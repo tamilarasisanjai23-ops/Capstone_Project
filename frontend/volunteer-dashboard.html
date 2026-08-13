@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Volunteer Dashboard</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+
+    <nav>
+        <h2>Disaster Relief</h2>
+
+        <div>
+            <a href="index.html">Home</a>
+            <a href="volunteer-dashboard.html">Dashboard</a>
+            <a href="tasks.html">Tasks</a>
+            <a href="login.html">Logout</a>
+        </div>
+    </nav>
+
+
+    <!-- Dashboard -->
+
+    <div class="dashboard">
+
+        <h1>Welcome, Volunteer!</h1>
+
+        <p class="dashboard-subtitle">
+            Thank you for supporting disaster relief activities.
+        </p>
+
+
+        <!-- Summary Cards -->
+
+        <div class="dashboard-cards">
+
+            <div class="dashboard-card">
+                <h3>Assigned Tasks</h3>
+                <p class="number">5</p>
+            </div>
+
+            <div class="dashboard-card">
+                <h3>Completed Tasks</h3>
+                <p class="number"
+                id="completeCount">3</p>
+            </div>
+
+            <div class="dashboard-card">
+                <h3>Pending Tasks</h3>
+                <p class="number"
+                id="pendingCount">2</p>
+            </div>
+
+            <div class="dashboard-card">
+                <h3>Relief Activities</h3>
+                <p class="number"
+                id="reliefCount">8</p>
+            </div>
+
+        </div>
+
+
+        <!-- Volunteer Profile -->
+
+        <div class="dashboard-section">
+
+            <h2>My Profile</h2>
+
+            <div class="profile-info">
+
+                <p><strong>Name:</strong> Volunteer Name</p>
+
+                <p><strong>Email:</strong> volunteer@gmail.com</p>
+
+                <p><strong>Phone:</strong> 9876543210</p>
+
+                <p><strong>Skill:</strong> First Aid</p>
+
+                <p><strong>Location:</strong> Trichy</p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Disaster Alert -->
+
+        <div class="dashboard-section alert">
+
+            <h2>🚨 Active Disaster Alert</h2>
+
+            <p>
+                Flood relief operations are currently active.
+            </p>
+
+            <p>
+                Location: Trichy
+            </p>
+
+            <p>
+                Priority: High
+            </p>
+
+        </div>
+
+
+        <!-- Recent Tasks -->
+
+        <div class="dashboard-section">
+
+            <h2>Recent Tasks</h2>
+
+            <table>
+
+                <tr>
+                    <th>Task</th>
+                    <th>Location</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                </tr>
+
+                <tr>
+                    <td>Food Distribution</td>
+                    <td>Trichy</td>
+                    <td>High</td>
+                    <td class="status-completed">
+                        Completed
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Medicine Distribution</td>
+                    <td>Lalgudi</td>
+                    <td>Medium</td>
+                    <td class="status-completed">
+                        Completed
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Shelter Support</td>
+                    <td>Srirangam</td>
+                    <td>High</td>
+                    <td class="status-pending">
+    <button onclick="completeTask(this)">Complete</button>
+</td>
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+<script>
+function completeTask(button) {
+    button.innerText = "Completed";
+    button.disabled = true;
+}
+</script>
+</body>
+
+</html>

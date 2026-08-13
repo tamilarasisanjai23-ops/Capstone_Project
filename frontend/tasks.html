@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Tasks - Disaster Relief</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+
+    <nav>
+
+        <h2>Disaster Relief</h2>
+
+        <div>
+            <a href="index.html">Home</a>
+            <a href="volunteer-dashboard.html">Dashboard</a>
+            <a href="tasks.html">Tasks</a>
+            <a href="login.html">Logout</a>
+        </div>
+
+    </nav>
+
+
+    <!-- Task Page -->
+
+    <div class="task-page">
+
+        <h1>Relief Tasks</h1>
+
+        <p class="task-subtitle">
+            View and manage disaster relief tasks assigned to you.
+        </p>
+
+
+        <!-- Available Tasks -->
+
+        <section class="task-section">
+
+            <h2>Available Tasks</h2>
+
+            <div class="task-container">
+
+                <!-- Task 1 -->
+
+                <div class="task-card">
+
+                    <h3>Food Distribution</h3>
+
+                    <p>
+                        Distribute food packets to affected families.
+                    </p>
+
+                    <p>
+                        <strong>📍 Location:</strong> Trichy
+                    </p>
+
+                    <p>
+                        <strong>👥 Volunteers Required:</strong> 5
+                    </p>
+
+                    <p>
+                        <strong>⏰ Time:</strong> 10:00 AM - 2:00 PM
+                    </p>
+
+                    <span class="priority high">
+                        High Priority
+                    </span>
+
+                    
+                        <button class="task-btn" onclick="acceptTask(this)">
+    Accept Task
+</button>
+
+                </div>
+
+
+
+                <!-- Task 2 -->
+
+                <div class="task-card">
+
+                    <h3>Medicine Distribution</h3>
+
+                    <p>
+                        Help distribute essential medicines
+                        to affected people.
+                    </p>
+
+                    <p>
+                        <strong>📍 Location:</strong> Lalgudi
+                    </p>
+
+                    <p>
+                        <strong>👥 Volunteers Required:</strong> 3
+                    </p>
+
+                    <p>
+                        <strong>⏰ Time:</strong> 9:00 AM - 12:00 PM
+                    </p>
+
+                    <span class="priority medium">
+                        Medium Priority
+                    </span>
+
+                    <button type="button" class="task-btn" onclick="acceptTask(this)">
+    Accept Task
+</button>
+                </div>
+
+
+                <!-- Task 3 -->
+
+                <div class="task-card">
+
+                    <h3>Shelter Support</h3>
+
+                    <p>
+                        Assist families staying in temporary
+                        relief shelters.
+                    </p>
+
+                    <p>
+                        <strong>📍 Location:</strong> Srirangam
+                    </p>
+
+                    <p>
+                        <strong>👥 Volunteers Required:</strong> 4
+                    </p>
+
+                    <p>
+                        <strong>⏰ Time:</strong> 8:00 AM - 4:00 PM
+                    </p>
+
+                    <span class="priority high">
+                        High Priority
+                    </span>
+
+                    <button class="task-btn" onclick="acceptTask(this)">
+    Accept Task
+</button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Assigned Tasks -->
+
+        <section class="task-section">
+
+            <h2>My Assigned Tasks</h2>
+
+            <table>
+
+                <tr>
+                    <th>Task</th>
+                    <th>Location</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+
+                <tr>
+
+                    <td>Food Distribution</td>
+
+                    <td>Trichy</td>
+
+                    <td>
+                        <span class="priority high">
+                            High
+                        </span>
+                    </td>
+
+                    <td>
+                        <span class="task-status progress">
+                            In Progress
+                        </span>
+                    </td>
+
+                    <td>
+                        <button class="update-btn" onclick="completeTask(this)">
+    Update
+</button>
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>Medicine Distribution</td>
+
+                    <td>Lalgudi</td>
+
+                    <td>
+                        <span class="priority medium">
+                            Medium
+                        </span>
+                    </td>
+
+                    <td>
+                        <span class="task-status Pending">
+                            Pending
+                        </span>
+                    </td>
+
+                    <td>
+                        <button class="update-btn" onclick="startTask(this)">
+    Start
+</button>
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>Shelter Support</td>
+
+                    <td>Srirangam</td>
+
+                    <td>
+                        <span class="priority high">
+                            High
+                        </span>
+                    </td>
+
+                    <td>
+                        <span class="task-status pending">
+                            Pending
+                        </span>
+                    </td>
+
+                    <td>
+                        <button class="update-btn" onclick="startTask(this)">
+    Start
+</button>
+                    </td>
+
+                </tr>
+
+            </table>
+
+        </section>
+
+    </div>
+
+<script>
+function acceptTask(button) {
+    button.innerText = "Task Accepted";
+    button.disabled = true;
+}
+
+function startTask(button) {
+    const row = button.closest("tr");
+    const status = row.querySelector(".task-status");
+
+    status.innerText = "In Progress";
+    status.className = "task-status in-progress";
+
+    button.innerText = "Started";
+    button.disabled = true;
+}
+function completeTask(button) {
+    const row = button.closest("tr");
+    const status = row.querySelector(".task-status");
+
+    status.innerText = "Completed";
+    status.className = "task-status completed";
+
+    button.innerText = "View";
+    button.disabled = true;
+}
+</script>
+</body>
+
+</html>
