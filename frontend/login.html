@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login - Disaster Relief</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <nav>
+        <h2>Disaster Relief</h2>
+
+        <div>
+            <a href="index.html">Home</a>
+            <a href="login.html">Login</a>
+            <a href="register.html">Volunteer</a>
+        </div>
+    </nav>
+
+    <div class="login-container">
+
+        <div class="login-box">
+
+            <h2>Login</h2>
+
+            <p>Access your account</p>
+
+            <form onsubmit="loginUser(event)">
+
+                <label>Email</label>
+                <input
+    type="email"
+    id="loginEmail"
+    placeholder="Enter your email"
+    required
+>
+
+                <label>Password</label>
+                <input
+    type="password"
+    id="loginPassword"
+    placeholder="Enter your password"
+    required
+>
+
+                <button type="submit">
+                    Login
+                </button>
+
+            </form>
+
+            <p class="register-text">
+                Don't have an account?
+                <a href="register.html">Register here</a>
+            </p>
+
+        </div>
+
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

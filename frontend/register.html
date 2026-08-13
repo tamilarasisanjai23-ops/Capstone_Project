@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Volunteer Registration</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <nav>
+        <h2>Disaster Relief</h2>
+
+        <div>
+            <a href="index.html">Home</a>
+            <a href="login.html">Login</a>
+            <a href="register.html">Volunteer</a>
+        </div>
+    </nav>
+
+    <div class="register-container">
+
+        <div class="register-box">
+
+            <h2>Volunteer Registration</h2>
+
+            <p>Join our disaster relief team</p>
+
+            <form action="login.html">
+
+                <label>Full Name</label>
+                <input
+                    type="text"
+                    placeholder="Enter your full name"
+                    required
+                >
+
+                <label>Email</label>
+                <input
+                    type="email"
+                    placeholder="Enter your email"
+                    required
+                >
+
+                <label>Phone Number</label>
+                <input
+                    type="tel"
+                    placeholder="Enter your phone number"
+                    required
+                >
+
+                <label>Password</label>
+                <input
+                    type="password"
+                    placeholder="Create password"
+                    required
+                >
+
+                <label>Skills</label>
+                <select required>
+                    <option value="">Select your skill</option>
+                    <option>First Aid</option>
+                    <option>Rescue</option>
+                    <option>Food Distribution</option>
+                    <option>Medical Support</option>
+                    <option>Transportation</option>
+                    <option>Communication</option>
+                </select>
+
+                <label>Location</label>
+                <input
+                    type="text"
+                    placeholder="Enter your location"
+                    required
+                >
+
+                <button type="submit">
+                    Register
+                </button>
+
+            </form>
+
+            <p class="login-text">
+                Already have an account?
+                <a href="login.html">Login here</a>
+            </p>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
