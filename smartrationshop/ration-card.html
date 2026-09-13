@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Ration Card - Smart Ration Shop</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top Government Bar -->
+  <div class="top-gov-bar">
+    <div class="container">
+      <span>🏛️ Ministry of Consumer Affairs, Food & Public Distribution</span>
+      <span>National e-Ration Portal</span>
+    </div>
+  </div>
+
+  <!-- Header / Navigation Bar -->
+  <header class="navbar">
+    <div class="container">
+      <a href="index.html" class="brand-logo">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+        </svg>
+        Smart Ration Shop
+      </a>
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle navigation">☰</button>
+      <ul class="nav-menu" id="nav-menu">
+        <li class="nav-item"><a href="customer-dashboard.html" class="nav-link">Dashboard</a></li>
+        <li class="nav-item"><a href="ration-card.html" class="nav-link active">Ration Card</a></li>
+        <li class="nav-item"><a href="products.html" class="nav-link">Products</a></li>
+        <li class="nav-item"><a href="distribution.html" class="nav-link">Distribution</a></li>
+        <li class="nav-item"><a href="complaints.html" class="nav-link">Complaints</a></li>
+        <li class="nav-item"><button onclick="handleLogout()" class="btn btn-sm btn-danger" style="margin-left: 10px;">Logout</button></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+
+    <div class="btn-print-container" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+      <div>
+        <h2 style="color: var(--primary);">Digital e-Ration Card</h2>
+        <p style="color: var(--gray); font-size: 0.9rem;">Official food security identity document issued by State PDS Administration</p>
+      </div>
+      <button onclick="printRationCard()" class="btn btn-secondary">🖨️ Print Ration Card</button>
+    </div>
+
+    <!-- Official e-Ration Card Layout -->
+    <div class="ration-card-wrapper">
+      <div class="ration-card-container">
+        
+        <!-- Header -->
+        <div class="card-gov-header">
+          <h3>DIGITAL SMART RATION CARD</h3>
+          <p>GOVERNMENT PUBLIC DISTRIBUTION SYSTEM</p>
+        </div>
+
+        <!-- Body Content -->
+        <div class="card-body-content">
+          <div class="card-main-grid">
+            
+            <!-- Photo Placeholder -->
+            <div class="card-photo-box">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+              </svg>
+              <span>Head of Family</span>
+            </div>
+
+            <!-- Primary Info Table -->
+            <table class="card-details-table">
+              <tr>
+                <td class="lbl">Ration Card No:</td>
+                <td><strong id="rc-card-no" style="color: var(--primary); font-size: 1.05rem;">-</strong></td>
+              </tr>
+              <tr>
+                <td class="lbl">Cardholder Name:</td>
+                <td><strong id="rc-name">-</strong></td>
+              </tr>
+              <tr>
+                <td class="lbl">Card Category:</td>
+                <td><span id="rc-card-type" class="badge badge-success">-</span></td>
+              </tr>
+              <tr>
+                <td class="lbl">Fair Price Shop:</td>
+                <td>FPS-44021 (Central Ward)</td>
+              </tr>
+              <tr>
+                <td class="lbl">Residential Address:</td>
+                <td id="rc-address">-</td>
+              </tr>
+              <tr>
+                <td class="lbl">Validity Period:</td>
+                <td><strong>2024 - 2029 (5 Years)</strong></td>
+              </tr>
+            </table>
+
+          </div>
+
+          <!-- Registered Family Members Section -->
+          <div class="family-section-title">
+            Registered Family Members (<span id="rc-members-count">-</span>)
+          </div>
+
+          <table class="table" style="margin-bottom: 0; font-size: 0.85rem;">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Member Name</th>
+                <th>Relationship</th>
+                <th>Age</th>
+                <th>Aadhaar Verified</th>
+              </tr>
+            </thead>
+            <tbody id="rc-family-tbody">
+              <!-- Dynamically populated via REST API / script.js -->
+            </tbody>
+          </table>
+
+          <!-- Barcode Footer Strip -->
+          <div class="barcode-strip">
+            <div style="font-size: 0.8rem; color: var(--gray);">
+              <div>Issued by Department of Food & Civil Supplies</div>
+              <div>Digital Signature: PDS-VERIFIED-SECURE</div>
+            </div>
+            <div class="fake-barcode"></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2026 Smart Ration Shop Management System. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

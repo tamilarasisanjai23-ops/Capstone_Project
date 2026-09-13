@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register Ration Card - Smart Ration Shop</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top Government Bar -->
+  <div class="top-gov-bar">
+    <div class="container">
+      <span>🏛️ Ministry of Consumer Affairs, Food & Public Distribution</span>
+      <span>Helpline: 1967</span>
+    </div>
+  </div>
+
+  <!-- Header / Navigation Bar -->
+  <header class="navbar">
+    <div class="container">
+      <a href="index.html" class="brand-logo">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+        </svg>
+        Smart Ration Shop
+      </a>
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle navigation">☰</button>
+      <ul class="nav-menu" id="nav-menu">
+        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+        <li class="nav-item"><a href="products.html" class="nav-link">Products</a></li>
+        <li class="nav-item"><a href="login.html" class="nav-link">Login</a></li>
+        <li class="nav-item"><a href="register.html" class="nav-link btn-nav active">Register Card</a></li>
+        <li class="nav-item"><a href="admin-dashboard.html" class="nav-link">Admin Portal</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+    <div class="auth-box" style="max-width: 600px;">
+      <div class="auth-header">
+        <h2>Cardholder Registration</h2>
+        <p>Register your Digital Ration Card to access online commodities portal</p>
+      </div>
+
+      <!-- Alert Notification -->
+      <div id="register-alert" style="display: none;"></div>
+
+      <form id="register-form">
+        <div class="form-group">
+          <label for="fullName" class="form-label">Full Name (Head of Family)</label>
+          <input type="text" id="fullName" class="form-control" placeholder="e.g. Sanjai Kumar" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email" class="form-label">Email Address</label>
+            <input type="email" id="email" class="form-control" placeholder="sanjai123@gmail.com" required>
+          </div>
+          <div class="form-group">
+            <label for="mobile" class="form-label">Mobile Number</label>
+            <input type="tel" id="mobile" class="form-control" placeholder="10-digit mobile number" maxlength="10" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="address" class="form-label">Residential Address</label>
+          <input type="text" id="address" class="form-control" placeholder="House #, Street, Ward, City" required>
+        </div>
+
+        <div class="form-group">
+          <label for="cardNo" class="form-label">Ration Card Number</label>
+          <input type="text" id="cardNo" class="form-control" placeholder="e.g. RC-5566778899" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" id="password" class="form-control" placeholder="Create password" required>
+          </div>
+          <div class="form-group">
+            <label for="confirmPassword" class="form-label">Confirm Password</label>
+            <input type="password" id="confirmPassword" class="form-control" placeholder="Re-enter password" required>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-secondary btn-block" style="margin-top: 10px;">Register Account</button>
+      </form>
+
+      <div style="text-align: center; margin-top: 20px; font-size: 0.9rem; color: var(--gray);">
+        Already have a registered card? <a href="login.html" style="font-weight: 600;">Login here</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2026 Smart Ration Shop Management System. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

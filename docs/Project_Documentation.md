@@ -4,7 +4,7 @@
 ---
 
 ## 1. Project Overview
-The **Volunteer Disaster Relief Coordination System** is a enterprise-grade capstone project engineered to streamline emergency response operations during natural disasters. The application connects disaster management teams with frontline volunteers, offering real-time coordination across tasks, supply resources, relief shelters, and emergency alerts.
+The **Volunteer Disaster Relief Coordination System** is an enterprise-grade capstone project engineered to streamline emergency response operations during natural disasters. The application connects disaster management teams with frontline volunteers, offering real-time coordination across tasks, supply resources, relief shelters, emergency warning alerts, voice dispatches, walkie-talkie PTT channels, live location tracking, and SOS distress calls.
 
 ---
 
@@ -15,7 +15,7 @@ The application adopts a decoupled 3-Tier Architecture:
 ```
 +-------------------------------------------------------+
 |                    PRESENTATION LAYER                 |
-|             React.js SPA (Vite + Tailwind/CSS3)        |
+|      React.js SPA (Vite + Web Audio + WebRTC + CSS3)  |
 |      Single Page Application with Role Dashboards     |
 +---------------------------+---------------------------+
                             | HTTP / REST API (JSON)
@@ -40,10 +40,12 @@ The application adopts a decoupled 3-Tier Architecture:
 
 ### Frontend:
 - **Framework**: React.js (v18+) with Vite build tool
+- **Audio & Media**: Web Audio API (`AudioContext`), `MediaRecorder` API, WebRTC audio streams (`BroadcastChannel` stream loopback)
+- **Geolocation**: HTML5 Browser Geolocation API (`navigator.geolocation`)
 - **Styling**: Modern CSS3 custom visual system (Dark/Glassmorphism theme, CSS variables)
 - **Icons**: Lucide React iconography library
 - **Routing**: React Router DOM (Client-side route guards for Admin and Volunteer)
-- **HTTP Client**: Custom fetch/axios API service layer with JWT header injection
+- **HTTP Client**: Custom fetch API service layer with JWT header injection and localStorage fallback
 
 ### Backend:
 - **Language**: Java 17 / 26
@@ -67,59 +69,56 @@ The application adopts a decoupled 3-Tier Architecture:
    - Roles: `ADMIN`, `VOLUNTEER`.
 
 2. **Admin Dashboard Module**:
-   - Central control hub featuring 8 metric widgets: Total Volunteers, Active Volunteers, Total Disasters, Active Disasters, Pending Tasks, Completed Tasks, Available Resources, Relief Centers.
+   - Central control hub featuring real-time metric widgets, emergency warning alert creation, voice alert recorder, and SOS distress queue.
 
 3. **Volunteer Dashboard Module**:
-   - Volunteer workspace presenting assigned tasks, pending actions, completion metrics, and disaster warning banners.
+   - Volunteer workspace presenting assigned tasks, pending actions, prominent SOS emergency button with live GPS capture, and voice alert player.
 
-4. **Volunteer Management Module**:
+4. **Real-World Emergency Response Subsystem**:
+   - **Emergency Alert System**: Create broadcast warnings with alert levels (`LOW`, `MEDIUM`, `HIGH`, `CRITICAL`). Critical alerts trigger prominent warning banners and Web Audio API alarm sirens.
+   - **Voice Alert / Microphone Feature**: Admin records audio messages via browser microphone. Persists voice metadata (`voice_alerts`) and enables volunteers to listen via an inline player with Play, Pause, and Stop controls.
+   - **Emergency Radio / Push-to-Talk (PTT)**: Dedicated `/emergency-radio` tactical walkie-talkie page supporting 5 channels (*Medical*, *Rescue*, *Food Distribution*, *Transport*, *General Emergency*), real-time WebRTC audio streams, microphone permission indicators, mute/unmute, and frequency visualizers.
+   - **SOS Emergency Button**: Prominent SOS button on Volunteer Dashboard capturing live GPS coordinates (`navigator.geolocation`), notifying Command Center Admins, updating SOS status, and providing an Admin `/sos-alerts` portal.
+   - **Live Location & Emergency Map**: Dedicated `/emergency-map` page rendering interactive pins for Disasters, Relief Shelters, SOS Emergency calls, and Live Volunteer coordinates with layer filters.
+   - **Enhanced Notification Center**: Unified notification hub for Emergency Warnings, Voice Alerts, SOS Alerts, Task Assignments, and Announcements.
+
+5. **Volunteer Management Module**:
    - Full CRUD operations, skill management (First Aid, Search & Rescue), availability status, and account filtering.
 
-5. **Disaster Management Module**:
+6. **Disaster Management Module**:
    - Categorize disaster events by severity level (`LOW`, `MODERATE`, `HIGH`, `CRITICAL`), start date, description, and geographical location.
 
-6. **Task & Assignment Lifecycle Module**:
+7. **Task & Assignment Lifecycle Module**:
    - Create relief tasks linked to specific disasters, assign registered volunteers, and progress tasks across `PENDING`, `ASSIGNED`, `IN_PROGRESS`, and `COMPLETED`.
 
-7. **Resource Inventory Module**:
+8. **Resource Inventory Module**:
    - Track emergency supply items (boats, medical kits, rations) with quantities and lifecycle status (`REQUESTED`, `DISPATCHED`, `DELIVERED`, `AVAILABLE`).
 
-8. **Relief Shelter Module**:
+9. **Relief Shelter Module**:
    - Shelter facility monitoring with occupancy capacity, emergency contact numbers, and operational state.
 
-9. **Geographic Location Module**:
-   - Standardized address repository mapping cities, districts, and postal pincodes.
+10. **Geographic Location Module**:
+    - Standardized address repository mapping cities, districts, and postal pincodes.
 
-10. **Reports & Analytics Module**:
+11. **Reports & Analytics Module**:
     - Aggregated visual analytics breakdown across volunteers, tasks, resources, and relief centers.
 
-11. **Notification System**:
-    - In-app notification center for broadcast announcements and task assignment alerts.
-
 ---
 
-## 5. REST API Specifications Overview
+## 5. Database Schema & Tables
 
-| Module | Endpoint | Method | Role | Description |
-| :--- | :--- | :---: | :---: | :--- |
-| **Auth** | `/api/auth/login` | `POST` | Public | Authenticate user & return JWT token |
-| **Auth** | `/api/auth/register` | `POST` | Public | Register new volunteer user |
-| **Volunteers** | `/api/volunteers` | `GET` | Admin/Volunteer | List all registered volunteers |
-| **Volunteers** | `/api/volunteers/{id}` | `PUT` | Admin | Update volunteer details/status |
-| **Disasters** | `/api/disasters` | `GET/POST` | Authenticated | List or create disaster events |
-| **Tasks** | `/api/tasks` | `GET/POST` | Authenticated | List or create emergency tasks |
-| **Tasks** | `/api/tasks/{id}/assign` | `POST` | Admin | Assign volunteer to task |
-| **Tasks** | `/api/tasks/{id}/status` | `PATCH` | Authenticated | Update task progress status |
-| **Resources** | `/api/resources` | `GET/POST` | Authenticated | Manage emergency supplies |
-| **Relief Centers** | `/api/relief-centers` | `GET/POST` | Authenticated | Manage shelter facilities |
-| **Locations** | `/api/locations` | `GET/POST` | Authenticated | Manage geographical locations |
-| **Notifications**| `/api/notifications` | `GET` | Authenticated | Fetch notifications for logged-in user |
-| **Reports** | `/api/reports/summary` | `GET` | Admin | Aggregate system metrics |
-
----
-
-## 6. Future Enhancements
-- Real-time WebSockets integration for live disaster chat and instant push alerts.
-- Interactive Leaflet / Mapbox GIS map displaying real-time disaster zones and volunteer locations.
-- Offline PWA support with background synchronization for field volunteers in low-connectivity areas.
-- Automated SMS / WhatsApp notification gateway integration via Twilio.
+The system comprises 14 relational tables:
+1. `users` - User authentication credentials & roles
+2. `volunteers` - Volunteer profiles & skills
+3. `locations` - Address & district definitions
+4. `disasters` - Disaster incidents & severity
+5. `relief_centers` - Shelter facilities & capacity
+6. `tasks` - Emergency relief task requirements
+7. `task_assignments` - Task allocations to volunteers
+8. `resources` - Emergency supply items
+9. `notifications` - In-app system alerts & notifications
+10. `emergency_alerts` - Admin emergency broadcast alerts
+11. `voice_alerts` - Audio voice alert dispatches
+12. `sos_alerts` - Volunteer distress signals with GPS
+13. `emergency_radio_channels` - Walkie-talkie PTT channels
+14. `volunteer_locations` - Live volunteer GPS coordinates

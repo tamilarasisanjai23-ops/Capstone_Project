@@ -13,23 +13,44 @@ import {
   ArrowRight,
   Shield,
   Activity,
-  AlertCircle
+  AlertCircle,
+  Mic,
+  Radio,
+  Volume2,
+  AlertOctagon,
+  VolumeX,
+  MapPin
 } from 'lucide-react';
 import { apiService } from '../services/apiService';
+import audioService from '../services/audioService';
 import StatCard from '../components/StatCard';
 import Badge from '../components/Badge';
 import Modal from '../components/Modal';
+import SosButton from '../components/SosButton';
+import VoiceRecorderModal from '../components/VoiceRecorderModal';
+import VoicePlayer from '../components/VoicePlayer';
 
 export const Dashboard = ({ currentUser }) => {
   const [metrics, setMetrics] = useState(null);
   const [recentDisasters, setRecentDisasters] = useState([]);
   const [assignedTasks, setAssignedTasks] = useState([]);
   const [shelters, setShelters] = useState([]);
+  const [emergencyAlerts, setEmergencyAlerts] = useState([]);
+  const [voiceAlerts, setVoiceAlerts] = useState([]);
+
   const [showBroadcastModal, setShowBroadcastModal] = useState(false);
   const [broadcastTitle, setBroadcastTitle] = useState('');
   const [broadcastMessage, setBroadcastMessage] = useState('');
-  const navigate = useNavigate();
 
+  const [showEmergencyAlertModal, setShowEmergencyAlertModal] = useState(false);
+  const [alertTitle, setAlertTitle] = useState('');
+  const [alertMessage, setAlertMessage] = useState('');
+  const [alertSeverity, setAlertSeverity] = useState('CRITICAL');
+
+  const [showVoiceRecorderModal, setShowVoiceRecorderModal] = useState(false);
+  const [sirenPlaying, setSirenPlaying] = useState(false);
+
+  const navigate = useNavigate();
   const isAdmin = currentUser?.role === 'ADMIN';
 
   const loadDashboardData = async () => {
@@ -43,7 +64,6 @@ export const Dashboard = ({ currentUser }) => {
     if (isAdmin) {
       setAssignedTasks(allTasks.slice(0, 5));
     } else {
-      // Filter tasks assigned to this volunteer
       const myTasks = allTasks.filter(t => t.assignedVolunteer && (
         Number(t.assignedVolunteer.user_id) === Number(currentUser?.user_id) ||
         Number(t.assignedVolunteer.volunteer_id) === Number(currentUser?.user_id)
@@ -53,6 +73,12 @@ export const Dashboard = ({ currentUser }) => {
 
     const centers = await apiService.getReliefCenters();
     setShelters(centers.slice(0, 3));
+
+    const alerts = await apiService.getEmergencyAlerts();
+    setEmergencyAlerts(alerts);
+
+    const voices = await apiService.getVoiceAlerts();
+    setVoiceAlerts(voices);
   };
 
   useEffect(() => {
@@ -62,8 +88,43 @@ export const Dashboard = ({ currentUser }) => {
     return () => window.removeEventListener('vdr-storage-update', handleStorageUpdate);
   }, [currentUser, isAdmin]);
 
+  // Check critical alerts and trigger siren sound if new critical alert exists
+  const hasCritical = emergencyAlerts.some(a => a.severity === 'CRITICAL') || recentDisasters.some(d => d.severity === 'CRITICAL');
+
+  const toggleSiren = () => {
+    if (sirenPlaying) {
+      audioService.stopEmergencySiren();
+      setSirenPlaying(false);
+    } else {
+      audioService.playEmergencySiren();
+      setSirenPlaying(true);
+    }
+  };
+
   const handleStatusChange = async (taskId, newStatus) => {
     await apiService.updateTaskStatus(taskId, newStatus);
+    loadDashboardData();
+  };
+
+  const handleCreateEmergencyAlert = async (e) => {
+    e.preventDefault();
+    if (!alertTitle || !alertMessage) return;
+
+    await apiService.createEmergencyAlert({
+      title: alertTitle,
+      message: alertMessage,
+      severity: alertSeverity,
+      created_by: currentUser?.user_id || 1
+    });
+
+    if (alertSeverity === 'CRITICAL') {
+      audioService.playEmergencySiren();
+      setSirenPlaying(true);
+    }
+
+    setAlertTitle('');
+    setAlertMessage('');
+    setShowEmergencyAlertModal(false);
     loadDashboardData();
   };
 
@@ -86,19 +147,50 @@ export const Dashboard = ({ currentUser }) => {
 
   return (
     <div className="dashboard-page">
-      {/* Active Disaster Warning Banner */}
-      {recentDisasters.some(d => d.severity === 'CRITICAL') && (
-        <div className="alert-banner alert-banner-critical">
-          <AlertCircle size={24} style={{ flexShrink: 0 }} />
+      
+      {/* Prominent Emergency Warning Banner */}
+      {hasCritical && (
+        <div className="alert-banner alert-banner-critical" style={{
+          background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.25) 0%, rgba(185, 28, 28, 0.35) 100%)',
+          border: '2px solid #ef4444',
+          borderRadius: '14px',
+          padding: '1rem 1.25rem',
+          marginBottom: '1.5rem',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '1rem',
+          boxShadow: '0 10px 25px rgba(239, 68, 68, 0.3)'
+        }}>
+          <AlertCircle size={28} color="#ef4444" style={{ flexShrink: 0 }} className="animate-pulse" />
           <div style={{ flex: 1 }}>
-            <strong style={{ fontSize: '1rem', display: 'block' }}>HIGH ALERT: CRITICAL DISASTER IN PROGRESS</strong>
-            <p style={{ fontSize: '0.85rem', margin: 0 }}>
-              {recentDisasters.find(d => d.severity === 'CRITICAL')?.type} - {recentDisasters.find(d => d.severity === 'CRITICAL')?.description}
+            <strong style={{ fontSize: '1.05rem', color: '#fca5a5', display: 'block' }}>
+              CRITICAL EMERGENCY ALERT IN EFFECT
+            </strong>
+            <p style={{ fontSize: '0.88rem', margin: '4px 0 0 0', color: '#fecaca' }}>
+              {emergencyAlerts.find(a => a.severity === 'CRITICAL')?.message || 'Flash flood landfall imminent in Sector 14. Evacuate immediately.'}
             </p>
           </div>
-          <button className="btn btn-danger btn-sm" onClick={() => navigate('/disasters')}>
-            View Disaster Alert
-          </button>
+
+          <div style={{ display: 'flex', gap: '0.5rem' }}>
+            <button className={`btn ${sirenPlaying ? 'btn-amber' : 'btn-danger'} btn-sm`} onClick={toggleSiren}>
+              {sirenPlaying ? <VolumeX size={15} /> : <Volume2 size={15} />}
+              {sirenPlaying ? 'Silence Siren' : 'Play Alarm Siren'}
+            </button>
+            <button className="btn btn-secondary btn-sm" onClick={() => navigate('/disasters')}>
+              View Incident Details
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Volunteer SOS Emergency Button Bar */}
+      {!isAdmin && (
+        <div className="glass-card" style={{ marginBottom: '1.5rem', textAlign: 'center', border: '1px solid rgba(239, 68, 68, 0.4)' }}>
+          <h3 style={{ fontSize: '1rem', color: '#ef4444', marginBottom: '0.25rem' }}>VOLUNTEER DISTRESS & EMERGENCY SIGNAL</h3>
+          <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '0.75rem' }}>
+            In danger or trapped? Press SOS below to transmit your live GPS coordinates to the Command Center.
+          </p>
+          <SosButton currentUser={currentUser} onSosCreated={loadDashboardData} />
         </div>
       )}
 
@@ -108,24 +200,30 @@ export const Dashboard = ({ currentUser }) => {
           <h1>{isAdmin ? 'System Command Center' : `Welcome Back, ${currentUser?.name || 'Volunteer'}`}</h1>
           <p>
             {isAdmin 
-              ? 'Real-time monitoring and coordination across disaster zones and relief squads.' 
-              : 'Your active assignments, disaster warnings, and emergency contact portal.'}
+              ? 'Real-time monitoring, emergency alerts, voice dispatches, and SOS command matrix.' 
+              : 'Your active assignments, disaster warnings, SOS emergency portal, and voice broadcasts.'}
           </p>
         </div>
 
         <div className="header-actions">
           {isAdmin ? (
             <>
-              <button className="btn btn-primary" onClick={() => setShowBroadcastModal(true)}>
-                <Megaphone size={16} /> Broadcast Alert
+              <button className="btn btn-danger" onClick={() => setShowEmergencyAlertModal(true)}>
+                <AlertOctagon size={16} /> Create Emergency Alert
               </button>
-              <button className="btn btn-emerald" onClick={() => navigate('/tasks')}>
-                <Plus size={16} /> Dispatch Task
+              <button
+  className="btn btn-rose"
+  onClick={() => setShowVoiceRecorderModal(true)}
+>
+  <Mic size={16} /> Record Voice Alert
+</button>
+              <button className="btn btn-primary" onClick={() => navigate('/sos-alerts')}>
+                <Shield size={16} /> SOS Center ({metrics?.activeSosCount || 0})
               </button>
             </>
           ) : (
-            <button className="btn btn-primary" onClick={() => navigate('/tasks')}>
-              <CheckSquare size={16} /> My Tasks
+            <button className="btn btn-primary" onClick={() => navigate('/emergency-radio')}>
+              <Radio size={16} /> Emergency Radio PTT
             </button>
           )}
         </div>
@@ -148,6 +246,13 @@ export const Dashboard = ({ currentUser }) => {
           color="rose"
         />
         <StatCard
+          icon={AlertOctagon}
+          value={metrics?.activeSosCount || 0}
+          label="Active SOS Distress Calls"
+          subtext="Immediate Assistance Requested"
+          color="rose"
+        />
+        <StatCard
           icon={Clock}
           value={metrics?.pendingTasks || 0}
           label="Pending Tasks"
@@ -162,13 +267,6 @@ export const Dashboard = ({ currentUser }) => {
           color="emerald"
         />
         <StatCard
-          icon={Package}
-          value={metrics?.totalResources || 0}
-          label="Resource Items"
-          subtext={`${metrics?.deliveredResources || 0} Delivered`}
-          color="sky"
-        />
-        <StatCard
           icon={Home}
           value={metrics?.totalShelters || 0}
           label="Relief Shelters"
@@ -176,6 +274,21 @@ export const Dashboard = ({ currentUser }) => {
           color="purple"
         />
       </div>
+
+      {/* Voice Alerts Feed Section */}
+      {voiceAlerts.length > 0 && (
+        <div style={{ marginBottom: '1.5rem' }}>
+          <h3 style={{ fontSize: '1.1rem', fontWeight: '700', marginBottom: '0.85rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <Volume2 size={18} color="var(--accent-rose)" />
+            Latest Emergency Voice Dispatches
+          </h3>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1rem' }}>
+            {voiceAlerts.slice(0, 2).map(voice => (
+              <VoicePlayer key={voice.voice_id} voiceAlert={voice} />
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Main Grid Content */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '1.5rem' }}>
@@ -249,39 +362,36 @@ export const Dashboard = ({ currentUser }) => {
           )}
         </div>
 
-        {/* Right Column: Active Disasters & Shelters */}
+        {/* Right Column: Active Disasters & Emergency Alerts */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           
-          {/* Active Disasters */}
+          {/* Emergency Alerts Feed */}
           <div className="glass-card">
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
               <h3 style={{ fontSize: '1.1rem', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <AlertTriangle size={18} color="var(--accent-rose)" />
-                Active Crisis Zones
+                <AlertOctagon size={18} color="var(--accent-rose)" />
+                Active Emergency Alerts ({emergencyAlerts.length})
               </h3>
-              <button className="btn btn-secondary btn-sm" onClick={() => navigate('/disasters')}>
-                Manage
-              </button>
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-              {recentDisasters.map(d => (
-                <div key={d.disaster_id} style={{
+              {emergencyAlerts.map(alert => (
+                <div key={alert.alert_id} style={{
                   padding: '0.85rem 1rem',
-                  borderRadius: 'var(--radius-sm)',
-                  background: 'rgba(0,0,0,0.2)',
-                  border: '1px solid var(--border-glass)',
+                  borderRadius: '10px',
+                  background: alert.severity === 'CRITICAL' ? 'rgba(239, 68, 68, 0.08)' : 'rgba(0,0,0,0.2)',
+                  borderLeft: `4px solid ${alert.severity === 'CRITICAL' ? '#ef4444' : alert.severity === 'HIGH' ? '#f97316' : '#3b82f6'}`,
                   display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between'
+                  flexDirection: 'column',
+                  gap: '0.25rem'
                 }}>
-                  <div>
-                    <strong style={{ fontSize: '0.9rem', display: 'block' }}>{d.type}</strong>
-                    <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
-                      Location: {d.location?.city || 'Zone ' + d.location_id}
-                    </span>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <strong style={{ fontSize: '0.9rem', color: alert.severity === 'CRITICAL' ? '#fca5a5' : 'var(--text-primary)' }}>
+                      {alert.title}
+                    </strong>
+                    <Badge variant={alert.severity}>{alert.severity}</Badge>
                   </div>
-                  <Badge variant={d.severity}>{d.severity}</Badge>
+                  <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--text-muted)' }}>{alert.message}</p>
                 </div>
               ))}
             </div>
@@ -322,45 +432,69 @@ export const Dashboard = ({ currentUser }) => {
         </div>
       </div>
 
-      {/* Broadcast Announcement Modal */}
+      {/* Emergency Alert Creation Modal */}
       <Modal
-        isOpen={showBroadcastModal}
-        onClose={() => setShowBroadcastModal(false)}
-        title="Broadcast Disaster Alert to Volunteers"
+        isOpen={showEmergencyAlertModal}
+        onClose={() => setShowEmergencyAlertModal(false)}
+        title="Create Emergency Alert Broadcast"
         footer={
           <>
-            <button className="btn btn-secondary" onClick={() => setShowBroadcastModal(false)}>Cancel</button>
-            <button className="btn btn-primary" onClick={handleSendBroadcast}>Dispatch Notification</button>
+            <button className="btn btn-secondary" onClick={() => setShowEmergencyAlertModal(false)}>Cancel</button>
+            <button className="btn btn-danger" onClick={handleCreateEmergencyAlert}>Dispatch Emergency Alert</button>
           </>
         }
       >
-        <form onSubmit={handleSendBroadcast}>
+        <form onSubmit={handleCreateEmergencyAlert}>
           <div className="form-group">
-            <label>Alert Title</label>
+            <label>Emergency Alert Headline</label>
             <input
               type="text"
               className="form-control"
-              placeholder="e.g. Cyclone Standby Notice"
-              value={broadcastTitle}
-              onChange={(e) => setBroadcastTitle(e.target.value)}
+              placeholder="e.g. FLASH FLOOD EVACUATION ORDER SECTOR 14"
+              value={alertTitle}
+              onChange={(e) => setAlertTitle(e.target.value)}
               required
             />
           </div>
+
           <div className="form-group">
-            <label>Message Content</label>
+            <label>Alert Severity Level</label>
+            <select
+              className="form-control"
+              value={alertSeverity}
+              onChange={(e) => setAlertSeverity(e.target.value)}
+            >
+              <option value="LOW">LOW - Advisory / Status Update</option>
+              <option value="MEDIUM">MEDIUM - High Preparedness</option>
+              <option value="HIGH">HIGH - Danger / Urgent Action</option>
+              <option value="CRITICAL">CRITICAL - Severe Siren & Sound Warning</option>
+            </select>
+          </div>
+
+          <div className="form-group">
+            <label>Alert Detailed Message</label>
             <textarea
               className="form-control"
               rows={4}
-              placeholder="Enter operational details or instructions for field teams..."
-              value={broadcastMessage}
-              onChange={(e) => setBroadcastMessage(e.target.value)}
+              placeholder="Describe danger location, required volunteer actions, or evacuation points..."
+              value={alertMessage}
+              onChange={(e) => setAlertMessage(e.target.value)}
               required
             />
           </div>
         </form>
       </Modal>
+
+      {/* Voice Recorder Modal */}
+      <VoiceRecorderModal
+        isOpen={showVoiceRecorderModal}
+        onClose={() => setShowVoiceRecorderModal(false)}
+        onVoiceSent={() => loadDashboardData()}
+        currentUser={currentUser}
+      />
     </div>
   );
 };
 
 export default Dashboard;
+

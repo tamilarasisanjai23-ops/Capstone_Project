@@ -70,12 +70,12 @@ export const Locations = ({ currentUser }) => {
     }
   };
 
-  const filteredLocations = locations.filter(l => 
-    (l.address || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
-    (l.city || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
-    (l.district || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
-    (l.pincode || '').includes(searchTerm)
-  );
+  const filteredLocations = locations.filter(l =>
+  (l.address || '').toLowerCase().includes((searchTerm || '').toLowerCase()) ||
+  (l.city || '').toLowerCase().includes((searchTerm || '').toLowerCase()) ||
+  (l.district || '').toLowerCase().includes((searchTerm || '').toLowerCase()) ||
+  (l.pincode || '').toLowerCase().includes((searchTerm || '').toLowerCase())
+);
 
   return (
     <div className="locations-page">

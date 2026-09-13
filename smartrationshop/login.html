@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Smart Ration Shop</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top Government Bar -->
+  <div class="top-gov-bar">
+    <div class="container">
+      <span>🏛️ Ministry of Consumer Affairs, Food & Public Distribution</span>
+      <span>Helpline: 1967</span>
+    </div>
+  </div>
+
+  <!-- Header / Navigation Bar -->
+  <header class="navbar">
+    <div class="container">
+      <a href="index.html" class="brand-logo">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+        </svg>
+        Smart Ration Shop
+      </a>
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle navigation">☰</button>
+      <ul class="nav-menu" id="nav-menu">
+        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+        <li class="nav-item"><a href="products.html" class="nav-link">Products</a></li>
+        <li class="nav-item"><a href="login.html" class="nav-link active">Login</a></li>
+        <li class="nav-item"><a href="register.html" class="nav-link btn-nav">Register Card</a></li>
+        <li class="nav-item"><a href="admin-dashboard.html" class="nav-link">Admin Portal</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+    <div class="auth-box">
+      <div class="auth-header">
+        <h2>Citizen Login</h2>
+        <p>Enter your credentials to access your Smart Ration account</p>
+      </div>
+
+      <!-- Demo Credentials Box -->
+      <div class="demo-box">
+        <strong>📌 Demo Credentials for Testing:</strong>
+        <div>Customer Email: <code>user@gmail.com</code> | Password: <code>12345</code></div>
+        <div>Admin Email: <code>admin@gmail.com</code> | Password: <code>admin123</code></div>
+      </div>
+
+      <!-- Alert Notification -->
+      <div id="login-alert" style="display: none;"></div>
+
+      <form id="login-form">
+        <div class="form-group">
+          <label for="email" class="form-label">Email or Ration Card Number</label>
+          <input type="text" id="email" class="form-control" placeholder="e.g. user@gmail.com or RC-9876543210" required>
+        </div>
+
+        <div class="form-group">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" id="password" class="form-control" placeholder="Enter your password" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Login to Account</button>
+      </form>
+
+      <div style="text-align: center; margin-top: 20px; font-size: 0.9rem; color: var(--gray);">
+        Don't have a Ration Card account? <a href="register.html" style="font-weight: 600;">Register New Card</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2026 Smart Ration Shop Management System. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Dashboard - Smart Ration Shop</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top Government Bar -->
+  <div class="top-gov-bar">
+    <div class="container">
+      <span>🏛️ Ministry of Consumer Affairs, Food & Public Distribution</span>
+      <span>Beneficiary Portal</span>
+    </div>
+  </div>
+
+  <!-- Header / Navigation Bar -->
+  <header class="navbar">
+    <div class="container">
+      <a href="index.html" class="brand-logo">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+        </svg>
+        Smart Ration Shop
+      </a>
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle navigation">☰</button>
+      <ul class="nav-menu" id="nav-menu">
+        <li class="nav-item"><a href="customer-dashboard.html" class="nav-link active">Dashboard</a></li>
+        <li class="nav-item"><a href="ration-card.html" class="nav-link">Ration Card</a></li>
+        <li class="nav-item"><a href="products.html" class="nav-link">Products</a></li>
+        <li class="nav-item"><a href="distribution.html" class="nav-link">Distribution</a></li>
+        <li class="nav-item"><a href="complaints.html" class="nav-link">Complaints</a></li>
+        <li class="nav-item"><button onclick="handleLogout()" class="btn btn-sm btn-danger" style="margin-left: 10px;">Logout</button></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+
+    <!-- Welcome Banner & Profile Overview -->
+    <div class="dash-banner">
+      <div class="dash-user">
+        <h2>Welcome, <span id="dash-user-name">-</span></h2>
+        <p>Ration Card No: <strong id="dash-card-no">-</strong> | Category: <span id="dash-card-type" class="badge badge-success">-</span></p>
+      </div>
+      <div class="quick-actions">
+        <a href="ration-card.html" class="btn btn-primary btn-sm">💳 View Ration Card</a>
+        <a href="products.html" class="btn btn-secondary btn-sm">🌾 View Products</a>
+        <a href="distribution.html" class="btn btn-outline btn-sm" style="color: var(--dark); border-color: var(--border);">📜 Distribution Status</a>
+        <a href="complaints.html" class="btn btn-outline btn-sm" style="color: var(--dark); border-color: var(--border);">📝 Complaints</a>
+        <button onclick="handleLogout()" class="btn btn-danger btn-sm">Logout</button>
+      </div>
+    </div>
+
+    <!-- Beneficiary Account Overview Grid -->
+    <div class="grid grid-3" style="margin-bottom: 35px;">
+      <div class="stat-card">
+        <div class="stat-icon" style="background: var(--primary-light); color: var(--primary);">👨‍👩‍👧‍👦</div>
+        <div class="stat-info">
+          <div class="stat-value" id="dash-members">-</div>
+          <div class="stat-label">Registered Family Members</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon" style="background: var(--secondary-light); color: var(--secondary);">📅</div>
+        <div class="stat-info">
+          <div class="stat-value">August 2026</div>
+          <div class="stat-label">Monthly Entitlement Period</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon" style="background: #fef08a; color: var(--warning);">⚡</div>
+        <div class="stat-info">
+          <div class="stat-value">Active</div>
+          <div class="stat-label">Monthly Ration Quota Status</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Available Ration Commodity Cards -->
+    <div class="section-header" style="text-align: left;">
+      <h2>Monthly Entitlement Items</h2>
+      <p>Current allocation and stock status for your ration card</p>
+    </div>
+
+    <div class="grid grid-3">
+
+      <!-- Item 1: Rice -->
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+          <div class="card-icon" style="background: #e0f2fe; color: #0284c7;">🌾</div>
+          <span class="badge badge-success">Available for Collection</span>
+        </div>
+        <h3 class="card-title">Rice (Raw / Boiled)</h3>
+        <div style="font-size: 1.5rem; font-weight: 800; color: var(--primary); margin: 8px 0;">
+          20 kg <span style="font-size: 0.85rem; color: var(--gray); font-weight: 400;">(5 kg/head)</span>
+        </div>
+        <p class="card-text">Subsidy Rate: <strong>₹3.00 / kg</strong></p>
+        <p class="card-text" style="font-size: 0.85rem; margin-top: 6px; color: var(--gray);">Fair Price Shop: FPS-44021 (Central Ward)</p>
+      </div>
+
+      <!-- Item 2: Wheat -->
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+          <div class="card-icon" style="background: #fef3c7; color: #d97706;">🌾</div>
+          <span class="badge badge-success">Available for Collection</span>
+        </div>
+        <h3 class="card-title">Wheat</h3>
+        <div style="font-size: 1.5rem; font-weight: 800; color: var(--primary); margin: 8px 0;">
+          10 kg <span style="font-size: 0.85rem; color: var(--gray); font-weight: 400;">(2.5 kg/head)</span>
+        </div>
+        <p class="card-text">Subsidy Rate: <strong>₹2.00 / kg</strong></p>
+        <p class="card-text" style="font-size: 0.85rem; margin-top: 6px; color: var(--gray);">Fair Price Shop: FPS-44021 (Central Ward)</p>
+      </div>
+
+      <!-- Item 3: Sugar -->
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+          <div class="card-icon" style="background: #f1f5f9; color: #475569;">🍬</div>
+          <span class="badge badge-info">Collected (15-Aug)</span>
+        </div>
+        <h3 class="card-title">Sugar</h3>
+        <div style="font-size: 1.5rem; font-weight: 800; color: var(--primary); margin: 8px 0;">
+          2 kg <span style="font-size: 0.85rem; color: var(--gray); font-weight: 400;">(Family Quota)</span>
+        </div>
+        <p class="card-text">Subsidy Rate: <strong>₹13.50 / kg</strong></p>
+        <p class="card-text" style="font-size: 0.85rem; margin-top: 6px; color: var(--gray);">Status: Distributed for current month</p>
+      </div>
+
+      <!-- Item 4: Dal -->
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+          <div class="card-icon" style="background: #ccfbf1; color: #0d9488;">🫘</div>
+          <span class="badge badge-success">Available for Collection</span>
+        </div>
+        <h3 class="card-title">Pulses / Dal</h3>
+        <div style="font-size: 1.5rem; font-weight: 800; color: var(--primary); margin: 8px 0;">
+          2 kg <span style="font-size: 0.85rem; color: var(--gray); font-weight: 400;">(Family Quota)</span>
+        </div>
+        <p class="card-text">Subsidy Rate: <strong>₹60.00 / kg</strong></p>
+        <p class="card-text" style="font-size: 0.85rem; margin-top: 6px; color: var(--gray);">Fair Price Shop: FPS-44021 (Central Ward)</p>
+      </div>
+
+      <!-- Item 5: Kerosene -->
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+          <div class="card-icon" style="background: #fee2e2; color: #dc2626;">🛢️</div>
+          <span class="badge badge-warning">Pending Stock Arrival</span>
+        </div>
+        <h3 class="card-title">Kerosene Oil</h3>
+        <div style="font-size: 1.5rem; font-weight: 800; color: var(--primary); margin: 8px 0;">
+          3 Liters <span style="font-size: 0.85rem; color: var(--gray); font-weight: 400;">(Non-LPG Quota)</span>
+        </div>
+        <p class="card-text">Subsidy Rate: <strong>₹25.00 / Liter</strong></p>
+        <p class="card-text" style="font-size: 0.85rem; margin-top: 6px; color: var(--gray);">Arrival Expected: 30-Aug-2026</p>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2026 Smart Ration Shop Management System. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

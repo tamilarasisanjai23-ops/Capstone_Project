@@ -160,10 +160,21 @@
     </div>
 <script>
 function completeTask(button) {
+
     button.innerText = "Completed";
     button.disabled = true;
+
+    let completed = document.getElementById("completeCount");
+    let pending = document.getElementById("pendingCount");
+
+    let completedCount = parseInt(completed.innerText);
+    let pendingCount = parseInt(pending.innerText);
+
+    completed.innerText = completedCount + 1;
+    pending.innerText = pendingCount - 1;
 }
 </script>
+
 </body>
 
 </html>

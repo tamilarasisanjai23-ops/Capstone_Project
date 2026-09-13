@@ -148,6 +148,79 @@ CREATE TABLE IF NOT EXISTS notifications (
         REFERENCES users(user_id) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- -----------------------------------------------------------------
+-- 10. Table: emergency_alerts
+-- -----------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS emergency_alerts (
+    alert_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(150) NOT NULL,
+    message TEXT NOT NULL,
+    severity VARCHAR(50) NOT NULL DEFAULT 'CRITICAL', -- LOW, MEDIUM, HIGH, CRITICAL
+    disaster_id BIGINT,
+    created_by BIGINT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_emergency_alerts_disasters FOREIGN KEY (disaster_id) 
+        REFERENCES disasters(disaster_id) ON DELETE SET NULL ON UPDATE CASCADE,
+    CONSTRAINT fk_emergency_alerts_users FOREIGN KEY (created_by) 
+        REFERENCES users(user_id) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- -----------------------------------------------------------------
+-- 11. Table: voice_alerts
+-- -----------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS voice_alerts (
+    voice_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(150) NOT NULL,
+    audio_data LONGTEXT NOT NULL,
+    duration INT NOT NULL DEFAULT 0,
+    alert_level VARCHAR(50) NOT NULL DEFAULT 'HIGH',
+    created_by BIGINT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_voice_alerts_users FOREIGN KEY (created_by) 
+        REFERENCES users(user_id) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- -----------------------------------------------------------------
+-- 12. Table: sos_alerts
+-- -----------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS sos_alerts (
+    sos_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    volunteer_id BIGINT NOT NULL,
+    latitude DECIMAL(10, 8),
+    longitude DECIMAL(11, 8),
+    message TEXT,
+    status VARCHAR(50) NOT NULL DEFAULT 'ACTIVE', -- ACTIVE, RESPONDING, RESOLVED
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    CONSTRAINT fk_sos_alerts_volunteers FOREIGN KEY (volunteer_id) 
+        REFERENCES volunteers(volunteer_id) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- -----------------------------------------------------------------
+-- 13. Table: emergency_radio_channels
+-- -----------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS emergency_radio_channels (
+    channel_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    channel_name VARCHAR(100) NOT NULL UNIQUE,
+    description VARCHAR(255),
+    status VARCHAR(50) NOT NULL DEFAULT 'ACTIVE',
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- -----------------------------------------------------------------
+-- 14. Table: volunteer_locations
+-- -----------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS volunteer_locations (
+    location_record_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    volunteer_id BIGINT NOT NULL UNIQUE,
+    latitude DECIMAL(10, 8) NOT NULL,
+    longitude DECIMAL(11, 8) NOT NULL,
+    status VARCHAR(50) NOT NULL DEFAULT 'ACTIVE',
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    CONSTRAINT fk_volunteer_locations_volunteers FOREIGN KEY (volunteer_id) 
+        REFERENCES volunteers(volunteer_id) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 -- =================================================================
 -- INITIAL SEED DATA
 -- =================================================================
@@ -218,3 +291,36 @@ INSERT INTO notifications (notification_id, user_id, title, message, type, is_re
 (2, 2, 'Disaster Alert Update', 'Cyclone Flash Flood alert status updated to CRITICAL. Stay on high standby.', 'DISASTER_ALERT', FALSE),
 (3, 3, 'New Task Available', 'Medical First Aid Screening task assigned to your team.', 'ANNOUNCEMENT', TRUE)
 ON DUPLICATE KEY UPDATE title=VALUES(title);
+
+-- Insert Emergency Radio Channels
+INSERT INTO emergency_radio_channels (channel_id, channel_name, description, status) VALUES
+(1, 'Medical', 'Priority channel for emergency medical teams, triage, and doctor dispatch.', 'ACTIVE'),
+(2, 'Rescue', 'Search and rescue squad coordination, boat operations, and evacuation.', 'ACTIVE'),
+(3, 'Food Distribution', 'Supply chain dispatch, food ration delivery, and drinking water logistics.', 'ACTIVE'),
+(4, 'Transport', 'Heavy vehicle squad, ambulance routing, and debris clearance convoy.', 'ACTIVE'),
+(5, 'General Emergency', 'Main public emergency channel for general field updates and broadcasts.', 'ACTIVE')
+ON DUPLICATE KEY UPDATE channel_name=VALUES(channel_name);
+
+-- Insert Emergency Alerts Seed Data
+INSERT INTO emergency_alerts (alert_id, title, message, severity, disaster_id, created_by) VALUES
+(1, 'FLASH FLOOD WARNING SECTOR 14', 'Water levels rising rapidly along Sector 14 embankment. Immediate evacuation to Central Relief Shelter A required.', 'CRITICAL', 1, 1),
+(2, 'MONSOON DAM SPILLWAY OPENING', 'Dam gates opening at 14:00. Lowland villages in Cuddalore must move to elevated shelters immediately.', 'HIGH', 2, 1)
+ON DUPLICATE KEY UPDATE title=VALUES(title);
+
+-- Insert Voice Alerts Seed Data
+INSERT INTO voice_alerts (voice_id, title, audio_data, duration, alert_level, created_by) VALUES
+(1, 'Commander Emergency Audio Dispatch', 'data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=', 8, 'CRITICAL', 1)
+ON DUPLICATE KEY UPDATE title=VALUES(title);
+
+-- Insert SOS Alerts Seed Data
+INSERT INTO sos_alerts (sos_id, volunteer_id, latitude, longitude, message, status) VALUES
+(1, 1, 13.0827, 80.2707, 'Trapped in rising flood water near Sector 14 Bridge. Need boat assistance!', 'ACTIVE')
+ON DUPLICATE KEY UPDATE message=VALUES(message);
+
+-- Insert Volunteer Locations Seed Data
+INSERT INTO volunteer_locations (location_record_id, volunteer_id, latitude, longitude, status) VALUES
+(1, 1, 13.0827, 80.2707, 'ACTIVE'),
+(2, 2, 11.7480, 79.7714, 'ACTIVE'),
+(3, 3, 11.6854, 76.1320, 'ACTIVE')
+ON DUPLICATE KEY UPDATE status=VALUES(status);
+

@@ -12,7 +12,10 @@ import {
   BarChart3,
   Bell,
   User,
-  LogOut
+  LogOut,
+  Radio,
+  Map,
+  AlertOctagon
 } from 'lucide-react';
 import { authService } from '../services/storageService';
 
@@ -48,6 +51,26 @@ export const Sidebar = ({ currentUser, onLogout }) => {
             <BarChart3 size={18} />
             <span>Reports & Analytics</span>
           </NavLink>
+        </div>
+
+        <div className="nav-group">
+          <span className="nav-section-title">Emergency Response</span>
+          <NavLink to="/emergency-radio" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
+            <Radio size={18} color="var(--accent-rose)" />
+            <span>Emergency Radio (PTT)</span>
+          </NavLink>
+
+          <NavLink to="/emergency-map" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
+            <Map size={18} color="var(--accent-sky)" />
+            <span>Emergency Map</span>
+          </NavLink>
+
+          {isAdmin && (
+            <NavLink to="/sos-alerts" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
+              <AlertOctagon size={18} color="#ef4444" />
+              <span>SOS Emergency Center</span>
+            </NavLink>
+          )}
         </div>
 
         <div className="nav-group">
@@ -104,3 +127,4 @@ export const Sidebar = ({ currentUser, onLogout }) => {
 };
 
 export default Sidebar;
+

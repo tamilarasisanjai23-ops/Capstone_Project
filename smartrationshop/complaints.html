@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grievance & Complaints - Smart Ration Shop</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top Government Bar -->
+  <div class="top-gov-bar">
+    <div class="container">
+      <span>🏛️ Ministry of Consumer Affairs, Food & Public Distribution</span>
+      <span>Citizen Grievance Redressal Portal</span>
+    </div>
+  </div>
+
+  <!-- Header / Navigation Bar -->
+  <header class="navbar">
+    <div class="container">
+      <a href="index.html" class="brand-logo">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+        </svg>
+        Smart Ration Shop
+      </a>
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle navigation">☰</button>
+      <ul class="nav-menu" id="nav-menu">
+        <li class="nav-item"><a href="customer-dashboard.html" class="nav-link">Dashboard</a></li>
+        <li class="nav-item"><a href="ration-card.html" class="nav-link">Ration Card</a></li>
+        <li class="nav-item"><a href="products.html" class="nav-link">Products</a></li>
+        <li class="nav-item"><a href="distribution.html" class="nav-link">Distribution</a></li>
+        <li class="nav-item"><a href="complaints.html" class="nav-link active">Complaints</a></li>
+        <li class="nav-item"><button onclick="handleLogout()" class="btn btn-sm btn-danger" style="margin-left: 10px;">Logout</button></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+
+    <div style="margin-bottom: 24px;">
+      <h2 style="color: var(--primary);">Citizen Complaint & Grievance Portal</h2>
+      <p style="color: var(--gray); font-size: 0.9rem;">Submit complaints regarding Fair Price Shop services, stock availability, or card issues</p>
+    </div>
+
+    <div class="grid grid-2" style="align-items: start;">
+
+      <!-- Complaint Submission Form -->
+      <div class="card">
+        <h3 class="card-title" style="margin-bottom: 16px; border-bottom: 2px solid var(--light-gray); padding-bottom: 8px;">Register New Complaint</h3>
+        
+        <!-- Alert Banner -->
+        <div id="complaint-alert" style="display: none;"></div>
+
+        <form id="complaint-form">
+          <div class="form-group">
+            <label for="complaint-cardNo" class="form-label">Ration Card Number</label>
+            <input type="text" id="complaint-cardNo" class="form-control" placeholder="e.g. RC-9876543210" required>
+          </div>
+
+          <div class="form-group">
+            <label for="complaint-type" class="form-label">Complaint Category</label>
+            <select id="complaint-type" class="form-control" required>
+              <option value="">-- Select Category --</option>
+              <option value="Quantity Shortage">Quantity Shortage</option>
+              <option value="Quality Issues">Commodity Quality Issues</option>
+              <option value="Overcharging">Overcharging / Extra Price</option>
+              <option value="Shop Closed">Fair Price Shop Closed</option>
+              <option value="Card Status Issue">Card Status / Aadhaar Linkage Issue</option>
+              <option value="Other">Other Grievance</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="complaint-desc" class="form-label">Detailed Complaint Description</label>
+            <textarea id="complaint-desc" class="form-control" placeholder="Describe the incident including shop name, date, and specifics..." required></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-danger btn-block">Submit Complaint</button>
+        </form>
+      </div>
+
+      <!-- Grievance Redressal FAQ / Guidelines -->
+      <div class="card" style="background-color: var(--primary-light); border-color: #bfdbfe;">
+        <h3 class="card-title" style="color: var(--primary);">📌 Complaint Redressal Process</h3>
+        <ul style="padding-left: 20px; color: var(--dark-muted); font-size: 0.9rem; line-height: 1.8;">
+          <li>All submitted complaints are routed to the District Supply Officer (DSO).</li>
+          <li>Resolution timeline for Fair Price Shop complaints is <strong>48 to 72 hours</strong>.</li>
+          <li>You can track the live status of your filed grievances in the table below.</li>
+          <li>For urgent assistance, dial Emergency PDS Helpline: <strong>1967</strong>.</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Previous Complaints Table -->
+    <div style="margin-top: 40px;">
+      <h3 style="color: var(--primary); margin-bottom: 16px;">Previous Registered Complaints</h3>
+      
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Complaint ID</th>
+              <th>Category</th>
+              <th>Date Filed</th>
+              <th>Status</th>
+              <th>Description / Remarks</th>
+            </tr>
+          </thead>
+          <tbody id="complaints-tbody">
+            <!-- Dynamically Rendered by script.js -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2026 Smart Ration Shop Management System. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

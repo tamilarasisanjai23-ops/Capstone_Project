@@ -10,6 +10,11 @@ const STORAGE_KEYS = {
   ASSIGNMENTS: 'vdr_assignments',
   RESOURCES: 'vdr_resources',
   NOTIFICATIONS: 'vdr_notifications',
+  EMERGENCY_ALERTS: 'vdr_emergency_alerts',
+  VOICE_ALERTS: 'vdr_voice_alerts',
+  SOS_ALERTS: 'vdr_sos_alerts',
+  RADIO_CHANNELS: 'vdr_radio_channels',
+  VOLUNTEER_LOCATIONS: 'vdr_volunteer_locations',
   CURRENT_USER: 'vdr_current_user',
   TOKEN: 'vdr_token'
 };
@@ -73,6 +78,33 @@ const DEFAULT_NOTIFICATIONS = [
   { notification_id: 3, user_id: 3, title: 'New Task Available', message: 'Medical First Aid Screening task assigned to your team.', type: 'ANNOUNCEMENT', is_read: true, created_at: '2026-08-03 09:00' }
 ];
 
+const DEFAULT_EMERGENCY_ALERTS = [
+  { alert_id: 1, title: 'FLASH FLOOD WARNING SECTOR 14', message: 'Water levels rising rapidly along Sector 14 embankment. Immediate evacuation to Central Relief Shelter A required.', severity: 'CRITICAL', disaster_id: 1, created_by: 1, created_at: '2026-08-13 10:00' },
+  { alert_id: 2, title: 'MONSOON DAM SPILLWAY OPENING', message: 'Dam gates opening at 14:00. Lowland villages in Cuddalore must move to elevated shelters immediately.', severity: 'HIGH', disaster_id: 2, created_by: 1, created_at: '2026-08-13 11:30' }
+];
+
+const DEFAULT_VOICE_ALERTS = [
+  { voice_id: 1, title: 'Commander Emergency Audio Dispatch', audio_data: 'data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=', duration: 8, alert_level: 'CRITICAL', created_by: 1, created_at: '2026-08-13 12:00' }
+];
+
+const DEFAULT_SOS_ALERTS = [
+  { sos_id: 1, volunteer_id: 1, volunteer_name: 'John Doe', volunteer_phone: '+1-800-555-0101', latitude: 13.0827, longitude: 80.2707, message: 'Trapped in rising flood water near Sector 14 Bridge. Need boat assistance!', status: 'ACTIVE', created_at: '2026-08-13 12:15' }
+];
+
+const DEFAULT_RADIO_CHANNELS = [
+  { channel_id: 1, channel_name: 'Medical', description: 'Priority channel for emergency medical teams, triage, and doctor dispatch.', status: 'ACTIVE' },
+  { channel_id: 2, channel_name: 'Rescue', description: 'Search and rescue squad coordination, boat operations, and evacuation.', status: 'ACTIVE' },
+  { channel_id: 3, channel_name: 'Food Distribution', description: 'Supply chain dispatch, food ration delivery, and drinking water logistics.', status: 'ACTIVE' },
+  { channel_id: 4, channel_name: 'Transport', description: 'Heavy vehicle squad, ambulance routing, and debris clearance convoy.', status: 'ACTIVE' },
+  { channel_id: 5, channel_name: 'General Emergency', description: 'Main public emergency channel for general field updates and broadcasts.', status: 'ACTIVE' }
+];
+
+const DEFAULT_VOLUNTEER_LOCATIONS = [
+  { location_record_id: 1, volunteer_id: 1, volunteer_name: 'John Doe', latitude: 13.0827, longitude: 80.2707, status: 'ACTIVE', updated_at: '2026-08-13 12:30' },
+  { location_record_id: 2, volunteer_id: 2, volunteer_name: 'Sarah Connor', latitude: 11.7480, longitude: 79.7714, status: 'ACTIVE', updated_at: '2026-08-13 12:20' },
+  { location_record_id: 3, volunteer_id: 3, volunteer_name: 'Michael Scott', latitude: 11.6854, longitude: 76.1320, status: 'ACTIVE', updated_at: '2026-08-13 12:10' }
+];
+
 // Initialize Storage if empty
 export const initializeStorage = () => {
   if (!localStorage.getItem(STORAGE_KEYS.USERS)) {
@@ -102,6 +134,21 @@ export const initializeStorage = () => {
   if (!localStorage.getItem(STORAGE_KEYS.NOTIFICATIONS)) {
     localStorage.setItem(STORAGE_KEYS.NOTIFICATIONS, JSON.stringify(DEFAULT_NOTIFICATIONS));
   }
+  if (!localStorage.getItem(STORAGE_KEYS.EMERGENCY_ALERTS)) {
+    localStorage.setItem(STORAGE_KEYS.EMERGENCY_ALERTS, JSON.stringify(DEFAULT_EMERGENCY_ALERTS));
+  }
+  if (!localStorage.getItem(STORAGE_KEYS.VOICE_ALERTS)) {
+    localStorage.setItem(STORAGE_KEYS.VOICE_ALERTS, JSON.stringify(DEFAULT_VOICE_ALERTS));
+  }
+  if (!localStorage.getItem(STORAGE_KEYS.SOS_ALERTS)) {
+    localStorage.setItem(STORAGE_KEYS.SOS_ALERTS, JSON.stringify(DEFAULT_SOS_ALERTS));
+  }
+  if (!localStorage.getItem(STORAGE_KEYS.RADIO_CHANNELS)) {
+    localStorage.setItem(STORAGE_KEYS.RADIO_CHANNELS, JSON.stringify(DEFAULT_RADIO_CHANNELS));
+  }
+  if (!localStorage.getItem(STORAGE_KEYS.VOLUNTEER_LOCATIONS)) {
+    localStorage.setItem(STORAGE_KEYS.VOLUNTEER_LOCATIONS, JSON.stringify(DEFAULT_VOLUNTEER_LOCATIONS));
+  }
 
   // Set default logged in user if not set
   if (!localStorage.getItem(STORAGE_KEYS.CURRENT_USER)) {
@@ -109,6 +156,7 @@ export const initializeStorage = () => {
     localStorage.setItem(STORAGE_KEYS.TOKEN, 'mock-jwt-token-admin-1');
   }
 };
+
 
 // Generic Helpers
 const getCollection = (key) => {
@@ -642,6 +690,8 @@ export const reportsService = {
     const tasks = taskService.getAll();
     const resources = resourceService.getAll();
     const shelters = reliefCenterService.getAll();
+    const sosAlerts = getCollection(STORAGE_KEYS.SOS_ALERTS);
+    const activeSosCount = sosAlerts.filter(s => s.status === 'ACTIVE').length;
 
     const activeVolunteers = volunteers.filter(v => v.status === 'AVAILABLE' || v.status === 'ON_DUTY').length;
     const activeDisasters = disasters.filter(d => d.status === 'ACTIVE').length;
@@ -662,7 +712,155 @@ export const reportsService = {
       deliveredResources: resources.filter(r => r.status === 'DELIVERED').length,
       totalShelters: shelters.length,
       totalCapacity,
-      totalOccupancy
+      totalOccupancy,
+      activeSosCount
     };
   }
 };
+
+// Emergency Alerts Service
+export const emergencyAlertService = {
+  getAll: () => getCollection(STORAGE_KEYS.EMERGENCY_ALERTS),
+  create: (data) => {
+    const alerts = getCollection(STORAGE_KEYS.EMERGENCY_ALERTS);
+    const newAlert = {
+      alert_id: Date.now(),
+      title: data.title,
+      message: data.message,
+      severity: data.severity || 'CRITICAL',
+      disaster_id: data.disaster_id || null,
+      created_by: data.created_by || 1,
+      created_at: new Date().toISOString().replace('T', ' ').substring(0, 19)
+    };
+    alerts.unshift(newAlert);
+    saveCollection(STORAGE_KEYS.EMERGENCY_ALERTS, alerts);
+
+    // Also dispatch notification to all users
+    notificationService.create({
+      user_id: 'BROADCAST',
+      title: `[EMERGENCY ALERT] ${newAlert.title}`,
+      message: newAlert.message,
+      type: 'EMERGENCY_ALERT'
+    });
+
+    return newAlert;
+  },
+  delete: (id) => {
+    const alerts = getCollection(STORAGE_KEYS.EMERGENCY_ALERTS).filter(a => Number(a.alert_id) !== Number(id));
+    saveCollection(STORAGE_KEYS.EMERGENCY_ALERTS, alerts);
+    return true;
+  }
+};
+
+// Voice Alerts Service
+export const voiceAlertService = {
+  getAll: () => getCollection(STORAGE_KEYS.VOICE_ALERTS),
+  create: (data) => {
+    const voiceAlerts = getCollection(STORAGE_KEYS.VOICE_ALERTS);
+    const newVoice = {
+      voice_id: Date.now(),
+      title: data.title || 'Emergency Voice Broadcast',
+      audio_data: data.audio_data,
+      duration: data.duration || 0,
+      alert_level: data.alert_level || 'HIGH',
+      created_by: data.created_by || 1,
+      created_at: new Date().toISOString().replace('T', ' ').substring(0, 19)
+    };
+    voiceAlerts.unshift(newVoice);
+    saveCollection(STORAGE_KEYS.VOICE_ALERTS, voiceAlerts);
+
+    notificationService.create({
+      user_id: 'BROADCAST',
+      title: `[VOICE ALERT] ${newVoice.title}`,
+      message: `Audio broadcast (${newVoice.duration}s). Click to listen.`,
+      type: 'VOICE_ALERT'
+    });
+
+    return newVoice;
+  },
+  delete: (id) => {
+    const alerts = getCollection(STORAGE_KEYS.VOICE_ALERTS).filter(v => Number(v.voice_id) !== Number(id));
+    saveCollection(STORAGE_KEYS.VOICE_ALERTS, alerts);
+    return true;
+  }
+};
+
+// SOS Alerts Service
+export const sosAlertService = {
+  getAll: () => getCollection(STORAGE_KEYS.SOS_ALERTS),
+  create: (data) => {
+    const sosList = getCollection(STORAGE_KEYS.SOS_ALERTS);
+    const newSos = {
+      sos_id: Date.now(),
+      volunteer_id: data.volunteer_id,
+      volunteer_name: data.volunteer_name || 'Volunteer Emergency Call',
+      volunteer_phone: data.volunteer_phone || '',
+      latitude: data.latitude || 13.0827,
+      longitude: data.longitude || 80.2707,
+      message: data.message || 'MAYDAY! Emergency assistance requested.',
+      status: 'ACTIVE',
+      created_at: new Date().toISOString().replace('T', ' ').substring(0, 19)
+    };
+    sosList.unshift(newSos);
+    saveCollection(STORAGE_KEYS.SOS_ALERTS, sosList);
+
+    // Dispatch broadcast notification to Admin
+    notificationService.create({
+      user_id: 1, // Admin
+      title: `[SOS DISTRESS CALL] ${newSos.volunteer_name}`,
+      message: `Location: (${newSos.latitude}, ${newSos.longitude}) - ${newSos.message}`,
+      type: 'SOS_ALERT'
+    });
+
+    return newSos;
+  },
+  updateStatus: (id, status) => {
+    const sosList = getCollection(STORAGE_KEYS.SOS_ALERTS);
+    const idx = sosList.findIndex(s => Number(s.sos_id) === Number(id));
+    if (idx !== -1) {
+      sosList[idx].status = status;
+      sosList[idx].updated_at = new Date().toISOString().replace('T', ' ').substring(0, 19);
+      saveCollection(STORAGE_KEYS.SOS_ALERTS, sosList);
+      return sosList[idx];
+    }
+    return null;
+  }
+};
+
+// Emergency Radio Channel Service
+export const radioChannelService = {
+  getAll: () => getCollection(STORAGE_KEYS.RADIO_CHANNELS)
+};
+
+// Volunteer Live Location Service
+export const volunteerLocationService = {
+  getAll: () => getCollection(STORAGE_KEYS.VOLUNTEER_LOCATIONS),
+  updateLocation: (data) => {
+    const locations = getCollection(STORAGE_KEYS.VOLUNTEER_LOCATIONS);
+    const idx = locations.findIndex(l => Number(l.volunteer_id) === Number(data.volunteer_id));
+    const now = new Date().toISOString().replace('T', ' ').substring(0, 19);
+    
+    if (idx !== -1) {
+      locations[idx].latitude = data.latitude;
+      locations[idx].longitude = data.longitude;
+      locations[idx].status = data.status || 'ACTIVE';
+      locations[idx].updated_at = now;
+      saveCollection(STORAGE_KEYS.VOLUNTEER_LOCATIONS, locations);
+      return locations[idx];
+    } else {
+      const newLoc = {
+        location_record_id: Date.now(),
+        volunteer_id: data.volunteer_id,
+        volunteer_name: data.volunteer_name || 'Volunteer',
+        latitude: data.latitude,
+        longitude: data.longitude,
+        status: data.status || 'ACTIVE',
+        updated_at: now
+      };
+      locations.push(newLoc);
+      saveCollection(STORAGE_KEYS.VOLUNTEER_LOCATIONS, locations);
+      return newLoc;
+    }
+  }
+};
+

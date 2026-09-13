@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ration Products & Stock - Smart Ration Shop</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top Government Bar -->
+  <div class="top-gov-bar">
+    <div class="container">
+      <span>🏛️ Ministry of Consumer Affairs, Food & Public Distribution</span>
+      <span>Stock & Commodity Inventory</span>
+    </div>
+  </div>
+
+  <div id="api-status-bar" class="api-status-bar"></div>
+
+  <!-- Header / Navigation Bar -->
+  <header class="navbar">
+    <div class="container">
+      <a href="index.html" class="brand-logo">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+        </svg>
+        Smart Ration Shop
+      </a>
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle navigation">☰</button>
+      <ul class="nav-menu" id="nav-menu">
+        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+        <li class="nav-item"><a href="products.html" class="nav-link active">Products</a></li>
+        <li class="nav-item"><a href="customer-dashboard.html" class="nav-link">Dashboard</a></li>
+        <li class="nav-item"><a href="distribution.html" class="nav-link">Distribution</a></li>
+        <li class="nav-item"><a href="complaints.html" class="nav-link">Complaints</a></li>
+        <li class="nav-item"><a href="login.html" class="nav-link">Login</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 24px;">
+      <div>
+        <h2 style="color: var(--primary);">Essential Ration Commodities</h2>
+        <p style="color: var(--gray); font-size: 0.9rem;">Fair Price Shop live stock inventory from MySQL database</p>
+      </div>
+      <div style="width: 300px;">
+        <input type="text" id="product-search" class="form-control" placeholder="🔍 Search product (e.g. Rice, Wheat)...">
+      </div>
+    </div>
+
+    <!-- Products Grid View -->
+    <div class="grid grid-3" id="products-grid">
+      <!-- Dynamically rendered via Spring Boot REST API -->
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2026 Smart Ration Shop Management System. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

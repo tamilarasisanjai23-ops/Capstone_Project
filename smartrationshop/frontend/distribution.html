@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Distribution History - Smart Ration Shop</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top Government Bar -->
+  <div class="top-gov-bar">
+    <div class="container">
+      <span>🏛️ Ministry of Consumer Affairs, Food & Public Distribution</span>
+      <span>Distribution & Transaction Ledger</span>
+    </div>
+  </div>
+
+  <div id="api-status-bar" class="api-status-bar"></div>
+
+  <!-- Header / Navigation Bar -->
+  <header class="navbar">
+    <div class="container">
+      <a href="index.html" class="brand-logo">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+        </svg>
+        Smart Ration Shop
+      </a>
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle navigation">☰</button>
+      <ul class="nav-menu" id="nav-menu">
+        <li class="nav-item"><a href="customer-dashboard.html" class="nav-link">Dashboard</a></li>
+        <li class="nav-item"><a href="ration-card.html" class="nav-link">Ration Card</a></li>
+        <li class="nav-item"><a href="products.html" class="nav-link">Products</a></li>
+        <li class="nav-item"><a href="distribution.html" class="nav-link active">Distribution</a></li>
+        <li class="nav-item"><a href="complaints.html" class="nav-link">Complaints</a></li>
+        <li class="nav-item"><button onclick="handleLogout()" class="btn btn-sm btn-danger" style="margin-left: 10px;">Logout</button></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+
+    <div style="margin-bottom: 24px;">
+      <h2 style="color: var(--primary);">Ration Distribution History</h2>
+      <p style="color: var(--gray); font-size: 0.9rem;">Verified database record of monthly commodity collections</p>
+    </div>
+
+    <!-- Distribution Summary Stats -->
+    <div class="grid grid-3" style="margin-bottom: 28px;">
+      <div class="stat-card">
+        <div class="stat-icon" style="background: var(--secondary-light); color: var(--secondary);">✅</div>
+        <div class="stat-info">
+          <div class="stat-value">34 kg</div>
+          <div class="stat-label">Total Grains Distributed</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon" style="background: var(--info-light); color: var(--info);">💳</div>
+        <div class="stat-info">
+          <div class="stat-value">₹182.00</div>
+          <div class="stat-label">Total Subsidized Amount</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon" style="background: #fef3c7; color: var(--accent);">🏪</div>
+        <div class="stat-info">
+          <div class="stat-value">FPS-44021</div>
+          <div class="stat-label">Assigned Fair Price Shop</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Distribution History Table -->
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Txn ID</th>
+            <th>Date</th>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Price Paid</th>
+            <th>FPS Shop ID</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="distribution-tbody">
+          <!-- Dynamically populated via REST API -->
+        </tbody>
+      </table>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2026 Smart Ration Shop Management System. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

@@ -17,6 +17,9 @@ import Locations from './pages/Locations';
 import Reports from './pages/Reports';
 import Notifications from './pages/Notifications';
 import Profile from './pages/Profile';
+import EmergencyRadio from './pages/EmergencyRadio';
+import EmergencyMap from './pages/EmergencyMap';
+import SosAlerts from './pages/SosAlerts';
 
 export function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -69,6 +72,9 @@ export function App() {
                 <Route path="/reports" element={<Reports currentUser={currentUser} />} />
                 <Route path="/notifications" element={<Notifications currentUser={currentUser} />} />
                 <Route path="/profile" element={<Profile currentUser={currentUser} onUserUpdate={setCurrentUser} />} />
+                <Route path="/emergency-radio" element={<EmergencyRadio currentUser={currentUser} />} />
+                <Route path="/emergency-map" element={<EmergencyMap currentUser={currentUser} />} />
+                <Route path="/sos-alerts" element={<SosAlerts currentUser={currentUser} />} />
                 <Route path="*" element={<Navigate to="/dashboard" replace />} />
               </Routes>
             </main>
@@ -86,3 +92,4 @@ export function App() {
 }
 
 export default App;
+
