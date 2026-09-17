@@ -1,16 +1,10 @@
 package com.disaster.backend.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "emergency_alerts")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class EmergencyAlert {
 
     @Id
@@ -25,7 +19,7 @@ public class EmergencyAlert {
     private String message;
 
     @Column(nullable = false, length = 50)
-    private String severity; // LOW, MEDIUM, HIGH, CRITICAL
+    private String severity;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "disaster_id")
@@ -38,29 +32,67 @@ public class EmergencyAlert {
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
 
+    public EmergencyAlert() {
+    }
+
+    public Long getAlertId() {
+        return alertId;
+    }
+
+    public void setAlertId(Long alertId) {
+        this.alertId = alertId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getSeverity() {
+        return severity;
+    }
+
+    public void setSeverity(String severity) {
+        this.severity = severity;
+    }
+
+    public Disaster getDisaster() {
+        return disaster;
+    }
+
+    public void setDisaster(Disaster disaster) {
+        this.disaster = disaster;
+    }
+
+    public User getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
     @PrePersist
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();
     }
-
-    public Long getAlertId() { return alertId; }
-    public void setAlertId(Long alertId) { this.alertId = alertId; }
-
-    public String getTitle() { return title; }
-    public void setTitle(String title) { this.title = title; }
-
-    public String getMessage() { return message; }
-    public void setMessage(String message) { this.message = message; }
-
-    public String getSeverity() { return severity; }
-    public void setSeverity(String severity) { this.severity = severity; }
-
-    public Disaster getDisaster() { return disaster; }
-    public void setDisaster(Disaster disaster) { this.disaster = disaster; }
-
-    public User getCreatedBy() { return createdBy; }
-    public void setCreatedBy(User createdBy) { this.createdBy = createdBy; }
-
-    public LocalDateTime getCreatedAt() { return createdAt; }
-    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 }
