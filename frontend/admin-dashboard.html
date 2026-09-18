@@ -3,11 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>Admin Dashboard</title>
+    <title>Admin Dashboard - Disaster Relief</title>
 
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -15,9 +13,7 @@
 <body>
 
     <!-- Navigation -->
-
     <nav>
-
         <h2>Disaster Relief Admin</h2>
 
         <div>
@@ -25,12 +21,10 @@
             <a href="admin-dashboard.html">Dashboard</a>
             <a href="login.html">Logout</a>
         </div>
-
     </nav>
 
 
     <!-- Admin Dashboard -->
-
     <div class="admin-dashboard">
 
         <h1>Admin Dashboard</h1>
@@ -41,59 +35,44 @@
 
 
         <!-- Statistics -->
-
         <div class="admin-cards">
 
             <div class="admin-card">
-
                 <h3>Total Volunteers</h3>
-
                 <p>120</p>
-
             </div>
 
-
             <div class="admin-card">
-
                 <h3>Active Disasters</h3>
-
                 <p>4</p>
-
             </div>
 
-
             <div class="admin-card">
-
                 <h3>Active Tasks</h3>
-
                 <p>35</p>
-
             </div>
 
-
             <div class="admin-card">
-
                 <h3>Completed Tasks</h3>
-
                 <p>85</p>
-
             </div>
 
         </div>
 
 
-        <!-- Disaster Management -->
+        <!-- ========================= -->
+        <!-- DISASTER MANAGEMENT -->
+        <!-- ========================= -->
 
         <section class="admin-section">
 
             <h2>Disaster Management</h2>
 
-            <button class="add-btn" 
-    + Add Disaster
-</button>
+            <button class="add-btn" id="addDisasterBtn">
+                + Add Disaster
+            </button>
 
-
-            <table>
+            <table id="disasterTable">
 
                 <tr>
                     <th>Disaster</th>
@@ -103,73 +82,52 @@
                     <th>Status</th>
                 </tr>
 
-
                 <tr>
-
                     <td>Flood</td>
-
                     <td>Trichy</td>
-
                     <td>
                         <span class="severity-high">
                             High
                         </span>
                     </td>
-
                     <td>40</td>
-
                     <td>
                         <span class="active-status">
                             Active
                         </span>
                     </td>
-
                 </tr>
 
-
                 <tr>
-
                     <td>Cyclone</td>
-
                     <td>Thanjavur</td>
-
                     <td>
                         <span class="severity-medium">
                             Medium
                         </span>
                     </td>
-
                     <td>25</td>
-
                     <td>
                         <span class="active-status">
                             Active
                         </span>
                     </td>
-
                 </tr>
 
-
                 <tr>
-
                     <td>Flood</td>
-
                     <td>Ariyalur</td>
-
                     <td>
                         <span class="severity-high">
                             High
                         </span>
                     </td>
-
                     <td>30</td>
-
                     <td>
                         <span class="active-status">
                             Active
                         </span>
                     </td>
-
                 </tr>
 
             </table>
@@ -177,12 +135,13 @@
         </section>
 
 
-        <!-- Volunteer Management -->
+        <!-- ========================= -->
+        <!-- VOLUNTEER MANAGEMENT -->
+        <!-- ========================= -->
 
         <section class="admin-section">
 
             <h2>Volunteer Management</h2>
-
 
             <table>
 
@@ -194,73 +153,52 @@
                     <th>Action</th>
                 </tr>
 
-
                 <tr>
-
                     <td>Arun</td>
-
                     <td>First Aid</td>
-
                     <td>Trichy</td>
-
                     <td>
                         <span class="available">
                             Available
                         </span>
                     </td>
-
                     <td>
                         <button class="assign-btn">
                             Assign Task
                         </button>
                     </td>
-
                 </tr>
 
-
                 <tr>
-
                     <td>Priya</td>
-
                     <td>Medical Support</td>
-
                     <td>Lalgudi</td>
-
                     <td>
                         <span class="available">
                             Available
                         </span>
                     </td>
-
                     <td>
                         <button class="assign-btn">
                             Assign Task
                         </button>
                     </td>
-
                 </tr>
 
-
                 <tr>
-
                     <td>Karthik</td>
-
                     <td>Rescue</td>
-
                     <td>Srirangam</td>
-
                     <td>
                         <span class="busy">
                             Busy
                         </span>
                     </td>
-
                     <td>
                         <button class="assign-btn" disabled>
                             Unavailable
                         </button>
                     </td>
-
                 </tr>
 
             </table>
@@ -268,12 +206,45 @@
         </section>
 
 
-        <!-- Task Monitoring -->
+        <!-- ========================= -->
+        <!-- EMERGENCY ALERTS -->
+        <!-- ========================= -->
+
+        <section class="admin-section">
+
+            <h2>Emergency Alerts</h2>
+
+            <button class="add-btn" id="addAlertBtn">
+                + Add Emergency Alert
+            </button>
+
+            <table id="emergencyAlertTable">
+
+                <tr>
+                    <th>Title</th>
+                    <th>Message</th>
+                    <th>Severity</th>
+                    <th>Action</th>
+                </tr>
+
+                <tr>
+                    <td colspan="4">
+                        Loading alerts...
+                    </td>
+                </tr>
+
+            </table>
+
+        </section>
+
+
+        <!-- ========================= -->
+        <!-- TASK MONITORING -->
+        <!-- ========================= -->
 
         <section class="admin-section">
 
             <h2>Task Monitoring</h2>
-
 
             <table>
 
@@ -284,55 +255,37 @@
                     <th>Status</th>
                 </tr>
 
-
                 <tr>
-
                     <td>Food Distribution</td>
-
                     <td>Arun</td>
-
                     <td>Trichy</td>
-
                     <td>
                         <span class="task-status progress">
                             In Progress
                         </span>
                     </td>
-
                 </tr>
 
-
                 <tr>
-
                     <td>Medicine Distribution</td>
-
                     <td>Priya</td>
-
                     <td>Lalgudi</td>
-
                     <td>
                         <span class="task-status completed">
                             Completed
                         </span>
                     </td>
-
                 </tr>
 
-
                 <tr>
-
                     <td>Shelter Support</td>
-
                     <td>Karthik</td>
-
                     <td>Srirangam</td>
-
                     <td>
                         <span class="task-status pending">
                             Pending
                         </span>
                     </td>
-
                 </tr>
 
             </table>
@@ -340,47 +293,566 @@
         </section>
 
     </div>
+
+
+    <!-- ========================= -->
+    <!-- JAVASCRIPT -->
+    <!-- ========================= -->
+
     <script>
-       
 
-document.querySelector(".add-btn").addEventListener("click", function () {
+        const BACKEND_URL =
+            "https://capstone-project-c6bv.onrender.com";
 
-    const disaster = prompt("Enter Disaster Name:");
-    if (disaster === null || disaster.trim() === "") return;
 
-    const location = prompt("Enter Location:");
-    if (location === null || location.trim() === "") return;
+        /* =========================
+           ADD DISASTER
+           ========================= */
 
-    const severity = prompt("Enter Severity (High / Medium / Low):");
-    if (severity === null || severity.trim() === "") return;
+        const addDisasterBtn =
+            document.getElementById("addDisasterBtn");
 
-    const table = document.querySelector(".admin-section table");
+        if (addDisasterBtn) {
 
-    const row = table.insertRow(-1);
+            addDisasterBtn.addEventListener(
+                "click",
+                function () {
 
-    row.insertCell(0).textContent = disaster;
-    row.insertCell(1).textContent = location;
-    row.insertCell(2).textContent = severity;
-    row.insertCell(3).textContent = "0";
-    row.insertCell(4).textContent = "Active";
+                    const disaster =
+                        prompt("Enter Disaster Name:");
 
-    alert("Disaster Added Successfully!");
-});
-document.querySelectorAll(".assign-btn").forEach(function(button) {
-    button.addEventListener("click", function() {
-        const task = prompt("Enter Task:");
+                    if (
+                        disaster === null ||
+                        disaster.trim() === ""
+                    ) {
+                        return;
+                    }
 
-        if (task === null || task.trim() === "") {
-            return;
+
+                    const location =
+                        prompt("Enter Location:");
+
+                    if (
+                        location === null ||
+                        location.trim() === ""
+                    ) {
+                        return;
+                    }
+
+
+                    const severity =
+                        prompt(
+                            "Enter Severity (High / Medium / Low):"
+                        );
+
+                    if (
+                        severity === null ||
+                        severity.trim() === ""
+                    ) {
+                        return;
+                    }
+
+
+                    const table =
+                        document.getElementById(
+                            "disasterTable"
+                        );
+
+                    const row =
+                        table.insertRow(-1);
+
+
+                    row.insertCell(0).textContent =
+                        disaster.trim();
+
+                    row.insertCell(1).textContent =
+                        location.trim();
+
+                    row.insertCell(2).textContent =
+                        severity.trim();
+
+                    row.insertCell(3).textContent =
+                        "0";
+
+                    row.insertCell(4).textContent =
+                        "Active";
+
+
+                    alert(
+                        "Disaster Added Successfully!"
+                    );
+
+                }
+            );
+
         }
 
-        alert("Task Assigned Successfully!");
-    });
-});
-</script>
+
+        /* =========================
+           ASSIGN TASK
+           ========================= */
+
+        document
+            .querySelectorAll(".assign-btn")
+            .forEach(
+                function (button) {
+
+                    button.addEventListener(
+                        "click",
+                        function () {
+
+                            const task =
+                                prompt("Enter Task:");
+
+                            if (
+                                task === null ||
+                                task.trim() === ""
+                            ) {
+                                return;
+                            }
+
+                            alert(
+                                "Task Assigned Successfully!"
+                            );
+
+                        }
+                    );
+
+                }
+            );
 
 
+        /* =========================
+           LOAD EMERGENCY ALERTS
+           ========================= */
+
+        function loadEmergencyAlerts() {
+
+            fetch(
+                BACKEND_URL +
+                "/api/emergency-alerts"
+            )
+
+                .then(
+                    function (response) {
+
+                        if (!response.ok) {
+
+                            throw new Error(
+                                "Failed to load emergency alerts"
+                            );
+
+                        }
+
+                        return response.json();
+
+                    }
+                )
+
+                .then(
+                    function (alerts) {
+
+                        const table =
+                            document.getElementById(
+                                "emergencyAlertTable"
+                            );
+
+
+                        table.innerHTML = `
+                            <tr>
+                                <th>Title</th>
+                                <th>Message</th>
+                                <th>Severity</th>
+                                <th>Action</th>
+                            </tr>
+                        `;
+
+
+                        if (
+                            !Array.isArray(alerts) ||
+                            alerts.length === 0
+                        ) {
+
+                            const row =
+                                table.insertRow(-1);
+
+                            const cell =
+                                row.insertCell(0);
+
+                            cell.colSpan = 4;
+
+                            cell.textContent =
+                                "No emergency alerts available.";
+
+                            return;
+
+                        }
+
+
+                        alerts.forEach(
+                            function (alert) {
+
+                                const row =
+                                    table.insertRow(-1);
+
+
+                                row.insertCell(0).textContent =
+                                    alert.title || "";
+
+                                row.insertCell(1).textContent =
+                                    alert.message || "";
+
+                                row.insertCell(2).textContent =
+                                    alert.severity || "";
+
+
+                                const actionCell =
+                                    row.insertCell(3);
+
+
+                                const deleteButton =
+                                    document.createElement(
+                                        "button"
+                                    );
+
+                                deleteButton.textContent =
+                                    "Delete";
+
+                                deleteButton.className =
+                                    "assign-btn";
+
+
+                                deleteButton.addEventListener(
+                                    "click",
+                                    function () {
+
+                                        deleteAlert(
+                                            alert.alertId
+                                        );
+
+                                    }
+                                );
+
+
+                                actionCell.appendChild(
+                                    deleteButton
+                                );
+
+                            }
+                        );
+
+                    }
+                )
+
+                .catch(
+                    function (error) {
+
+                        console.error(
+                            "Error loading emergency alerts:",
+                            error
+                        );
+
+
+                        const table =
+                            document.getElementById(
+                                "emergencyAlertTable"
+                            );
+
+
+                        table.innerHTML = `
+                            <tr>
+                                <th>Title</th>
+                                <th>Message</th>
+                                <th>Severity</th>
+                                <th>Action</th>
+                            </tr>
+
+                            <tr>
+                                <td colspan="4">
+                                    Unable to load emergency alerts.
+                                </td>
+                            </tr>
+                        `;
+
+                    }
+                );
+
+        }
+
+
+        /* =========================
+           ADD EMERGENCY ALERT
+           ========================= */
+
+        const addAlertBtn =
+            document.getElementById(
+                "addAlertBtn"
+            );
+
+
+        if (addAlertBtn) {
+
+            addAlertBtn.addEventListener(
+                "click",
+                function () {
+
+                    const title =
+                        prompt(
+                            "Enter Alert Title:"
+                        );
+
+
+                    if (
+                        title === null ||
+                        title.trim() === ""
+                    ) {
+                        return;
+                    }
+
+
+                    const message =
+                        prompt(
+                            "Enter Alert Message:"
+                        );
+
+
+                    if (
+                        message === null ||
+                        message.trim() === ""
+                    ) {
+                        return;
+                    }
+
+
+                    const severity =
+                        prompt(
+                            "Enter Severity (High / Medium / Low):"
+                        );
+
+
+                    if (
+                        severity === null ||
+                        severity.trim() === ""
+                    ) {
+                        return;
+                    }
+
+
+                    /* Get logged-in admin email */
+                    const adminEmail =
+                        localStorage.getItem(
+                            "loggedInEmail"
+                        );
+
+
+                    if (
+                        !adminEmail ||
+                        adminEmail.trim() === ""
+                    ) {
+
+                        alert(
+                            "Admin login session not found. Please login again."
+                        );
+
+                        window.location.href =
+                            "login.html";
+
+                        return;
+
+                    }
+
+
+                    const alertData = {
+
+                        title:
+                            title.trim(),
+
+                        message:
+                            message.trim(),
+
+                        severity:
+                            severity.trim()
+
+                    };
+
+
+                    const alertUrl =
+                        BACKEND_URL +
+                        "/api/emergency-alerts?createdByEmail=" +
+                        encodeURIComponent(
+                            adminEmail
+                        );
+
+
+                    fetch(
+                        alertUrl,
+                        {
+
+                            method: "POST",
+
+                            headers: {
+
+                                "Content-Type":
+                                    "application/json"
+
+                            },
+
+                            body:
+                                JSON.stringify(
+                                    alertData
+                                )
+
+                        }
+                    )
+
+                        .then(
+                            async function (response) {
+
+                                const responseText =
+                                    await response.text();
+
+
+                                if (!response.ok) {
+
+                                    throw new Error(
+                                        responseText ||
+                                        "Failed to create emergency alert"
+                                    );
+
+                                }
+
+
+                                return responseText;
+
+                            }
+                        )
+
+                        .then(
+                            function () {
+
+                                alert(
+                                    "Emergency alert added successfully!"
+                                );
+
+
+                                loadEmergencyAlerts();
+
+                            }
+                        )
+
+                        .catch(
+                            function (error) {
+
+                                console.error(
+                                    "Add alert error:",
+                                    error
+                                );
+
+
+                                alert(
+                                    "Failed to add emergency alert."
+                                );
+
+                            }
+                        );
+
+                }
+            );
+
+        }
+
+
+        /* =========================
+           DELETE EMERGENCY ALERT
+           ========================= */
+
+        function deleteAlert(id) {
+
+            if (!id) {
+
+                alert(
+                    "Invalid alert ID."
+                );
+
+                return;
+
+            }
+
+
+            const confirmed =
+                confirm(
+                    "Are you sure you want to delete this alert?"
+                );
+
+
+            if (!confirmed) {
+                return;
+            }
+
+
+            fetch(
+                BACKEND_URL +
+                "/api/emergency-alerts/" +
+                id,
+                {
+
+                    method: "DELETE"
+
+                }
+            )
+
+                .then(
+                    function (response) {
+
+                        if (!response.ok) {
+
+                            throw new Error(
+                                "Failed to delete alert"
+                            );
+
+                        }
+
+                    }
+                )
+
+                .then(
+                    function () {
+
+                        alert(
+                            "Alert deleted successfully!"
+                        );
+
+                        loadEmergencyAlerts();
+
+                    }
+                )
+
+                .catch(
+                    function (error) {
+
+                        console.error(
+                            "Delete error:",
+                            error
+                        );
+
+                        alert(
+                            "Failed to delete alert."
+                        );
+
+                    }
+                );
+
+        }
+
+
+        /* =========================
+           INITIAL LOAD
+           ========================= */
+
+        loadEmergencyAlerts();
+
+    </script>
 
 </body>
-</html>
 
+</html>
