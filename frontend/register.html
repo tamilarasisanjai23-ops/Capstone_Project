@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@
 
 <body>
 
+    <!-- Navigation -->
     <nav>
         <h2>Disaster Relief</h2>
 
@@ -21,6 +23,8 @@
         </div>
     </nav>
 
+
+    <!-- Registration -->
     <div class="register-container">
 
         <div class="register-box">
@@ -29,53 +33,102 @@
 
             <p>Join our disaster relief team</p>
 
-            <form action="login.html">
 
-                <label>Full Name</label>
+            <form id="registerForm">
+
+                <label for="name">Full Name</label>
+
                 <input
                     type="text"
+                    id="name"
+                    name="name"
                     placeholder="Enter your full name"
                     required
                 >
 
-                <label>Email</label>
+
+                <label for="email">Email</label>
+
                 <input
                     type="email"
+                    id="email"
+                    name="email"
                     placeholder="Enter your email"
                     required
                 >
 
-                <label>Phone Number</label>
+
+                <label for="phone">Phone Number</label>
+
                 <input
                     type="tel"
+                    id="phone"
+                    name="phone"
                     placeholder="Enter your phone number"
                     required
                 >
 
-                <label>Password</label>
+
+                <label for="password">Password</label>
+
                 <input
                     type="password"
+                    id="password"
+                    name="password"
                     placeholder="Create password"
                     required
                 >
 
-                <label>Skills</label>
-                <select required>
-                    <option value="">Select your skill</option>
-                    <option>First Aid</option>
-                    <option>Rescue</option>
-                    <option>Food Distribution</option>
-                    <option>Medical Support</option>
-                    <option>Transportation</option>
-                    <option>Communication</option>
+
+                <label for="skills">Skills</label>
+
+                <select
+                    id="skills"
+                    name="skills"
+                    required
+                >
+
+                    <option value="">
+                        Select your skill
+                    </option>
+
+                    <option value="First Aid">
+                        First Aid
+                    </option>
+
+                    <option value="Rescue">
+                        Rescue
+                    </option>
+
+                    <option value="Food Distribution">
+                        Food Distribution
+                    </option>
+
+                    <option value="Medical Support">
+                        Medical Support
+                    </option>
+
+                    <option value="Transportation">
+                        Transportation
+                    </option>
+
+                    <option value="Communication">
+                        Communication
+                    </option>
+
                 </select>
 
-                <label>Location</label>
+
+                <label for="location">Location</label>
+
                 <input
                     type="text"
+                    id="location"
+                    name="location"
                     placeholder="Enter your location"
                     required
                 >
+
 
                 <button type="submit">
                     Register
@@ -83,14 +136,24 @@
 
             </form>
 
+
             <p class="login-text">
+
                 Already have an account?
-                <a href="login.html">Login here</a>
+
+                <a href="login.html">
+                    Login here
+                </a>
+
             </p>
 
         </div>
 
     </div>
 
+
+    <script src="js/script.js"></script>
+
 </body>
+
 </html>
