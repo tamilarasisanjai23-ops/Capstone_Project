@@ -48,20 +48,17 @@
 
             <div class="dashboard-card">
                 <h3>Completed Tasks</h3>
-                <p class="number"
-                id="completeCount">3</p>
+                <p class="number" id="completeCount">3</p>
             </div>
 
             <div class="dashboard-card">
                 <h3>Pending Tasks</h3>
-                <p class="number"
-                id="pendingCount">2</p>
+                <p class="number" id="pendingCount">2</p>
             </div>
 
             <div class="dashboard-card">
                 <h3>Relief Activities</h3>
-                <p class="number"
-                id="reliefCount">8</p>
+                <p class="number" id="reliefCount">8</p>
             </div>
 
         </div>
@@ -75,38 +72,51 @@
 
             <div class="profile-info">
 
-                <p><strong>Name:</strong> Volunteer Name</p>
+                <p>
+                    <strong>Name:</strong>
+                    Volunteer Name
+                </p>
 
-                <p><strong>Email:</strong> volunteer@gmail.com</p>
+                <p>
+                    <strong>Email:</strong>
+                    volunteer@gmail.com
+                </p>
 
-                <p><strong>Phone:</strong> 9876543210</p>
+                <p>
+                    <strong>Phone:</strong>
+                    9876543210
+                </p>
 
-                <p><strong>Skill:</strong> First Aid</p>
+                <p>
+                    <strong>Skill:</strong>
+                    First Aid
+                </p>
 
-                <p><strong>Location:</strong> Trichy</p>
+                <p>
+                    <strong>Location:</strong>
+                    Trichy
+                </p>
 
             </div>
 
         </div>
 
 
-        <!-- Disaster Alert -->
+        <!-- ========================== -->
+        <!-- EMERGENCY ALERTS -->
+        <!-- ========================== -->
 
         <div class="dashboard-section alert">
 
-            <h2>🚨 Active Disaster Alert</h2>
+            <h2>🚨 Emergency Alerts</h2>
 
-            <p>
-                Flood relief operations are currently active.
-            </p>
+            <div id="emergencyAlerts">
 
-            <p>
-                Location: Trichy
-            </p>
+                <p>
+                    Loading emergency alerts...
+                </p>
 
-            <p>
-                Priority: High
-            </p>
+            </div>
 
         </div>
 
@@ -127,30 +137,67 @@
                 </tr>
 
                 <tr>
-                    <td>Food Distribution</td>
-                    <td>Trichy</td>
-                    <td>High</td>
+
+                    <td>
+                        Food Distribution
+                    </td>
+
+                    <td>
+                        Trichy
+                    </td>
+
+                    <td>
+                        High
+                    </td>
+
                     <td class="status-completed">
                         Completed
                     </td>
+
                 </tr>
 
                 <tr>
-                    <td>Medicine Distribution</td>
-                    <td>Lalgudi</td>
-                    <td>Medium</td>
+
+                    <td>
+                        Medicine Distribution
+                    </td>
+
+                    <td>
+                        Lalgudi
+                    </td>
+
+                    <td>
+                        Medium
+                    </td>
+
                     <td class="status-completed">
                         Completed
                     </td>
+
                 </tr>
 
                 <tr>
-                    <td>Shelter Support</td>
-                    <td>Srirangam</td>
-                    <td>High</td>
+
+                    <td>
+                        Shelter Support
+                    </td>
+
+                    <td>
+                        Srirangam
+                    </td>
+
+                    <td>
+                        High
+                    </td>
+
                     <td class="status-pending">
-    <button onclick="completeTask(this)">Complete</button>
-</td>
+
+                        <button onclick="completeTask(this)">
+                            Complete
+                        </button>
+
+                    </td>
+
                 </tr>
 
             </table>
@@ -158,22 +205,203 @@
         </div>
 
     </div>
-<script>
-function completeTask(button) {
 
-    button.innerText = "Completed";
-    button.disabled = true;
 
-    let completed = document.getElementById("completeCount");
-    let pending = document.getElementById("pendingCount");
+    <!-- ========================== -->
+    <!-- JAVASCRIPT -->
+    <!-- ========================== -->
 
-    let completedCount = parseInt(completed.innerText);
-    let pendingCount = parseInt(pending.innerText);
+    <script>
 
-    completed.innerText = completedCount + 1;
-    pending.innerText = pendingCount - 1;
-}
-</script>
+        const BACKEND_URL =
+            "https://capstone-project-c6bv.onrender.com";
+
+
+        /* ==========================
+           LOAD EMERGENCY ALERTS
+           ========================== */
+
+        function loadEmergencyAlerts() {
+
+            fetch(
+                BACKEND_URL +
+                "/api/emergency-alerts"
+            )
+
+                .then(function (response) {
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                            "Failed to load emergency alerts"
+                        );
+
+                    }
+
+                    return response.json();
+
+                })
+
+                .then(function (alerts) {
+
+                    const alertContainer =
+                        document.getElementById(
+                            "emergencyAlerts"
+                        );
+
+
+                    if (
+                        !Array.isArray(alerts) ||
+                        alerts.length === 0
+                    ) {
+
+                        alertContainer.innerHTML = `
+                            <p>
+                                No emergency alerts available.
+                            </p>
+                        `;
+
+                        return;
+                    }
+
+
+                    alertContainer.innerHTML = "";
+
+
+                    alerts.forEach(function (alert) {
+
+                        const alertBox =
+                            document.createElement(
+                                "div"
+                            );
+
+
+                        alertBox.style.marginBottom =
+                            "15px";
+
+
+                        alertBox.style.padding =
+                            "15px";
+
+
+                        alertBox.style.borderRadius =
+                            "8px";
+
+
+                        alertBox.style.border =
+                            "1px solid #ddd";
+
+
+                        alertBox.style.backgroundColor =
+                            "#fff";
+
+
+                        alertBox.innerHTML = `
+
+                            <h3>
+                                🚨 ${alert.title || "Emergency Alert"}
+                            </h3>
+
+                            <p>
+                                <strong>Message:</strong>
+                                ${alert.message || ""}
+                            </p>
+
+                            <p>
+                                <strong>Severity:</strong>
+                                ${alert.severity || ""}
+                            </p>
+
+                        `;
+
+
+                        alertContainer.appendChild(
+                            alertBox
+                        );
+
+                    });
+
+                })
+
+                .catch(function (error) {
+
+                    console.error(
+                        "Error loading emergency alerts:",
+                        error
+                    );
+
+
+                    const alertContainer =
+                        document.getElementById(
+                            "emergencyAlerts"
+                        );
+
+
+                    alertContainer.innerHTML = `
+                        <p>
+                            Unable to load emergency alerts.
+                        </p>
+                    `;
+
+                });
+
+        }
+
+
+        /* ==========================
+           COMPLETE TASK
+           ========================== */
+
+        function completeTask(button) {
+
+            button.innerText =
+                "Completed";
+
+            button.disabled =
+                true;
+
+
+            let completed =
+                document.getElementById(
+                    "completeCount"
+                );
+
+
+            let pending =
+                document.getElementById(
+                    "pendingCount"
+                );
+
+
+            let completedCount =
+                parseInt(
+                    completed.innerText
+                );
+
+
+            let pendingCount =
+                parseInt(
+                    pending.innerText
+                );
+
+
+            completed.innerText =
+                completedCount + 1;
+
+
+            pending.innerText =
+                pendingCount - 1;
+
+        }
+
+
+        /* ==========================
+           INITIAL LOAD
+           ========================== */
+
+        loadEmergencyAlerts();
+
+    </script>
 
 </body>
 
