@@ -15,7 +15,6 @@
     <!-- Navigation -->
 
     <nav>
-
         <h2>Disaster Relief</h2>
 
         <div>
@@ -24,7 +23,6 @@
             <a href="tasks.html">Tasks</a>
             <a href="login.html">Logout</a>
         </div>
-
     </nav>
 
 
@@ -45,108 +43,9 @@
 
             <h2>Available Tasks</h2>
 
-            <div class="task-container">
+            <div class="task-container" id="availableTasks">
 
-                <!-- Task 1 -->
-
-                <div class="task-card">
-
-                    <h3>Food Distribution</h3>
-
-                    <p>
-                        Distribute food packets to affected families.
-                    </p>
-
-                    <p>
-                        <strong>📍 Location:</strong> Trichy
-                    </p>
-
-                    <p>
-                        <strong>👥 Volunteers Required:</strong> 5
-                    </p>
-
-                    <p>
-                        <strong>⏰ Time:</strong> 10:00 AM - 2:00 PM
-                    </p>
-
-                    <span class="priority high">
-                        High Priority
-                    </span>
-
-                    
-                        <button class="task-btn" onclick="acceptTask(this)">
-    Accept Task
-</button>
-
-                </div>
-
-
-
-                <!-- Task 2 -->
-
-                <div class="task-card">
-
-                    <h3>Medicine Distribution</h3>
-
-                    <p>
-                        Help distribute essential medicines
-                        to affected people.
-                    </p>
-
-                    <p>
-                        <strong>📍 Location:</strong> Lalgudi
-                    </p>
-
-                    <p>
-                        <strong>👥 Volunteers Required:</strong> 3
-                    </p>
-
-                    <p>
-                        <strong>⏰ Time:</strong> 9:00 AM - 12:00 PM
-                    </p>
-
-                    <span class="priority medium">
-                        Medium Priority
-                    </span>
-
-                    <button type="button" class="task-btn" onclick="acceptTask(this)">
-    Accept Task
-</button>
-                </div>
-
-
-                <!-- Task 3 -->
-
-                <div class="task-card">
-
-                    <h3>Shelter Support</h3>
-
-                    <p>
-                        Assist families staying in temporary
-                        relief shelters.
-                    </p>
-
-                    <p>
-                        <strong>📍 Location:</strong> Srirangam
-                    </p>
-
-                    <p>
-                        <strong>👥 Volunteers Required:</strong> 4
-                    </p>
-
-                    <p>
-                        <strong>⏰ Time:</strong> 8:00 AM - 4:00 PM
-                    </p>
-
-                    <span class="priority high">
-                        High Priority
-                    </span>
-
-                    <button class="task-btn" onclick="acceptTask(this)">
-    Accept Task
-</button>
-
-                </div>
+                <p>Loading tasks...</p>
 
             </div>
 
@@ -159,7 +58,7 @@
 
             <h2>My Assigned Tasks</h2>
 
-            <table>
+            <table id="assignedTaskTable">
 
                 <tr>
                     <th>Task</th>
@@ -170,83 +69,9 @@
                 </tr>
 
                 <tr>
-
-                    <td>Food Distribution</td>
-
-                    <td>Trichy</td>
-
-                    <td>
-                        <span class="priority high">
-                            High
-                        </span>
+                    <td colspan="5">
+                        Loading tasks...
                     </td>
-
-                    <td>
-                        <span class="task-status progress">
-                            In Progress
-                        </span>
-                    </td>
-
-                    <td>
-                        <button class="update-btn" onclick="completeTask(this)">
-    Update
-</button>
-                    </td>
-
-                </tr>
-
-
-                <tr>
-
-                    <td>Medicine Distribution</td>
-
-                    <td>Lalgudi</td>
-
-                    <td>
-                        <span class="priority medium">
-                            Medium
-                        </span>
-                    </td>
-
-                    <td>
-                        <span class="task-status Pending">
-                            Pending
-                        </span>
-                    </td>
-
-                    <td>
-                        <button class="update-btn" onclick="startTask(this)">
-    Start
-</button>
-                    </td>
-
-                </tr>
-
-
-                <tr>
-
-                    <td>Shelter Support</td>
-
-                    <td>Srirangam</td>
-
-                    <td>
-                        <span class="priority high">
-                            High
-                        </span>
-                    </td>
-
-                    <td>
-                        <span class="task-status pending">
-                            Pending
-                        </span>
-                    </td>
-
-                    <td>
-                        <button class="update-btn" onclick="startTask(this)">
-    Start
-</button>
-                    </td>
-
                 </tr>
 
             </table>
@@ -255,33 +80,501 @@
 
     </div>
 
-<script>
-function acceptTask(button) {
-    button.innerText = "Task Accepted";
-    button.disabled = true;
-}
 
-function startTask(button) {
-    const row = button.closest("tr");
-    const status = row.querySelector(".task-status");
+    <!-- JavaScript -->
 
-    status.innerText = "In Progress";
-    status.className = "task-status in-progress";
+    <script>
 
-    button.innerText = "Started";
-    button.disabled = true;
-}
-function completeTask(button) {
-    const row = button.closest("tr");
-    const status = row.querySelector(".task-status");
+        const BACKEND_URL =
+            "https://capstone-project-c6bv.onrender.com";
 
-    status.innerText = "Completed";
-    status.className = "task-status completed";
 
-    button.innerText = "View";
-    button.disabled = true;
-}
-</script>
+        /* ==========================
+           LOAD TASKS
+           ========================== */
+
+        function loadTasks() {
+
+            fetch(
+                BACKEND_URL + "/api/tasks"
+            )
+
+                .then(function (response) {
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                            "Failed to load tasks"
+                        );
+
+                    }
+
+                    return response.json();
+
+                })
+
+                .then(function (tasks) {
+
+                    if (
+                        !Array.isArray(tasks) ||
+                        tasks.length === 0
+                    ) {
+
+                        createDefaultTasks();
+
+                        return;
+
+                    }
+
+
+                    displayTasks(tasks);
+
+                })
+
+                .catch(function (error) {
+
+                    console.error(
+                        "Task loading error:",
+                        error
+                    );
+
+                    document.getElementById(
+                        "availableTasks"
+                    ).innerHTML = `
+                        <p>
+                            Unable to load tasks.
+                        </p>
+                    `;
+
+                });
+
+        }
+
+
+        /* ==========================
+           CREATE DEFAULT TASKS
+           ========================== */
+
+        function createDefaultTasks() {
+
+            const defaultTasks = [
+
+                {
+                    taskName: "Food Distribution",
+                    location: "Trichy",
+                    priority: "High",
+                    status: "Pending"
+                },
+
+                {
+                    taskName: "Medicine Distribution",
+                    location: "Lalgudi",
+                    priority: "Medium",
+                    status: "Pending"
+                },
+
+                {
+                    taskName: "Shelter Support",
+                    location: "Srirangam",
+                    priority: "High",
+                    status: "Pending"
+                }
+
+            ];
+
+
+            const requests =
+                defaultTasks.map(function (task) {
+
+                    return fetch(
+                        BACKEND_URL + "/api/tasks",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body:
+                                JSON.stringify(task)
+                        }
+                    );
+
+                });
+
+
+            Promise.all(requests)
+
+                .then(function () {
+
+                    loadTasks();
+
+                })
+
+                .catch(function (error) {
+
+                    console.error(
+                        "Default task creation error:",
+                        error
+                    );
+
+                });
+
+        }
+
+
+        /* ==========================
+           DISPLAY TASKS
+           ========================== */
+
+        function displayTasks(tasks) {
+
+            const availableContainer =
+                document.getElementById(
+                    "availableTasks"
+                );
+
+
+            const assignedTable =
+                document.getElementById(
+                    "assignedTaskTable"
+                );
+
+
+            availableContainer.innerHTML = "";
+
+
+            assignedTable.innerHTML = `
+                <tr>
+                    <th>Task</th>
+                    <th>Location</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            `;
+
+
+            tasks.forEach(function (task) {
+
+                /* ==================
+                   AVAILABLE TASK CARD
+                   ================== */
+
+                const card =
+                    document.createElement("div");
+
+                card.className =
+                    "task-card";
+
+
+                card.innerHTML = `
+
+                    <h3>
+                        ${task.taskName}
+                    </h3>
+
+                    <p>
+                        Help with disaster relief
+                        activities.
+                    </p>
+
+                    <p>
+                        <strong>📍 Location:</strong>
+                        ${task.location}
+                    </p>
+
+                    <p>
+                        <strong>⏰ Status:</strong>
+                        ${task.status}
+                    </p>
+
+                    <span class="priority ${getPriorityClass(task.priority)}">
+                        ${task.priority} Priority
+                    </span>
+
+                    <br><br>
+
+                    <button
+                        class="task-btn"
+                        onclick="acceptTask(
+                            ${task.taskId},
+                            this
+                        )"
+                        ${task.status !== "Pending"
+                            ? "disabled"
+                            : ""}
+                    >
+                        ${task.status === "Pending"
+                            ? "Accept Task"
+                            : task.status}
+                    </button>
+
+                `;
+
+
+                availableContainer.appendChild(
+                    card
+                );
+
+
+                /* ==================
+                   ASSIGNED TASK TABLE
+                   ================== */
+
+                const row =
+                    assignedTable.insertRow(-1);
+
+
+                row.insertCell(0).textContent =
+                    task.taskName;
+
+                row.insertCell(1).textContent =
+                    task.location;
+
+                row.insertCell(2).textContent =
+                    task.priority;
+
+
+                const statusCell =
+                    row.insertCell(3);
+
+
+                const statusSpan =
+                    document.createElement("span");
+
+                statusSpan.className =
+                    getStatusClass(task.status);
+
+                statusSpan.textContent =
+                    task.status;
+
+
+                statusCell.appendChild(
+                    statusSpan
+                );
+
+
+                const actionCell =
+                    row.insertCell(4);
+
+
+                const actionButton =
+                    document.createElement("button");
+
+
+                actionButton.className =
+                    "update-btn";
+
+
+                if (
+                    task.status === "Pending"
+                ) {
+
+                    actionButton.textContent =
+                        "Start";
+
+                    actionButton.onclick =
+                        function () {
+
+                            updateTaskStatus(
+                                task.taskId,
+                                "In Progress"
+                            );
+
+                        };
+
+                }
+                else if (
+                    task.status === "In Progress"
+                ) {
+
+                    actionButton.textContent =
+                        "Complete";
+
+                    actionButton.onclick =
+                        function () {
+
+                            updateTaskStatus(
+                                task.taskId,
+                                "Completed"
+                            );
+
+                        };
+
+                }
+                else {
+
+                    actionButton.textContent =
+                        "View";
+
+                    actionButton.onclick =
+                        function () {
+
+                            alert(
+                                "Task: " +
+                                task.taskName +
+                                "\nStatus: " +
+                                task.status
+                            );
+
+                        };
+
+                }
+
+
+                actionCell.appendChild(
+                    actionButton
+                );
+
+            });
+
+        }
+
+
+        /* ==========================
+           ACCEPT TASK
+           ========================== */
+
+        function acceptTask(
+            taskId,
+            button
+        ) {
+
+            updateTaskStatus(
+                taskId,
+                "In Progress"
+            );
+
+        }
+
+
+        /* ==========================
+           UPDATE TASK STATUS
+           ========================== */
+
+        function updateTaskStatus(
+            taskId,
+            newStatus
+        ) {
+
+            fetch(
+                BACKEND_URL +
+                "/api/tasks/" +
+                taskId +
+                "/status?status=" +
+                encodeURIComponent(
+                    newStatus
+                ),
+                {
+                    method: "PUT"
+                }
+            )
+
+                .then(function (response) {
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                            "Failed to update task"
+                        );
+
+                    }
+
+                    return response.json();
+
+                })
+
+                .then(function () {
+
+                    alert(
+                        "Task status updated to " +
+                        newStatus
+                    );
+
+                    loadTasks();
+
+                })
+
+                .catch(function (error) {
+
+                    console.error(
+                        "Task update error:",
+                        error
+                    );
+
+                    alert(
+                        "Failed to update task."
+                    );
+
+                });
+
+        }
+
+
+        /* ==========================
+           PRIORITY CLASS
+           ========================== */
+
+        function getPriorityClass(
+            priority
+        ) {
+
+            if (!priority) {
+                return "";
+            }
+
+
+            return priority
+                .toLowerCase()
+                .replace(
+                    /\s+/g,
+                    "-"
+                );
+
+        }
+
+
+        /* ==========================
+           STATUS CLASS
+           ========================== */
+
+        function getStatusClass(
+            status
+        ) {
+
+            if (
+                status === "Completed"
+            ) {
+
+                return "task-status completed";
+
+            }
+
+
+            if (
+                status === "In Progress"
+            ) {
+
+                return "task-status progress";
+
+            }
+
+
+            return "task-status pending";
+
+        }
+
+
+        /* ==========================
+           INITIAL LOAD
+           ========================== */
+
+        loadTasks();
+
+    </script>
+
 </body>
 
 </html>

@@ -2,132 +2,256 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
     <title>Admin Dashboard - Disaster Relief</title>
 
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet"
+        href="css/style.css">
+
 </head>
 
 <body>
 
-    <!-- Navigation -->
+    <!-- =========================
+         NAVIGATION
+         ========================= -->
+
     <nav>
-        <h2>Disaster Relief Admin</h2>
+
+        <h2>
+            Disaster Relief Admin
+        </h2>
 
         <div>
-            <a href="index.html">Home</a>
-            <a href="admin-dashboard.html">Dashboard</a>
-            <a href="login.html">Logout</a>
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="admin-dashboard.html">
+                Dashboard
+            </a>
+
+            <a href="login.html">
+                Logout
+            </a>
+
         </div>
+
     </nav>
 
 
-    <!-- Admin Dashboard -->
+    <!-- =========================
+         ADMIN DASHBOARD
+         ========================= -->
+
     <div class="admin-dashboard">
 
-        <h1>Admin Dashboard</h1>
+        <h1>
+            Admin Dashboard
+        </h1>
 
         <p class="admin-subtitle">
             Monitor volunteers, disasters and relief activities.
         </p>
 
 
-        <!-- Statistics -->
+        <!-- =========================
+             STATISTICS
+             ========================= -->
+
         <div class="admin-cards">
 
             <div class="admin-card">
-                <h3>Total Volunteers</h3>
-                <p>120</p>
+
+                <h3>
+                    Total Volunteers
+                </h3>
+
+                <p>
+                    120
+                </p>
+
             </div>
 
-            <div class="admin-card">
-                <h3>Active Disasters</h3>
-                <p>4</p>
-            </div>
 
             <div class="admin-card">
-                <h3>Active Tasks</h3>
-                <p>35</p>
+
+                <h3>
+                    Active Disasters
+                </h3>
+
+                <p>
+                    4
+                </p>
+
             </div>
 
+
             <div class="admin-card">
-                <h3>Completed Tasks</h3>
-                <p>85</p>
+
+                <h3>
+                    Active Tasks
+                </h3>
+
+                <p>
+                    35
+                </p>
+
+            </div>
+
+
+            <div class="admin-card">
+
+                <h3>
+                    Completed Tasks
+                </h3>
+
+                <p>
+                    85
+                </p>
+
             </div>
 
         </div>
 
 
-        <!-- ========================= -->
-        <!-- DISASTER MANAGEMENT -->
-        <!-- ========================= -->
+        <!-- =========================
+             DISASTER MANAGEMENT
+             ========================= -->
 
         <section class="admin-section">
 
-            <h2>Disaster Management</h2>
+            <h2>
+                Disaster Management
+            </h2>
 
-            <button class="add-btn" id="addDisasterBtn">
+
+            <button
+                class="add-btn"
+                id="addDisasterBtn">
+
                 + Add Disaster
+
             </button>
+
 
             <table id="disasterTable">
 
                 <tr>
-                    <th>Disaster</th>
-                    <th>Location</th>
-                    <th>Severity</th>
-                    <th>Volunteers</th>
-                    <th>Status</th>
+
+                    <th>
+                        Disaster
+                    </th>
+
+                    <th>
+                        Location
+                    </th>
+
+                    <th>
+                        Severity
+                    </th>
+
+                    <th>
+                        Volunteers
+                    </th>
+
+                    <th>
+                        Status
+                    </th>
+
                 </tr>
 
+
                 <tr>
-                    <td>Flood</td>
-                    <td>Trichy</td>
+
+                    <td>
+                        Flood
+                    </td>
+
+                    <td>
+                        Trichy
+                    </td>
+
                     <td>
                         <span class="severity-high">
                             High
                         </span>
                     </td>
-                    <td>40</td>
+
+                    <td>
+                        40
+                    </td>
+
                     <td>
                         <span class="active-status">
                             Active
                         </span>
                     </td>
+
                 </tr>
 
+
                 <tr>
-                    <td>Cyclone</td>
-                    <td>Thanjavur</td>
+
+                    <td>
+                        Cyclone
+                    </td>
+
+                    <td>
+                        Thanjavur
+                    </td>
+
                     <td>
                         <span class="severity-medium">
                             Medium
                         </span>
                     </td>
-                    <td>25</td>
+
+                    <td>
+                        25
+                    </td>
+
                     <td>
                         <span class="active-status">
                             Active
                         </span>
                     </td>
+
                 </tr>
 
+
                 <tr>
-                    <td>Flood</td>
-                    <td>Ariyalur</td>
+
+                    <td>
+                        Flood
+                    </td>
+
+                    <td>
+                        Ariyalur
+                    </td>
+
                     <td>
                         <span class="severity-high">
                             High
                         </span>
                     </td>
-                    <td>30</td>
+
+                    <td>
+                        30
+                    </td>
+
                     <td>
                         <span class="active-status">
                             Active
                         </span>
                     </td>
+
                 </tr>
 
             </table>
@@ -135,70 +259,144 @@
         </section>
 
 
-        <!-- ========================= -->
-        <!-- VOLUNTEER MANAGEMENT -->
-        <!-- ========================= -->
+        <!-- =========================
+             VOLUNTEER MANAGEMENT
+             ========================= -->
 
         <section class="admin-section">
 
-            <h2>Volunteer Management</h2>
+            <h2>
+                Volunteer Management
+            </h2>
+
 
             <table>
 
                 <tr>
-                    <th>Name</th>
-                    <th>Skill</th>
-                    <th>Location</th>
-                    <th>Availability</th>
-                    <th>Action</th>
+
+                    <th>
+                        Name
+                    </th>
+
+                    <th>
+                        Skill
+                    </th>
+
+                    <th>
+                        Location
+                    </th>
+
+                    <th>
+                        Availability
+                    </th>
+
+                    <th>
+                        Action
+                    </th>
+
                 </tr>
 
+
                 <tr>
-                    <td>Arun</td>
-                    <td>First Aid</td>
-                    <td>Trichy</td>
+
                     <td>
+                        Arun
+                    </td>
+
+                    <td>
+                        First Aid
+                    </td>
+
+                    <td>
+                        Trichy
+                    </td>
+
+                    <td>
+
                         <span class="available">
                             Available
                         </span>
+
                     </td>
+
                     <td>
+
                         <button class="assign-btn">
                             Assign Task
                         </button>
+
                     </td>
+
                 </tr>
 
+
                 <tr>
-                    <td>Priya</td>
-                    <td>Medical Support</td>
-                    <td>Lalgudi</td>
+
                     <td>
+                        Priya
+                    </td>
+
+                    <td>
+                        Medical Support
+                    </td>
+
+                    <td>
+                        Lalgudi
+                    </td>
+
+                    <td>
+
                         <span class="available">
                             Available
                         </span>
+
                     </td>
+
                     <td>
+
                         <button class="assign-btn">
                             Assign Task
                         </button>
+
                     </td>
+
                 </tr>
 
+
                 <tr>
-                    <td>Karthik</td>
-                    <td>Rescue</td>
-                    <td>Srirangam</td>
+
                     <td>
+                        Karthik
+                    </td>
+
+                    <td>
+                        Rescue
+                    </td>
+
+                    <td>
+                        Srirangam
+                    </td>
+
+                    <td>
+
                         <span class="busy">
                             Busy
                         </span>
+
                     </td>
+
                     <td>
-                        <button class="assign-btn" disabled>
+
+                        <button
+                            class="assign-btn"
+                            disabled>
+
                             Unavailable
+
                         </button>
+
                     </td>
+
                 </tr>
 
             </table>
@@ -206,31 +404,55 @@
         </section>
 
 
-        <!-- ========================= -->
-        <!-- EMERGENCY ALERTS -->
-        <!-- ========================= -->
+        <!-- =========================
+             EMERGENCY ALERTS
+             ========================= -->
 
         <section class="admin-section">
 
-            <h2>Emergency Alerts</h2>
+            <h2>
+                Emergency Alerts
+            </h2>
 
-            <button class="add-btn" id="addAlertBtn">
+
+            <button
+                class="add-btn"
+                id="addAlertBtn">
+
                 + Add Emergency Alert
+
             </button>
+
 
             <table id="emergencyAlertTable">
 
                 <tr>
-                    <th>Title</th>
-                    <th>Message</th>
-                    <th>Severity</th>
-                    <th>Action</th>
+
+                    <th>
+                        Title
+                    </th>
+
+                    <th>
+                        Message
+                    </th>
+
+                    <th>
+                        Severity
+                    </th>
+
+                    <th>
+                        Action
+                    </th>
+
                 </tr>
 
+
                 <tr>
+
                     <td colspan="4">
                         Loading alerts...
                     </td>
+
                 </tr>
 
             </table>
@@ -238,54 +460,46 @@
         </section>
 
 
-        <!-- ========================= -->
-        <!-- TASK MONITORING -->
-        <!-- ========================= -->
+        <!-- =========================
+             TASK MONITORING
+             ========================= -->
 
         <section class="admin-section">
 
-            <h2>Task Monitoring</h2>
+            <h2>
+                Task Monitoring
+            </h2>
 
-            <table>
+
+            <table id="taskMonitoringTable">
 
                 <tr>
-                    <th>Task</th>
-                    <th>Volunteer</th>
-                    <th>Location</th>
-                    <th>Status</th>
+
+                    <th>
+                        Task
+                    </th>
+
+                    <th>
+                        Volunteer
+                    </th>
+
+                    <th>
+                        Location
+                    </th>
+
+                    <th>
+                        Status
+                    </th>
+
                 </tr>
 
-                <tr>
-                    <td>Food Distribution</td>
-                    <td>Arun</td>
-                    <td>Trichy</td>
-                    <td>
-                        <span class="task-status progress">
-                            In Progress
-                        </span>
-                    </td>
-                </tr>
 
                 <tr>
-                    <td>Medicine Distribution</td>
-                    <td>Priya</td>
-                    <td>Lalgudi</td>
-                    <td>
-                        <span class="task-status completed">
-                            Completed
-                        </span>
-                    </td>
-                </tr>
 
-                <tr>
-                    <td>Shelter Support</td>
-                    <td>Karthik</td>
-                    <td>Srirangam</td>
-                    <td>
-                        <span class="task-status pending">
-                            Pending
-                        </span>
+                    <td colspan="4">
+                        Loading tasks...
                     </td>
+
                 </tr>
 
             </table>
@@ -295,9 +509,9 @@
     </div>
 
 
-    <!-- ========================= -->
-    <!-- JAVASCRIPT -->
-    <!-- ========================= -->
+    <!-- =========================
+         JAVASCRIPT
+         ========================= -->
 
     <script>
 
@@ -305,12 +519,15 @@
             "https://capstone-project-c6bv.onrender.com";
 
 
-        /* =========================
+        /* ==================================
            ADD DISASTER
-           ========================= */
+           ================================== */
 
         const addDisasterBtn =
-            document.getElementById("addDisasterBtn");
+            document.getElementById(
+                "addDisasterBtn"
+            );
+
 
         if (addDisasterBtn) {
 
@@ -319,7 +536,10 @@
                 function () {
 
                     const disaster =
-                        prompt("Enter Disaster Name:");
+                        prompt(
+                            "Enter Disaster Name:"
+                        );
+
 
                     if (
                         disaster === null ||
@@ -330,7 +550,10 @@
 
 
                     const location =
-                        prompt("Enter Location:");
+                        prompt(
+                            "Enter Location:"
+                        );
+
 
                     if (
                         location === null ||
@@ -345,6 +568,7 @@
                             "Enter Severity (High / Medium / Low):"
                         );
 
+
                     if (
                         severity === null ||
                         severity.trim() === ""
@@ -358,23 +582,38 @@
                             "disasterTable"
                         );
 
+
                     const row =
                         table.insertRow(-1);
 
 
-                    row.insertCell(0).textContent =
+                    row.insertCell(
+                        0
+                    ).textContent =
                         disaster.trim();
 
-                    row.insertCell(1).textContent =
+
+                    row.insertCell(
+                        1
+                    ).textContent =
                         location.trim();
 
-                    row.insertCell(2).textContent =
+
+                    row.insertCell(
+                        2
+                    ).textContent =
                         severity.trim();
 
-                    row.insertCell(3).textContent =
+
+                    row.insertCell(
+                        3
+                    ).textContent =
                         "0";
 
-                    row.insertCell(4).textContent =
+
+                    row.insertCell(
+                        4
+                    ).textContent =
                         "Active";
 
 
@@ -388,12 +627,14 @@
         }
 
 
-        /* =========================
-           ASSIGN TASK
-           ========================= */
+        /* ==================================
+           ASSIGN TASK BUTTON
+           ================================== */
 
         document
-            .querySelectorAll(".assign-btn")
+            .querySelectorAll(
+                ".assign-btn"
+            )
             .forEach(
                 function (button) {
 
@@ -402,7 +643,10 @@
                         function () {
 
                             const task =
-                                prompt("Enter Task:");
+                                prompt(
+                                    "Enter Task:"
+                                );
+
 
                             if (
                                 task === null ||
@@ -410,6 +654,7 @@
                             ) {
                                 return;
                             }
+
 
                             alert(
                                 "Task Assigned Successfully!"
@@ -422,9 +667,9 @@
             );
 
 
-        /* =========================
+        /* ==================================
            LOAD EMERGENCY ALERTS
-           ========================= */
+           ================================== */
 
         function loadEmergencyAlerts() {
 
@@ -439,7 +684,7 @@
                         if (!response.ok) {
 
                             throw new Error(
-                                "Failed to load emergency alerts"
+                                "Failed to load alerts"
                             );
 
                         }
@@ -459,30 +704,51 @@
 
 
                         table.innerHTML = `
+
                             <tr>
-                                <th>Title</th>
-                                <th>Message</th>
-                                <th>Severity</th>
-                                <th>Action</th>
+
+                                <th>
+                                    Title
+                                </th>
+
+                                <th>
+                                    Message
+                                </th>
+
+                                <th>
+                                    Severity
+                                </th>
+
+                                <th>
+                                    Action
+                                </th>
+
                             </tr>
+
                         `;
 
 
                         if (
-                            !Array.isArray(alerts) ||
+                            !Array.isArray(
+                                alerts
+                            ) ||
                             alerts.length === 0
                         ) {
 
                             const row =
                                 table.insertRow(-1);
 
+
                             const cell =
                                 row.insertCell(0);
 
+
                             cell.colSpan = 4;
+
 
                             cell.textContent =
                                 "No emergency alerts available.";
+
 
                             return;
 
@@ -496,18 +762,28 @@
                                     table.insertRow(-1);
 
 
-                                row.insertCell(0).textContent =
+                                row.insertCell(
+                                    0
+                                ).textContent =
                                     alert.title || "";
 
-                                row.insertCell(1).textContent =
+
+                                row.insertCell(
+                                    1
+                                ).textContent =
                                     alert.message || "";
 
-                                row.insertCell(2).textContent =
+
+                                row.insertCell(
+                                    2
+                                ).textContent =
                                     alert.severity || "";
 
 
                                 const actionCell =
-                                    row.insertCell(3);
+                                    row.insertCell(
+                                        3
+                                    );
 
 
                                 const deleteButton =
@@ -515,8 +791,10 @@
                                         "button"
                                     );
 
+
                                 deleteButton.textContent =
                                     "Delete";
+
 
                                 deleteButton.className =
                                     "assign-btn";
@@ -560,18 +838,35 @@
 
 
                         table.innerHTML = `
+
                             <tr>
-                                <th>Title</th>
-                                <th>Message</th>
-                                <th>Severity</th>
-                                <th>Action</th>
+
+                                <th>
+                                    Title
+                                </th>
+
+                                <th>
+                                    Message
+                                </th>
+
+                                <th>
+                                    Severity
+                                </th>
+
+                                <th>
+                                    Action
+                                </th>
+
                             </tr>
 
                             <tr>
+
                                 <td colspan="4">
                                     Unable to load emergency alerts.
                                 </td>
+
                             </tr>
+
                         `;
 
                     }
@@ -580,9 +875,9 @@
         }
 
 
-        /* =========================
+        /* ==================================
            ADD EMERGENCY ALERT
-           ========================= */
+           ================================== */
 
         const addAlertBtn =
             document.getElementById(
@@ -638,7 +933,6 @@
                     }
 
 
-                    /* Get logged-in admin email */
                     const adminEmail =
                         localStorage.getItem(
                             "loggedInEmail"
@@ -654,8 +948,10 @@
                             "Admin login session not found. Please login again."
                         );
 
+
                         window.location.href =
                             "login.html";
+
 
                         return;
 
@@ -688,7 +984,9 @@
                         alertUrl,
                         {
 
-                            method: "POST",
+                            method:
+                                "POST",
+
 
                             headers: {
 
@@ -696,6 +994,7 @@
                                     "application/json"
 
                             },
+
 
                             body:
                                 JSON.stringify(
@@ -706,23 +1005,27 @@
                     )
 
                         .then(
-                            async function (response) {
+                            async function (
+                                response
+                            ) {
 
-                                const responseText =
+                                const text =
                                     await response.text();
 
 
-                                if (!response.ok) {
+                                if (
+                                    !response.ok
+                                ) {
 
                                     throw new Error(
-                                        responseText ||
+                                        text ||
                                         "Failed to create emergency alert"
                                     );
 
                                 }
 
 
-                                return responseText;
+                                return text;
 
                             }
                         )
@@ -762,9 +1065,9 @@
         }
 
 
-        /* =========================
+        /* ==================================
            DELETE EMERGENCY ALERT
-           ========================= */
+           ================================== */
 
         function deleteAlert(id) {
 
@@ -796,7 +1099,8 @@
                 id,
                 {
 
-                    method: "DELETE"
+                    method:
+                        "DELETE"
 
                 }
             )
@@ -804,7 +1108,9 @@
                 .then(
                     function (response) {
 
-                        if (!response.ok) {
+                        if (
+                            !response.ok
+                        ) {
 
                             throw new Error(
                                 "Failed to delete alert"
@@ -822,6 +1128,7 @@
                             "Alert deleted successfully!"
                         );
 
+
                         loadEmergencyAlerts();
 
                     }
@@ -835,6 +1142,7 @@
                             error
                         );
 
+
                         alert(
                             "Failed to delete alert."
                         );
@@ -845,11 +1153,272 @@
         }
 
 
-        /* =========================
+        /* ==================================
+           LOAD TASK MONITORING
+           ================================== */
+
+        function loadTaskMonitoring() {
+
+            fetch(
+                BACKEND_URL +
+                "/api/tasks"
+            )
+
+                .then(
+                    function (response) {
+
+                        if (!response.ok) {
+
+                            throw new Error(
+                                "Failed to load tasks"
+                            );
+
+                        }
+
+                        return response.json();
+
+                    }
+                )
+
+                .then(
+                    function (tasks) {
+
+                        const table =
+                            document.getElementById(
+                                "taskMonitoringTable"
+                            );
+
+
+                        table.innerHTML = `
+
+                            <tr>
+
+                                <th>
+                                    Task
+                                </th>
+
+                                <th>
+                                    Volunteer
+                                </th>
+
+                                <th>
+                                    Location
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                            </tr>
+
+                        `;
+
+
+                        if (
+                            !Array.isArray(
+                                tasks
+                            ) ||
+                            tasks.length === 0
+                        ) {
+
+                            const row =
+                                table.insertRow(-1);
+
+
+                            const cell =
+                                row.insertCell(0);
+
+
+                            cell.colSpan = 4;
+
+
+                            cell.textContent =
+                                "No tasks available.";
+
+
+                            return;
+
+                        }
+
+
+                        tasks.forEach(
+                            function (task) {
+
+                                const row =
+                                    table.insertRow(-1);
+
+
+                                row.insertCell(
+                                    0
+                                ).textContent =
+                                    task.taskName || "";
+
+
+                                /*
+                                 * Current task backend
+                                 * does not store volunteer name.
+                                 * So we map the existing demo
+                                 * task names to the existing
+                                 * volunteer names.
+                                 */
+
+                                let volunteer =
+                                    "Unassigned";
+
+
+                                if (
+                                    task.taskName ===
+                                    "Food Distribution"
+                                ) {
+
+                                    volunteer =
+                                        "Arun";
+
+                                }
+                                else if (
+                                    task.taskName ===
+                                    "Medicine Distribution"
+                                ) {
+
+                                    volunteer =
+                                        "Priya";
+
+                                }
+                                else if (
+                                    task.taskName ===
+                                    "Shelter Support"
+                                ) {
+
+                                    volunteer =
+                                        "Karthik";
+
+                                }
+
+
+                                row.insertCell(
+                                    1
+                                ).textContent =
+                                    volunteer;
+
+
+                                row.insertCell(
+                                    2
+                                ).textContent =
+                                    task.location || "";
+
+
+                                const statusCell =
+                                    row.insertCell(
+                                        3
+                                    );
+
+
+                                const statusSpan =
+                                    document.createElement(
+                                        "span"
+                                    );
+
+
+                                statusSpan.textContent =
+                                    task.status || "";
+
+
+                                if (
+                                    task.status ===
+                                    "Completed"
+                                ) {
+
+                                    statusSpan.className =
+                                        "task-status completed";
+
+                                }
+                                else if (
+                                    task.status ===
+                                    "In Progress"
+                                ) {
+
+                                    statusSpan.className =
+                                        "task-status progress";
+
+                                }
+                                else {
+
+                                    statusSpan.className =
+                                        "task-status pending";
+
+                                }
+
+
+                                statusCell.appendChild(
+                                    statusSpan
+                                );
+
+                            }
+                        );
+
+                    }
+                )
+
+                .catch(
+                    function (error) {
+
+                        console.error(
+                            "Task monitoring error:",
+                            error
+                        );
+
+
+                        const table =
+                            document.getElementById(
+                                "taskMonitoringTable"
+                            );
+
+
+                        table.innerHTML = `
+
+                            <tr>
+
+                                <th>
+                                    Task
+                                </th>
+
+                                <th>
+                                    Volunteer
+                                </th>
+
+                                <th>
+                                    Location
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                            </tr>
+
+                            <tr>
+
+                                <td colspan="4">
+                                    Unable to load tasks.
+                                </td>
+
+                            </tr>
+
+                        `;
+
+                    }
+                );
+
+        }
+
+
+        /* ==================================
            INITIAL LOAD
-           ========================= */
+           ================================== */
 
         loadEmergencyAlerts();
+
+        loadTaskMonitoring();
 
     </script>
 
