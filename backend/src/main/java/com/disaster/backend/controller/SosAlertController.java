@@ -44,26 +44,50 @@ public class SosAlertController {
         if (existingUser.isEmpty()) {
             return ResponseEntity
                     .badRequest()
-                    .body("Volunteer user not found");
+                    .body("User not found");
         }
 
         User user = existingUser.get();
 
+        if (user.getRole() == null ||
+                !user.getRole().equalsIgnoreCase("VOLUNTEER")) {
+
+            return ResponseEntity
+                    .badRequest()
+                    .body("User is not a volunteer");
+        }
+
+        /*
+         * Find existing volunteer record.
+         * If it does not exist, create one automatically.
+         */
         Optional<Volunteer> existingVolunteer =
                 volunteerRepository.findByUser_UserId(user.getUserId());
 
-        if (existingVolunteer.isEmpty()) {
-            return ResponseEntity
-                    .badRequest()
-                    .body("Volunteer record not found");
-        }
+        Volunteer volunteer;
 
-        Volunteer volunteer = existingVolunteer.get();
+        if (existingVolunteer.isPresent()) {
+
+            volunteer = existingVolunteer.get();
+
+        } else {
+
+            volunteer = new Volunteer();
+
+            volunteer.setUser(user);
+            volunteer.setSkills("Not Specified");
+            volunteer.setAvailability("Available");
+            volunteer.setStatus("AVAILABLE");
+
+            volunteer =
+                    volunteerRepository.save(volunteer);
+        }
 
         sosAlert.setVolunteer(volunteer);
 
         if (sosAlert.getStatus() == null ||
                 sosAlert.getStatus().isBlank()) {
+
             sosAlert.setStatus("ACTIVE");
         }
 
