@@ -12,7 +12,9 @@
 
 <body>
 
-    <!-- Navigation -->
+    <!-- ========================== -->
+    <!-- NAVIGATION -->
+    <!-- ========================== -->
 
     <nav>
         <h2>Disaster Relief</h2>
@@ -26,7 +28,9 @@
     </nav>
 
 
-    <!-- Dashboard -->
+    <!-- ========================== -->
+    <!-- DASHBOARD -->
+    <!-- ========================== -->
 
     <div class="dashboard">
 
@@ -37,7 +41,9 @@
         </p>
 
 
-        <!-- Summary Cards -->
+        <!-- ========================== -->
+        <!-- SUMMARY CARDS -->
+        <!-- ========================== -->
 
         <div class="dashboard-cards">
 
@@ -64,7 +70,9 @@
         </div>
 
 
-        <!-- Volunteer Profile -->
+        <!-- ========================== -->
+        <!-- VOLUNTEER PROFILE -->
+        <!-- ========================== -->
 
         <div class="dashboard-section">
 
@@ -79,7 +87,9 @@
 
                 <p>
                     <strong>Email:</strong>
-                    volunteer@gmail.com
+                    <span id="volunteerEmail">
+                        volunteer@gmail.com
+                    </span>
                 </p>
 
                 <p>
@@ -103,6 +113,50 @@
 
 
         <!-- ========================== -->
+        <!-- SOS ALERT -->
+        <!-- ========================== -->
+
+        <div class="dashboard-section"
+             style="
+                text-align: center;
+                border: 2px solid #d32f2f;
+                background-color: #fff5f5;
+             ">
+
+            <h2>🆘 Emergency SOS</h2>
+
+            <p>
+                Press the button only during an emergency.
+            </p>
+
+            <button
+                id="sosButton"
+                onclick="sendSOS()"
+                style="
+                    background-color: #d32f2f;
+                    color: white;
+                    border: none;
+                    padding: 15px 30px;
+                    font-size: 20px;
+                    font-weight: bold;
+                    border-radius: 8px;
+                    cursor: pointer;
+                "
+            >
+                🆘 SEND SOS
+            </button>
+
+            <p id="sosStatus"
+               style="
+                    margin-top: 15px;
+                    font-weight: bold;
+               ">
+            </p>
+
+        </div>
+
+
+        <!-- ========================== -->
         <!-- EMERGENCY ALERTS -->
         <!-- ========================== -->
 
@@ -121,7 +175,9 @@
         </div>
 
 
-        <!-- Recent Tasks -->
+        <!-- ========================== -->
+        <!-- RECENT TASKS -->
+        <!-- ========================== -->
 
         <div class="dashboard-section">
 
@@ -218,6 +274,28 @@
 
 
         /* ==========================
+           LOAD LOGGED-IN EMAIL
+           ========================== */
+
+        function loadVolunteerEmail() {
+
+            const loggedInEmail =
+                localStorage.getItem("loggedInEmail");
+
+            const emailElement =
+                document.getElementById("volunteerEmail");
+
+            if (loggedInEmail) {
+
+                emailElement.innerText =
+                    loggedInEmail;
+
+            }
+
+        }
+
+
+        /* ==========================
            LOAD EMERGENCY ALERTS
            ========================== */
 
@@ -279,18 +357,14 @@
                         alertBox.style.marginBottom =
                             "15px";
 
-
                         alertBox.style.padding =
                             "15px";
-
 
                         alertBox.style.borderRadius =
                             "8px";
 
-
                         alertBox.style.border =
                             "1px solid #ddd";
-
 
                         alertBox.style.backgroundColor =
                             "#fff";
@@ -349,6 +423,240 @@
 
 
         /* ==========================
+           SEND SOS
+           ========================== */
+
+        function sendSOS() {
+
+            const sosButton =
+                document.getElementById("sosButton");
+
+            const sosStatus =
+                document.getElementById("sosStatus");
+
+
+            const volunteerEmail =
+                localStorage.getItem("loggedInEmail");
+
+
+            if (!volunteerEmail) {
+
+                sosStatus.innerText =
+                    "Please login again before sending SOS.";
+
+                sosStatus.style.color =
+                    "red";
+
+                return;
+            }
+
+
+            if (!navigator.geolocation) {
+
+                sosStatus.innerText =
+                    "GPS is not supported by this browser.";
+
+                sosStatus.style.color =
+                    "red";
+
+                return;
+            }
+
+
+            sosButton.disabled =
+                true;
+
+            sosButton.innerText =
+                "Getting Location...";
+
+            sosStatus.innerText =
+                "Getting your current location...";
+
+            sosStatus.style.color =
+                "#333";
+
+
+            navigator.geolocation.getCurrentPosition(
+
+                function (position) {
+
+                    const latitude =
+                        position.coords.latitude;
+
+                    const longitude =
+                        position.coords.longitude;
+
+
+                    const sosData = {
+
+                        latitude: latitude,
+
+                        longitude: longitude,
+
+                        message:
+                            "Volunteer needs emergency assistance.",
+
+                        status:
+                            "ACTIVE"
+
+                    };
+
+
+                    sosStatus.innerText =
+                        "Sending SOS alert...";
+
+
+                    fetch(
+                        BACKEND_URL +
+                        "/api/sos-alerts?volunteerEmail=" +
+                        encodeURIComponent(
+                            volunteerEmail
+                        ),
+                        {
+
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body:
+                                JSON.stringify(
+                                    sosData
+                                )
+
+                        }
+                    )
+
+                    .then(function (response) {
+
+                        if (!response.ok) {
+
+                            return response
+                                .text()
+                                .then(function (message) {
+
+                                    throw new Error(
+                                        message ||
+                                        "Failed to send SOS"
+                                    );
+
+                                });
+
+                        }
+
+                        return response.json();
+
+                    })
+
+                    .then(function (savedAlert) {
+
+                        sosStatus.innerText =
+                            "🆘 SOS sent successfully! Admin has been notified.";
+
+                        sosStatus.style.color =
+                            "green";
+
+                        sosButton.innerText =
+                            "🆘 SOS SENT";
+
+                        alert(
+                            "Emergency SOS sent successfully."
+                        );
+
+                        console.log(
+                            "Saved SOS:",
+                            savedAlert
+                        );
+
+                    })
+
+                    .catch(function (error) {
+
+                        console.error(
+                            "SOS Error:",
+                            error
+                        );
+
+
+                        sosStatus.innerText =
+                            "Failed to send SOS: " +
+                            error.message;
+
+                        sosStatus.style.color =
+                            "red";
+
+
+                        sosButton.disabled =
+                            false;
+
+                        sosButton.innerText =
+                            "🆘 SEND SOS";
+
+                    });
+
+                },
+
+                function (error) {
+
+                    console.error(
+                        "GPS Error:",
+                        error
+                    );
+
+
+                    let message =
+                        "Unable to get your location.";
+
+
+                    if (error.code === 1) {
+
+                        message =
+                            "Location permission denied. Please allow location access.";
+
+                    }
+                    else if (error.code === 2) {
+
+                        message =
+                            "Location unavailable. Please try again.";
+
+                    }
+                    else if (error.code === 3) {
+
+                        message =
+                            "Location request timed out. Please try again.";
+
+                    }
+
+
+                    sosStatus.innerText =
+                        message;
+
+                    sosStatus.style.color =
+                        "red";
+
+
+                    sosButton.disabled =
+                        false;
+
+                    sosButton.innerText =
+                        "🆘 SEND SOS";
+
+                },
+
+                {
+                    enableHighAccuracy: true,
+                    timeout: 10000,
+                    maximumAge: 0
+                }
+
+            );
+
+        }
+
+
+        /* ==========================
            COMPLETE TASK
            ========================== */
 
@@ -398,6 +706,8 @@
         /* ==========================
            INITIAL LOAD
            ========================== */
+
+        loadVolunteerEmail();
 
         loadEmergencyAlerts();
 
