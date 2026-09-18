@@ -131,7 +131,6 @@
                 Disaster Management
             </h2>
 
-
             <button
                 class="add-btn"
                 id="addDisasterBtn">
@@ -140,43 +139,22 @@
 
             </button>
 
-
             <table id="disasterTable">
 
                 <tr>
 
-                    <th>
-                        Disaster
-                    </th>
-
-                    <th>
-                        Location
-                    </th>
-
-                    <th>
-                        Severity
-                    </th>
-
-                    <th>
-                        Volunteers
-                    </th>
-
-                    <th>
-                        Status
-                    </th>
+                    <th>Disaster</th>
+                    <th>Location</th>
+                    <th>Severity</th>
+                    <th>Volunteers</th>
+                    <th>Status</th>
 
                 </tr>
 
-
                 <tr>
 
-                    <td>
-                        Flood
-                    </td>
-
-                    <td>
-                        Trichy
-                    </td>
+                    <td>Flood</td>
+                    <td>Trichy</td>
 
                     <td>
                         <span class="severity-high">
@@ -184,9 +162,7 @@
                         </span>
                     </td>
 
-                    <td>
-                        40
-                    </td>
+                    <td>40</td>
 
                     <td>
                         <span class="active-status">
@@ -196,16 +172,10 @@
 
                 </tr>
 
-
                 <tr>
 
-                    <td>
-                        Cyclone
-                    </td>
-
-                    <td>
-                        Thanjavur
-                    </td>
+                    <td>Cyclone</td>
+                    <td>Thanjavur</td>
 
                     <td>
                         <span class="severity-medium">
@@ -213,9 +183,7 @@
                         </span>
                     </td>
 
-                    <td>
-                        25
-                    </td>
+                    <td>25</td>
 
                     <td>
                         <span class="active-status">
@@ -225,16 +193,10 @@
 
                 </tr>
 
-
                 <tr>
 
-                    <td>
-                        Flood
-                    </td>
-
-                    <td>
-                        Ariyalur
-                    </td>
+                    <td>Flood</td>
+                    <td>Ariyalur</td>
 
                     <td>
                         <span class="severity-high">
@@ -242,9 +204,7 @@
                         </span>
                     </td>
 
-                    <td>
-                        30
-                    </td>
+                    <td>30</td>
 
                     <td>
                         <span class="active-status">
@@ -269,120 +229,68 @@
                 Volunteer Management
             </h2>
 
-
             <table>
 
                 <tr>
 
-                    <th>
-                        Name
-                    </th>
-
-                    <th>
-                        Skill
-                    </th>
-
-                    <th>
-                        Location
-                    </th>
-
-                    <th>
-                        Availability
-                    </th>
-
-                    <th>
-                        Action
-                    </th>
+                    <th>Name</th>
+                    <th>Skill</th>
+                    <th>Location</th>
+                    <th>Availability</th>
+                    <th>Action</th>
 
                 </tr>
 
-
                 <tr>
 
-                    <td>
-                        Arun
-                    </td>
+                    <td>Arun</td>
+                    <td>First Aid</td>
+                    <td>Trichy</td>
 
                     <td>
-                        First Aid
-                    </td>
-
-                    <td>
-                        Trichy
-                    </td>
-
-                    <td>
-
                         <span class="available">
                             Available
                         </span>
-
                     </td>
 
                     <td>
-
                         <button class="assign-btn">
                             Assign Task
                         </button>
-
                     </td>
 
                 </tr>
 
-
                 <tr>
 
-                    <td>
-                        Priya
-                    </td>
+                    <td>Priya</td>
+                    <td>Medical Support</td>
+                    <td>Lalgudi</td>
 
                     <td>
-                        Medical Support
-                    </td>
-
-                    <td>
-                        Lalgudi
-                    </td>
-
-                    <td>
-
                         <span class="available">
                             Available
                         </span>
-
                     </td>
 
                     <td>
-
                         <button class="assign-btn">
                             Assign Task
                         </button>
-
                     </td>
 
                 </tr>
 
-
                 <tr>
 
-                    <td>
-                        Karthik
-                    </td>
+                    <td>Karthik</td>
+                    <td>Rescue</td>
+                    <td>Srirangam</td>
 
                     <td>
-                        Rescue
-                    </td>
-
-                    <td>
-                        Srirangam
-                    </td>
-
-                    <td>
-
                         <span class="busy">
                             Busy
                         </span>
-
                     </td>
 
                     <td>
@@ -405,6 +313,50 @@
 
 
         <!-- =========================
+             SOS ALERTS
+             ========================= -->
+
+        <section class="admin-section">
+
+            <h2>
+                🆘 SOS Alerts
+            </h2>
+
+            <button
+                class="add-btn"
+                id="refreshSosBtn">
+
+                🔄 Refresh SOS Alerts
+
+            </button>
+
+            <table id="sosAlertTable">
+
+                <tr>
+
+                    <th>Volunteer</th>
+                    <th>Email</th>
+                    <th>Location</th>
+                    <th>Message</th>
+                    <th>Status</th>
+                    <th>Action</th>
+
+                </tr>
+
+                <tr>
+
+                    <td colspan="6">
+                        Loading SOS alerts...
+                    </td>
+
+                </tr>
+
+            </table>
+
+        </section>
+
+
+        <!-- =========================
              EMERGENCY ALERTS
              ========================= -->
 
@@ -414,7 +366,6 @@
                 Emergency Alerts
             </h2>
 
-
             <button
                 class="add-btn"
                 id="addAlertBtn">
@@ -423,29 +374,16 @@
 
             </button>
 
-
             <table id="emergencyAlertTable">
 
                 <tr>
 
-                    <th>
-                        Title
-                    </th>
-
-                    <th>
-                        Message
-                    </th>
-
-                    <th>
-                        Severity
-                    </th>
-
-                    <th>
-                        Action
-                    </th>
+                    <th>Title</th>
+                    <th>Message</th>
+                    <th>Severity</th>
+                    <th>Action</th>
 
                 </tr>
-
 
                 <tr>
 
@@ -470,29 +408,16 @@
                 Task Monitoring
             </h2>
 
-
             <table id="taskMonitoringTable">
 
                 <tr>
 
-                    <th>
-                        Task
-                    </th>
-
-                    <th>
-                        Volunteer
-                    </th>
-
-                    <th>
-                        Location
-                    </th>
-
-                    <th>
-                        Status
-                    </th>
+                    <th>Task</th>
+                    <th>Volunteer</th>
+                    <th>Location</th>
+                    <th>Status</th>
 
                 </tr>
-
 
                 <tr>
 
@@ -528,7 +453,6 @@
                 "addDisasterBtn"
             );
 
-
         if (addDisasterBtn) {
 
             addDisasterBtn.addEventListener(
@@ -540,7 +464,6 @@
                             "Enter Disaster Name:"
                         );
 
-
                     if (
                         disaster === null ||
                         disaster.trim() === ""
@@ -548,12 +471,10 @@
                         return;
                     }
 
-
                     const location =
                         prompt(
                             "Enter Location:"
                         );
-
 
                     if (
                         location === null ||
@@ -562,12 +483,10 @@
                         return;
                     }
 
-
                     const severity =
                         prompt(
                             "Enter Severity (High / Medium / Low):"
                         );
-
 
                     if (
                         severity === null ||
@@ -576,46 +495,38 @@
                         return;
                     }
 
-
                     const table =
                         document.getElementById(
                             "disasterTable"
                         );
 
-
                     const row =
                         table.insertRow(-1);
-
 
                     row.insertCell(
                         0
                     ).textContent =
                         disaster.trim();
 
-
                     row.insertCell(
                         1
                     ).textContent =
                         location.trim();
-
 
                     row.insertCell(
                         2
                     ).textContent =
                         severity.trim();
 
-
                     row.insertCell(
                         3
                     ).textContent =
                         "0";
 
-
                     row.insertCell(
                         4
                     ).textContent =
                         "Active";
-
 
                     alert(
                         "Disaster Added Successfully!"
@@ -647,14 +558,12 @@
                                     "Enter Task:"
                                 );
 
-
                             if (
                                 task === null ||
                                 task.trim() === ""
                             ) {
                                 return;
                             }
-
 
                             alert(
                                 "Task Assigned Successfully!"
@@ -665,6 +574,462 @@
 
                 }
             );
+
+
+        /* ==================================
+           LOAD SOS ALERTS
+           ================================== */
+
+        function loadSosAlerts() {
+
+            const table =
+                document.getElementById(
+                    "sosAlertTable"
+                );
+
+            table.innerHTML = `
+
+                <tr>
+
+                    <th>Volunteer</th>
+                    <th>Email</th>
+                    <th>Location</th>
+                    <th>Message</th>
+                    <th>Status</th>
+                    <th>Action</th>
+
+                </tr>
+
+            `;
+
+            fetch(
+                BACKEND_URL +
+                "/api/sos-alerts"
+            )
+
+                .then(
+                    function (response) {
+
+                        if (!response.ok) {
+
+                            throw new Error(
+                                "Failed to load SOS alerts"
+                            );
+
+                        }
+
+                        return response.json();
+
+                    }
+                )
+
+                .then(
+                    function (alerts) {
+
+                        if (
+                            !Array.isArray(alerts) ||
+                            alerts.length === 0
+                        ) {
+
+                            const row =
+                                table.insertRow(-1);
+
+                            const cell =
+                                row.insertCell(0);
+
+                            cell.colSpan = 6;
+
+                            cell.textContent =
+                                "No SOS alerts available.";
+
+                            return;
+
+                        }
+
+
+                        alerts.forEach(
+                            function (sosAlert) {
+
+                                const row =
+                                    table.insertRow(-1);
+
+                                const volunteer =
+                                    sosAlert.volunteer ||
+                                    {};
+
+                                const user =
+                                    volunteer.user ||
+                                    {};
+
+                                const volunteerName =
+                                    user.name ||
+                                    "Unknown Volunteer";
+
+                                const volunteerEmail =
+                                    user.email ||
+                                    "Unknown Email";
+
+                                const latitude =
+                                    sosAlert.latitude !== null &&
+                                    sosAlert.latitude !== undefined
+                                        ? sosAlert.latitude
+                                        : "N/A";
+
+                                const longitude =
+                                    sosAlert.longitude !== null &&
+                                    sosAlert.longitude !== undefined
+                                        ? sosAlert.longitude
+                                        : "N/A";
+
+
+                                row.insertCell(
+                                    0
+                                ).textContent =
+                                    volunteerName;
+
+
+                                row.insertCell(
+                                    1
+                                ).textContent =
+                                    volunteerEmail;
+
+
+                                row.insertCell(
+                                    2
+                                ).innerHTML =
+                                    "Lat: " +
+                                    latitude +
+                                    "<br>Lng: " +
+                                    longitude;
+
+
+                                row.insertCell(
+                                    3
+                                ).textContent =
+                                    sosAlert.message ||
+                                    "Emergency SOS";
+
+
+                                const statusCell =
+                                    row.insertCell(
+                                        4
+                                    );
+
+                                const statusSpan =
+                                    document.createElement(
+                                        "span"
+                                    );
+
+                                const currentStatus =
+                                    sosAlert.status ||
+                                    "ACTIVE";
+
+                                statusSpan.textContent =
+                                    currentStatus;
+
+
+                                if (
+                                    currentStatus ===
+                                    "ACTIVE"
+                                ) {
+
+                                    statusSpan.style.color =
+                                        "red";
+
+                                    statusSpan.style.fontWeight =
+                                        "bold";
+
+                                }
+                                else if (
+                                    currentStatus ===
+                                    "RESPONDING"
+                                ) {
+
+                                    statusSpan.style.color =
+                                        "orange";
+
+                                    statusSpan.style.fontWeight =
+                                        "bold";
+
+                                }
+                                else if (
+                                    currentStatus ===
+                                    "RESOLVED"
+                                ) {
+
+                                    statusSpan.style.color =
+                                        "green";
+
+                                    statusSpan.style.fontWeight =
+                                        "bold";
+
+                                }
+
+
+                                statusCell.appendChild(
+                                    statusSpan
+                                );
+
+
+                                /* =========================
+                                   ACTION BUTTONS
+                                   ========================= */
+
+                                const actionCell =
+                                    row.insertCell(
+                                        5
+                                    );
+
+
+                                /*
+                                 * ACTIVE
+                                 * → Responding
+                                 * → Resolve
+                                 */
+
+                                if (
+                                    currentStatus ===
+                                    "ACTIVE"
+                                ) {
+
+                                    const respondingButton =
+                                        document.createElement(
+                                            "button"
+                                        );
+
+                                    respondingButton.textContent =
+                                        "Responding";
+
+                                    respondingButton.className =
+                                        "assign-btn";
+
+                                    respondingButton.style.marginRight =
+                                        "5px";
+
+                                    respondingButton.addEventListener(
+                                        "click",
+                                        function () {
+
+                                            updateSosStatus(
+                                                sosAlert.sosId,
+                                                "RESPONDING"
+                                            );
+
+                                        }
+                                    );
+
+                                    actionCell.appendChild(
+                                        respondingButton
+                                    );
+
+
+                                    const resolveButton =
+                                        document.createElement(
+                                            "button"
+                                        );
+
+                                    resolveButton.textContent =
+                                        "Resolve";
+
+                                    resolveButton.className =
+                                        "assign-btn";
+
+                                    resolveButton.addEventListener(
+                                        "click",
+                                        function () {
+
+                                            updateSosStatus(
+                                                sosAlert.sosId,
+                                                "RESOLVED"
+                                            );
+
+                                        }
+                                    );
+
+                                    actionCell.appendChild(
+                                        resolveButton
+                                    );
+
+                                }
+
+
+                                /*
+                                 * RESPONDING
+                                 * → Resolve only
+                                 */
+
+                                else if (
+                                    currentStatus ===
+                                    "RESPONDING"
+                                ) {
+
+                                    const resolveButton =
+                                        document.createElement(
+                                            "button"
+                                        );
+
+                                    resolveButton.textContent =
+                                        "Resolve";
+
+                                    resolveButton.className =
+                                        "assign-btn";
+
+                                    resolveButton.addEventListener(
+                                        "click",
+                                        function () {
+
+                                            updateSosStatus(
+                                                sosAlert.sosId,
+                                                "RESOLVED"
+                                            );
+
+                                        }
+                                    );
+
+                                    actionCell.appendChild(
+                                        resolveButton
+                                    );
+
+                                }
+
+
+                                /*
+                                 * RESOLVED
+                                 * → No buttons
+                                 */
+
+                                else if (
+                                    currentStatus ===
+                                    "RESOLVED"
+                                ) {
+
+                                    actionCell.textContent =
+                                        "Completed";
+
+                                }
+
+                            }
+                        );
+
+                    }
+                )
+
+                .catch(
+                    function (error) {
+
+                        console.error(
+                            "SOS alert error:",
+                            error
+                        );
+
+                        const row =
+                            table.insertRow(-1);
+
+                        const cell =
+                            row.insertCell(0);
+
+                        cell.colSpan = 6;
+
+                        cell.textContent =
+                            "Unable to load SOS alerts.";
+
+                    }
+                );
+
+        }
+
+
+        /* ==================================
+           UPDATE SOS STATUS
+           ================================== */
+
+        function updateSosStatus(
+            sosId,
+            status
+        ) {
+
+            fetch(
+                BACKEND_URL +
+                "/api/sos-alerts/" +
+                sosId +
+                "/status?status=" +
+                encodeURIComponent(
+                    status
+                ),
+                {
+                    method:
+                        "PUT"
+                }
+            )
+
+                .then(
+                    function (response) {
+
+                        if (!response.ok) {
+
+                            throw new Error(
+                                "Failed to update SOS status"
+                            );
+
+                        }
+
+                        return response.json();
+
+                    }
+                )
+
+                .then(
+                    function () {
+
+                        alert(
+                            "SOS status updated to " +
+                            status
+                        );
+
+                        loadSosAlerts();
+
+                    }
+                )
+
+                .catch(
+                    function (error) {
+
+                        console.error(
+                            "SOS status update error:",
+                            error
+                        );
+
+                        alert(
+                            "Failed to update SOS status."
+                        );
+
+                    }
+                );
+
+        }
+
+
+        /* ==================================
+           REFRESH SOS
+           ================================== */
+
+        const refreshSosBtn =
+            document.getElementById(
+                "refreshSosBtn"
+            );
+
+        if (refreshSosBtn) {
+
+            refreshSosBtn.addEventListener(
+                "click",
+                function () {
+
+                    loadSosAlerts();
+
+                }
+            );
+
+        }
 
 
         /* ==================================
@@ -702,26 +1067,14 @@
                                 "emergencyAlertTable"
                             );
 
-
                         table.innerHTML = `
 
                             <tr>
 
-                                <th>
-                                    Title
-                                </th>
-
-                                <th>
-                                    Message
-                                </th>
-
-                                <th>
-                                    Severity
-                                </th>
-
-                                <th>
-                                    Action
-                                </th>
+                                <th>Title</th>
+                                <th>Message</th>
+                                <th>Severity</th>
+                                <th>Action</th>
 
                             </tr>
 
@@ -729,26 +1082,20 @@
 
 
                         if (
-                            !Array.isArray(
-                                alerts
-                            ) ||
+                            !Array.isArray(alerts) ||
                             alerts.length === 0
                         ) {
 
                             const row =
                                 table.insertRow(-1);
 
-
                             const cell =
                                 row.insertCell(0);
 
-
                             cell.colSpan = 4;
-
 
                             cell.textContent =
                                 "No emergency alerts available.";
-
 
                             return;
 
@@ -756,61 +1103,55 @@
 
 
                         alerts.forEach(
-                            function (alert) {
+                            function (emergencyAlert) {
 
                                 const row =
                                     table.insertRow(-1);
 
-
                                 row.insertCell(
                                     0
                                 ).textContent =
-                                    alert.title || "";
-
+                                    emergencyAlert.title ||
+                                    "";
 
                                 row.insertCell(
                                     1
                                 ).textContent =
-                                    alert.message || "";
-
+                                    emergencyAlert.message ||
+                                    "";
 
                                 row.insertCell(
                                     2
                                 ).textContent =
-                                    alert.severity || "";
-
+                                    emergencyAlert.severity ||
+                                    "";
 
                                 const actionCell =
                                     row.insertCell(
                                         3
                                     );
 
-
                                 const deleteButton =
                                     document.createElement(
                                         "button"
                                     );
 
-
                                 deleteButton.textContent =
                                     "Delete";
 
-
                                 deleteButton.className =
                                     "assign-btn";
-
 
                                 deleteButton.addEventListener(
                                     "click",
                                     function () {
 
                                         deleteAlert(
-                                            alert.alertId
+                                            emergencyAlert.alertId
                                         );
 
                                     }
                                 );
-
 
                                 actionCell.appendChild(
                                     deleteButton
@@ -830,32 +1171,19 @@
                             error
                         );
 
-
                         const table =
                             document.getElementById(
                                 "emergencyAlertTable"
                             );
 
-
                         table.innerHTML = `
 
                             <tr>
 
-                                <th>
-                                    Title
-                                </th>
-
-                                <th>
-                                    Message
-                                </th>
-
-                                <th>
-                                    Severity
-                                </th>
-
-                                <th>
-                                    Action
-                                </th>
+                                <th>Title</th>
+                                <th>Message</th>
+                                <th>Severity</th>
+                                <th>Action</th>
 
                             </tr>
 
@@ -884,7 +1212,6 @@
                 "addAlertBtn"
             );
 
-
         if (addAlertBtn) {
 
             addAlertBtn.addEventListener(
@@ -896,7 +1223,6 @@
                             "Enter Alert Title:"
                         );
 
-
                     if (
                         title === null ||
                         title.trim() === ""
@@ -904,12 +1230,10 @@
                         return;
                     }
 
-
                     const message =
                         prompt(
                             "Enter Alert Message:"
                         );
-
 
                     if (
                         message === null ||
@@ -918,12 +1242,10 @@
                         return;
                     }
 
-
                     const severity =
                         prompt(
                             "Enter Severity (High / Medium / Low):"
                         );
-
 
                     if (
                         severity === null ||
@@ -932,12 +1254,10 @@
                         return;
                     }
 
-
                     const adminEmail =
                         localStorage.getItem(
                             "loggedInEmail"
                         );
-
 
                     if (
                         !adminEmail ||
@@ -948,15 +1268,12 @@
                             "Admin login session not found. Please login again."
                         );
 
-
                         window.location.href =
                             "login.html";
-
 
                         return;
 
                     }
-
 
                     const alertData = {
 
@@ -971,14 +1288,12 @@
 
                     };
 
-
                     const alertUrl =
                         BACKEND_URL +
                         "/api/emergency-alerts?createdByEmail=" +
                         encodeURIComponent(
                             adminEmail
                         );
-
 
                     fetch(
                         alertUrl,
@@ -987,14 +1302,12 @@
                             method:
                                 "POST",
 
-
                             headers: {
 
                                 "Content-Type":
                                     "application/json"
 
                             },
-
 
                             body:
                                 JSON.stringify(
@@ -1012,7 +1325,6 @@
                                 const text =
                                     await response.text();
 
-
                                 if (
                                     !response.ok
                                 ) {
@@ -1023,7 +1335,6 @@
                                     );
 
                                 }
-
 
                                 return text;
 
@@ -1037,7 +1348,6 @@
                                     "Emergency alert added successfully!"
                                 );
 
-
                                 loadEmergencyAlerts();
 
                             }
@@ -1050,7 +1360,6 @@
                                     "Add alert error:",
                                     error
                                 );
-
 
                                 alert(
                                     "Failed to add emergency alert."
@@ -1081,17 +1390,14 @@
 
             }
 
-
             const confirmed =
                 confirm(
                     "Are you sure you want to delete this alert?"
                 );
 
-
             if (!confirmed) {
                 return;
             }
-
 
             fetch(
                 BACKEND_URL +
@@ -1108,9 +1414,7 @@
                 .then(
                     function (response) {
 
-                        if (
-                            !response.ok
-                        ) {
+                        if (!response.ok) {
 
                             throw new Error(
                                 "Failed to delete alert"
@@ -1128,7 +1432,6 @@
                             "Alert deleted successfully!"
                         );
 
-
                         loadEmergencyAlerts();
 
                     }
@@ -1141,7 +1444,6 @@
                             "Delete error:",
                             error
                         );
-
 
                         alert(
                             "Failed to delete alert."
@@ -1188,26 +1490,14 @@
                                 "taskMonitoringTable"
                             );
 
-
                         table.innerHTML = `
 
                             <tr>
 
-                                <th>
-                                    Task
-                                </th>
-
-                                <th>
-                                    Volunteer
-                                </th>
-
-                                <th>
-                                    Location
-                                </th>
-
-                                <th>
-                                    Status
-                                </th>
+                                <th>Task</th>
+                                <th>Volunteer</th>
+                                <th>Location</th>
+                                <th>Status</th>
 
                             </tr>
 
@@ -1215,26 +1505,20 @@
 
 
                         if (
-                            !Array.isArray(
-                                tasks
-                            ) ||
+                            !Array.isArray(tasks) ||
                             tasks.length === 0
                         ) {
 
                             const row =
                                 table.insertRow(-1);
 
-
                             const cell =
                                 row.insertCell(0);
 
-
                             cell.colSpan = 4;
-
 
                             cell.textContent =
                                 "No tasks available.";
-
 
                             return;
 
@@ -1247,20 +1531,12 @@
                                 const row =
                                     table.insertRow(-1);
 
-
                                 row.insertCell(
                                     0
                                 ).textContent =
-                                    task.taskName || "";
+                                    task.taskName ||
+                                    "";
 
-
-                                /*
-                                 * Current task backend
-                                 * does not store volunteer name.
-                                 * So we map the existing demo
-                                 * task names to the existing
-                                 * volunteer names.
-                                 */
 
                                 let volunteer =
                                     "Unassigned";
@@ -1304,14 +1580,14 @@
                                 row.insertCell(
                                     2
                                 ).textContent =
-                                    task.location || "";
+                                    task.location ||
+                                    "";
 
 
                                 const statusCell =
                                     row.insertCell(
                                         3
                                     );
-
 
                                 const statusSpan =
                                     document.createElement(
@@ -1320,7 +1596,8 @@
 
 
                                 statusSpan.textContent =
-                                    task.status || "";
+                                    task.status ||
+                                    "";
 
 
                                 if (
@@ -1367,32 +1644,19 @@
                             error
                         );
 
-
                         const table =
                             document.getElementById(
                                 "taskMonitoringTable"
                             );
 
-
                         table.innerHTML = `
 
                             <tr>
 
-                                <th>
-                                    Task
-                                </th>
-
-                                <th>
-                                    Volunteer
-                                </th>
-
-                                <th>
-                                    Location
-                                </th>
-
-                                <th>
-                                    Status
-                                </th>
+                                <th>Task</th>
+                                <th>Volunteer</th>
+                                <th>Location</th>
+                                <th>Status</th>
 
                             </tr>
 
@@ -1415,6 +1679,8 @@
         /* ==================================
            INITIAL LOAD
            ================================== */
+
+        loadSosAlerts();
 
         loadEmergencyAlerts();
 
