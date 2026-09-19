@@ -1,41 +1,30 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-
-import EmergencyRadio from "./pages/EmergencyRadio";
-
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { EmergencyRadio } from './pages/EmergencyRadio';
 
 const loggedInEmail =
-    localStorage.getItem("loggedInEmail");
-
+  localStorage.getItem('loggedInEmail');
 
 const loggedInName =
-    localStorage.getItem("loggedInName");
-
+  localStorage.getItem('loggedInName');
 
 const currentUser = {
+  name:
+    loggedInName ||
+    loggedInEmail ||
+    'Field Unit',
 
-    name:
-        loggedInName ||
-        loggedInEmail ||
-        "Field Unit",
-
-    email:
-        loggedInEmail ||
-        ""
-
+  email:
+    loggedInEmail ||
+    ''
 };
 
-
 ReactDOM.createRoot(
-    document.getElementById("root")
+  document.getElementById('root')
 ).render(
-
-    <React.StrictMode>
-
-        <EmergencyRadio
-            currentUser={currentUser}
-        />
-
-    </React.StrictMode>
-
+  <React.StrictMode>
+    <EmergencyRadio
+      currentUser={currentUser}
+    />
+  </React.StrictMode>
 );
