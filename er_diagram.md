@@ -16,7 +16,8 @@ erDiagram
     VOLUNTEERS ||--o{ TASK_ASSIGNMENTS : "1:N (Volunteer receives Assignments)"
     VOLUNTEERS ||--o{ SOS_ALERTS : "1:N (Volunteer triggers SOS Alerts)"
     VOLUNTEERS ||--o| VOLUNTEER_LOCATIONS : "1:1 (Volunteer live location)"
-    TASKS ||--o{ TASK_ASSIGNMENTS : "1:N (Task split into Assignments)"
+    
+     ||--o{ TASK_ASSIGNMENTS : "1:N (Task split into Assignments)"
     DISASTERS ||--o{ TASKS : "1:N (Disaster creates Tasks)"
     DISASTERS ||--o{ RESOURCES : "1:N (Disaster requires Resources)"
     DISASTERS ||--o{ EMERGENCY_ALERTS : "1:N (Disaster linked to Alerts)"
@@ -63,6 +64,7 @@ erDiagram
         VARCHAR title "Task Title"
         TEXT description "Detailed Instructions"
         VARCHAR priority "Priority (LOW, MEDIUM, HIGH, URGENT)"
+        BIGINT location_id FK "Foreign Key to LOCATIONS"
         VARCHAR status "Status (PENDING, ASSIGNED, IN_PROGRESS, COMPLETED)"
     }
 
