@@ -254,9 +254,11 @@
                     </td>
 
                     <td>
+
                         <button class="assign-btn">
                             Assign Task
                         </button>
+
                     </td>
 
                 </tr>
@@ -274,9 +276,11 @@
                     </td>
 
                     <td>
+
                         <button class="assign-btn">
                             Assign Task
                         </button>
+
                     </td>
 
                 </tr>
@@ -363,7 +367,7 @@
         <section class="admin-section">
 
             <h2>
-                Emergency Alerts
+                🚨 Emergency Alerts
             </h2>
 
             <button
@@ -389,6 +393,194 @@
 
                     <td colspan="4">
                         Loading alerts...
+                    </td>
+
+                </tr>
+
+            </table>
+
+        </section>
+
+
+        <!-- =========================
+             VOICE ALERTS
+             ========================= -->
+
+        <section class="admin-section">
+
+            <h2>
+                🎙️ Voice Alerts
+            </h2>
+
+
+            <!-- VOICE ALERT FORM -->
+
+            <div
+                style="
+                    padding: 20px;
+                    border: 1px solid #ddd;
+                    border-radius: 10px;
+                    margin-bottom: 20px;
+                    background: #fafafa;
+                ">
+
+                <h3>
+                    Create Voice Alert
+                </h3>
+
+
+                <div style="margin-bottom: 15px;">
+
+                    <label
+                        for="voiceTitle"
+                        style="
+                            display: block;
+                            font-weight: bold;
+                            margin-bottom: 5px;
+                        ">
+
+                        Alert Title
+
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="voiceTitle"
+                        placeholder="Example: Flood Warning"
+                        style="
+                            width: 100%;
+                            padding: 10px;
+                            border: 1px solid #ccc;
+                            border-radius: 6px;
+                            box-sizing: border-box;
+                        ">
+
+                </div>
+
+
+                <div style="margin-bottom: 15px;">
+
+                    <label
+                        for="voiceAlertLevel"
+                        style="
+                            display: block;
+                            font-weight: bold;
+                            margin-bottom: 5px;
+                        ">
+
+                        Alert Level
+
+                    </label>
+
+
+                    <select
+                        id="voiceAlertLevel"
+                        style="
+                            width: 100%;
+                            padding: 10px;
+                            border: 1px solid #ccc;
+                            border-radius: 6px;
+                        ">
+
+                        <option value="LOW">
+                            LOW
+                        </option>
+
+                        <option value="MEDIUM">
+                            MEDIUM
+                        </option>
+
+                        <option value="HIGH">
+                            HIGH
+                        </option>
+
+                        <option value="CRITICAL">
+                            CRITICAL
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div style="margin-bottom: 15px;">
+
+                    <button
+                        class="add-btn"
+                        id="startRecordingBtn">
+
+                        🎙️ Start Recording
+
+                    </button>
+
+
+                    <button
+                        class="assign-btn"
+                        id="stopRecordingBtn"
+                        disabled>
+
+                        ⏹ Stop Recording
+
+                    </button>
+
+                </div>
+
+
+                <p id="recordingStatus">
+                    Not recording
+                </p>
+
+
+                <audio
+                    id="voicePreview"
+                    controls
+                    style="
+                        display: none;
+                        width: 100%;
+                        margin-top: 10px;
+                    ">
+                </audio>
+
+
+                <button
+                    class="add-btn"
+                    id="saveVoiceAlertBtn"
+                    disabled
+                    style="
+                        margin-top: 15px;
+                    ">
+
+                    💾 Save Voice Alert
+
+                </button>
+
+            </div>
+
+
+            <!-- SAVED VOICE ALERTS -->
+
+            <h3>
+                Saved Voice Alerts
+            </h3>
+
+
+            <table id="voiceAlertTable">
+
+                <tr>
+
+                    <th>Title</th>
+                    <th>Level</th>
+                    <th>Duration</th>
+                    <th>Voice</th>
+                    <th>Action</th>
+
+                </tr>
+
+                <tr>
+
+                    <td colspan="5">
+                        Loading voice alerts...
                     </td>
 
                 </tr>
@@ -453,6 +645,7 @@
                 "addDisasterBtn"
             );
 
+
         if (addDisasterBtn) {
 
             addDisasterBtn.addEventListener(
@@ -464,6 +657,7 @@
                             "Enter Disaster Name:"
                         );
 
+
                     if (
                         disaster === null ||
                         disaster.trim() === ""
@@ -471,10 +665,12 @@
                         return;
                     }
 
+
                     const location =
                         prompt(
                             "Enter Location:"
                         );
+
 
                     if (
                         location === null ||
@@ -483,10 +679,12 @@
                         return;
                     }
 
+
                     const severity =
                         prompt(
                             "Enter Severity (High / Medium / Low):"
                         );
+
 
                     if (
                         severity === null ||
@@ -495,38 +693,46 @@
                         return;
                     }
 
+
                     const table =
                         document.getElementById(
                             "disasterTable"
                         );
 
+
                     const row =
                         table.insertRow(-1);
+
 
                     row.insertCell(
                         0
                     ).textContent =
                         disaster.trim();
 
+
                     row.insertCell(
                         1
                     ).textContent =
                         location.trim();
+
 
                     row.insertCell(
                         2
                     ).textContent =
                         severity.trim();
 
+
                     row.insertCell(
                         3
                     ).textContent =
                         "0";
 
+
                     row.insertCell(
                         4
                     ).textContent =
                         "Active";
+
 
                     alert(
                         "Disaster Added Successfully!"
@@ -558,12 +764,14 @@
                                     "Enter Task:"
                                 );
 
+
                             if (
                                 task === null ||
                                 task.trim() === ""
                             ) {
                                 return;
                             }
+
 
                             alert(
                                 "Task Assigned Successfully!"
@@ -587,6 +795,7 @@
                     "sosAlertTable"
                 );
 
+
             table.innerHTML = `
 
                 <tr>
@@ -601,6 +810,7 @@
                 </tr>
 
             `;
+
 
             fetch(
                 BACKEND_URL +
@@ -634,13 +844,17 @@
                             const row =
                                 table.insertRow(-1);
 
+
                             const cell =
                                 row.insertCell(0);
 
+
                             cell.colSpan = 6;
+
 
                             cell.textContent =
                                 "No SOS alerts available.";
+
 
                             return;
 
@@ -653,27 +867,33 @@
                                 const row =
                                     table.insertRow(-1);
 
+
                                 const volunteer =
                                     sosAlert.volunteer ||
                                     {};
+
 
                                 const user =
                                     volunteer.user ||
                                     {};
 
+
                                 const volunteerName =
                                     user.name ||
                                     "Unknown Volunteer";
 
+
                                 const volunteerEmail =
                                     user.email ||
                                     "Unknown Email";
+
 
                                 const latitude =
                                     sosAlert.latitude !== null &&
                                     sosAlert.latitude !== undefined
                                         ? sosAlert.latitude
                                         : "N/A";
+
 
                                 const longitude =
                                     sosAlert.longitude !== null &&
@@ -715,14 +935,17 @@
                                         4
                                     );
 
+
                                 const statusSpan =
                                     document.createElement(
                                         "span"
                                     );
 
+
                                 const currentStatus =
                                     sosAlert.status ||
                                     "ACTIVE";
+
 
                                 statusSpan.textContent =
                                     currentStatus;
@@ -771,21 +994,11 @@
                                 );
 
 
-                                /* =========================
-                                   ACTION BUTTONS
-                                   ========================= */
-
                                 const actionCell =
                                     row.insertCell(
                                         5
                                     );
 
-
-                                /*
-                                 * ACTIVE
-                                 * → Responding
-                                 * → Resolve
-                                 */
 
                                 if (
                                     currentStatus ===
@@ -797,14 +1010,18 @@
                                             "button"
                                         );
 
+
                                     respondingButton.textContent =
                                         "Responding";
+
 
                                     respondingButton.className =
                                         "assign-btn";
 
+
                                     respondingButton.style.marginRight =
                                         "5px";
+
 
                                     respondingButton.addEventListener(
                                         "click",
@@ -818,6 +1035,7 @@
                                         }
                                     );
 
+
                                     actionCell.appendChild(
                                         respondingButton
                                     );
@@ -828,11 +1046,14 @@
                                             "button"
                                         );
 
+
                                     resolveButton.textContent =
                                         "Resolve";
 
+
                                     resolveButton.className =
                                         "assign-btn";
+
 
                                     resolveButton.addEventListener(
                                         "click",
@@ -846,18 +1067,12 @@
                                         }
                                     );
 
+
                                     actionCell.appendChild(
                                         resolveButton
                                     );
 
                                 }
-
-
-                                /*
-                                 * RESPONDING
-                                 * → Resolve only
-                                 */
-
                                 else if (
                                     currentStatus ===
                                     "RESPONDING"
@@ -868,11 +1083,14 @@
                                             "button"
                                         );
 
+
                                     resolveButton.textContent =
                                         "Resolve";
 
+
                                     resolveButton.className =
                                         "assign-btn";
+
 
                                     resolveButton.addEventListener(
                                         "click",
@@ -886,18 +1104,12 @@
                                         }
                                     );
 
+
                                     actionCell.appendChild(
                                         resolveButton
                                     );
 
                                 }
-
-
-                                /*
-                                 * RESOLVED
-                                 * → No buttons
-                                 */
-
                                 else if (
                                     currentStatus ===
                                     "RESOLVED"
@@ -922,13 +1134,17 @@
                             error
                         );
 
+
                         const row =
                             table.insertRow(-1);
+
 
                         const cell =
                             row.insertCell(0);
 
+
                         cell.colSpan = 6;
+
 
                         cell.textContent =
                             "Unable to load SOS alerts.";
@@ -957,8 +1173,10 @@
                     status
                 ),
                 {
+
                     method:
                         "PUT"
+
                 }
             )
 
@@ -986,6 +1204,7 @@
                             status
                         );
 
+
                         loadSosAlerts();
 
                     }
@@ -998,6 +1217,7 @@
                             "SOS status update error:",
                             error
                         );
+
 
                         alert(
                             "Failed to update SOS status."
@@ -1017,6 +1237,7 @@
             document.getElementById(
                 "refreshSosBtn"
             );
+
 
         if (refreshSosBtn) {
 
@@ -1067,6 +1288,7 @@
                                 "emergencyAlertTable"
                             );
 
+
                         table.innerHTML = `
 
                             <tr>
@@ -1089,13 +1311,17 @@
                             const row =
                                 table.insertRow(-1);
 
+
                             const cell =
                                 row.insertCell(0);
 
+
                             cell.colSpan = 4;
+
 
                             cell.textContent =
                                 "No emergency alerts available.";
+
 
                             return;
 
@@ -1108,11 +1334,13 @@
                                 const row =
                                     table.insertRow(-1);
 
+
                                 row.insertCell(
                                     0
                                 ).textContent =
                                     emergencyAlert.title ||
                                     "";
+
 
                                 row.insertCell(
                                     1
@@ -1120,27 +1348,33 @@
                                     emergencyAlert.message ||
                                     "";
 
+
                                 row.insertCell(
                                     2
                                 ).textContent =
                                     emergencyAlert.severity ||
                                     "";
 
+
                                 const actionCell =
                                     row.insertCell(
                                         3
                                     );
+
 
                                 const deleteButton =
                                     document.createElement(
                                         "button"
                                     );
 
+
                                 deleteButton.textContent =
                                     "Delete";
 
+
                                 deleteButton.className =
                                     "assign-btn";
+
 
                                 deleteButton.addEventListener(
                                     "click",
@@ -1152,6 +1386,7 @@
 
                                     }
                                 );
+
 
                                 actionCell.appendChild(
                                     deleteButton
@@ -1171,10 +1406,12 @@
                             error
                         );
 
+
                         const table =
                             document.getElementById(
                                 "emergencyAlertTable"
                             );
+
 
                         table.innerHTML = `
 
@@ -1212,6 +1449,7 @@
                 "addAlertBtn"
             );
 
+
         if (addAlertBtn) {
 
             addAlertBtn.addEventListener(
@@ -1223,6 +1461,7 @@
                             "Enter Alert Title:"
                         );
 
+
                     if (
                         title === null ||
                         title.trim() === ""
@@ -1230,10 +1469,12 @@
                         return;
                     }
 
+
                     const message =
                         prompt(
                             "Enter Alert Message:"
                         );
+
 
                     if (
                         message === null ||
@@ -1242,10 +1483,12 @@
                         return;
                     }
 
+
                     const severity =
                         prompt(
                             "Enter Severity (High / Medium / Low):"
                         );
+
 
                     if (
                         severity === null ||
@@ -1254,10 +1497,12 @@
                         return;
                     }
 
+
                     const adminEmail =
                         localStorage.getItem(
                             "loggedInEmail"
                         );
+
 
                     if (
                         !adminEmail ||
@@ -1268,12 +1513,15 @@
                             "Admin login session not found. Please login again."
                         );
 
+
                         window.location.href =
                             "login.html";
+
 
                         return;
 
                     }
+
 
                     const alertData = {
 
@@ -1288,12 +1536,14 @@
 
                     };
 
+
                     const alertUrl =
                         BACKEND_URL +
                         "/api/emergency-alerts?createdByEmail=" +
                         encodeURIComponent(
                             adminEmail
                         );
+
 
                     fetch(
                         alertUrl,
@@ -1325,6 +1575,7 @@
                                 const text =
                                     await response.text();
 
+
                                 if (
                                     !response.ok
                                 ) {
@@ -1335,6 +1586,7 @@
                                     );
 
                                 }
+
 
                                 return text;
 
@@ -1348,6 +1600,7 @@
                                     "Emergency alert added successfully!"
                                 );
 
+
                                 loadEmergencyAlerts();
 
                             }
@@ -1360,6 +1613,7 @@
                                     "Add alert error:",
                                     error
                                 );
+
 
                                 alert(
                                     "Failed to add emergency alert."
@@ -1390,14 +1644,17 @@
 
             }
 
+
             const confirmed =
                 confirm(
                     "Are you sure you want to delete this alert?"
                 );
 
+
             if (!confirmed) {
                 return;
             }
+
 
             fetch(
                 BACKEND_URL +
@@ -1414,7 +1671,9 @@
                 .then(
                     function (response) {
 
-                        if (!response.ok) {
+                        if (
+                            !response.ok
+                        ) {
 
                             throw new Error(
                                 "Failed to delete alert"
@@ -1432,6 +1691,7 @@
                             "Alert deleted successfully!"
                         );
 
+
                         loadEmergencyAlerts();
 
                     }
@@ -1445,8 +1705,890 @@
                             error
                         );
 
+
                         alert(
                             "Failed to delete alert."
+                        );
+
+                    }
+                );
+
+        }
+
+
+        /* ==================================
+           VOICE ALERT VARIABLES
+           ================================== */
+
+        let mediaRecorder = null;
+
+        let recordedChunks = [];
+
+        let recordedBlob = null;
+
+        let recordingStartTime = null;
+
+        let recordingTimer = null;
+
+
+        /* ==================================
+           VOICE ALERT ELEMENTS
+           ================================== */
+
+        const startRecordingBtn =
+            document.getElementById(
+                "startRecordingBtn"
+            );
+
+
+        const stopRecordingBtn =
+            document.getElementById(
+                "stopRecordingBtn"
+            );
+
+
+        const saveVoiceAlertBtn =
+            document.getElementById(
+                "saveVoiceAlertBtn"
+            );
+
+
+        const recordingStatus =
+            document.getElementById(
+                "recordingStatus"
+            );
+
+
+        const voicePreview =
+            document.getElementById(
+                "voicePreview"
+            );
+
+
+        /* ==================================
+           START VOICE RECORDING
+           ================================== */
+
+        if (startRecordingBtn) {
+
+            startRecordingBtn.addEventListener(
+                "click",
+                async function () {
+
+                    try {
+
+                        if (
+                            !navigator.mediaDevices ||
+                            !navigator.mediaDevices.getUserMedia
+                        ) {
+
+                            alert(
+                                "Audio recording is not supported by this browser."
+                            );
+
+                            return;
+
+                        }
+
+
+                        const stream =
+                            await navigator.mediaDevices.getUserMedia(
+                                {
+                                    audio: true
+                                }
+                            );
+
+
+                        recordedChunks = [];
+
+                        recordedBlob = null;
+
+                        voicePreview.style.display =
+                            "none";
+
+
+                        mediaRecorder =
+                            new MediaRecorder(
+                                stream
+                            );
+
+
+                        mediaRecorder.ondataavailable =
+                            function (event) {
+
+                                if (
+                                    event.data &&
+                                    event.data.size > 0
+                                ) {
+
+                                    recordedChunks.push(
+                                        event.data
+                                    );
+
+                                }
+
+                            };
+
+
+                        mediaRecorder.onstop =
+                            function () {
+
+                                recordedBlob =
+                                    new Blob(
+                                        recordedChunks,
+                                        {
+                                            type:
+                                                mediaRecorder.mimeType ||
+                                                "audio/webm"
+                                        }
+                                    );
+
+
+                                const audioUrl =
+                                    URL.createObjectURL(
+                                        recordedBlob
+                                    );
+
+
+                                voicePreview.src =
+                                    audioUrl;
+
+
+                                voicePreview.style.display =
+                                    "block";
+
+
+                                saveVoiceAlertBtn.disabled =
+                                    false;
+
+
+                                if (recordingTimer) {
+
+                                    clearInterval(
+                                        recordingTimer
+                                    );
+
+                                }
+
+
+                                recordingStatus.innerText =
+                                    "Recording completed.";
+
+                            };
+
+
+                        mediaRecorder.start();
+
+
+                        recordingStartTime =
+                            Date.now();
+
+
+                        recordingStatus.innerText =
+                            "🔴 Recording... 0 seconds";
+
+
+                        startRecordingBtn.disabled =
+                            true;
+
+
+                        stopRecordingBtn.disabled =
+                            false;
+
+
+                        saveVoiceAlertBtn.disabled =
+                            true;
+
+
+                        recordingTimer =
+                            setInterval(
+                                function () {
+
+                                    const elapsedSeconds =
+                                        Math.floor(
+                                            (
+                                                Date.now() -
+                                                recordingStartTime
+                                            ) /
+                                            1000
+                                        );
+
+
+                                    recordingStatus.innerText =
+                                        "🔴 Recording... " +
+                                        elapsedSeconds +
+                                        " seconds";
+
+                                },
+                                1000
+                            );
+
+                    }
+                    catch (error) {
+
+                        console.error(
+                            "Microphone error:",
+                            error
+                        );
+
+
+                        alert(
+                            "Unable to access microphone. Please allow microphone permission."
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+
+
+        /* ==================================
+           STOP VOICE RECORDING
+           ================================== */
+
+        if (stopRecordingBtn) {
+
+            stopRecordingBtn.addEventListener(
+                "click",
+                function () {
+
+                    if (
+                        mediaRecorder &&
+                        mediaRecorder.state !==
+                        "inactive"
+                    ) {
+
+                        mediaRecorder.stop();
+
+
+                        if (
+                            mediaRecorder.stream
+                        ) {
+
+                            mediaRecorder.stream
+                                .getTracks()
+                                .forEach(
+                                    function (track) {
+
+                                        track.stop();
+
+                                    }
+                                );
+
+                        }
+
+                    }
+
+
+                    startRecordingBtn.disabled =
+                        false;
+
+
+                    stopRecordingBtn.disabled =
+                        true;
+
+                }
+            );
+
+        }
+
+
+        /* ==================================
+           SAVE VOICE ALERT
+           ================================== */
+
+        if (saveVoiceAlertBtn) {
+
+            saveVoiceAlertBtn.addEventListener(
+                "click",
+                async function () {
+
+                    if (!recordedBlob) {
+
+                        alert(
+                            "Please record a voice alert first."
+                        );
+
+                        return;
+
+                    }
+
+
+                    const titleInput =
+                        document.getElementById(
+                            "voiceTitle"
+                        );
+
+
+                    const levelInput =
+                        document.getElementById(
+                            "voiceAlertLevel"
+                        );
+
+
+                    const title =
+                        titleInput.value.trim();
+
+
+                    const alertLevel =
+                        levelInput.value;
+
+
+                    const adminEmail =
+                        localStorage.getItem(
+                            "loggedInEmail"
+                        );
+
+
+                    if (!adminEmail) {
+
+                        alert(
+                            "Admin login session not found. Please login again."
+                        );
+
+                        window.location.href =
+                            "login.html";
+
+                        return;
+
+                    }
+
+
+                    if (!title) {
+
+                        alert(
+                            "Please enter a voice alert title."
+                        );
+
+                        titleInput.focus();
+
+                        return;
+
+                    }
+
+
+                    try {
+
+                        saveVoiceAlertBtn.disabled =
+                            true;
+
+
+                        recordingStatus.innerText =
+                            "Saving voice alert...";
+
+
+                        const audioData =
+                            await convertBlobToDataUrl(
+                                recordedBlob
+                            );
+
+
+                        const duration =
+                            Math.max(
+                                1,
+                                Math.round(
+                                    recordedBlobDuration()
+                                )
+                            );
+
+
+                        const voiceAlertData = {
+
+                            title:
+                                title,
+
+                            audioData:
+                                audioData,
+
+                            duration:
+                                duration,
+
+                            alertLevel:
+                                alertLevel
+
+                        };
+
+
+                        const voiceUrl =
+                            BACKEND_URL +
+                            "/api/voice-alerts?createdByEmail=" +
+                            encodeURIComponent(
+                                adminEmail
+                            );
+
+
+                        const response =
+                            await fetch(
+                                voiceUrl,
+                                {
+
+                                    method:
+                                        "POST",
+
+                                    headers: {
+
+                                        "Content-Type":
+                                            "application/json"
+
+                                    },
+
+                                    body:
+                                        JSON.stringify(
+                                            voiceAlertData
+                                        )
+
+                                }
+                            );
+
+
+                        const responseText =
+                            await response.text();
+
+
+                        if (!response.ok) {
+
+                            throw new Error(
+                                responseText ||
+                                "Failed to save voice alert"
+                            );
+
+                        }
+
+
+                        alert(
+                            "Voice alert saved successfully!"
+                        );
+
+
+                        titleInput.value =
+                            "";
+
+
+                        levelInput.value =
+                            "LOW";
+
+
+                        voicePreview.pause();
+
+                        voicePreview.removeAttribute(
+                            "src"
+                        );
+
+
+                        voicePreview.style.display =
+                            "none";
+
+
+                        recordedBlob =
+                            null;
+
+
+                        recordedChunks =
+                            [];
+
+
+                        saveVoiceAlertBtn.disabled =
+                            true;
+
+
+                        recordingStatus.innerText =
+                            "Voice alert saved.";
+
+
+                        loadVoiceAlerts();
+
+                    }
+                    catch (error) {
+
+                        console.error(
+                            "Save voice alert error:",
+                            error
+                        );
+
+
+                        alert(
+                            "Failed to save voice alert: " +
+                            error.message
+                        );
+
+
+                        saveVoiceAlertBtn.disabled =
+                            false;
+
+                    }
+
+                }
+            );
+
+        }
+
+
+        /* ==================================
+           CONVERT BLOB TO DATA URL
+           ================================== */
+
+        function convertBlobToDataUrl(
+            blob
+        ) {
+
+            return new Promise(
+                function (
+                    resolve,
+                    reject
+                ) {
+
+                    const reader =
+                        new FileReader();
+
+
+                    reader.onloadend =
+                        function () {
+
+                            resolve(
+                                reader.result
+                            );
+
+                        };
+
+
+                    reader.onerror =
+                        function () {
+
+                            reject(
+                                new Error(
+                                    "Failed to convert audio data"
+                                )
+                            );
+
+                        };
+
+
+                    reader.readAsDataURL(
+                        blob
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* ==================================
+           RECORDED DURATION
+           ================================== */
+
+        function recordedBlobDuration() {
+
+            if (!recordingStartTime) {
+
+                return 1;
+
+            }
+
+
+            return (
+                Date.now() -
+                recordingStartTime
+            ) / 1000;
+
+        }
+
+
+        /* ==================================
+           LOAD VOICE ALERTS
+           ================================== */
+
+        function loadVoiceAlerts() {
+
+            const table =
+                document.getElementById(
+                    "voiceAlertTable"
+                );
+
+
+            if (!table) {
+                return;
+            }
+
+
+            table.innerHTML = `
+
+                <tr>
+
+                    <th>Title</th>
+                    <th>Level</th>
+                    <th>Duration</th>
+                    <th>Voice</th>
+                    <th>Action</th>
+
+                </tr>
+
+            `;
+
+
+            fetch(
+                BACKEND_URL +
+                "/api/voice-alerts"
+            )
+
+                .then(
+                    function (response) {
+
+                        if (!response.ok) {
+
+                            throw new Error(
+                                "Failed to load voice alerts"
+                            );
+
+                        }
+
+                        return response.json();
+
+                    }
+                )
+
+                .then(
+                    function (alerts) {
+
+                        if (
+                            !Array.isArray(alerts) ||
+                            alerts.length === 0
+                        ) {
+
+                            const row =
+                                table.insertRow(-1);
+
+
+                            const cell =
+                                row.insertCell(0);
+
+
+                            cell.colSpan = 5;
+
+
+                            cell.textContent =
+                                "No voice alerts available.";
+
+
+                            return;
+
+                        }
+
+
+                        alerts.forEach(
+                            function (voiceAlert) {
+
+                                const row =
+                                    table.insertRow(-1);
+
+
+                                row.insertCell(
+                                    0
+                                ).textContent =
+                                    voiceAlert.title ||
+                                    "";
+
+
+                                row.insertCell(
+                                    1
+                                ).textContent =
+                                    voiceAlert.alertLevel ||
+                                    "";
+
+
+                                row.insertCell(
+                                    2
+                                ).textContent =
+                                    (
+                                        voiceAlert.duration ||
+                                        0
+                                    ) +
+                                    " sec";
+
+
+                                const audioCell =
+                                    row.insertCell(
+                                        3
+                                    );
+
+
+                                const audioPlayer =
+                                    document.createElement(
+                                        "audio"
+                                    );
+
+
+                                audioPlayer.controls =
+                                    true;
+
+
+                                audioPlayer.style.width =
+                                    "220px";
+
+
+                                audioPlayer.src =
+                                    voiceAlert.audioData ||
+                                    "";
+
+
+                                audioCell.appendChild(
+                                    audioPlayer
+                                );
+
+
+                                const actionCell =
+                                    row.insertCell(
+                                        4
+                                    );
+
+
+                                const deleteButton =
+                                    document.createElement(
+                                        "button"
+                                    );
+
+
+                                deleteButton.textContent =
+                                    "Delete";
+
+
+                                deleteButton.className =
+                                    "assign-btn";
+
+
+                                deleteButton.addEventListener(
+                                    "click",
+                                    function () {
+
+                                        deleteVoiceAlert(
+                                            voiceAlert.voiceId
+                                        );
+
+                                    }
+                                );
+
+
+                                actionCell.appendChild(
+                                    deleteButton
+                                );
+
+                            }
+                        );
+
+                    }
+                )
+
+                .catch(
+                    function (error) {
+
+                        console.error(
+                            "Voice alert error:",
+                            error
+                        );
+
+
+                        const row =
+                            table.insertRow(-1);
+
+
+                        const cell =
+                            row.insertCell(0);
+
+
+                        cell.colSpan = 5;
+
+
+                        cell.textContent =
+                            "Unable to load voice alerts.";
+
+                    }
+                );
+
+        }
+
+
+        /* ==================================
+           DELETE VOICE ALERT
+           ================================== */
+
+        function deleteVoiceAlert(
+            voiceId
+        ) {
+
+            if (!voiceId) {
+
+                alert(
+                    "Invalid voice alert ID."
+                );
+
+                return;
+
+            }
+
+
+            const confirmed =
+                confirm(
+                    "Are you sure you want to delete this voice alert?"
+                );
+
+
+            if (!confirmed) {
+                return;
+            }
+
+
+            fetch(
+                BACKEND_URL +
+                "/api/voice-alerts/" +
+                voiceId,
+                {
+
+                    method:
+                        "DELETE"
+
+                }
+            )
+
+                .then(
+                    function (response) {
+
+                        if (!response.ok) {
+
+                            throw new Error(
+                                "Failed to delete voice alert"
+                            );
+
+                        }
+
+                    }
+                )
+
+                .then(
+                    function () {
+
+                        alert(
+                            "Voice alert deleted successfully!"
+                        );
+
+
+                        loadVoiceAlerts();
+
+                    }
+                )
+
+                .catch(
+                    function (error) {
+
+                        console.error(
+                            "Delete voice alert error:",
+                            error
+                        );
+
+
+                        alert(
+                            "Failed to delete voice alert."
                         );
 
                     }
@@ -1490,6 +2632,7 @@
                                 "taskMonitoringTable"
                             );
 
+
                         table.innerHTML = `
 
                             <tr>
@@ -1512,13 +2655,17 @@
                             const row =
                                 table.insertRow(-1);
 
+
                             const cell =
                                 row.insertCell(0);
 
+
                             cell.colSpan = 4;
+
 
                             cell.textContent =
                                 "No tasks available.";
+
 
                             return;
 
@@ -1530,6 +2677,7 @@
 
                                 const row =
                                     table.insertRow(-1);
+
 
                                 row.insertCell(
                                     0
@@ -1589,6 +2737,7 @@
                                         3
                                     );
 
+
                                 const statusSpan =
                                     document.createElement(
                                         "span"
@@ -1644,10 +2793,12 @@
                             error
                         );
 
+
                         const table =
                             document.getElementById(
                                 "taskMonitoringTable"
                             );
+
 
                         table.innerHTML = `
 
@@ -1683,6 +2834,8 @@
         loadSosAlerts();
 
         loadEmergencyAlerts();
+
+        loadVoiceAlerts();
 
         loadTaskMonitoring();
 

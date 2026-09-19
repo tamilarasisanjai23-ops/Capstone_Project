@@ -146,11 +146,12 @@
                 🆘 SEND SOS
             </button>
 
-            <p id="sosStatus"
-               style="
+            <p
+                id="sosStatus"
+                style="
                     margin-top: 15px;
                     font-weight: bold;
-               ">
+                ">
             </p>
 
         </div>
@@ -168,6 +169,25 @@
 
                 <p>
                     Loading emergency alerts...
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- ========================== -->
+        <!-- VOICE ALERTS -->
+        <!-- ========================== -->
+
+        <div class="dashboard-section">
+
+            <h2>🎙️ Voice Alerts</h2>
+
+            <div id="voiceAlerts">
+
+                <p>
+                    Loading voice alerts...
                 </p>
 
             </div>
@@ -414,6 +434,170 @@
                     alertContainer.innerHTML = `
                         <p>
                             Unable to load emergency alerts.
+                        </p>
+                    `;
+
+                });
+
+        }
+
+
+        /* ==========================
+           LOAD VOICE ALERTS
+           ========================== */
+
+        function loadVoiceAlerts() {
+
+            const voiceContainer =
+                document.getElementById(
+                    "voiceAlerts"
+                );
+
+
+            fetch(
+                BACKEND_URL +
+                "/api/voice-alerts"
+            )
+
+                .then(function (response) {
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                            "Failed to load voice alerts"
+                        );
+
+                    }
+
+                    return response.json();
+
+                })
+
+                .then(function (alerts) {
+
+                    if (
+                        !Array.isArray(alerts) ||
+                        alerts.length === 0
+                    ) {
+
+                        voiceContainer.innerHTML = `
+                            <p>
+                                No voice alerts available.
+                            </p>
+                        `;
+
+                        return;
+                    }
+
+
+                    voiceContainer.innerHTML = "";
+
+
+                    alerts.forEach(function (voiceAlert) {
+
+                        const alertBox =
+                            document.createElement(
+                                "div"
+                            );
+
+
+                        alertBox.style.marginBottom =
+                            "15px";
+
+                        alertBox.style.padding =
+                            "15px";
+
+                        alertBox.style.borderRadius =
+                            "8px";
+
+                        alertBox.style.border =
+                            "1px solid #ddd";
+
+                        alertBox.style.backgroundColor =
+                            "#fff";
+
+
+                        const title =
+                            voiceAlert.title ||
+                            "Voice Alert";
+
+
+                        const level =
+                            voiceAlert.alertLevel ||
+                            "UNKNOWN";
+
+
+                        const duration =
+                            voiceAlert.duration ||
+                            0;
+
+
+                        alertBox.innerHTML = `
+
+                            <h3>
+                                🎙️ ${title}
+                            </h3>
+
+                            <p>
+                                <strong>Alert Level:</strong>
+                                ${level}
+                            </p>
+
+                            <p>
+                                <strong>Duration:</strong>
+                                ${duration} seconds
+                            </p>
+
+                        `;
+
+
+                        const audioPlayer =
+                            document.createElement(
+                                "audio"
+                            );
+
+
+                        audioPlayer.controls =
+                            true;
+
+
+                        audioPlayer.style.width =
+                            "100%";
+
+
+                        audioPlayer.style.marginTop =
+                            "10px";
+
+
+                        audioPlayer.src =
+                            voiceAlert.audioData ||
+                            "";
+
+
+                        alertBox.appendChild(
+                            audioPlayer
+                        );
+
+
+                        voiceContainer.appendChild(
+                            alertBox
+                        );
+
+                    });
+
+                })
+
+                .catch(function (error) {
+
+                    console.error(
+                        "Error loading voice alerts:",
+                        error
+                    );
+
+
+                    voiceContainer.innerHTML = `
+                        <p>
+                            Unable to load voice alerts.
                         </p>
                     `;
 
@@ -710,6 +894,8 @@
         loadVolunteerEmail();
 
         loadEmergencyAlerts();
+
+        loadVoiceAlerts();
 
     </script>
 
