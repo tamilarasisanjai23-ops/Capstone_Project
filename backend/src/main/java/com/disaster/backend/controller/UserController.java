@@ -39,8 +39,6 @@ public class UserController {
                 userRepository.save(user);
 
 
-        // Create Volunteer record automatically
-        // for volunteer users
         if (savedUser.getRole() != null &&
                 savedUser.getRole()
                         .equalsIgnoreCase("VOLUNTEER")) {
@@ -121,6 +119,139 @@ public class UserController {
 
 
     // =========================================================
+    // GET USER PROFILE BY EMAIL
+    // =========================================================
+
+    @GetMapping("/email")
+    public ResponseEntity<?> getUserProfile(
+            @RequestParam String email) {
+
+        Optional<User> existingUser =
+                userRepository.findByEmail(
+                        email
+                );
+
+
+        if (existingUser.isEmpty()) {
+
+            return ResponseEntity
+                    .notFound()
+                    .build();
+        }
+
+
+        User user =
+                existingUser.get();
+
+
+        Map<String, Object> profile =
+                new HashMap<>();
+
+
+        // Safe user information only
+        profile.put(
+                "userId",
+                user.getUserId()
+        );
+
+
+        profile.put(
+                "name",
+                user.getName()
+        );
+
+
+        profile.put(
+                "email",
+                user.getEmail()
+        );
+
+
+        profile.put(
+                "phone",
+                user.getPhone()
+        );
+
+
+        profile.put(
+                "role",
+                user.getRole()
+        );
+
+
+        // Volunteer information
+        Optional<Volunteer> volunteerRecord =
+                volunteerRepository
+                        .findByUser_UserId(
+                                user.getUserId()
+                        );
+
+
+        if (volunteerRecord.isPresent()) {
+
+            Volunteer volunteer =
+                    volunteerRecord.get();
+
+
+            profile.put(
+                    "volunteerId",
+                    volunteer.getVolunteerId()
+            );
+
+
+            profile.put(
+                    "skills",
+                    volunteer.getSkills()
+            );
+
+
+            profile.put(
+                    "availability",
+                    volunteer.getAvailability()
+            );
+
+
+            profile.put(
+                    "status",
+                    volunteer.getStatus()
+            );
+
+        }
+        else {
+
+            profile.put(
+                    "volunteerId",
+                    null
+            );
+
+
+            profile.put(
+                    "skills",
+                    "Not Specified"
+            );
+
+
+            profile.put(
+                    "availability",
+                    "Available"
+            );
+
+
+            profile.put(
+                    "status",
+                    "AVAILABLE"
+            );
+
+        }
+
+
+        return ResponseEntity.ok(
+                profile
+        );
+    }
+
+
+    // =========================================================
     // GET ALL VOLUNTEERS
     // =========================================================
 
@@ -137,7 +268,6 @@ public class UserController {
 
         for (User user : users) {
 
-            // Only volunteer users
             if (user.getRole() == null ||
                     !user.getRole()
                             .equalsIgnoreCase(
@@ -148,7 +278,6 @@ public class UserController {
             }
 
 
-            // Find volunteer record
             Optional<Volunteer> volunteerRecord =
                     volunteerRepository
                             .findByUser_UserId(
@@ -159,8 +288,6 @@ public class UserController {
             Volunteer record;
 
 
-            // If volunteer record is missing,
-            // create it automatically
             if (volunteerRecord.isEmpty()) {
 
                 record =
@@ -176,14 +303,14 @@ public class UserController {
                                 record
                         );
 
-            } else {
+            }
+            else {
 
                 record =
                         volunteerRecord.get();
             }
 
 
-            // Prepare safe response
             Map<String, Object> volunteer =
                     new HashMap<>();
 
