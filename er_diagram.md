@@ -153,7 +153,9 @@ erDiagram
 | **VOLUNTEERS** | **1 : 1** | **VOLUNTEER_LOCATIONS** | `VOLUNTEER_LOCATIONS.volunteer_id` | Volunteer transmits live GPS coordinates. |
 | **TASKS** | **1 : M** | **TASK_ASSIGNMENTS** | `TASK_ASSIGNMENTS.task_id` | Task allocated to one or multiple volunteers. |
 | **DISASTERS** | **1 : M** | **TASKS** | `TASKS.disaster_id` | Disaster requires multiple emergency tasks. |
+| **LOCATIONS** | **1 : M** | **TASKS** | `TASKS.location_id` | Location is associated with multiple emergency tasks. |
 | **DISASTERS** | **1 : M** | **RESOURCES** | `RESOURCES.disaster_id` | Disaster requires multiple emergency resources. |
+| **LOCATIONS** | **1 : M** | **TASKS** | `TASKS.location_id` | Location is associated with multiple emergency tasks. |
 | **DISASTERS** | **1 : M** | **EMERGENCY_ALERTS** | `EMERGENCY_ALERTS.disaster_id` | Disaster links to emergency warnings. |
 | **LOCATIONS** | **1 : M** | **DISASTERS** | `DISASTERS.location_id` | Location hosts disaster events. |
 | **LOCATIONS** | **1 : M** | **RELIEF_CENTERS** | `RELIEF_CENTERS.location_id` | Location contains relief center shelters. |
