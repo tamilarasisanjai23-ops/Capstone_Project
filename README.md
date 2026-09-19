@@ -1,26 +1,16 @@
 # Volunteer Disaster Relief Coordination System
 
-> A Full-Stack Capstone Project for Emergency Response and Volunteer Coordination
-
-![License](https://img.shields.io/badge/License-MIT-blue.svg)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-brightgreen.svg)
-![MySQL](https://img.shields.io/badge/MySQL-8.0-blue.svg)
-
----
+> A Full-Stack Web Application for Emergency Response and Volunteer Coordination
 
 ## 📌 Project Overview
 
-The **Volunteer Disaster Relief Coordination System** is a web-based platform developed to support disaster-response activities and volunteer coordination.
+The **Volunteer Disaster Relief Coordination System** is a web-based disaster management application designed to help administrators and volunteers coordinate emergency-response activities.
 
-The system provides a centralized platform where administrators can manage disasters, volunteers, emergency alerts, relief tasks, resources, shelters, SOS requests, voice alerts, and notifications.
-
-Volunteers can view emergency information, manage assigned tasks, update task status, send SOS alerts, receive notifications, and access emergency communication features.
+The system provides a centralized platform for managing volunteers, disasters, emergency alerts, SOS requests, tasks, resources, shelters, and emergency communication.
 
 ---
 
-## 🎯 Key Features
-
-### 🚨 Emergency Response
+## 🚨 Key Features
 
 * Emergency Alert System
 * Voice Alert System
@@ -29,21 +19,24 @@ Volunteers can view emergency information, manage assigned tasks, update task st
 * Disaster Management
 * Volunteer Task Coordination
 * Notification Center
+* Resource Management
+* Shelter Management
+* Volunteer Management
 
-### 🔔 Emergency Alert System
+## 🔔 Emergency Alert System
 
 * Admin can create emergency alerts.
 * Alerts can contain a title, message, and severity.
 * Volunteers can view available emergency alerts.
 * Admin can delete emergency alerts.
 
-### 🔊 Voice Alert System
+## 🔊 Voice Alert System
 
 * Admin can create voice alerts.
 * Volunteers can view available voice alerts.
 * Voice-based emergency communication is supported through the frontend.
 
-### 📻 Emergency Radio
+## 📻 Emergency Radio
 
 * Emergency Radio interface for volunteers.
 * Emergency channel selection.
@@ -51,25 +44,25 @@ Volunteers can view emergency information, manage assigned tasks, update task st
 * Push-to-talk style communication interface.
 * Uses browser-based audio capabilities.
 
-### 🆘 SOS Alert System
+## 🆘 SOS Alert System
 
 * Volunteers can send SOS alerts during emergency situations.
 * Admin can monitor SOS alerts.
 * Admin can update SOS alert status.
 * Volunteers can receive updated SOS status.
 
-### 📋 Task Coordination
+## 📋 Task Coordination
 
 * Admin can assign tasks to volunteers.
 * Volunteers can view assigned tasks.
 * Volunteers can update task status.
-* Supported task statuses include:
+* Supported task statuses:
 
   * Pending
   * In Progress
   * Completed
 
-### 🔔 Notification Center
+## 🔔 Notification Center
 
 Notifications can be used for:
 
@@ -149,19 +142,17 @@ The Volunteer Dashboard provides volunteers with access to emergency-response ac
 
 ## 🛠️ Technology Stack
 
-| Layer                     | Technology                                                            |
-| ------------------------- | --------------------------------------------------------------------- |
-| **Frontend**              | HTML5, CSS3, JavaScript                                               |
-| **Interactive Component** | React / Vite                                                          |
-| **Backend**               | Java, Spring Boot 3.x                                                 |
-| **API**                   | Spring Boot REST APIs                                                 |
-| **Data Access**           | Spring Data JPA                                                       |
-| **Database**              | MySQL 8.0+                                                            |
-| **Build Tool**            | Maven                                                                 |
-| **Communication**         | Web Audio API, MediaRecorder API, WebRTC-related browser capabilities |
-| **Location**              | Browser Geolocation API                                               |
-| **Development Tools**     | VS Code, Git, GitHub                                                  |
-| **Deployment**            | Docker / Cloud Deployment                                             |
+| Layer                 | Technology                                   |
+| --------------------- | -------------------------------------------- |
+| **Frontend**          | HTML5, CSS3, JavaScript                      |
+| **Backend**           | Java, Spring Boot 3.x                        |
+| **API**               | Spring Boot REST APIs                        |
+| **Data Access**       | Spring Data JPA                              |
+| **Database**          | MySQL 8.0+                                   |
+| **Build Tool**        | Maven                                        |
+| **Browser Features**  | Web Audio / MediaRecorder / Geolocation APIs |
+| **Development Tools** | VS Code, Git, GitHub                         |
+| **Deployment**        | Docker / Render                              |
 
 ---
 
@@ -185,9 +176,6 @@ capstone/
 │   ├── js/
 │   │
 │   └── src/
-│       ├── radio-main.jsx
-│       └── pages/
-│           └── EmergencyRadio.jsx
 │
 ├── backend/
 │   ├── src/
@@ -211,7 +199,6 @@ capstone/
 │   └── schema.sql
 │
 ├── docs/
-│
 ├── er_diagram.md
 ├── problem-statement.md
 ├── README.md
@@ -266,7 +253,7 @@ The backend also supports operations related to:
 
 The project uses **MySQL** for persistent data storage.
 
-The database is designed to manage information related to:
+The database manages information related to:
 
 * Users
 * Volunteers
@@ -279,7 +266,7 @@ The database is designed to manage information related to:
 * Relief Resources
 * Shelters
 
-Database scripts are maintained inside the:
+Database scripts are maintained inside:
 
 ```text
 database/
@@ -291,38 +278,38 @@ database/
 ## 🔄 System Workflow
 
 ```text
-                    ADMIN
-                      │
-          ┌───────────┼────────────┐
-          │           │            │
-     Manage       Create       Monitor
-    Volunteers     Alerts        SOS
-          │           │            │
-          └───────────┼────────────┘
-                      │
-                      ▼
-             SPRING BOOT BACKEND
-                      │
-              REST API Operations
-                      │
-                      ▼
-                    MYSQL
-                      │
-                      ▼
-                  FRONTEND
-                      │
-                      ▼
-                VOLUNTEERS
-                      │
-        ┌─────────────┼─────────────┐
-        │             │             │
-      Tasks         Alerts         SOS
-        │             │             │
-        ▼             ▼             ▼
-   Update Status   View Alerts   Send SOS
-                      │
-                      ▼
-              Emergency Radio
+                         ADMIN
+                           │
+             ┌─────────────┼─────────────┐
+             │             │             │
+         Manage         Create        Monitor
+        Volunteers       Alerts          SOS
+             │             │             │
+             └─────────────┼─────────────┘
+                           │
+                           ▼
+                  SPRING BOOT BACKEND
+                           │
+                     REST API Operations
+                           │
+                           ▼
+                         MYSQL
+                           │
+                           ▼
+                       FRONTEND
+                           │
+                           ▼
+                      VOLUNTEERS
+                           │
+              ┌────────────┼────────────┐
+              │            │            │
+            Tasks        Alerts         SOS
+              │            │            │
+              ▼            ▼            ▼
+        Update Status  View Alerts   Send SOS
+                           │
+                           ▼
+                    Emergency Radio
 ```
 
 ---
@@ -358,9 +345,9 @@ mvn spring-boot:run
 
 ### 3. Frontend
 
-The frontend contains HTML, CSS, JavaScript and React/Vite-based emergency communication components.
+The frontend contains HTML, CSS, and JavaScript pages for the disaster-response system.
 
-Open the required frontend page using the configured frontend development environment.
+Open the required frontend page using the configured frontend environment.
 
 ---
 
@@ -372,7 +359,9 @@ The backend includes a Dockerfile:
 backend/Dockerfile
 ```
 
-The Docker configuration can be used for container-based deployment of the Spring Boot backend.
+The Docker configuration is used for container-based deployment of the Spring Boot backend.
+
+The backend can be deployed to a cloud platform such as **Render** using the Docker configuration.
 
 ---
 
@@ -411,9 +400,9 @@ The system focuses on:
 
 ---
 
-## 👩‍💻 Project
+## 👩‍💻 Project Information
 
-**Volunteer Disaster Relief Coordination System**
+**Project:** Volunteer Disaster Relief Coordination System
 
 **Type:** College Capstone Project
 
