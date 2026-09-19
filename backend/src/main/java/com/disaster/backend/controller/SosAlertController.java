@@ -36,6 +36,10 @@ public class SosAlertController {
     private NotificationService notificationService;
 
 
+    // =========================================================
+    // GET ALL SOS ALERTS
+    // =========================================================
+
     @GetMapping
     public List<SosAlert> getAllSosAlerts() {
 
@@ -43,6 +47,10 @@ public class SosAlertController {
                 .findAllByOrderByCreatedAtDesc();
     }
 
+
+    // =========================================================
+    // CREATE SOS ALERT
+    // =========================================================
 
     @PostMapping
     public ResponseEntity<?> createSosAlert(
@@ -63,6 +71,7 @@ public class SosAlertController {
                 existingUser.get();
 
 
+        // Only volunteers can send SOS
         if (user.getRole() == null ||
                 !user.getRole()
                         .equalsIgnoreCase("VOLUNTEER")) {
@@ -73,17 +82,15 @@ public class SosAlertController {
         }
 
 
-        /*
-         * Find existing volunteer record.
-         * If it does not exist, create one automatically.
-         */
+        // =====================================================
+        // FIND OR CREATE VOLUNTEER RECORD
+        // =====================================================
 
         Optional<Volunteer> existingVolunteer =
                 volunteerRepository
                         .findByUser_UserId(
                                 user.getUserId()
                         );
-
 
         Volunteer volunteer;
 
@@ -115,14 +122,20 @@ public class SosAlertController {
         );
 
 
+        // =====================================================
+        // DEFAULT SOS STATUS
+        // =====================================================
+
         if (sosAlert.getStatus() == null ||
                 sosAlert.getStatus().isBlank()) {
 
-            sosAlert.setStatus(
-                    "ACTIVE"
-            );
+            sosAlert.setStatus("ACTIVE");
         }
 
+
+        // =====================================================
+        // SAVE SOS
+        // =====================================================
 
         SosAlert saved =
                 sosAlertRepository.save(
@@ -130,11 +143,9 @@ public class SosAlertController {
                 );
 
 
-        /*
-         * ==========================================
-         * AUTOMATIC ADMIN NOTIFICATION
-         * ==========================================
-         */
+        // =====================================================
+        // AUTOMATIC ADMIN NOTIFICATION
+        // =====================================================
 
         List<User> allUsers =
                 userRepository.findAll();
@@ -172,14 +183,9 @@ public class SosAlertController {
                 );
 
 
-                /*
-                 * Save notification directly
-                 * for each admin.
-                 */
-                notificationService
-                        .saveNotification(
-                                notification
-                        );
+                notificationService.saveNotification(
+                        notification
+                );
             }
         }
 
@@ -190,6 +196,10 @@ public class SosAlertController {
     }
 
 
+    // =========================================================
+    // UPDATE SOS STATUS
+    // =========================================================
+
     @PutMapping("/{id}/status")
     public ResponseEntity<?> updateSosStatus(
             @PathVariable Long id,
@@ -198,14 +208,117 @@ public class SosAlertController {
         return sosAlertRepository.findById(id)
                 .map(alert -> {
 
-                    alert.setStatus(
-                            status
-                    );
+                    // Update SOS status
+                    alert.setStatus(status);
 
-                    return ResponseEntity.ok(
+
+                    // Save updated SOS
+                    SosAlert savedAlert =
                             sosAlertRepository.save(
                                     alert
-                            )
+                            );
+
+
+                    // =================================================
+                    // NOTIFY VOLUNTEER ABOUT STATUS CHANGE
+                    // =================================================
+
+                    if (savedAlert.getVolunteer() != null &&
+                            savedAlert.getVolunteer().getUser() != null) {
+
+                        User volunteerUser =
+                                savedAlert
+                                        .getVolunteer()
+                                        .getUser();
+
+
+                        Notification notification =
+                                new Notification();
+
+
+                        notification.setUser(
+                                volunteerUser
+                        );
+
+
+                        String title;
+
+                        String message;
+
+
+                        // ---------------------------------------------
+                        // ACTIVE -> RESPONDING
+                        // ---------------------------------------------
+
+                        if (status.equalsIgnoreCase(
+                                "RESPONDING")) {
+
+                            title =
+                                    "🆘 SOS Response Started";
+
+                            message =
+                                    "Admin has started responding to your SOS alert.";
+
+                        }
+
+
+                        // ---------------------------------------------
+                        // RESPONDING -> RESOLVED
+                        // ---------------------------------------------
+
+                        else if (status.equalsIgnoreCase(
+                                "RESOLVED")) {
+
+                            title =
+                                    "✅ SOS Alert Resolved";
+
+                            message =
+                                    "Your SOS alert has been marked as resolved by the admin.";
+
+                        }
+
+
+                        // ---------------------------------------------
+                        // OTHER STATUS
+                        // ---------------------------------------------
+
+                        else {
+
+                            title =
+                                    "🆘 SOS Status Updated";
+
+                            message =
+                                    "Your SOS alert status is now: " +
+                                    status;
+                        }
+
+
+                        notification.setTitle(
+                                title
+                        );
+
+                        notification.setMessage(
+                                message
+                        );
+
+                        notification.setType(
+                                "SOS_STATUS"
+                        );
+
+                        notification.setReadStatus(
+                                false
+                        );
+
+
+                        // Save notification
+                        notificationService.saveNotification(
+                                notification
+                        );
+                    }
+
+
+                    return ResponseEntity.ok(
+                            savedAlert
                     );
 
                 })
