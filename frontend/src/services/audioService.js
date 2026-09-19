@@ -1,4 +1,6 @@
-// Audio + Emergency Radio Service
+// ============================================================
+// AUDIO + EMERGENCY RADIO SERVICE
+// ============================================================
 
 let audioCtx = null;
 let sirenOscillator = null;
@@ -8,6 +10,10 @@ let sirenInterval = null;
 const BACKEND_URL =
     "https://capstone-project-c6bv.onrender.com";
 
+
+// ============================================================
+// GET AUDIO CONTEXT
+// ============================================================
 
 const getAudioContext = () => {
 
@@ -38,15 +44,20 @@ const getAudioContext = () => {
 
 
     return audioCtx;
+
 };
 
+
+// ============================================================
+// AUDIO SERVICE
+// ============================================================
 
 export const audioService = {
 
 
-    // =====================================================
+    // ========================================================
     // EMERGENCY SIREN
-    // =====================================================
+    // ========================================================
 
     playEmergencySiren: () => {
 
@@ -107,45 +118,42 @@ export const audioService = {
 
 
             sirenInterval =
-                setInterval(
-                    () => {
+                setInterval(() => {
 
-                        if (
-                            !sirenOscillator ||
-                            !audioCtx
-                        ) {
+                    if (
+                        !sirenOscillator ||
+                        !audioCtx
+                    ) {
 
-                            return;
+                        return;
 
-                        }
-
-
-                        const targetFreq =
-                            high
-                                ? 600
-                                : 960;
+                    }
 
 
-                        sirenOscillator.frequency
-                            .setTargetAtTime(
-                                targetFreq,
-                                audioCtx.currentTime,
-                                0.15
-                            );
+                    const targetFrequency =
+                        high
+                            ? 600
+                            : 960;
 
 
-                        high =
-                            !high;
+                    sirenOscillator.frequency
+                        .setTargetAtTime(
+                            targetFrequency,
+                            audioCtx.currentTime,
+                            0.15
+                        );
 
-                    },
-                    400
-                );
+
+                    high =
+                        !high;
+
+                }, 400);
 
         }
         catch (error) {
 
             console.warn(
-                "Siren error:",
+                "Emergency siren error:",
                 error
             );
 
@@ -154,9 +162,9 @@ export const audioService = {
     },
 
 
-    // =====================================================
-    // STOP SIREN
-    // =====================================================
+    // ========================================================
+    // STOP EMERGENCY SIREN
+    // ========================================================
 
     stopEmergencySiren: () => {
 
@@ -182,6 +190,7 @@ export const audioService = {
 
             }
             catch (error) {
+                // Ignore cleanup error
             }
 
 
@@ -199,6 +208,7 @@ export const audioService = {
 
             }
             catch (error) {
+                // Ignore cleanup error
             }
 
 
@@ -210,9 +220,9 @@ export const audioService = {
     },
 
 
-    // =====================================================
+    // ========================================================
     // ALERT BEEP
-    // =====================================================
+    // ========================================================
 
     playAlertBeep: () => {
 
@@ -226,7 +236,7 @@ export const audioService = {
             }
 
 
-            const osc =
+            const oscillator =
                 ctx.createOscillator();
 
 
@@ -234,11 +244,11 @@ export const audioService = {
                 ctx.createGain();
 
 
-            osc.type =
+            oscillator.type =
                 "sine";
 
 
-            osc.frequency
+            oscillator.frequency
                 .setValueAtTime(
                     880,
                     ctx.currentTime
@@ -259,7 +269,7 @@ export const audioService = {
                 );
 
 
-            osc.connect(
+            oscillator.connect(
                 gain
             );
 
@@ -269,23 +279,24 @@ export const audioService = {
             );
 
 
-            osc.start();
+            oscillator.start();
 
 
-            osc.stop(
+            oscillator.stop(
                 ctx.currentTime + 0.5
             );
 
         }
         catch (error) {
+            // Ignore beep error
         }
 
     },
 
 
-    // =====================================================
+    // ========================================================
     // VOICE RECORDER
-    // =====================================================
+    // ========================================================
 
     createVoiceRecorder: () => {
 
@@ -304,6 +315,11 @@ export const audioService = {
 
         return {
 
+
+            // ------------------------------------------------
+            // START RECORDING
+            // ------------------------------------------------
+
             start: async () => {
 
                 if (
@@ -313,7 +329,7 @@ export const audioService = {
                 ) {
 
                     throw new Error(
-                        "Microphone access is not supported."
+                        "Microphone access is not supported in this browser."
                     );
 
                 }
@@ -363,6 +379,10 @@ export const audioService = {
             },
 
 
+            // ------------------------------------------------
+            // STOP RECORDING
+            // ------------------------------------------------
+
             stop: () => {
 
                 return new Promise(
@@ -372,7 +392,7 @@ export const audioService = {
 
                             reject(
                                 new Error(
-                                    "Recorder not initialized"
+                                    "Recorder not initialized."
                                 )
                             );
 
@@ -382,65 +402,93 @@ export const audioService = {
 
 
                         const duration =
-                            Math.round(
-                                (
-                                    Date.now() -
-                                    startTime
-                                ) / 1000
+                            Math.max(
+                                1,
+                                Math.round(
+                                    (
+                                        Date.now() -
+                                        startTime
+                                    ) / 1000
+                                )
                             );
 
 
                         mediaRecorder.onstop =
                             () => {
 
-                                const audioBlob =
-                                    new Blob(
-                                        audioChunks,
-                                        {
-                                            type:
-                                                "audio/webm"
-                                        }
+                                try {
+
+                                    const audioBlob =
+                                        new Blob(
+                                            audioChunks,
+                                            {
+                                                type:
+                                                    mediaRecorder.mimeType ||
+                                                    "audio/webm"
+                                            }
+                                        );
+
+
+                                    const reader =
+                                        new FileReader();
+
+
+                                    reader.onloadend =
+                                        () => {
+
+                                            if (stream) {
+
+                                                stream
+                                                    .getTracks()
+                                                    .forEach(
+                                                        track => {
+                                                            track.stop();
+                                                        }
+                                                    );
+
+                                            }
+
+
+                                            resolve({
+
+                                                audioData:
+                                                    reader.result,
+
+                                                duration:
+                                                    duration,
+
+                                                blob:
+                                                    audioBlob
+
+                                            });
+
+                                        };
+
+
+                                    reader.onerror =
+                                        () => {
+
+                                            reject(
+                                                new Error(
+                                                    "Failed to read recorded audio."
+                                                )
+                                            );
+
+                                        };
+
+
+                                    reader.readAsDataURL(
+                                        audioBlob
                                     );
 
+                                }
+                                catch (error) {
 
-                                const reader =
-                                    new FileReader();
+                                    reject(
+                                        error
+                                    );
 
-
-                                reader.readAsDataURL(
-                                    audioBlob
-                                );
-
-
-                                reader.onloadend =
-                                    () => {
-
-                                        if (stream) {
-
-                                            stream
-                                                .getTracks()
-                                                .forEach(
-                                                    track =>
-                                                        track.stop()
-                                                );
-
-                                        }
-
-
-                                        resolve({
-
-                                            audioData:
-                                                reader.result,
-
-                                            duration:
-                                                duration || 1,
-
-                                            blob:
-                                                audioBlob
-
-                                        });
-
-                                    };
+                                }
 
                             };
 
@@ -453,16 +501,27 @@ export const audioService = {
             },
 
 
+            // ------------------------------------------------
+            // CANCEL RECORDING
+            // ------------------------------------------------
+
             cancel: () => {
 
-                if (
-                    mediaRecorder &&
-                    mediaRecorder.state !==
-                    "inactive"
-                ) {
+                try {
 
-                    mediaRecorder.stop();
+                    if (
+                        mediaRecorder &&
+                        mediaRecorder.state !==
+                        "inactive"
+                    ) {
 
+                        mediaRecorder.stop();
+
+                    }
+
+                }
+                catch (error) {
+                    // Ignore cleanup error
                 }
 
 
@@ -471,8 +530,9 @@ export const audioService = {
                     stream
                         .getTracks()
                         .forEach(
-                            track =>
-                                track.stop()
+                            track => {
+                                track.stop();
+                            }
                         );
 
                 }
@@ -484,365 +544,466 @@ export const audioService = {
     },
 
 
-    // =====================================================
+    // ========================================================
     // REAL BACKEND RADIO CHANNEL MANAGER
-    // =====================================================
+    // ========================================================
 
     createRadioChannelManager:
-        (channelName, onAudioMessage) => {
-
-            let pollingTimer =
-                null;
-
-            let closed =
-                false;
-
-            const seenMessageIds =
-                new Set();
+        (
+            channelName,
+            onAudioMessage
+        ) => {
 
 
-            // ---------------------------------------------
-            // PLAY RECEIVED AUDIO
-            // ---------------------------------------------
-
-            const playIncomingAudio =
-                (audioData) => {
-
-                    if (!audioData) {
-                        return;
-                    }
+        let pollingTimer =
+            null;
 
 
-                    try {
-
-                        const audio =
-                            new Audio(
-                                audioData
-                            );
-
-                        audio.play()
-                            .catch(
-                                () => {}
-                            );
-
-                    }
-                    catch (error) {
-
-                        console.warn(
-                            "Incoming radio audio error:",
-                            error
-                        );
-
-                    }
-
-                };
+        let closed =
+            false;
 
 
-            // ---------------------------------------------
-            // LOAD MESSAGES
-            // ---------------------------------------------
-
-            const loadMessages =
-                async () => {
-
-                    if (closed) {
-                        return;
-                    }
+        const seenMessageIds =
+            new Set();
 
 
-                    try {
+        // ----------------------------------------------------
+        // LOAD RADIO MESSAGES
+        // ----------------------------------------------------
 
-                        const response =
-                            await fetch(
-                                BACKEND_URL +
-                                "/api/radio-messages?channelName=" +
-                                encodeURIComponent(
-                                    channelName
-                                )
-                            );
+        const loadMessages =
+            async () => {
 
-
-                        if (!response.ok) {
-
-                            throw new Error(
-                                "Failed to load radio messages"
-                            );
-
-                        }
+                if (closed) {
+                    return;
+                }
 
 
-                        const messages =
-                            await response.json();
+                try {
 
+                    const response =
+                        await fetch(
+                            BACKEND_URL +
+                            "/api/radio-messages?channelName=" +
+                            encodeURIComponent(
+                                channelName
+                            ),
+                            {
+                                method:
+                                    "GET",
 
-                        if (
-                            !Array.isArray(messages)
-                        ) {
-
-                            return;
-                        }
-
-
-                        const ordered =
-                            [...messages]
-                                .reverse();
-
-
-                        ordered.forEach(
-                            (message) => {
-
-                                if (
-                                    !message.messageId ||
-                                    seenMessageIds.has(
-                                        message.messageId
-                                    )
-                                ) {
-
-                                    return;
-
+                                headers: {
+                                    "Accept":
+                                        "application/json"
                                 }
-
-
-                                seenMessageIds.add(
-                                    message.messageId
-                                );
-
-
-                                const mappedMessage = {
-
-                                    sender:
-                                        message.senderName,
-
-                                    audioData:
-                                        message.audioData,
-
-                                    message:
-                                        message.audioData
-                                            ? "Voice transmission"
-                                            : "Radio message",
-
-                                    timestamp:
-                                        message.createdAt
-                                            ? new Date(
-                                                message.createdAt
-                                            )
-                                                .toLocaleTimeString()
-                                            : new Date()
-                                                .toLocaleTimeString()
-
-                                };
-
-
-                                if (
-                                    onAudioMessage
-                                ) {
-
-                                    onAudioMessage(
-                                        mappedMessage
-                                    );
-
-                                }
-
-
-                                playIncomingAudio(
-                                    message.audioData
-                                );
-
                             }
                         );
 
-                    }
-                    catch (error) {
 
-                        console.warn(
-                            "Radio polling error:",
-                            error
+                    if (!response.ok) {
+
+                        const errorText =
+                            await response.text();
+
+
+                        throw new Error(
+                            errorText ||
+                            "Failed to load radio messages."
                         );
 
                     }
 
-                };
+
+                    const messages =
+                        await response.json();
 
 
-            // Start polling every 2 seconds
-            pollingTimer =
-                setInterval(
-                    loadMessages,
-                    2000
-                );
+                    if (
+                        !Array.isArray(
+                            messages
+                        )
+                    ) {
+
+                        return;
+
+                    }
 
 
-            // Load immediately
-            loadMessages();
+                    /*
+                     * API returns newest first.
+                     * Reverse so older messages are
+                     * processed before newer messages.
+                     */
+
+                    const orderedMessages =
+                        [...messages]
+                            .reverse();
 
 
-            return {
+                    orderedMessages.forEach(
+                        (message) => {
 
-                // -----------------------------------------
-                // MICROPHONE PERMISSION
-                // -----------------------------------------
-
-                requestMicPermission:
-                    async () => {
-
-                        if (
-                            !navigator.mediaDevices ||
-                            !navigator.mediaDevices
-                                .getUserMedia
-                        ) {
-
-                            return false;
-
-                        }
-
-
-                        try {
-
-                            const stream =
-                                await navigator
-                                    .mediaDevices
-                                    .getUserMedia({
-                                        audio: true
-                                    });
-
-
-                            stream
-                                .getTracks()
-                                .forEach(
-                                    track =>
-                                        track.stop()
-                                );
-
-
-                            return true;
-
-                        }
-                        catch (error) {
-
-                            return false;
-
-                        }
-
-                    },
-
-
-                // -----------------------------------------
-                // SEND AUDIO TO BACKEND
-                // -----------------------------------------
-
-                transmitAudioMessage:
-                    async (
-                        speakerName,
-                        base64Audio
-                    ) => {
-
-                        try {
-
-                            const response =
-                                await fetch(
-                                    BACKEND_URL +
-                                    "/api/radio-messages",
-                                    {
-
-                                        method:
-                                            "POST",
-
-                                        headers: {
-
-                                            "Content-Type":
-                                                "application/json"
-
-                                        },
-
-                                        body:
-                                            JSON.stringify({
-
-                                                channelName:
-                                                    channelName,
-
-                                                senderName:
-                                                    speakerName,
-
-                                                audioData:
-                                                    base64Audio
-
-                                            })
-
-                                    }
-                                );
-
-
-                            if (!response.ok) {
-
-                                throw new Error(
-                                    "Radio transmission failed"
-                                );
-
-                            }
-
-
-                            const saved =
-                                await response.json();
-
-
-                            // Prevent own message
-                            // from being processed twice
                             if (
-                                saved &&
-                                saved.messageId
+                                !message ||
+                                !message.messageId
                             ) {
 
-                                seenMessageIds.add(
-                                    saved.messageId
-                                );
+                                return;
 
                             }
 
 
-                            return saved;
+                            /*
+                             * Prevent duplicate processing.
+                             */
 
-                        }
-                        catch (error) {
+                            if (
+                                seenMessageIds.has(
+                                    message.messageId
+                                )
+                            ) {
 
-                            console.error(
-                                "Radio transmission error:",
-                                error
+                                return;
+
+                            }
+
+
+                            seenMessageIds.add(
+                                message.messageId
                             );
 
 
-                            throw error;
+                            const mappedMessage = {
+
+                                messageId:
+                                    message.messageId,
+
+                                sender:
+                                    message.senderName ||
+                                    "Unknown",
+
+                                audioData:
+                                    message.audioData ||
+                                    null,
+
+                                message:
+                                    message.audioData
+                                        ? "Voice transmission"
+                                        : "Radio message",
+
+                                timestamp:
+                                    message.createdAt
+                                        ? new Date(
+                                            message.createdAt
+                                        ).toLocaleTimeString()
+                                        : new Date()
+                                            .toLocaleTimeString()
+
+                            };
+
+
+                            if (
+                                onAudioMessage
+                            ) {
+
+                                onAudioMessage(
+                                    mappedMessage
+                                );
+
+                            }
 
                         }
+                    );
 
-                    },
+                }
+                catch (error) {
 
-
-                // -----------------------------------------
-                // CLOSE CHANNEL
-                // -----------------------------------------
-
-                close: () => {
-
-                    closed =
-                        true;
-
-
-                    if (pollingTimer) {
-
-                        clearInterval(
-                            pollingTimer
-                        );
-
-                        pollingTimer =
-                            null;
-
-                    }
+                    console.warn(
+                        "Radio polling error:",
+                        error
+                    );
 
                 }
 
             };
 
-        }
+
+        // ----------------------------------------------------
+        // INITIAL LOAD
+        // ----------------------------------------------------
+
+        loadMessages();
+
+
+        // ----------------------------------------------------
+        // POLL EVERY 2 SECONDS
+        // ----------------------------------------------------
+
+        pollingTimer =
+            setInterval(
+                loadMessages,
+                2000
+            );
+
+
+        return {
+
+
+            // ================================================
+            // REQUEST MICROPHONE PERMISSION
+            // ================================================
+
+            requestMicPermission:
+                async () => {
+
+                    if (
+                        !navigator.mediaDevices ||
+                        !navigator.mediaDevices
+                            .getUserMedia
+                    ) {
+
+                        return false;
+
+                    }
+
+
+                    try {
+
+                        const testStream =
+                            await navigator
+                                .mediaDevices
+                                .getUserMedia({
+                                    audio: true
+                                });
+
+
+                        testStream
+                            .getTracks()
+                            .forEach(
+                                track => {
+                                    track.stop();
+                                }
+                            );
+
+
+                        return true;
+
+                    }
+                    catch (error) {
+
+                        return false;
+
+                    }
+
+                },
+
+
+            // ================================================
+            // SEND RADIO AUDIO TO BACKEND
+            // ================================================
+
+            transmitAudioMessage:
+                async (
+                    speakerName,
+                    base64Audio
+                ) => {
+
+                    if (!channelName) {
+
+                        throw new Error(
+                            "Radio channel name is missing."
+                        );
+
+                    }
+
+
+                    if (!speakerName) {
+
+                        speakerName =
+                            "Field Unit";
+
+                    }
+
+
+                    if (!base64Audio) {
+
+                        throw new Error(
+                            "Audio data is empty."
+                        );
+
+                    }
+
+
+                    try {
+
+                        const requestBody = {
+
+                            channelName:
+                                channelName,
+
+                            senderName:
+                                speakerName,
+
+                            audioData:
+                                base64Audio
+
+                        };
+
+
+                        console.log(
+                            "Sending radio transmission:",
+                            {
+                                channelName:
+                                    channelName,
+
+                                senderName:
+                                    speakerName,
+
+                                audioSize:
+                                    base64Audio.length
+                            }
+                        );
+
+
+                        const response =
+                            await fetch(
+                                BACKEND_URL +
+                                "/api/radio-messages",
+                                {
+
+                                    method:
+                                        "POST",
+
+                                    headers: {
+
+                                        "Content-Type":
+                                            "application/json",
+
+                                        "Accept":
+                                            "application/json"
+
+                                    },
+
+                                    body:
+                                        JSON.stringify(
+                                            requestBody
+                                        )
+
+                                }
+                            );
+
+
+                        const responseText =
+                            await response.text();
+
+
+                        console.log(
+                            "Radio server response:",
+                            {
+                                status:
+                                    response.status,
+
+                                body:
+                                    responseText
+                            }
+                        );
+
+
+                        if (!response.ok) {
+
+                            throw new Error(
+                                responseText ||
+                                `Radio server returned HTTP ${response.status}.`
+                            );
+
+                        }
+
+
+                        let savedMessage;
+
+                        try {
+
+                            savedMessage =
+                                JSON.parse(
+                                    responseText
+                                );
+
+                        }
+                        catch (error) {
+
+                            throw new Error(
+                                "Server returned an invalid JSON response."
+                            );
+
+                        }
+
+
+                        if (
+                            !savedMessage ||
+                            !savedMessage.messageId
+                        ) {
+
+                            throw new Error(
+                                "Radio message was not saved correctly."
+                            );
+
+                        }
+
+
+                        /*
+                         * Mark own message as already seen.
+                         * This prevents duplicate local processing.
+                         */
+
+                        seenMessageIds.add(
+                            savedMessage.messageId
+                        );
+
+
+                        return savedMessage;
+
+                    }
+                    catch (error) {
+
+                        console.error(
+                            "Radio transmission error:",
+                            error
+                        );
+
+
+                        throw error;
+
+                    }
+
+                },
+
+
+            // ================================================
+            // CLOSE RADIO CHANNEL
+            // ================================================
+
+            close: () => {
+
+                closed =
+                    true;
+
+
+                if (pollingTimer) {
+
+                    clearInterval(
+                        pollingTimer
+                    );
+
+                    pollingTimer =
+                        null;
+
+                }
+
+            }
+
+        };
+
+    }
 
 };
 
