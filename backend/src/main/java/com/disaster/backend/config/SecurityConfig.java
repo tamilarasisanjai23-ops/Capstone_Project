@@ -50,24 +50,21 @@ public class SecurityConfig {
         CorsConfiguration configuration =
                 new CorsConfiguration();
 
-
-        /*
-         * Local React/Vite frontend
-         */
         configuration.setAllowedOrigins(
             Arrays.asList(
+                // Local React/Vite
                 "http://localhost:5173",
                 "http://127.0.0.1:5173",
 
+                // Local static frontend
                 "http://localhost:5500",
-                "http://127.0.0.1:5500"
+                "http://127.0.0.1:5500",
+
+                // Cloud frontend
+                "https://capstone-project-frontend-uuqq.onrender.com"
             )
         );
 
-
-        /*
-         * HTTP methods allowed from frontend
-         */
         configuration.setAllowedMethods(
             Arrays.asList(
                 "GET",
@@ -78,40 +75,21 @@ public class SecurityConfig {
             )
         );
 
-
-        /*
-         * Request headers allowed
-         */
         configuration.setAllowedHeaders(
             Arrays.asList("*")
         );
 
+        configuration.setAllowCredentials(false);
 
-        /*
-         * We are not using browser credentials/cookies
-         */
-        configuration.setAllowCredentials(
-            false
-        );
-
-
-        /*
-         * Cache preflight result for 1 hour
-         */
-        configuration.setMaxAge(
-            3600L
-        );
-
+        configuration.setMaxAge(3600L);
 
         UrlBasedCorsConfigurationSource source =
                 new UrlBasedCorsConfigurationSource();
-
 
         source.registerCorsConfiguration(
             "/**",
             configuration
         );
-
 
         return source;
     }
