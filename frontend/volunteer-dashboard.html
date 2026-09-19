@@ -113,15 +113,53 @@
 
 
         <!-- ========================== -->
+        <!-- NOTIFICATION CENTER -->
+        <!-- ========================== -->
+
+        <div class="dashboard-section">
+
+            <h2>
+                🔔 Notification Center
+                <span
+                    id="unreadCount"
+                    style="
+                        color: #d32f2f;
+                        font-size: 16px;
+                        margin-left: 10px;
+                    ">
+                    Unread: 0
+                </span>
+            </h2>
+
+            <button
+                id="refreshNotificationsBtn"
+                class="assign-btn"
+                style="margin-bottom: 15px;">
+                🔄 Refresh Notifications
+            </button>
+
+            <div id="notificationContainer">
+
+                <p>
+                    Loading notifications...
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- ========================== -->
         <!-- SOS ALERT -->
         <!-- ========================== -->
 
-        <div class="dashboard-section"
-             style="
+        <div
+            class="dashboard-section"
+            style="
                 text-align: center;
                 border: 2px solid #d32f2f;
                 background-color: #fff5f5;
-             ">
+            ">
 
             <h2>🆘 Emergency SOS</h2>
 
@@ -141,8 +179,7 @@
                     font-weight: bold;
                     border-radius: 8px;
                     cursor: pointer;
-                "
-            >
+                ">
                 🆘 SEND SOS
             </button>
 
@@ -303,7 +340,9 @@
                 localStorage.getItem("loggedInEmail");
 
             const emailElement =
-                document.getElementById("volunteerEmail");
+                document.getElementById(
+                    "volunteerEmail"
+                );
 
             if (loggedInEmail) {
 
@@ -311,6 +350,354 @@
                     loggedInEmail;
 
             }
+
+        }
+
+
+        /* ==========================
+           LOAD NOTIFICATIONS
+           ========================== */
+
+        function loadNotifications() {
+
+            const email =
+                localStorage.getItem(
+                    "loggedInEmail"
+                );
+
+            const container =
+                document.getElementById(
+                    "notificationContainer"
+                );
+
+            const unreadCountElement =
+                document.getElementById(
+                    "unreadCount"
+                );
+
+
+            if (!email) {
+
+                container.innerHTML = `
+                    <p>
+                        Please login again to view notifications.
+                    </p>
+                `;
+
+                unreadCountElement.innerText =
+                    "Unread: 0";
+
+                return;
+            }
+
+
+            fetch(
+                BACKEND_URL +
+                "/api/notifications/email?email=" +
+                encodeURIComponent(email)
+            )
+
+                .then(function (response) {
+
+                    if (!response.ok) {
+
+                        return response
+                            .text()
+                            .then(function (message) {
+
+                                throw new Error(
+                                    message ||
+                                    "Failed to load notifications"
+                                );
+
+                            });
+
+                    }
+
+                    return response.json();
+
+                })
+
+                .then(function (notifications) {
+
+                    container.innerHTML = "";
+
+
+                    if (
+                        !Array.isArray(notifications) ||
+                        notifications.length === 0
+                    ) {
+
+                        container.innerHTML = `
+                            <p>
+                                No notifications available.
+                            </p>
+                        `;
+
+                        unreadCountElement.innerText =
+                            "Unread: 0";
+
+                        return;
+                    }
+
+
+                    let unreadCount = 0;
+
+
+                    notifications.forEach(
+                        function (notification) {
+
+                            if (
+                                notification.readStatus === false
+                            ) {
+
+                                unreadCount++;
+
+                            }
+
+
+                            const notificationBox =
+                                document.createElement(
+                                    "div"
+                                );
+
+
+                            notificationBox.style.marginBottom =
+                                "15px";
+
+                            notificationBox.style.padding =
+                                "15px";
+
+                            notificationBox.style.borderRadius =
+                                "8px";
+
+                            notificationBox.style.border =
+                                notification.readStatus
+                                    ? "1px solid #ddd"
+                                    : "2px solid #d32f2f";
+
+                            notificationBox.style.backgroundColor =
+                                notification.readStatus
+                                    ? "#ffffff"
+                                    : "#fff5f5";
+
+
+                            const title =
+                                notification.title ||
+                                "Notification";
+
+
+                            const message =
+                                notification.message ||
+                                "";
+
+
+                            const type =
+                                notification.type ||
+                                "GENERAL";
+
+
+                            const createdAt =
+                                notification.createdAt ||
+                                "";
+
+
+                            notificationBox.innerHTML = `
+
+                                <h3>
+                                    🔔 ${title}
+                                </h3>
+
+                                <p>
+                                    <strong>Type:</strong>
+                                    ${type}
+                                </p>
+
+                                <p>
+                                    <strong>Message:</strong>
+                                    ${message}
+                                </p>
+
+                                <p>
+                                    <strong>Time:</strong>
+                                    ${createdAt}
+                                </p>
+
+                            `;
+
+
+                            if (
+                                notification.readStatus === false
+                            ) {
+
+                                const readButton =
+                                    document.createElement(
+                                        "button"
+                                    );
+
+
+                                readButton.innerText =
+                                    "Mark as Read";
+
+
+                                readButton.className =
+                                    "assign-btn";
+
+
+                                readButton.addEventListener(
+                                    "click",
+                                    function () {
+
+                                        markNotificationAsRead(
+                                            notification.notificationId
+                                        );
+
+                                    }
+                                );
+
+
+                                notificationBox.appendChild(
+                                    readButton
+                                );
+
+                            }
+                            else {
+
+                                const readText =
+                                    document.createElement(
+                                        "span"
+                                    );
+
+
+                                readText.innerText =
+                                    "✓ Read";
+
+
+                                readText.style.color =
+                                    "green";
+
+                                readText.style.fontWeight =
+                                    "bold";
+
+
+                                notificationBox.appendChild(
+                                    readText
+                                );
+
+                            }
+
+
+                            container.appendChild(
+                                notificationBox
+                            );
+
+                        }
+                    );
+
+
+                    unreadCountElement.innerText =
+                        "Unread: " +
+                        unreadCount;
+
+                })
+
+                .catch(function (error) {
+
+                    console.error(
+                        "Notification error:",
+                        error
+                    );
+
+
+                    container.innerHTML = `
+                        <p>
+                            Unable to load notifications.
+                        </p>
+                    `;
+
+                    unreadCountElement.innerText =
+                        "Unread: 0";
+
+                });
+
+        }
+
+
+        /* ==========================
+           MARK NOTIFICATION AS READ
+           ========================== */
+
+        function markNotificationAsRead(
+            notificationId
+        ) {
+
+            fetch(
+                BACKEND_URL +
+                "/api/notifications/" +
+                notificationId +
+                "/read",
+                {
+                    method:
+                        "PUT"
+                }
+            )
+
+                .then(function (response) {
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                            "Failed to mark notification as read"
+                        );
+
+                    }
+
+                    return response.json();
+
+                })
+
+                .then(function () {
+
+                    loadNotifications();
+
+                })
+
+                .catch(function (error) {
+
+                    console.error(
+                        "Mark read error:",
+                        error
+                    );
+
+                    alert(
+                        "Failed to mark notification as read."
+                    );
+
+                });
+
+        }
+
+
+        /* ==========================
+           REFRESH NOTIFICATIONS
+           ========================== */
+
+        const refreshNotificationsBtn =
+            document.getElementById(
+                "refreshNotificationsBtn"
+            );
+
+
+        if (refreshNotificationsBtn) {
+
+            refreshNotificationsBtn.addEventListener(
+                "click",
+                function () {
+
+                    loadNotifications();
+
+                }
+            );
 
         }
 
@@ -613,14 +1000,20 @@
         function sendSOS() {
 
             const sosButton =
-                document.getElementById("sosButton");
+                document.getElementById(
+                    "sosButton"
+                );
 
             const sosStatus =
-                document.getElementById("sosStatus");
+                document.getElementById(
+                    "sosStatus"
+                );
 
 
             const volunteerEmail =
-                localStorage.getItem("loggedInEmail");
+                localStorage.getItem(
+                    "loggedInEmail"
+                );
 
 
             if (!volunteerEmail) {
@@ -673,9 +1066,11 @@
 
                     const sosData = {
 
-                        latitude: latitude,
+                        latitude:
+                            latitude,
 
-                        longitude: longitude,
+                        longitude:
+                            longitude,
 
                         message:
                             "Volunteer needs emergency assistance.",
@@ -698,11 +1093,14 @@
                         ),
                         {
 
-                            method: "POST",
+                            method:
+                                "POST",
 
                             headers: {
+
                                 "Content-Type":
                                     "application/json"
+
                             },
 
                             body:
@@ -830,9 +1228,14 @@
                 },
 
                 {
-                    enableHighAccuracy: true,
-                    timeout: 10000,
-                    maximumAge: 0
+                    enableHighAccuracy:
+                        true,
+
+                    timeout:
+                        10000,
+
+                    maximumAge:
+                        0
                 }
 
             );
@@ -892,6 +1295,8 @@
            ========================== */
 
         loadVolunteerEmail();
+
+        loadNotifications();
 
         loadEmergencyAlerts();
 
