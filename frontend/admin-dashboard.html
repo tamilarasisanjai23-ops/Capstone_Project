@@ -6,186 +6,192 @@
     <meta charset="UTF-8">
 
     <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
+          content="width=device-width, initial-scale=1.0">
 
     <title>Admin Dashboard - Disaster Relief</title>
 
     <link rel="stylesheet"
-        href="css/style.css">
+          href="css/style.css">
 
 </head>
 
 <body>
 
-    <!-- =========================
-         NAVIGATION
-         ========================= -->
 
-    <nav>
+<!-- =========================================================
+     NAVIGATION
+     ========================================================= -->
+
+<nav>
+
+    <h2>
+        Disaster Relief Admin
+    </h2>
+
+    <div>
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="admin-dashboard.html">
+            Dashboard
+        </a>
+
+        <a href="login.html">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- =========================================================
+     ADMIN DASHBOARD
+     ========================================================= -->
+
+<div class="admin-dashboard">
+
+    <h1>
+        Admin Dashboard
+    </h1>
+
+    <p class="admin-subtitle">
+        Monitor volunteers, disasters and relief activities.
+    </p>
+
+
+    <!-- =====================================================
+         STATISTICS
+         ===================================================== -->
+
+    <div class="admin-cards">
+
+        <div class="admin-card">
+
+            <h3>
+                Total Volunteers
+            </h3>
+
+            <p id="totalVolunteersCount">
+                0
+            </p>
+
+        </div>
+
+
+        <div class="admin-card">
+
+            <h3>
+                Active Disasters
+            </h3>
+
+            <p>
+                4
+            </p>
+
+        </div>
+
+
+        <div class="admin-card">
+
+            <h3>
+                Active Tasks
+            </h3>
+
+            <p id="activeTasksCount">
+                0
+            </p>
+
+        </div>
+
+
+        <div class="admin-card">
+
+            <h3>
+                Completed Tasks
+            </h3>
+
+            <p id="completedTasksCount">
+                0
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         NOTIFICATION CENTER
+         ===================================================== -->
+
+    <section class="admin-section">
 
         <h2>
-            Disaster Relief Admin
+
+            🔔 Notification Center
+
+            <span
+                id="adminUnreadCount"
+                style="
+                    color: #d32f2f;
+                    font-size: 16px;
+                    margin-left: 10px;
+                ">
+
+                Unread: 0
+
+            </span>
+
         </h2>
 
-        <div>
 
-            <a href="index.html">
-                Home
-            </a>
+        <button
+            id="refreshAdminNotificationsBtn"
+            class="add-btn">
 
-            <a href="admin-dashboard.html">
-                Dashboard
-            </a>
+            🔄 Refresh Notifications
 
-            <a href="login.html">
-                Logout
-            </a>
-
-        </div>
-
-    </nav>
+        </button>
 
 
-    <!-- =========================
-         ADMIN DASHBOARD
-         ========================= -->
+        <div
+            id="adminNotificationContainer"
+            style="
+                margin-top: 15px;
+            ">
 
-    <div class="admin-dashboard">
-
-        <h1>
-            Admin Dashboard
-        </h1>
-
-        <p class="admin-subtitle">
-            Monitor volunteers, disasters and relief activities.
-        </p>
-
-
-        <!-- =========================
-             STATISTICS
-             ========================= -->
-
-        <div class="admin-cards">
-
-            <div class="admin-card">
-
-                <h3>
-                    Total Volunteers
-                </h3>
-
-                <p>
-                    120
-                </p>
-
-            </div>
-
-
-            <div class="admin-card">
-
-                <h3>
-                    Active Disasters
-                </h3>
-
-                <p>
-                    4
-                </p>
-
-            </div>
-
-
-            <div class="admin-card">
-
-                <h3>
-                    Active Tasks
-                </h3>
-
-                <p>
-                    35
-                </p>
-
-            </div>
-
-
-            <div class="admin-card">
-
-                <h3>
-                    Completed Tasks
-                </h3>
-
-                <p>
-                    85
-                </p>
-
-            </div>
+            <p>
+                Loading notifications...
+            </p>
 
         </div>
 
-
-        <!-- =========================
-             NOTIFICATION CENTER
-             ========================= -->
-
-        <section class="admin-section">
-
-            <h2>
-
-                🔔 Notification Center
-
-                <span
-                    id="adminUnreadCount"
-                    style="
-                        color: #d32f2f;
-                        font-size: 16px;
-                        margin-left: 10px;
-                    ">
-
-                    Unread: 0
-
-                </span>
-
-            </h2>
+    </section>
 
 
-            <button
-                class="add-btn"
-                id="refreshAdminNotificationsBtn">
+    <!-- =====================================================
+         DISASTER MANAGEMENT
+         ===================================================== -->
 
-                🔄 Refresh Notifications
+    <section class="admin-section">
 
-            </button>
-
-
-            <div
-                id="adminNotificationContainer"
-                style="margin-top: 15px;">
-
-                <p>
-                    Loading notifications...
-                </p>
-
-            </div>
-
-        </section>
+        <h2>
+            Disaster Management
+        </h2>
 
 
-        <!-- =========================
-             DISASTER MANAGEMENT
-             ========================= -->
+        <button
+            class="add-btn"
+            id="addDisasterBtn">
 
-        <section class="admin-section">
+            + Add Disaster
 
-            <h2>
-                Disaster Management
-            </h2>
+        </button>
 
-            <button
-                class="add-btn"
-                id="addDisasterBtn">
 
-                + Add Disaster
-
-            </button>
-
+        <div style="overflow-x:auto;">
 
             <table id="disasterTable">
 
@@ -225,11 +231,9 @@
                     </td>
 
                     <td>
-
                         <span class="severity-high">
                             High
                         </span>
-
                     </td>
 
                     <td>
@@ -237,11 +241,9 @@
                     </td>
 
                     <td>
-
                         <span class="active-status">
                             Active
                         </span>
-
                     </td>
 
                 </tr>
@@ -258,11 +260,9 @@
                     </td>
 
                     <td>
-
                         <span class="severity-medium">
                             Medium
                         </span>
-
                     </td>
 
                     <td>
@@ -270,11 +270,9 @@
                     </td>
 
                     <td>
-
                         <span class="active-status">
                             Active
                         </span>
-
                     </td>
 
                 </tr>
@@ -291,11 +289,9 @@
                     </td>
 
                     <td>
-
                         <span class="severity-high">
                             High
                         </span>
-
                     </td>
 
                     <td>
@@ -303,30 +299,42 @@
                     </td>
 
                     <td>
-
                         <span class="active-status">
                             Active
                         </span>
-
                     </td>
 
                 </tr>
 
             </table>
 
-        </section>
+        </div>
+
+    </section>
 
 
-        <!-- =========================
-             VOLUNTEER MANAGEMENT
-             ========================= -->
+    <!-- =====================================================
+         VOLUNTEER MANAGEMENT
+         ===================================================== -->
 
-        <section class="admin-section">
+    <section class="admin-section">
 
-            <h2>
-                Volunteer Management
-            </h2>
+        <h2>
+            Volunteer Management
+        </h2>
 
+
+        <button
+            id="refreshVolunteersBtn"
+            class="add-btn"
+            style="margin-bottom:15px;">
+
+            🔄 Refresh Volunteers
+
+        </button>
+
+
+        <div style="overflow-x:auto;">
 
             <table id="volunteerTable">
 
@@ -337,15 +345,19 @@
                     </th>
 
                     <th>
+                        Email
+                    </th>
+
+                    <th>
                         Skill
                     </th>
 
                     <th>
-                        Location
+                        Availability
                     </th>
 
                     <th>
-                        Availability
+                        Status
                     </th>
 
                     <th>
@@ -354,139 +366,42 @@
 
                 </tr>
 
-
                 <tr>
 
-                    <td>
-                        Arun
-                    </td>
-
-                    <td>
-                        First Aid
-                    </td>
-
-                    <td>
-                        Trichy
-                    </td>
-
-                    <td>
-
-                        <span class="available">
-                            Available
-                        </span>
-
-                    </td>
-
-                    <td>
-
-                        <button
-                            class="assign-btn">
-
-                            Assign Task
-
-                        </button>
-
-                    </td>
-
-                </tr>
-
-
-                <tr>
-
-                    <td>
-                        Priya
-                    </td>
-
-                    <td>
-                        Medical Support
-                    </td>
-
-                    <td>
-                        Lalgudi
-                    </td>
-
-                    <td>
-
-                        <span class="available">
-                            Available
-                        </span>
-
-                    </td>
-
-                    <td>
-
-                        <button
-                            class="assign-btn">
-
-                            Assign Task
-
-                        </button>
-
-                    </td>
-
-                </tr>
-
-
-                <tr>
-
-                    <td>
-                        Karthik
-                    </td>
-
-                    <td>
-                        Rescue
-                    </td>
-
-                    <td>
-                        Srirangam
-                    </td>
-
-                    <td>
-
-                        <span class="busy">
-                            Busy
-                        </span>
-
-                    </td>
-
-                    <td>
-
-                        <button
-                            class="assign-btn"
-                            disabled>
-
-                            Unavailable
-
-                        </button>
-
+                    <td colspan="6">
+                        Loading volunteers...
                     </td>
 
                 </tr>
 
             </table>
 
-        </section>
+        </div>
+
+    </section>
 
 
-        <!-- =========================
-             SOS ALERTS
-             ========================= -->
+    <!-- =====================================================
+         SOS ALERTS
+         ===================================================== -->
 
-        <section class="admin-section">
+    <section class="admin-section">
 
-            <h2>
-                🆘 SOS Alerts
-            </h2>
+        <h2>
+            🆘 SOS Alerts
+        </h2>
 
 
-            <button
-                class="add-btn"
-                id="refreshSosBtn">
+        <button
+            class="add-btn"
+            id="refreshSosBtn">
 
-                🔄 Refresh SOS Alerts
+            🔄 Refresh SOS Alerts
 
-            </button>
+        </button>
 
+
+        <div style="overflow-x:auto;">
 
             <table id="sosAlertTable">
 
@@ -529,28 +444,32 @@
 
             </table>
 
-        </section>
+        </div>
+
+    </section>
 
 
-        <!-- =========================
-             EMERGENCY ALERTS
-             ========================= -->
+    <!-- =====================================================
+         EMERGENCY ALERTS
+         ===================================================== -->
 
-        <section class="admin-section">
+    <section class="admin-section">
 
-            <h2>
-                🚨 Emergency Alerts
-            </h2>
+        <h2>
+            🚨 Emergency Alerts
+        </h2>
 
 
-            <button
-                class="add-btn"
-                id="addAlertBtn">
+        <button
+            class="add-btn"
+            id="addAlertBtn">
 
-                + Add Emergency Alert
+            + Add Emergency Alert
 
-            </button>
+        </button>
 
+
+        <div style="overflow-x:auto;">
 
             <table id="emergencyAlertTable">
 
@@ -585,177 +504,172 @@
 
             </table>
 
-        </section>
+        </div>
+
+    </section>
 
 
-        <!-- =========================
-             VOICE ALERTS
-             ========================= -->
+    <!-- =====================================================
+         VOICE ALERTS
+         ===================================================== -->
 
-        <section class="admin-section">
+    <section class="admin-section">
 
-            <h2>
-                🎙️ Voice Alerts
-            </h2>
-
-
-            <div
-                style="
-                    padding: 20px;
-                    border: 1px solid #ddd;
-                    border-radius: 10px;
-                    margin-bottom: 20px;
-                    background: #fafafa;
-                ">
+        <h2>
+            🎙️ Voice Alerts
+        </h2>
 
 
-                <h3>
-                    Create Voice Alert
-                </h3>
+        <div
+            style="
+                padding:20px;
+                border:1px solid #ddd;
+                border-radius:10px;
+                margin-bottom:20px;
+                background:#fafafa;
+            ">
+
+            <h3>
+                Create Voice Alert
+            </h3>
 
 
-                <div
+            <div style="margin-bottom:15px;">
+
+                <label
+                    for="voiceTitle"
                     style="
-                        margin-bottom: 15px;
+                        display:block;
+                        font-weight:bold;
+                        margin-bottom:5px;
                     ">
 
-                    <label
-                        for="voiceTitle"
-                        style="
-                            display: block;
-                            font-weight: bold;
-                            margin-bottom: 5px;
-                        ">
+                    Alert Title
 
-                        Alert Title
-
-                    </label>
+                </label>
 
 
-                    <input
-                        type="text"
-                        id="voiceTitle"
-                        placeholder="Example: Flood Warning"
-                        style="
-                            width: 100%;
-                            padding: 10px;
-                            border: 1px solid #ccc;
-                            border-radius: 6px;
-                            box-sizing: border-box;
-                        ">
-
-                </div>
-
-
-                <div
+                <input
+                    type="text"
+                    id="voiceTitle"
+                    placeholder="Example: Flood Warning"
                     style="
-                        margin-bottom: 15px;
+                        width:100%;
+                        padding:10px;
+                        border:1px solid #ccc;
+                        border-radius:6px;
+                        box-sizing:border-box;
                     ">
 
-                    <label
-                        for="voiceAlertLevel"
-                        style="
-                            display: block;
-                            font-weight: bold;
-                            margin-bottom: 5px;
-                        ">
-
-                        Alert Level
-
-                    </label>
+            </div>
 
 
-                    <select
-                        id="voiceAlertLevel"
-                        style="
-                            width: 100%;
-                            padding: 10px;
-                            border: 1px solid #ccc;
-                            border-radius: 6px;
-                        ">
+            <div style="margin-bottom:15px;">
 
-                        <option value="LOW">
-                            LOW
-                        </option>
-
-                        <option value="MEDIUM">
-                            MEDIUM
-                        </option>
-
-                        <option value="HIGH">
-                            HIGH
-                        </option>
-
-                        <option value="CRITICAL">
-                            CRITICAL
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <div
+                <label
+                    for="voiceAlertLevel"
                     style="
-                        margin-bottom: 15px;
+                        display:block;
+                        font-weight:bold;
+                        margin-bottom:5px;
                     ">
 
-                    <button
-                        class="add-btn"
-                        id="startRecordingBtn">
+                    Alert Level
 
-                        🎙️ Start Recording
-
-                    </button>
+                </label>
 
 
-                    <button
-                        class="assign-btn"
-                        id="stopRecordingBtn"
-                        disabled>
-
-                        ⏹ Stop Recording
-
-                    </button>
-
-                </div>
-
-
-                <p id="recordingStatus">
-                    Not recording
-                </p>
-
-
-                <audio
-                    id="voicePreview"
-                    controls
+                <select
+                    id="voiceAlertLevel"
                     style="
-                        display: none;
-                        width: 100%;
-                        margin-top: 10px;
+                        width:100%;
+                        padding:10px;
+                        border:1px solid #ccc;
+                        border-radius:6px;
                     ">
-                </audio>
 
+                    <option value="LOW">
+                        LOW
+                    </option>
+
+                    <option value="MEDIUM">
+                        MEDIUM
+                    </option>
+
+                    <option value="HIGH">
+                        HIGH
+                    </option>
+
+                    <option value="CRITICAL">
+                        CRITICAL
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div style="margin-bottom:15px;">
 
                 <button
                     class="add-btn"
-                    id="saveVoiceAlertBtn"
-                    disabled
-                    style="
-                        margin-top: 15px;
-                    ">
+                    id="startRecordingBtn">
 
-                    💾 Save Voice Alert
+                    🎙️ Start Recording
+
+                </button>
+
+
+                <button
+                    class="assign-btn"
+                    id="stopRecordingBtn"
+                    disabled>
+
+                    ⏹ Stop Recording
 
                 </button>
 
             </div>
 
 
-            <h3>
-                Saved Voice Alerts
-            </h3>
+            <p id="recordingStatus">
+                Not recording
+            </p>
 
+
+            <audio
+                id="voicePreview"
+                controls
+                style="
+                    display:none;
+                    width:100%;
+                    margin-top:10px;
+                ">
+
+            </audio>
+
+
+            <button
+                class="add-btn"
+                id="saveVoiceAlertBtn"
+                disabled
+                style="
+                    margin-top:15px;
+                ">
+
+                💾 Save Voice Alert
+
+            </button>
+
+        </div>
+
+
+        <h3>
+            Saved Voice Alerts
+        </h3>
+
+
+        <div style="overflow-x:auto;">
 
             <table id="voiceAlertTable">
 
@@ -794,19 +708,33 @@
 
             </table>
 
-        </section>
+        </div>
+
+    </section>
 
 
-        <!-- =========================
-             TASK MONITORING
-             ========================= -->
+    <!-- =====================================================
+         TASK MONITORING
+         ===================================================== -->
 
-        <section class="admin-section">
+    <section class="admin-section">
 
-            <h2>
-                Task Monitoring
-            </h2>
+        <h2>
+            📋 Task Monitoring
+        </h2>
 
+
+        <button
+            id="refreshTasksBtn"
+            class="add-btn"
+            style="margin-bottom:15px;">
+
+            🔄 Refresh Tasks
+
+        </button>
+
+
+        <div style="overflow-x:auto;">
 
             <table id="taskMonitoringTable">
 
@@ -821,11 +749,23 @@
                     </th>
 
                     <th>
+                        Email
+                    </th>
+
+                    <th>
                         Location
                     </th>
 
                     <th>
+                        Priority
+                    </th>
+
+                    <th>
                         Status
+                    </th>
+
+                    <th>
+                        Action
                     </th>
 
                 </tr>
@@ -833,7 +773,7 @@
 
                 <tr>
 
-                    <td colspan="4">
+                    <td colspan="7">
                         Loading tasks...
                     </td>
 
@@ -841,2530 +781,3099 @@
 
             </table>
 
-        </section>
+        </div>
 
-    </div>
+    </section>
 
-
-    <!-- =========================
-         JAVASCRIPT
-         ========================= -->
-
-    <script>
-
-        const BACKEND_URL =
-            "https://capstone-project-c6bv.onrender.com";
+</div>
 
 
-        /* =====================================================
-           ADMIN NOTIFICATIONS
-           ===================================================== */
+<!-- =========================================================
+     JAVASCRIPT
+     ========================================================= -->
 
-        function loadAdminNotifications() {
+<script>
 
-            const email =
+
+const BACKEND_URL =
+    "https://capstone-project-c6bv.onrender.com";
+
+
+/* =========================================================
+   ADMIN NOTIFICATIONS
+   ========================================================= */
+
+function loadAdminNotifications() {
+
+    const email =
+        localStorage.getItem(
+            "loggedInEmail"
+        );
+
+
+    const container =
+        document.getElementById(
+            "adminNotificationContainer"
+        );
+
+
+    const unreadCount =
+        document.getElementById(
+            "adminUnreadCount"
+        );
+
+
+    if (!email) {
+
+        container.innerHTML = `
+            <p>
+                Please login again to view notifications.
+            </p>
+        `;
+
+
+        unreadCount.innerText =
+            "Unread: 0";
+
+
+        return;
+    }
+
+
+    fetch(
+        BACKEND_URL +
+        "/api/notifications/email?email=" +
+        encodeURIComponent(email)
+    )
+
+    .then(function(response) {
+
+        if (!response.ok) {
+
+            return response.text()
+                .then(function(message) {
+
+                    throw new Error(
+                        message ||
+                        "Failed to load notifications"
+                    );
+
+                });
+
+        }
+
+
+        return response.json();
+
+    })
+
+    .then(function(notifications) {
+
+        container.innerHTML =
+            "";
+
+
+        if (
+            !Array.isArray(notifications) ||
+            notifications.length === 0
+        ) {
+
+            container.innerHTML = `
+                <p>
+                    No notifications available.
+                </p>
+            `;
+
+
+            unreadCount.innerText =
+                "Unread: 0";
+
+
+            return;
+
+        }
+
+
+        let count =
+            0;
+
+
+        notifications.forEach(
+            function(notification) {
+
+                if (
+                    notification.readStatus ===
+                    false
+                ) {
+
+                    count++;
+
+                }
+
+
+                const box =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                box.style.marginBottom =
+                    "15px";
+
+
+                box.style.padding =
+                    "15px";
+
+
+                box.style.borderRadius =
+                    "8px";
+
+
+                box.style.border =
+                    notification.readStatus
+                        ? "1px solid #ddd"
+                        : "2px solid #d32f2f";
+
+
+                box.style.backgroundColor =
+                    notification.readStatus
+                        ? "#fff"
+                        : "#fff5f5";
+
+
+                box.innerHTML = `
+
+                    <h3>
+                        🔔 ${
+                            notification.title ||
+                            "Notification"
+                        }
+                    </h3>
+
+                    <p>
+
+                        <strong>
+                            Type:
+                        </strong>
+
+                        ${
+                            notification.type ||
+                            "GENERAL"
+                        }
+
+                    </p>
+
+                    <p>
+
+                        <strong>
+                            Message:
+                        </strong>
+
+                        ${
+                            notification.message ||
+                            ""
+                        }
+
+                    </p>
+
+                    <p>
+
+                        <strong>
+                            Time:
+                        </strong>
+
+                        ${
+                            notification.createdAt ||
+                            ""
+                        }
+
+                    </p>
+
+                `;
+
+
+                if (
+                    notification.readStatus ===
+                    false
+                ) {
+
+                    const button =
+                        document.createElement(
+                            "button"
+                        );
+
+
+                    button.className =
+                        "assign-btn";
+
+
+                    button.innerText =
+                        "Mark as Read";
+
+
+                    button.addEventListener(
+                        "click",
+                        function() {
+
+                            markAdminNotificationAsRead(
+                                notification.notificationId
+                            );
+
+                        }
+                    );
+
+
+                    box.appendChild(
+                        button
+                    );
+
+                }
+                else {
+
+                    const read =
+                        document.createElement(
+                            "span"
+                        );
+
+
+                    read.innerText =
+                        "✓ Read";
+
+
+                    read.style.color =
+                        "green";
+
+
+                    read.style.fontWeight =
+                        "bold";
+
+
+                    box.appendChild(
+                        read
+                    );
+
+                }
+
+
+                container.appendChild(
+                    box
+                );
+
+            }
+        );
+
+
+        unreadCount.innerText =
+            "Unread: " +
+            count;
+
+    })
+
+    .catch(function(error) {
+
+        console.error(
+            "Notification error:",
+            error
+        );
+
+
+        container.innerHTML = `
+            <p>
+                Unable to load notifications.
+            </p>
+        `;
+
+
+        unreadCount.innerText =
+            "Unread: 0";
+
+    });
+
+}
+
+
+/* =========================================================
+   MARK ADMIN NOTIFICATION AS READ
+   ========================================================= */
+
+function markAdminNotificationAsRead(
+    notificationId
+) {
+
+    fetch(
+        BACKEND_URL +
+        "/api/notifications/" +
+        notificationId +
+        "/read",
+        {
+            method:
+                "PUT"
+        }
+    )
+
+    .then(function(response) {
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Failed to mark notification as read"
+            );
+
+        }
+
+
+        return response.json();
+
+    })
+
+    .then(function() {
+
+        loadAdminNotifications();
+
+    })
+
+    .catch(function(error) {
+
+        console.error(
+            "Mark notification read error:",
+            error
+        );
+
+
+        alert(
+            "Failed to mark notification as read."
+        );
+
+    });
+
+}
+
+
+/* =========================================================
+   REFRESH ADMIN NOTIFICATIONS
+   ========================================================= */
+
+document
+    .getElementById(
+        "refreshAdminNotificationsBtn"
+    )
+    .addEventListener(
+        "click",
+        function() {
+
+            loadAdminNotifications();
+
+        }
+    );
+
+
+/* =========================================================
+   LOAD VOLUNTEERS
+   ========================================================= */
+
+function loadVolunteers() {
+
+    const table =
+        document.getElementById(
+            "volunteerTable"
+        );
+
+
+    table.innerHTML = `
+
+        <tr>
+
+            <th>
+                Name
+            </th>
+
+            <th>
+                Email
+            </th>
+
+            <th>
+                Skill
+            </th>
+
+            <th>
+                Availability
+            </th>
+
+            <th>
+                Status
+            </th>
+
+            <th>
+                Action
+            </th>
+
+        </tr>
+
+    `;
+
+
+    fetch(
+        BACKEND_URL +
+        "/api/users/volunteers"
+    )
+
+    .then(function(response) {
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Failed to load volunteers"
+            );
+
+        }
+
+
+        return response.json();
+
+    })
+
+    .then(function(volunteers) {
+
+        const total =
+            Array.isArray(volunteers)
+                ? volunteers.length
+                : 0;
+
+
+        document.getElementById(
+            "totalVolunteersCount"
+        ).innerText =
+            total;
+
+
+        if (
+            !Array.isArray(volunteers) ||
+            volunteers.length === 0
+        ) {
+
+            const row =
+                table.insertRow(-1);
+
+
+            const cell =
+                row.insertCell(0);
+
+
+            cell.colSpan =
+                6;
+
+
+            cell.innerText =
+                "No volunteers available.";
+
+
+            return;
+
+        }
+
+
+        volunteers.forEach(
+            function(volunteer) {
+
+                const row =
+                    table.insertRow(-1);
+
+
+                row.setAttribute(
+                    "data-email",
+                    volunteer.email || ""
+                );
+
+
+                row.setAttribute(
+                    "data-volunteer-id",
+                    volunteer.volunteerId || ""
+                );
+
+
+                const nameCell =
+                    row.insertCell(0);
+
+
+                nameCell.innerText =
+                    volunteer.name ||
+                    "Volunteer";
+
+
+                const emailCell =
+                    row.insertCell(1);
+
+
+                emailCell.innerText =
+                    volunteer.email ||
+                    "";
+
+
+                const skillCell =
+                    row.insertCell(2);
+
+
+                skillCell.innerText =
+                    volunteer.skills ||
+                    "Not Specified";
+
+
+                const availabilityCell =
+                    row.insertCell(3);
+
+
+                availabilityCell.innerText =
+                    volunteer.availability ||
+                    "Available";
+
+
+                const statusCell =
+                    row.insertCell(4);
+
+
+                statusCell.innerText =
+                    volunteer.status ||
+                    "AVAILABLE";
+
+
+                if (
+                    (
+                        volunteer.status ||
+                        ""
+                    ).toUpperCase() ===
+                    "AVAILABLE"
+                ) {
+
+                    statusCell.style.color =
+                        "green";
+
+                    statusCell.style.fontWeight =
+                        "bold";
+
+                }
+                else {
+
+                    statusCell.style.color =
+                        "orange";
+
+                    statusCell.style.fontWeight =
+                        "bold";
+
+                }
+
+
+                const actionCell =
+                    row.insertCell(5);
+
+
+                const assignButton =
+                    document.createElement(
+                        "button"
+                    );
+
+
+                assignButton.className =
+                    "assign-btn";
+
+
+                assignButton.innerText =
+                    "Assign Task";
+
+
+                assignButton.disabled =
+                    (
+                        (
+                            volunteer.status ||
+                            ""
+                        ).toUpperCase() !==
+                        "AVAILABLE"
+                    );
+
+
+                assignButton.addEventListener(
+                    "click",
+                    function() {
+
+                        assignTaskToVolunteer(
+                            volunteer
+                        );
+
+                    }
+                );
+
+
+                actionCell.appendChild(
+                    assignButton
+                );
+
+            }
+        );
+
+    })
+
+    .catch(function(error) {
+
+        console.error(
+            "Volunteer loading error:",
+            error
+        );
+
+
+        const row =
+            table.insertRow(-1);
+
+
+        const cell =
+            row.insertCell(0);
+
+
+        cell.colSpan =
+            6;
+
+
+        cell.innerText =
+            "Unable to load volunteers.";
+
+    });
+
+}
+
+
+/* =========================================================
+   ASSIGN TASK TO VOLUNTEER
+   ========================================================= */
+
+async function assignTaskToVolunteer(
+    volunteer
+) {
+
+    const email =
+        volunteer.email;
+
+
+    const name =
+        volunteer.name ||
+        "Volunteer";
+
+
+    if (!email) {
+
+        alert(
+            "Volunteer email is missing."
+        );
+
+        return;
+
+    }
+
+
+    if (!volunteer.volunteerId) {
+
+        alert(
+            "Volunteer profile is not available."
+        );
+
+        return;
+
+    }
+
+
+    const taskName =
+        prompt(
+            "Enter Task Name:"
+        );
+
+
+    if (
+        !taskName ||
+        taskName.trim() === ""
+    ) {
+
+        return;
+
+    }
+
+
+    const location =
+        prompt(
+            "Enter Task Location:"
+        );
+
+
+    if (
+        !location ||
+        location.trim() === ""
+    ) {
+
+        return;
+
+    }
+
+
+    const priority =
+        prompt(
+            "Enter Priority (High / Medium / Low):",
+            "Medium"
+        );
+
+
+    if (
+        !priority ||
+        priority.trim() === ""
+    ) {
+
+        return;
+
+    }
+
+
+    const taskData = {
+
+        taskName:
+            taskName.trim(),
+
+        location:
+            location.trim(),
+
+        priority:
+            priority.trim(),
+
+        status:
+            "Pending"
+
+    };
+
+
+    try {
+
+        const response =
+            await fetch(
+                BACKEND_URL +
+                "/api/tasks?volunteerEmail=" +
+                encodeURIComponent(email),
+                {
+
+                    method:
+                        "POST",
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/json"
+
+                    },
+
+                    body:
+                        JSON.stringify(
+                            taskData
+                        )
+
+                }
+            );
+
+
+        const responseText =
+            await response.text();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                responseText ||
+                "Failed to assign task"
+            );
+
+        }
+
+
+        alert(
+            "Task assigned successfully to " +
+            name
+        );
+
+
+        loadTaskMonitoring();
+
+        loadVolunteers();
+
+        loadAdminNotifications();
+
+    }
+    catch(error) {
+
+        console.error(
+            "Task assignment error:",
+            error
+        );
+
+
+        alert(
+            "Task assignment failed: " +
+            error.message
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   REFRESH VOLUNTEERS
+   ========================================================= */
+
+document
+    .getElementById(
+        "refreshVolunteersBtn"
+    )
+    .addEventListener(
+        "click",
+        function() {
+
+            loadVolunteers();
+
+        }
+    );
+
+
+/* =========================================================
+   DISASTER MANAGEMENT
+   ========================================================= */
+
+document
+    .getElementById(
+        "addDisasterBtn"
+    )
+    .addEventListener(
+        "click",
+        function() {
+
+            const disaster =
+                prompt(
+                    "Enter Disaster Name:"
+                );
+
+
+            if (
+                !disaster ||
+                disaster.trim() === ""
+            ) {
+
+                return;
+
+            }
+
+
+            const location =
+                prompt(
+                    "Enter Location:"
+                );
+
+
+            if (
+                !location ||
+                location.trim() === ""
+            ) {
+
+                return;
+
+            }
+
+
+            const severity =
+                prompt(
+                    "Enter Severity (High / Medium / Low):"
+                );
+
+
+            if (
+                !severity ||
+                severity.trim() === ""
+            ) {
+
+                return;
+
+            }
+
+
+            const table =
+                document.getElementById(
+                    "disasterTable"
+                );
+
+
+            const row =
+                table.insertRow(-1);
+
+
+            row.insertCell(
+                0
+            ).innerText =
+                disaster.trim();
+
+
+            row.insertCell(
+                1
+            ).innerText =
+                location.trim();
+
+
+            row.insertCell(
+                2
+            ).innerText =
+                severity.trim();
+
+
+            row.insertCell(
+                3
+            ).innerText =
+                "0";
+
+
+            row.insertCell(
+                4
+            ).innerText =
+                "Active";
+
+
+            alert(
+                "Disaster added successfully!"
+            );
+
+        }
+    );
+
+
+/* =========================================================
+   LOAD SOS ALERTS
+   ========================================================= */
+
+function loadSosAlerts() {
+
+    const table =
+        document.getElementById(
+            "sosAlertTable"
+        );
+
+
+    table.innerHTML = `
+
+        <tr>
+
+            <th>
+                Volunteer
+            </th>
+
+            <th>
+                Email
+            </th>
+
+            <th>
+                Location
+            </th>
+
+            <th>
+                Message
+            </th>
+
+            <th>
+                Status
+            </th>
+
+            <th>
+                Action
+            </th>
+
+        </tr>
+
+    `;
+
+
+    fetch(
+        BACKEND_URL +
+        "/api/sos-alerts"
+    )
+
+    .then(function(response) {
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Failed to load SOS alerts"
+            );
+
+        }
+
+
+        return response.json();
+
+    })
+
+    .then(function(alerts) {
+
+        if (
+            !Array.isArray(alerts) ||
+            alerts.length === 0
+        ) {
+
+            const row =
+                table.insertRow(-1);
+
+
+            const cell =
+                row.insertCell(0);
+
+
+            cell.colSpan =
+                6;
+
+
+            cell.innerText =
+                "No SOS alerts available.";
+
+
+            return;
+
+        }
+
+
+        alerts.forEach(
+            function(alertItem) {
+
+                const row =
+                    table.insertRow(-1);
+
+
+                const volunteer =
+                    alertItem.volunteer ||
+                    {};
+
+
+                const user =
+                    volunteer.user ||
+                    {};
+
+
+                row.insertCell(0)
+                    .innerText =
+                    user.name ||
+                    "Unknown Volunteer";
+
+
+                row.insertCell(1)
+                    .innerText =
+                    user.email ||
+                    "Unknown Email";
+
+
+                row.insertCell(2)
+                    .innerHTML =
+                    "Lat: " +
+                    (
+                        alertItem.latitude ??
+                        "N/A"
+                    ) +
+                    "<br>Lng: " +
+                    (
+                        alertItem.longitude ??
+                        "N/A"
+                    );
+
+
+                row.insertCell(3)
+                    .innerText =
+                    alertItem.message ||
+                    "Emergency SOS";
+
+
+                const statusCell =
+                    row.insertCell(4);
+
+
+                const status =
+                    alertItem.status ||
+                    "ACTIVE";
+
+
+                statusCell.innerText =
+                    status;
+
+
+                if (
+                    status.toUpperCase() ===
+                    "ACTIVE"
+                ) {
+
+                    statusCell.style.color =
+                        "red";
+
+                    statusCell.style.fontWeight =
+                        "bold";
+
+                }
+                else if (
+                    status.toUpperCase() ===
+                    "RESPONDING"
+                ) {
+
+                    statusCell.style.color =
+                        "orange";
+
+                    statusCell.style.fontWeight =
+                        "bold";
+
+                }
+                else if (
+                    status.toUpperCase() ===
+                    "RESOLVED"
+                ) {
+
+                    statusCell.style.color =
+                        "green";
+
+                    statusCell.style.fontWeight =
+                        "bold";
+
+                }
+
+
+                const actionCell =
+                    row.insertCell(5);
+
+
+                if (
+                    status.toUpperCase() ===
+                    "ACTIVE"
+                ) {
+
+                    const respondingButton =
+                        document.createElement(
+                            "button"
+                        );
+
+
+                    respondingButton.innerText =
+                        "Responding";
+
+
+                    respondingButton.className =
+                        "assign-btn";
+
+
+                    respondingButton.style.marginRight =
+                        "5px";
+
+
+                    respondingButton.addEventListener(
+                        "click",
+                        function() {
+
+                            updateSosStatus(
+                                alertItem.sosId,
+                                "RESPONDING"
+                            );
+
+                        }
+                    );
+
+
+                    actionCell.appendChild(
+                        respondingButton
+                    );
+
+
+                    const resolveButton =
+                        document.createElement(
+                            "button"
+                        );
+
+
+                    resolveButton.innerText =
+                        "Resolve";
+
+
+                    resolveButton.className =
+                        "assign-btn";
+
+
+                    resolveButton.addEventListener(
+                        "click",
+                        function() {
+
+                            updateSosStatus(
+                                alertItem.sosId,
+                                "RESOLVED"
+                            );
+
+                        }
+                    );
+
+
+                    actionCell.appendChild(
+                        resolveButton
+                    );
+
+                }
+                else if (
+                    status.toUpperCase() ===
+                    "RESPONDING"
+                ) {
+
+                    const resolveButton =
+                        document.createElement(
+                            "button"
+                        );
+
+
+                    resolveButton.innerText =
+                        "Resolve";
+
+
+                    resolveButton.className =
+                        "assign-btn";
+
+
+                    resolveButton.addEventListener(
+                        "click",
+                        function() {
+
+                            updateSosStatus(
+                                alertItem.sosId,
+                                "RESOLVED"
+                            );
+
+                        }
+                    );
+
+
+                    actionCell.appendChild(
+                        resolveButton
+                    );
+
+                }
+                else {
+
+                    actionCell.innerText =
+                        "Completed";
+
+                }
+
+            }
+        );
+
+    })
+
+    .catch(function(error) {
+
+        console.error(
+            "SOS loading error:",
+            error
+        );
+
+
+        const row =
+            table.insertRow(-1);
+
+
+        const cell =
+            row.insertCell(0);
+
+
+        cell.colSpan =
+            6;
+
+
+        cell.innerText =
+            "Unable to load SOS alerts.";
+
+    });
+
+}
+
+
+/* =========================================================
+   UPDATE SOS STATUS
+   ========================================================= */
+
+function updateSosStatus(
+    sosId,
+    status
+) {
+
+    fetch(
+        BACKEND_URL +
+        "/api/sos-alerts/" +
+        sosId +
+        "/status?status=" +
+        encodeURIComponent(status),
+        {
+
+            method:
+                "PUT"
+
+        }
+    )
+
+    .then(function(response) {
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Failed to update SOS status"
+            );
+
+        }
+
+
+        return response.json();
+
+    })
+
+    .then(function() {
+
+        alert(
+            "SOS status updated to " +
+            status
+        );
+
+
+        loadSosAlerts();
+
+        loadAdminNotifications();
+
+    })
+
+    .catch(function(error) {
+
+        console.error(
+            "SOS status update error:",
+            error
+        );
+
+
+        alert(
+            "Failed to update SOS status."
+        );
+
+    });
+
+}
+
+
+/* =========================================================
+   REFRESH SOS
+   ========================================================= */
+
+document
+    .getElementById(
+        "refreshSosBtn"
+    )
+    .addEventListener(
+        "click",
+        function() {
+
+            loadSosAlerts();
+
+        }
+    );
+
+
+/* =========================================================
+   EMERGENCY ALERTS
+   ========================================================= */
+
+function loadEmergencyAlerts() {
+
+    const table =
+        document.getElementById(
+            "emergencyAlertTable"
+        );
+
+
+    fetch(
+        BACKEND_URL +
+        "/api/emergency-alerts"
+    )
+
+    .then(function(response) {
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Failed to load emergency alerts"
+            );
+
+        }
+
+
+        return response.json();
+
+    })
+
+    .then(function(alerts) {
+
+        table.innerHTML = `
+
+            <tr>
+
+                <th>
+                    Title
+                </th>
+
+                <th>
+                    Message
+                </th>
+
+                <th>
+                    Severity
+                </th>
+
+                <th>
+                    Action
+                </th>
+
+            </tr>
+
+        `;
+
+
+        if (
+            !Array.isArray(alerts) ||
+            alerts.length === 0
+        ) {
+
+            const row =
+                table.insertRow(-1);
+
+
+            const cell =
+                row.insertCell(0);
+
+
+            cell.colSpan =
+                4;
+
+
+            cell.innerText =
+                "No emergency alerts available.";
+
+
+            return;
+
+        }
+
+
+        alerts.forEach(
+            function(alertItem) {
+
+                const row =
+                    table.insertRow(-1);
+
+
+                row.insertCell(0)
+                    .innerText =
+                    alertItem.title ||
+                    "";
+
+
+                row.insertCell(1)
+                    .innerText =
+                    alertItem.message ||
+                    "";
+
+
+                row.insertCell(2)
+                    .innerText =
+                    alertItem.severity ||
+                    "";
+
+
+                const actionCell =
+                    row.insertCell(3);
+
+
+                const deleteButton =
+                    document.createElement(
+                        "button"
+                    );
+
+
+                deleteButton.innerText =
+                    "Delete";
+
+
+                deleteButton.className =
+                    "assign-btn";
+
+
+                deleteButton.addEventListener(
+                    "click",
+                    function() {
+
+                        deleteEmergencyAlert(
+                            alertItem.alertId
+                        );
+
+                    }
+                );
+
+
+                actionCell.appendChild(
+                    deleteButton
+                );
+
+            }
+        );
+
+    })
+
+    .catch(function(error) {
+
+        console.error(
+            "Emergency alert error:",
+            error
+        );
+
+
+        table.innerHTML = `
+
+            <tr>
+
+                <th>
+                    Title
+                </th>
+
+                <th>
+                    Message
+                </th>
+
+                <th>
+                    Severity
+                </th>
+
+                <th>
+                    Action
+                </th>
+
+            </tr>
+
+            <tr>
+
+                <td colspan="4">
+                    Unable to load emergency alerts.
+                </td>
+
+            </tr>
+
+        `;
+
+    });
+
+}
+
+
+/* =========================================================
+   ADD EMERGENCY ALERT
+   ========================================================= */
+
+document
+    .getElementById(
+        "addAlertBtn"
+    )
+    .addEventListener(
+        "click",
+        function() {
+
+            const title =
+                prompt(
+                    "Enter Alert Title:"
+                );
+
+
+            if (
+                !title ||
+                title.trim() === ""
+            ) {
+
+                return;
+
+            }
+
+
+            const message =
+                prompt(
+                    "Enter Alert Message:"
+                );
+
+
+            if (
+                !message ||
+                message.trim() === ""
+            ) {
+
+                return;
+
+            }
+
+
+            const severity =
+                prompt(
+                    "Enter Severity (High / Medium / Low):"
+                );
+
+
+            if (
+                !severity ||
+                severity.trim() === ""
+            ) {
+
+                return;
+
+            }
+
+
+            const adminEmail =
                 localStorage.getItem(
                     "loggedInEmail"
                 );
 
 
-            const container =
-                document.getElementById(
-                    "adminNotificationContainer"
+            if (!adminEmail) {
+
+                alert(
+                    "Admin login session not found."
                 );
 
-
-            const unreadCount =
-                document.getElementById(
-                    "adminUnreadCount"
-                );
-
-
-            if (!email) {
-
-                container.innerHTML = `
-                    <p>
-                        Please login again to view notifications.
-                    </p>
-                `;
-
-                unreadCount.innerText =
-                    "Unread: 0";
 
                 return;
+
             }
 
 
-            fetch(
-                BACKEND_URL +
-                "/api/notifications/email?email=" +
-                encodeURIComponent(email)
-            )
+            const alertData = {
 
-                .then(function (response) {
+                title:
+                    title.trim(),
 
-                    if (!response.ok) {
+                message:
+                    message.trim(),
 
-                        return response
-                            .text()
-                            .then(function (message) {
+                severity:
+                    severity.trim()
 
-                                throw new Error(
-                                    message ||
-                                    "Failed to load notifications"
-                                );
-
-                            });
-
-                    }
-
-                    return response.json();
-
-                })
-
-                .then(function (notifications) {
-
-                    container.innerHTML = "";
-
-
-                    if (
-                        !Array.isArray(notifications) ||
-                        notifications.length === 0
-                    ) {
-
-                        container.innerHTML = `
-                            <p>
-                                No notifications available.
-                            </p>
-                        `;
-
-                        unreadCount.innerText =
-                            "Unread: 0";
-
-                        return;
-                    }
-
-
-                    let count = 0;
-
-
-                    notifications.forEach(
-                        function (notification) {
-
-                            if (
-                                notification.readStatus === false
-                            ) {
-
-                                count++;
-
-                            }
-
-
-                            const box =
-                                document.createElement(
-                                    "div"
-                                );
-
-
-                            box.style.marginBottom =
-                                "15px";
-
-                            box.style.padding =
-                                "15px";
-
-                            box.style.borderRadius =
-                                "8px";
-
-                            box.style.border =
-                                notification.readStatus
-                                    ? "1px solid #ddd"
-                                    : "2px solid #d32f2f";
-
-                            box.style.backgroundColor =
-                                notification.readStatus
-                                    ? "#ffffff"
-                                    : "#fff5f5";
-
-
-                            const title =
-                                notification.title ||
-                                "Notification";
-
-
-                            const message =
-                                notification.message ||
-                                "";
-
-
-                            const type =
-                                notification.type ||
-                                "GENERAL";
-
-
-                            const createdAt =
-                                notification.createdAt ||
-                                "";
-
-
-                            box.innerHTML = `
-
-                                <h3>
-                                    🔔 ${title}
-                                </h3>
-
-                                <p>
-                                    <strong>Type:</strong>
-                                    ${type}
-                                </p>
-
-                                <p>
-                                    <strong>Message:</strong>
-                                    ${message}
-                                </p>
-
-                                <p>
-                                    <strong>Time:</strong>
-                                    ${createdAt}
-                                </p>
-
-                            `;
-
-
-                            if (
-                                notification.readStatus === false
-                            ) {
-
-                                const button =
-                                    document.createElement(
-                                        "button"
-                                    );
-
-
-                                button.className =
-                                    "assign-btn";
-
-
-                                button.innerText =
-                                    "Mark as Read";
-
-
-                                button.addEventListener(
-                                    "click",
-                                    function () {
-
-                                        markAdminNotificationAsRead(
-                                            notification.notificationId
-                                        );
-
-                                    }
-                                );
-
-
-                                box.appendChild(
-                                    button
-                                );
-
-                            }
-                            else {
-
-                                const readText =
-                                    document.createElement(
-                                        "span"
-                                    );
-
-
-                                readText.innerText =
-                                    "✓ Read";
-
-
-                                readText.style.color =
-                                    "green";
-
-
-                                readText.style.fontWeight =
-                                    "bold";
-
-
-                                box.appendChild(
-                                    readText
-                                );
-
-                            }
-
-
-                            container.appendChild(
-                                box
-                            );
-
-                        }
-                    );
-
-
-                    unreadCount.innerText =
-                        "Unread: " +
-                        count;
-
-                })
-
-                .catch(function (error) {
-
-                    console.error(
-                        "Admin notification error:",
-                        error
-                    );
-
-
-                    container.innerHTML = `
-                        <p>
-                            Unable to load notifications.
-                        </p>
-                    `;
-
-
-                    unreadCount.innerText =
-                        "Unread: 0";
-
-                });
-
-        }
-
-
-        /* =====================================================
-           MARK ADMIN NOTIFICATION AS READ
-           ===================================================== */
-
-        function markAdminNotificationAsRead(
-            notificationId
-        ) {
-
-            fetch(
-                BACKEND_URL +
-                "/api/notifications/" +
-                notificationId +
-                "/read",
-                {
-
-                    method:
-                        "PUT"
-
-                }
-            )
-
-                .then(function (response) {
-
-                    if (!response.ok) {
-
-                        throw new Error(
-                            "Failed to mark notification as read"
-                        );
-
-                    }
-
-                    return response.json();
-
-                })
-
-                .then(function () {
-
-                    loadAdminNotifications();
-
-                })
-
-                .catch(function (error) {
-
-                    console.error(
-                        "Mark notification read error:",
-                        error
-                    );
-
-
-                    alert(
-                        "Failed to mark notification as read."
-                    );
-
-                });
-
-        }
-
-
-        /* =====================================================
-           REFRESH ADMIN NOTIFICATIONS
-           ===================================================== */
-
-        const refreshAdminNotificationsBtn =
-            document.getElementById(
-                "refreshAdminNotificationsBtn"
-            );
-
-
-        if (
-            refreshAdminNotificationsBtn
-        ) {
-
-            refreshAdminNotificationsBtn.addEventListener(
-                "click",
-                function () {
-
-                    loadAdminNotifications();
-
-                }
-            );
-
-        }
-
-
-        /* =====================================================
-           ADD DISASTER
-           ===================================================== */
-
-        const addDisasterBtn =
-            document.getElementById(
-                "addDisasterBtn"
-            );
-
-
-        if (addDisasterBtn) {
-
-            addDisasterBtn.addEventListener(
-                "click",
-                function () {
-
-                    const disaster =
-                        prompt(
-                            "Enter Disaster Name:"
-                        );
-
-
-                    if (
-                        disaster === null ||
-                        disaster.trim() === ""
-                    ) {
-
-                        return;
-
-                    }
-
-
-                    const location =
-                        prompt(
-                            "Enter Location:"
-                        );
-
-
-                    if (
-                        location === null ||
-                        location.trim() === ""
-                    ) {
-
-                        return;
-
-                    }
-
-
-                    const severity =
-                        prompt(
-                            "Enter Severity (High / Medium / Low):"
-                        );
-
-
-                    if (
-                        severity === null ||
-                        severity.trim() === ""
-                    ) {
-
-                        return;
-
-                    }
-
-
-                    const table =
-                        document.getElementById(
-                            "disasterTable"
-                        );
-
-
-                    const row =
-                        table.insertRow(-1);
-
-
-                    row.insertCell(
-                        0
-                    ).textContent =
-                        disaster.trim();
-
-
-                    row.insertCell(
-                        1
-                    ).textContent =
-                        location.trim();
-
-
-                    row.insertCell(
-                        2
-                    ).textContent =
-                        severity.trim();
-
-
-                    row.insertCell(
-                        3
-                    ).textContent =
-                        "0";
-
-
-                    row.insertCell(
-                        4
-                    ).textContent =
-                        "Active";
-
-
-                    alert(
-                        "Disaster Added Successfully!"
-                    );
-
-                }
-            );
-
-        }
-
-
-        /* =====================================================
-           VOLUNTEER ASSIGN TASK
-           ===================================================== */
-
-        document
-            .querySelectorAll(
-                "#volunteerTable .assign-btn"
-            )
-            .forEach(
-                function (button) {
-
-                    button.addEventListener(
-                        "click",
-                        function () {
-
-                            const task =
-                                prompt(
-                                    "Enter Task:"
-                                );
-
-
-                            if (
-                                task === null ||
-                                task.trim() === ""
-                            ) {
-
-                                return;
-
-                            }
-
-
-                            alert(
-                                "Task Assigned Successfully!"
-                            );
-
-                        }
-                    );
-
-                }
-            );
-
-
-        /* =====================================================
-           LOAD SOS ALERTS
-           ===================================================== */
-
-        function loadSosAlerts() {
-
-            const table =
-                document.getElementById(
-                    "sosAlertTable"
-                );
-
-
-            table.innerHTML = `
-
-                <tr>
-
-                    <th>Volunteer</th>
-                    <th>Email</th>
-                    <th>Location</th>
-                    <th>Message</th>
-                    <th>Status</th>
-                    <th>Action</th>
-
-                </tr>
-
-            `;
+            };
 
 
             fetch(
                 BACKEND_URL +
-                "/api/sos-alerts"
-            )
-
-                .then(function (response) {
-
-                    if (!response.ok) {
-
-                        throw new Error(
-                            "Failed to load SOS alerts"
-                        );
-
-                    }
-
-                    return response.json();
-
-                })
-
-                .then(function (alerts) {
-
-                    if (
-                        !Array.isArray(alerts) ||
-                        alerts.length === 0
-                    ) {
-
-                        const row =
-                            table.insertRow(-1);
-
-
-                        const cell =
-                            row.insertCell(0);
-
-
-                        cell.colSpan =
-                            6;
-
-
-                        cell.textContent =
-                            "No SOS alerts available.";
-
-
-                        return;
-
-                    }
-
-
-                    alerts.forEach(
-                        function (sosAlert) {
-
-                            const row =
-                                table.insertRow(-1);
-
-
-                            const volunteer =
-                                sosAlert.volunteer ||
-                                {};
-
-
-                            const user =
-                                volunteer.user ||
-                                {};
-
-
-                            const volunteerName =
-                                user.name ||
-                                "Unknown Volunteer";
-
-
-                            const volunteerEmail =
-                                user.email ||
-                                "Unknown Email";
-
-
-                            const latitude =
-                                sosAlert.latitude !== null &&
-                                sosAlert.latitude !== undefined
-                                    ? sosAlert.latitude
-                                    : "N/A";
-
-
-                            const longitude =
-                                sosAlert.longitude !== null &&
-                                sosAlert.longitude !== undefined
-                                    ? sosAlert.longitude
-                                    : "N/A";
-
-
-                            row.insertCell(
-                                0
-                            ).textContent =
-                                volunteerName;
-
-
-                            row.insertCell(
-                                1
-                            ).textContent =
-                                volunteerEmail;
-
-
-                            row.insertCell(
-                                2
-                            ).innerHTML =
-                                "Lat: " +
-                                latitude +
-                                "<br>Lng: " +
-                                longitude;
-
-
-                            row.insertCell(
-                                3
-                            ).textContent =
-                                sosAlert.message ||
-                                "Emergency SOS";
-
-
-                            const statusCell =
-                                row.insertCell(
-                                    4
-                                );
-
-
-                            const statusSpan =
-                                document.createElement(
-                                    "span"
-                                );
-
-
-                            const currentStatus =
-                                sosAlert.status ||
-                                "ACTIVE";
-
-
-                            statusSpan.textContent =
-                                currentStatus;
-
-
-                            if (
-                                currentStatus ===
-                                "ACTIVE"
-                            ) {
-
-                                statusSpan.style.color =
-                                    "red";
-
-                                statusSpan.style.fontWeight =
-                                    "bold";
-
-                            }
-                            else if (
-                                currentStatus ===
-                                "RESPONDING"
-                            ) {
-
-                                statusSpan.style.color =
-                                    "orange";
-
-                                statusSpan.style.fontWeight =
-                                    "bold";
-
-                            }
-                            else if (
-                                currentStatus ===
-                                "RESOLVED"
-                            ) {
-
-                                statusSpan.style.color =
-                                    "green";
-
-                                statusSpan.style.fontWeight =
-                                    "bold";
-
-                            }
-
-
-                            statusCell.appendChild(
-                                statusSpan
-                            );
-
-
-                            const actionCell =
-                                row.insertCell(
-                                    5
-                                );
-
-
-                            if (
-                                currentStatus ===
-                                "ACTIVE"
-                            ) {
-
-                                const respondingButton =
-                                    document.createElement(
-                                        "button"
-                                    );
-
-
-                                respondingButton.textContent =
-                                    "Responding";
-
-
-                                respondingButton.className =
-                                    "assign-btn";
-
-
-                                respondingButton.style.marginRight =
-                                    "5px";
-
-
-                                respondingButton.addEventListener(
-                                    "click",
-                                    function () {
-
-                                        updateSosStatus(
-                                            sosAlert.sosId,
-                                            "RESPONDING"
-                                        );
-
-                                    }
-                                );
-
-
-                                actionCell.appendChild(
-                                    respondingButton
-                                );
-
-
-                                const resolveButton =
-                                    document.createElement(
-                                        "button"
-                                    );
-
-
-                                resolveButton.textContent =
-                                    "Resolve";
-
-
-                                resolveButton.className =
-                                    "assign-btn";
-
-
-                                resolveButton.addEventListener(
-                                    "click",
-                                    function () {
-
-                                        updateSosStatus(
-                                            sosAlert.sosId,
-                                            "RESOLVED"
-                                        );
-
-                                    }
-                                );
-
-
-                                actionCell.appendChild(
-                                    resolveButton
-                                );
-
-                            }
-                            else if (
-                                currentStatus ===
-                                "RESPONDING"
-                            ) {
-
-                                const resolveButton =
-                                    document.createElement(
-                                        "button"
-                                    );
-
-
-                                resolveButton.textContent =
-                                    "Resolve";
-
-
-                                resolveButton.className =
-                                    "assign-btn";
-
-
-                                resolveButton.addEventListener(
-                                    "click",
-                                    function () {
-
-                                        updateSosStatus(
-                                            sosAlert.sosId,
-                                            "RESOLVED"
-                                        );
-
-                                    }
-                                );
-
-
-                                actionCell.appendChild(
-                                    resolveButton
-                                );
-
-                            }
-                            else {
-
-                                actionCell.textContent =
-                                    "Completed";
-
-                            }
-
-                        }
-                    );
-
-                })
-
-                .catch(function (error) {
-
-                    console.error(
-                        "SOS alert error:",
-                        error
-                    );
-
-
-                    const row =
-                        table.insertRow(-1);
-
-
-                    const cell =
-                        row.insertCell(0);
-
-
-                    cell.colSpan =
-                        6;
-
-
-                    cell.textContent =
-                        "Unable to load SOS alerts.";
-
-                });
-
-        }
-
-
-        /* =====================================================
-           UPDATE SOS STATUS
-           ===================================================== */
-
-        function updateSosStatus(
-            sosId,
-            status
-        ) {
-
-            fetch(
-                BACKEND_URL +
-                "/api/sos-alerts/" +
-                sosId +
-                "/status?status=" +
+                "/api/emergency-alerts?createdByEmail=" +
                 encodeURIComponent(
-                    status
+                    adminEmail
                 ),
                 {
 
                     method:
-                        "PUT"
+                        "POST",
 
-                }
-            )
+                    headers: {
 
-                .then(function (response) {
+                        "Content-Type":
+                            "application/json"
 
-                    if (!response.ok) {
+                    },
 
-                        throw new Error(
-                            "Failed to update SOS status"
-                        );
-
-                    }
-
-                    return response.json();
-
-                })
-
-                .then(function () {
-
-                    alert(
-                        "SOS status updated to " +
-                        status
-                    );
-
-
-                    loadSosAlerts();
-
-                })
-
-                .catch(function (error) {
-
-                    console.error(
-                        "SOS status update error:",
-                        error
-                    );
-
-
-                    alert(
-                        "Failed to update SOS status."
-                    );
-
-                });
-
-        }
-
-
-        /* =====================================================
-           REFRESH SOS
-           ===================================================== */
-
-        const refreshSosBtn =
-            document.getElementById(
-                "refreshSosBtn"
-            );
-
-
-        if (refreshSosBtn) {
-
-            refreshSosBtn.addEventListener(
-                "click",
-                function () {
-
-                    loadSosAlerts();
-
-                }
-            );
-
-        }
-
-
-        /* =====================================================
-           LOAD EMERGENCY ALERTS
-           ===================================================== */
-
-        function loadEmergencyAlerts() {
-
-            fetch(
-                BACKEND_URL +
-                "/api/emergency-alerts"
-            )
-
-                .then(function (response) {
-
-                    if (!response.ok) {
-
-                        throw new Error(
-                            "Failed to load alerts"
-                        );
-
-                    }
-
-                    return response.json();
-
-                })
-
-                .then(function (alerts) {
-
-                    const table =
-                        document.getElementById(
-                            "emergencyAlertTable"
-                        );
-
-
-                    table.innerHTML = `
-
-                        <tr>
-
-                            <th>Title</th>
-                            <th>Message</th>
-                            <th>Severity</th>
-                            <th>Action</th>
-
-                        </tr>
-
-                    `;
-
-
-                    if (
-                        !Array.isArray(alerts) ||
-                        alerts.length === 0
-                    ) {
-
-                        const row =
-                            table.insertRow(-1);
-
-
-                        const cell =
-                            row.insertCell(0);
-
-
-                        cell.colSpan =
-                            4;
-
-
-                        cell.textContent =
-                            "No emergency alerts available.";
-
-
-                        return;
-
-                    }
-
-
-                    alerts.forEach(
-                        function (emergencyAlert) {
-
-                            const row =
-                                table.insertRow(-1);
-
-
-                            row.insertCell(
-                                0
-                            ).textContent =
-                                emergencyAlert.title ||
-                                "";
-
-
-                            row.insertCell(
-                                1
-                            ).textContent =
-                                emergencyAlert.message ||
-                                "";
-
-
-                            row.insertCell(
-                                2
-                            ).textContent =
-                                emergencyAlert.severity ||
-                                "";
-
-
-                            const actionCell =
-                                row.insertCell(
-                                    3
-                                );
-
-
-                            const deleteButton =
-                                document.createElement(
-                                    "button"
-                                );
-
-
-                            deleteButton.textContent =
-                                "Delete";
-
-
-                            deleteButton.className =
-                                "assign-btn";
-
-
-                            deleteButton.addEventListener(
-                                "click",
-                                function () {
-
-                                    deleteAlert(
-                                        emergencyAlert.alertId
-                                    );
-
-                                }
-                            );
-
-
-                            actionCell.appendChild(
-                                deleteButton
-                            );
-
-                        }
-                    );
-
-                })
-
-                .catch(function (error) {
-
-                    console.error(
-                        "Error loading emergency alerts:",
-                        error
-                    );
-
-
-                    const table =
-                        document.getElementById(
-                            "emergencyAlertTable"
-                        );
-
-
-                    table.innerHTML = `
-
-                        <tr>
-
-                            <th>Title</th>
-                            <th>Message</th>
-                            <th>Severity</th>
-                            <th>Action</th>
-
-                        </tr>
-
-                        <tr>
-
-                            <td colspan="4">
-                                Unable to load emergency alerts.
-                            </td>
-
-                        </tr>
-
-                    `;
-
-                });
-
-        }
-
-
-        /* =====================================================
-           ADD EMERGENCY ALERT
-           ===================================================== */
-
-        const addAlertBtn =
-            document.getElementById(
-                "addAlertBtn"
-            );
-
-
-        if (addAlertBtn) {
-
-            addAlertBtn.addEventListener(
-                "click",
-                function () {
-
-                    const title =
-                        prompt(
-                            "Enter Alert Title:"
-                        );
-
-
-                    if (
-                        title === null ||
-                        title.trim() === ""
-                    ) {
-
-                        return;
-
-                    }
-
-
-                    const message =
-                        prompt(
-                            "Enter Alert Message:"
-                        );
-
-
-                    if (
-                        message === null ||
-                        message.trim() === ""
-                    ) {
-
-                        return;
-
-                    }
-
-
-                    const severity =
-                        prompt(
-                            "Enter Severity (High / Medium / Low):"
-                        );
-
-
-                    if (
-                        severity === null ||
-                        severity.trim() === ""
-                    ) {
-
-                        return;
-
-                    }
-
-
-                    const adminEmail =
-                        localStorage.getItem(
-                            "loggedInEmail"
-                        );
-
-
-                    if (!adminEmail) {
-
-                        alert(
-                            "Admin login session not found. Please login again."
-                        );
-
-
-                        window.location.href =
-                            "login.html";
-
-
-                        return;
-
-                    }
-
-
-                    const alertData = {
-
-                        title:
-                            title.trim(),
-
-                        message:
-                            message.trim(),
-
-                        severity:
-                            severity.trim()
-
-                    };
-
-
-                    fetch(
-                        BACKEND_URL +
-                        "/api/emergency-alerts?createdByEmail=" +
-                        encodeURIComponent(
-                            adminEmail
-                        ),
-                        {
-
-                            method:
-                                "POST",
-
-                            headers: {
-
-                                "Content-Type":
-                                    "application/json"
-
-                            },
-
-                            body:
-                                JSON.stringify(
-                                    alertData
-                                )
-
-                        }
-                    )
-
-                        .then(
-                            async function (
-                                response
-                            ) {
-
-                                const text =
-                                    await response.text();
-
-
-                                if (!response.ok) {
-
-                                    throw new Error(
-                                        text ||
-                                        "Failed to create emergency alert"
-                                    );
-
-                                }
-
-
-                                return text;
-
-                            }
+                    body:
+                        JSON.stringify(
+                            alertData
                         )
 
-                        .then(function () {
+                }
+            )
 
-                            alert(
-                                "Emergency alert added successfully!"
-                            );
+            .then(async function(response) {
 
-
-                            loadEmergencyAlerts();
-
-                            loadAdminNotifications();
-
-                        })
-
-                        .catch(function (error) {
-
-                            console.error(
-                                "Add alert error:",
-                                error
-                            );
+                const text =
+                    await response.text();
 
 
-                            alert(
-                                "Failed to add emergency alert."
-                            );
+                if (!response.ok) {
 
-                        });
+                    throw new Error(
+                        text ||
+                        "Failed to create emergency alert"
+                    );
 
                 }
-            );
-
-        }
 
 
-        /* =====================================================
-           DELETE EMERGENCY ALERT
-           ===================================================== */
+                return text;
 
-        function deleteAlert(
-            id
-        ) {
+            })
 
-            if (!id) {
+            .then(function() {
 
                 alert(
-                    "Invalid alert ID."
-                );
-
-                return;
-
-            }
-
-
-            if (
-                !confirm(
-                    "Are you sure you want to delete this alert?"
-                )
-            ) {
-
-                return;
-
-            }
-
-
-            fetch(
-                BACKEND_URL +
-                "/api/emergency-alerts/" +
-                id,
-                {
-
-                    method:
-                        "DELETE"
-
-                }
-            )
-
-                .then(function (response) {
-
-                    if (!response.ok) {
-
-                        throw new Error(
-                            "Failed to delete alert"
-                        );
-
-                    }
-
-                })
-
-                .then(function () {
-
-                    alert(
-                        "Alert deleted successfully!"
-                    );
-
-
-                    loadEmergencyAlerts();
-
-                })
-
-                .catch(function (error) {
-
-                    console.error(
-                        "Delete error:",
-                        error
-                    );
-
-
-                    alert(
-                        "Failed to delete alert."
-                    );
-
-                });
-
-        }
-
-
-        /* =====================================================
-           VOICE ALERT VARIABLES
-           ===================================================== */
-
-        let mediaRecorder =
-            null;
-
-        let recordedChunks =
-            [];
-
-        let recordedBlob =
-            null;
-
-        let recordingStartTime =
-            null;
-
-        let recordingTimer =
-            null;
-
-
-        /* =====================================================
-           VOICE ALERT ELEMENTS
-           ===================================================== */
-
-        const startRecordingBtn =
-            document.getElementById(
-                "startRecordingBtn"
-            );
-
-
-        const stopRecordingBtn =
-            document.getElementById(
-                "stopRecordingBtn"
-            );
-
-
-        const saveVoiceAlertBtn =
-            document.getElementById(
-                "saveVoiceAlertBtn"
-            );
-
-
-        const recordingStatus =
-            document.getElementById(
-                "recordingStatus"
-            );
-
-
-        const voicePreview =
-            document.getElementById(
-                "voicePreview"
-            );
-
-
-        /* =====================================================
-           START RECORDING
-           ===================================================== */
-
-        if (startRecordingBtn) {
-
-            startRecordingBtn.addEventListener(
-                "click",
-                async function () {
-
-                    try {
-
-                        if (
-                            !navigator.mediaDevices ||
-                            !navigator.mediaDevices.getUserMedia
-                        ) {
-
-                            alert(
-                                "Audio recording is not supported by this browser."
-                            );
-
-                            return;
-
-                        }
-
-
-                        const stream =
-                            await navigator.mediaDevices.getUserMedia(
-                                {
-                                    audio: true
-                                }
-                            );
-
-
-                        recordedChunks = [];
-
-                        recordedBlob =
-                            null;
-
-
-                        mediaRecorder =
-                            new MediaRecorder(
-                                stream
-                            );
-
-
-                        mediaRecorder.ondataavailable =
-                            function (event) {
-
-                                if (
-                                    event.data &&
-                                    event.data.size > 0
-                                ) {
-
-                                    recordedChunks.push(
-                                        event.data
-                                    );
-
-                                }
-
-                            };
-
-
-                        mediaRecorder.onstop =
-                            function () {
-
-                                recordedBlob =
-                                    new Blob(
-                                        recordedChunks,
-                                        {
-                                            type:
-                                                mediaRecorder.mimeType ||
-                                                "audio/webm"
-                                        }
-                                    );
-
-
-                                voicePreview.src =
-                                    URL.createObjectURL(
-                                        recordedBlob
-                                    );
-
-
-                                voicePreview.style.display =
-                                    "block";
-
-
-                                saveVoiceAlertBtn.disabled =
-                                    false;
-
-
-                                if (
-                                    recordingTimer
-                                ) {
-
-                                    clearInterval(
-                                        recordingTimer
-                                    );
-
-                                }
-
-
-                                recordingStatus.innerText =
-                                    "Recording completed.";
-
-                            };
-
-
-                        mediaRecorder.start();
-
-
-                        recordingStartTime =
-                            Date.now();
-
-
-                        recordingStatus.innerText =
-                            "🔴 Recording... 0 seconds";
-
-
-                        startRecordingBtn.disabled =
-                            true;
-
-
-                        stopRecordingBtn.disabled =
-                            false;
-
-
-                        saveVoiceAlertBtn.disabled =
-                            true;
-
-
-                        recordingTimer =
-                            setInterval(
-                                function () {
-
-                                    const seconds =
-                                        Math.floor(
-                                            (
-                                                Date.now() -
-                                                recordingStartTime
-                                            ) / 1000
-                                        );
-
-
-                                    recordingStatus.innerText =
-                                        "🔴 Recording... " +
-                                        seconds +
-                                        " seconds";
-
-                                },
-                                1000
-                            );
-
-                    }
-                    catch (error) {
-
-                        console.error(
-                            "Microphone error:",
-                            error
-                        );
-
-
-                        alert(
-                            "Unable to access microphone. Please allow microphone permission."
-                        );
-
-                    }
-
-                }
-            );
-
-        }
-
-
-        /* =====================================================
-           STOP RECORDING
-           ===================================================== */
-
-        if (stopRecordingBtn) {
-
-            stopRecordingBtn.addEventListener(
-                "click",
-                function () {
-
-                    if (
-                        mediaRecorder &&
-                        mediaRecorder.state !==
-                        "inactive"
-                    ) {
-
-                        mediaRecorder.stop();
-
-
-                        if (
-                            mediaRecorder.stream
-                        ) {
-
-                            mediaRecorder.stream
-                                .getTracks()
-                                .forEach(
-                                    function (track) {
-
-                                        track.stop();
-
-                                    }
-                                );
-
-                        }
-
-                    }
-
-
-                    startRecordingBtn.disabled =
-                        false;
-
-
-                    stopRecordingBtn.disabled =
-                        true;
-
-                }
-            );
-
-        }
-
-
-        /* =====================================================
-           SAVE VOICE ALERT
-           ===================================================== */
-
-        if (saveVoiceAlertBtn) {
-
-            saveVoiceAlertBtn.addEventListener(
-                "click",
-                async function () {
-
-                    if (!recordedBlob) {
-
-                        alert(
-                            "Please record a voice alert first."
-                        );
-
-                        return;
-
-                    }
-
-
-                    const titleInput =
-                        document.getElementById(
-                            "voiceTitle"
-                        );
-
-
-                    const levelInput =
-                        document.getElementById(
-                            "voiceAlertLevel"
-                        );
-
-
-                    const title =
-                        titleInput.value.trim();
-
-
-                    const alertLevel =
-                        levelInput.value;
-
-
-                    const adminEmail =
-                        localStorage.getItem(
-                            "loggedInEmail"
-                        );
-
-
-                    if (!adminEmail) {
-
-                        alert(
-                            "Admin login session not found. Please login again."
-                        );
-
-                        window.location.href =
-                            "login.html";
-
-                        return;
-
-                    }
-
-
-                    if (!title) {
-
-                        alert(
-                            "Please enter a voice alert title."
-                        );
-
-                        titleInput.focus();
-
-                        return;
-
-                    }
-
-
-                    try {
-
-                        saveVoiceAlertBtn.disabled =
-                            true;
-
-
-                        recordingStatus.innerText =
-                            "Saving voice alert...";
-
-
-                        const audioData =
-                            await convertBlobToDataUrl(
-                                recordedBlob
-                            );
-
-
-                        const duration =
-                            recordingStartTime
-                                ? Math.max(
-                                    1,
-                                    Math.round(
-                                        (
-                                            Date.now() -
-                                            recordingStartTime
-                                        ) / 1000
-                                    )
-                                )
-                                : 1;
-
-
-                        const voiceAlertData = {
-
-                            title:
-                                title,
-
-                            audioData:
-                                audioData,
-
-                            duration:
-                                duration,
-
-                            alertLevel:
-                                alertLevel
-
-                        };
-
-
-                        const response =
-                            await fetch(
-                                BACKEND_URL +
-                                "/api/voice-alerts?createdByEmail=" +
-                                encodeURIComponent(
-                                    adminEmail
-                                ),
-                                {
-
-                                    method:
-                                        "POST",
-
-                                    headers: {
-
-                                        "Content-Type":
-                                            "application/json"
-
-                                    },
-
-                                    body:
-                                        JSON.stringify(
-                                            voiceAlertData
-                                        )
-
-                                }
-                            );
-
-
-                        const responseText =
-                            await response.text();
-
-
-                        if (!response.ok) {
-
-                            throw new Error(
-                                responseText ||
-                                "Failed to save voice alert"
-                            );
-
-                        }
-
-
-                        alert(
-                            "Voice alert saved successfully!"
-                        );
-
-
-                        titleInput.value =
-                            "";
-
-
-                        levelInput.value =
-                            "LOW";
-
-
-                        voicePreview.pause();
-
-                        voicePreview.removeAttribute(
-                            "src"
-                        );
-
-
-                        voicePreview.style.display =
-                            "none";
-
-
-                        recordedBlob =
-                            null;
-
-
-                        recordedChunks =
-                            [];
-
-
-                        saveVoiceAlertBtn.disabled =
-                            true;
-
-
-                        recordingStatus.innerText =
-                            "Voice alert saved.";
-
-
-                        loadVoiceAlerts();
-
-                    }
-                    catch (error) {
-
-                        console.error(
-                            "Save voice alert error:",
-                            error
-                        );
-
-
-                        alert(
-                            "Failed to save voice alert: " +
-                            error.message
-                        );
-
-
-                        saveVoiceAlertBtn.disabled =
-                            false;
-
-                    }
-
-                }
-            );
-
-        }
-
-
-        /* =====================================================
-           CONVERT BLOB TO DATA URL
-           ===================================================== */
-
-        function convertBlobToDataUrl(
-            blob
-        ) {
-
-            return new Promise(
-                function (
-                    resolve,
-                    reject
-                ) {
-
-                    const reader =
-                        new FileReader();
-
-
-                    reader.onloadend =
-                        function () {
-
-                            resolve(
-                                reader.result
-                            );
-
-                        };
-
-
-                    reader.onerror =
-                        function () {
-
-                            reject(
-                                new Error(
-                                    "Failed to convert audio data"
-                                )
-                            );
-
-                        };
-
-
-                    reader.readAsDataURL(
-                        blob
-                    );
-
-                }
-            );
-
-        }
-
-
-        /* =====================================================
-           LOAD VOICE ALERTS
-           ===================================================== */
-
-        function loadVoiceAlerts() {
-
-            const table =
-                document.getElementById(
-                    "voiceAlertTable"
+                    "Emergency alert added successfully!"
                 );
 
 
-            fetch(
-                BACKEND_URL +
-                "/api/voice-alerts"
-            )
+                loadEmergencyAlerts();
 
-                .then(function (response) {
+                loadAdminNotifications();
 
-                    if (!response.ok) {
+            })
 
-                        throw new Error(
-                            "Failed to load voice alerts"
-                        );
+            .catch(function(error) {
 
-                    }
+                console.error(
+                    "Add emergency alert error:",
+                    error
+                );
 
-                    return response.json();
-
-                })
-
-                .then(function (alerts) {
-
-                    table.innerHTML = `
-
-                        <tr>
-
-                            <th>Title</th>
-                            <th>Level</th>
-                            <th>Duration</th>
-                            <th>Voice</th>
-                            <th>Action</th>
-
-                        </tr>
-
-                    `;
-
-
-                    if (
-                        !Array.isArray(alerts) ||
-                        alerts.length === 0
-                    ) {
-
-                        const row =
-                            table.insertRow(-1);
-
-
-                        const cell =
-                            row.insertCell(0);
-
-
-                        cell.colSpan =
-                            5;
-
-
-                        cell.textContent =
-                            "No voice alerts available.";
-
-
-                        return;
-
-                    }
-
-
-                    alerts.forEach(
-                        function (voiceAlert) {
-
-                            const row =
-                                table.insertRow(-1);
-
-
-                            row.insertCell(
-                                0
-                            ).textContent =
-                                voiceAlert.title ||
-                                "";
-
-
-                            row.insertCell(
-                                1
-                            ).textContent =
-                                voiceAlert.alertLevel ||
-                                "";
-
-
-                            row.insertCell(
-                                2
-                            ).textContent =
-                                (
-                                    voiceAlert.duration ||
-                                    0
-                                ) +
-                                " sec";
-
-
-                            const audioCell =
-                                row.insertCell(
-                                    3
-                                );
-
-
-                            const audioPlayer =
-                                document.createElement(
-                                    "audio"
-                                );
-
-
-                            audioPlayer.controls =
-                                true;
-
-
-                            audioPlayer.style.width =
-                                "220px";
-
-
-                            audioPlayer.src =
-                                voiceAlert.audioData ||
-                                "";
-
-
-                            audioCell.appendChild(
-                                audioPlayer
-                            );
-
-
-                            const actionCell =
-                                row.insertCell(
-                                    4
-                                );
-
-
-                            const deleteButton =
-                                document.createElement(
-                                    "button"
-                                );
-
-
-                            deleteButton.textContent =
-                                "Delete";
-
-
-                            deleteButton.className =
-                                "assign-btn";
-
-
-                            deleteButton.addEventListener(
-                                "click",
-                                function () {
-
-                                    deleteVoiceAlert(
-                                        voiceAlert.voiceId
-                                    );
-
-                                }
-                            );
-
-
-                            actionCell.appendChild(
-                                deleteButton
-                            );
-
-                        }
-                    );
-
-                })
-
-                .catch(function (error) {
-
-                    console.error(
-                        "Voice alert error:",
-                        error
-                    );
-
-
-                    table.innerHTML = `
-
-                        <tr>
-
-                            <th>Title</th>
-                            <th>Level</th>
-                            <th>Duration</th>
-                            <th>Voice</th>
-                            <th>Action</th>
-
-                        </tr>
-
-                        <tr>
-
-                            <td colspan="5">
-                                Unable to load voice alerts.
-                            </td>
-
-                        </tr>
-
-                    `;
-
-                });
-
-        }
-
-
-        /* =====================================================
-           DELETE VOICE ALERT
-           ===================================================== */
-
-        function deleteVoiceAlert(
-            voiceId
-        ) {
-
-            if (!voiceId) {
 
                 alert(
-                    "Invalid voice alert ID."
+                    "Failed to add emergency alert."
                 );
 
-                return;
+            });
 
-            }
-
-
-            if (
-                !confirm(
-                    "Are you sure you want to delete this voice alert?"
-                )
-            ) {
-
-                return;
-
-            }
+        }
+    );
 
 
-            fetch(
-                BACKEND_URL +
-                "/api/voice-alerts/" +
-                voiceId,
-                {
+/* =========================================================
+   DELETE EMERGENCY ALERT
+   ========================================================= */
 
-                    method:
-                        "DELETE"
+function deleteEmergencyAlert(
+    alertId
+) {
 
-                }
-            )
+    if (!alertId) {
 
-                .then(function (response) {
-
-                    if (!response.ok) {
-
-                        throw new Error(
-                            "Failed to delete voice alert"
-                        );
-
-                    }
-
-                })
-
-                .then(function () {
-
-                    alert(
-                        "Voice alert deleted successfully!"
-                    );
+        alert(
+            "Invalid alert ID."
+        );
 
 
-                    loadVoiceAlerts();
+        return;
 
-                })
-
-                .catch(function (error) {
-
-                    console.error(
-                        "Delete voice alert error:",
-                        error
-                    );
+    }
 
 
-                    alert(
-                        "Failed to delete voice alert."
-                    );
+    if (
+        !confirm(
+            "Are you sure you want to delete this alert?"
+        )
+    ) {
 
-                });
+        return;
+
+    }
+
+
+    fetch(
+        BACKEND_URL +
+        "/api/emergency-alerts/" +
+        alertId,
+        {
+
+            method:
+                "DELETE"
+
+        }
+    )
+
+    .then(function(response) {
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Failed to delete alert"
+            );
 
         }
 
+    })
 
-        /* =====================================================
-           LOAD TASK MONITORING
-           ===================================================== */
+    .then(function() {
 
-        function loadTaskMonitoring() {
+        alert(
+            "Alert deleted successfully!"
+        );
 
-            fetch(
-                BACKEND_URL +
-                "/api/tasks"
-            )
-
-                .then(function (response) {
-
-                    if (!response.ok) {
-
-                        throw new Error(
-                            "Failed to load tasks"
-                        );
-
-                    }
-
-                    return response.json();
-
-                })
-
-                .then(function (tasks) {
-
-                    const table =
-                        document.getElementById(
-                            "taskMonitoringTable"
-                        );
-
-
-                    table.innerHTML = `
-
-                        <tr>
-
-                            <th>Task</th>
-                            <th>Volunteer</th>
-                            <th>Location</th>
-                            <th>Status</th>
-
-                        </tr>
-
-                    `;
-
-
-                    if (
-                        !Array.isArray(tasks) ||
-                        tasks.length === 0
-                    ) {
-
-                        const row =
-                            table.insertRow(-1);
-
-
-                        const cell =
-                            row.insertCell(0);
-
-
-                        cell.colSpan =
-                            4;
-
-
-                        cell.textContent =
-                            "No tasks available.";
-
-
-                        return;
-
-                    }
-
-
-                    tasks.forEach(
-                        function (task) {
-
-                            const row =
-                                table.insertRow(-1);
-
-
-                            row.insertCell(
-                                0
-                            ).textContent =
-                                task.taskName ||
-                                "";
-
-
-                            let volunteer =
-                                "Unassigned";
-
-
-                            if (
-                                task.taskName ===
-                                "Food Distribution"
-                            ) {
-
-                                volunteer =
-                                    "Arun";
-
-                            }
-                            else if (
-                                task.taskName ===
-                                "Medicine Distribution"
-                            ) {
-
-                                volunteer =
-                                    "Priya";
-
-                            }
-                            else if (
-                                task.taskName ===
-                                "Shelter Support"
-                            ) {
-
-                                volunteer =
-                                    "Karthik";
-
-                            }
-
-
-                            row.insertCell(
-                                1
-                            ).textContent =
-                                volunteer;
-
-
-                            row.insertCell(
-                                2
-                            ).textContent =
-                                task.location ||
-                                "";
-
-
-                            const statusCell =
-                                row.insertCell(
-                                    3
-                                );
-
-
-                            const statusSpan =
-                                document.createElement(
-                                    "span"
-                                );
-
-
-                            statusSpan.textContent =
-                                task.status ||
-                                "";
-
-
-                            if (
-                                task.status ===
-                                "Completed"
-                            ) {
-
-                                statusSpan.className =
-                                    "task-status completed";
-
-                            }
-                            else if (
-                                task.status ===
-                                "In Progress"
-                            ) {
-
-                                statusSpan.className =
-                                    "task-status progress";
-
-                            }
-                            else {
-
-                                statusSpan.className =
-                                    "task-status pending";
-
-                            }
-
-
-                            statusCell.appendChild(
-                                statusSpan
-                            );
-
-                        }
-                    );
-
-                })
-
-                .catch(function (error) {
-
-                    console.error(
-                        "Task monitoring error:",
-                        error
-                    );
-
-
-                    const table =
-                        document.getElementById(
-                            "taskMonitoringTable"
-                        );
-
-
-                    table.innerHTML = `
-
-                        <tr>
-
-                            <th>Task</th>
-                            <th>Volunteer</th>
-                            <th>Location</th>
-                            <th>Status</th>
-
-                        </tr>
-
-                        <tr>
-
-                            <td colspan="4">
-                                Unable to load tasks.
-                            </td>
-
-                        </tr>
-
-                    `;
-
-                });
-
-        }
-
-
-        /* =====================================================
-           INITIAL LOAD
-           ===================================================== */
-
-        loadAdminNotifications();
-
-        loadSosAlerts();
 
         loadEmergencyAlerts();
 
+    })
+
+    .catch(function(error) {
+
+        console.error(
+            "Delete alert error:",
+            error
+        );
+
+
+        alert(
+            "Failed to delete alert."
+        );
+
+    });
+
+}
+
+
+/* =========================================================
+   VOICE ALERT VARIABLES
+   ========================================================= */
+
+let mediaRecorder =
+    null;
+
+let recordedChunks =
+    [];
+
+let recordedBlob =
+    null;
+
+let recordingStartTime =
+    null;
+
+let recordingTimer =
+    null;
+
+
+/* =========================================================
+   VOICE ALERT ELEMENTS
+   ========================================================= */
+
+const startRecordingBtn =
+    document.getElementById(
+        "startRecordingBtn"
+    );
+
+
+const stopRecordingBtn =
+    document.getElementById(
+        "stopRecordingBtn"
+    );
+
+
+const saveVoiceAlertBtn =
+    document.getElementById(
+        "saveVoiceAlertBtn"
+    );
+
+
+const recordingStatus =
+    document.getElementById(
+        "recordingStatus"
+    );
+
+
+const voicePreview =
+    document.getElementById(
+        "voicePreview"
+    );
+
+
+/* =========================================================
+   START RECORDING
+   ========================================================= */
+
+startRecordingBtn.addEventListener(
+    "click",
+    async function() {
+
+        try {
+
+            if (
+                !navigator.mediaDevices ||
+                !navigator.mediaDevices.getUserMedia
+            ) {
+
+                alert(
+                    "Audio recording is not supported."
+                );
+
+
+                return;
+
+            }
+
+
+            const stream =
+                await navigator
+                    .mediaDevices
+                    .getUserMedia(
+                        {
+                            audio: true
+                        }
+                    );
+
+
+            recordedChunks =
+                [];
+
+
+            recordedBlob =
+                null;
+
+
+            mediaRecorder =
+                new MediaRecorder(
+                    stream
+                );
+
+
+            mediaRecorder.ondataavailable =
+                function(event) {
+
+                    if (
+                        event.data &&
+                        event.data.size > 0
+                    ) {
+
+                        recordedChunks.push(
+                            event.data
+                        );
+
+                    }
+
+                };
+
+
+            mediaRecorder.onstop =
+                function() {
+
+                    recordedBlob =
+                        new Blob(
+                            recordedChunks,
+                            {
+                                type:
+                                    mediaRecorder.mimeType ||
+                                    "audio/webm"
+                            }
+                        );
+
+
+                    voicePreview.src =
+                        URL.createObjectURL(
+                            recordedBlob
+                        );
+
+
+                    voicePreview.style.display =
+                        "block";
+
+
+                    saveVoiceAlertBtn.disabled =
+                        false;
+
+
+                    if (recordingTimer) {
+
+                        clearInterval(
+                            recordingTimer
+                        );
+
+                    }
+
+
+                    recordingStatus.innerText =
+                        "Recording completed.";
+
+                };
+
+
+            mediaRecorder.start();
+
+
+            recordingStartTime =
+                Date.now();
+
+
+            recordingStatus.innerText =
+                "🔴 Recording... 0 seconds";
+
+
+            startRecordingBtn.disabled =
+                true;
+
+
+            stopRecordingBtn.disabled =
+                false;
+
+
+            saveVoiceAlertBtn.disabled =
+                true;
+
+
+            recordingTimer =
+                setInterval(
+                    function() {
+
+                        const seconds =
+                            Math.floor(
+                                (
+                                    Date.now() -
+                                    recordingStartTime
+                                ) / 1000
+                            );
+
+
+                        recordingStatus.innerText =
+                            "🔴 Recording... " +
+                            seconds +
+                            " seconds";
+
+                    },
+                    1000
+                );
+
+        }
+        catch(error) {
+
+            console.error(
+                "Microphone error:",
+                error
+            );
+
+
+            alert(
+                "Unable to access microphone."
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   STOP RECORDING
+   ========================================================= */
+
+stopRecordingBtn.addEventListener(
+    "click",
+    function() {
+
+        if (
+            mediaRecorder &&
+            mediaRecorder.state !==
+            "inactive"
+        ) {
+
+            mediaRecorder.stop();
+
+
+            if (mediaRecorder.stream) {
+
+                mediaRecorder.stream
+                    .getTracks()
+                    .forEach(
+                        function(track) {
+
+                            track.stop();
+
+                        }
+                    );
+
+            }
+
+        }
+
+
+        startRecordingBtn.disabled =
+            false;
+
+
+        stopRecordingBtn.disabled =
+            true;
+
+    }
+);
+
+
+/* =========================================================
+   SAVE VOICE ALERT
+   ========================================================= */
+
+saveVoiceAlertBtn.addEventListener(
+    "click",
+    async function() {
+
+        if (!recordedBlob) {
+
+            alert(
+                "Please record a voice alert first."
+            );
+
+
+            return;
+
+        }
+
+
+        const title =
+            document
+                .getElementById(
+                    "voiceTitle"
+                )
+                .value
+                .trim();
+
+
+        const alertLevel =
+            document
+                .getElementById(
+                    "voiceAlertLevel"
+                )
+                .value;
+
+
+        const adminEmail =
+            localStorage.getItem(
+                "loggedInEmail"
+            );
+
+
+        if (!adminEmail) {
+
+            alert(
+                "Admin login session not found."
+            );
+
+
+            return;
+
+        }
+
+
+        if (!title) {
+
+            alert(
+                "Please enter a voice alert title."
+            );
+
+
+            return;
+
+        }
+
+
+        try {
+
+            saveVoiceAlertBtn.disabled =
+                true;
+
+
+            const audioData =
+                await convertBlobToDataUrl(
+                    recordedBlob
+                );
+
+
+            const duration =
+                recordingStartTime
+                    ? Math.max(
+                        1,
+                        Math.round(
+                            (
+                                Date.now() -
+                                recordingStartTime
+                            ) / 1000
+                        )
+                    )
+                    : 1;
+
+
+            const voiceAlertData = {
+
+                title:
+                    title,
+
+                audioData:
+                    audioData,
+
+                duration:
+                    duration,
+
+                alertLevel:
+                    alertLevel
+
+            };
+
+
+            const response =
+                await fetch(
+                    BACKEND_URL +
+                    "/api/voice-alerts?createdByEmail=" +
+                    encodeURIComponent(
+                        adminEmail
+                    ),
+                    {
+
+                        method:
+                            "POST",
+
+                        headers: {
+
+                            "Content-Type":
+                                "application/json"
+
+                        },
+
+                        body:
+                            JSON.stringify(
+                                voiceAlertData
+                            )
+
+                    }
+                );
+
+
+            const responseText =
+                await response.text();
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    responseText ||
+                    "Failed to save voice alert"
+                );
+
+            }
+
+
+            alert(
+                "Voice alert saved successfully!"
+            );
+
+
+            document
+                .getElementById(
+                    "voiceTitle"
+                )
+                .value =
+                "";
+
+
+            document
+                .getElementById(
+                    "voiceAlertLevel"
+                )
+                .value =
+                "LOW";
+
+
+            voicePreview.pause();
+
+
+            voicePreview.removeAttribute(
+                "src"
+            );
+
+
+            voicePreview.style.display =
+                "none";
+
+
+            recordedBlob =
+                null;
+
+
+            recordedChunks =
+                [];
+
+
+            saveVoiceAlertBtn.disabled =
+                true;
+
+
+            recordingStatus.innerText =
+                "Voice alert saved.";
+
+
+            loadVoiceAlerts();
+
+            loadAdminNotifications();
+
+        }
+        catch(error) {
+
+            console.error(
+                "Save voice alert error:",
+                error
+            );
+
+
+            alert(
+                "Failed to save voice alert: " +
+                error.message
+            );
+
+
+            saveVoiceAlertBtn.disabled =
+                false;
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   CONVERT BLOB TO DATA URL
+   ========================================================= */
+
+function convertBlobToDataUrl(
+    blob
+) {
+
+    return new Promise(
+        function(resolve, reject) {
+
+            const reader =
+                new FileReader();
+
+
+            reader.onloadend =
+                function() {
+
+                    resolve(
+                        reader.result
+                    );
+
+                };
+
+
+            reader.onerror =
+                function() {
+
+                    reject(
+                        new Error(
+                            "Failed to convert audio data"
+                        )
+                    );
+
+                };
+
+
+            reader.readAsDataURL(
+                blob
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   LOAD VOICE ALERTS
+   ========================================================= */
+
+function loadVoiceAlerts() {
+
+    const table =
+        document.getElementById(
+            "voiceAlertTable"
+        );
+
+
+    fetch(
+        BACKEND_URL +
+        "/api/voice-alerts"
+    )
+
+    .then(function(response) {
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Failed to load voice alerts"
+            );
+
+        }
+
+
+        return response.json();
+
+    })
+
+    .then(function(alerts) {
+
+        table.innerHTML = `
+
+            <tr>
+
+                <th>
+                    Title
+                </th>
+
+                <th>
+                    Level
+                </th>
+
+                <th>
+                    Duration
+                </th>
+
+                <th>
+                    Voice
+                </th>
+
+                <th>
+                    Action
+                </th>
+
+            </tr>
+
+        `;
+
+
+        if (
+            !Array.isArray(alerts) ||
+            alerts.length === 0
+        ) {
+
+            const row =
+                table.insertRow(-1);
+
+
+            const cell =
+                row.insertCell(0);
+
+
+            cell.colSpan =
+                5;
+
+
+            cell.innerText =
+                "No voice alerts available.";
+
+
+            return;
+
+        }
+
+
+        alerts.forEach(
+            function(voiceAlert) {
+
+                const row =
+                    table.insertRow(-1);
+
+
+                row.insertCell(0)
+                    .innerText =
+                    voiceAlert.title ||
+                    "";
+
+
+                row.insertCell(1)
+                    .innerText =
+                    voiceAlert.alertLevel ||
+                    "";
+
+
+                row.insertCell(2)
+                    .innerText =
+                    (
+                        voiceAlert.duration ||
+                        0
+                    ) +
+                    " sec";
+
+
+                const audioCell =
+                    row.insertCell(3);
+
+
+                const audioPlayer =
+                    document.createElement(
+                        "audio"
+                    );
+
+
+                audioPlayer.controls =
+                    true;
+
+
+                audioPlayer.style.width =
+                    "220px";
+
+
+                audioPlayer.src =
+                    voiceAlert.audioData ||
+                    "";
+
+
+                audioCell.appendChild(
+                    audioPlayer
+                );
+
+
+                const actionCell =
+                    row.insertCell(4);
+
+
+                const deleteButton =
+                    document.createElement(
+                        "button"
+                    );
+
+
+                deleteButton.innerText =
+                    "Delete";
+
+
+                deleteButton.className =
+                    "assign-btn";
+
+
+                deleteButton.addEventListener(
+                    "click",
+                    function() {
+
+                        deleteVoiceAlert(
+                            voiceAlert.voiceId
+                        );
+
+                    }
+                );
+
+
+                actionCell.appendChild(
+                    deleteButton
+                );
+
+            }
+        );
+
+    })
+
+    .catch(function(error) {
+
+        console.error(
+            "Voice alert error:",
+            error
+        );
+
+
+        table.innerHTML = `
+
+            <tr>
+
+                <td colspan="5">
+                    Unable to load voice alerts.
+                </td>
+
+            </tr>
+
+        `;
+
+    });
+
+}
+
+
+/* =========================================================
+   DELETE VOICE ALERT
+   ========================================================= */
+
+function deleteVoiceAlert(
+    voiceId
+) {
+
+    if (!voiceId) {
+
+        alert(
+            "Invalid voice alert ID."
+        );
+
+
+        return;
+
+    }
+
+
+    if (
+        !confirm(
+            "Are you sure you want to delete this voice alert?"
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    fetch(
+        BACKEND_URL +
+        "/api/voice-alerts/" +
+        voiceId,
+        {
+
+            method:
+                "DELETE"
+
+        }
+    )
+
+    .then(function(response) {
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Failed to delete voice alert"
+            );
+
+        }
+
+    })
+
+    .then(function() {
+
+        alert(
+            "Voice alert deleted successfully!"
+        );
+
+
         loadVoiceAlerts();
+
+    })
+
+    .catch(function(error) {
+
+        console.error(
+            "Delete voice alert error:",
+            error
+        );
+
+
+        alert(
+            "Failed to delete voice alert."
+        );
+
+    });
+
+}
+
+
+/* =========================================================
+   LOAD TASK MONITORING
+   ========================================================= */
+
+function loadTaskMonitoring() {
+
+    const table =
+        document.getElementById(
+            "taskMonitoringTable"
+        );
+
+
+    fetch(
+        BACKEND_URL +
+        "/api/tasks"
+    )
+
+    .then(function(response) {
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Failed to load tasks"
+            );
+
+        }
+
+
+        return response.json();
+
+    })
+
+    .then(function(tasks) {
+
+        table.innerHTML = `
+
+            <tr>
+
+                <th>
+                    Task
+                </th>
+
+                <th>
+                    Volunteer
+                </th>
+
+                <th>
+                    Email
+                </th>
+
+                <th>
+                    Location
+                </th>
+
+                <th>
+                    Priority
+                </th>
+
+                <th>
+                    Status
+                </th>
+
+                <th>
+                    Action
+                </th>
+
+            </tr>
+
+        `;
+
+
+        if (
+            !Array.isArray(tasks) ||
+            tasks.length === 0
+        ) {
+
+            const row =
+                table.insertRow(-1);
+
+
+            const cell =
+                row.insertCell(0);
+
+
+            cell.colSpan =
+                7;
+
+
+            cell.innerText =
+                "No tasks available.";
+
+
+            updateTaskCounts(
+                []
+            );
+
+
+            return;
+
+        }
+
+
+        updateTaskCounts(
+            tasks
+        );
+
+
+        tasks.forEach(
+            function(task) {
+
+                const row =
+                    table.insertRow(-1);
+
+
+                const volunteer =
+                    task.volunteer ||
+                    {};
+
+
+                const user =
+                    volunteer.user ||
+                    {};
+
+
+                const volunteerName =
+                    user.name ||
+                    "Unassigned";
+
+
+                const volunteerEmail =
+                    user.email ||
+                    "-";
+
+
+                const taskStatus =
+                    task.status ||
+                    "Pending";
+
+
+                row.insertCell(0)
+                    .innerText =
+                    task.taskName ||
+                    "";
+
+
+                row.insertCell(1)
+                    .innerText =
+                    volunteerName;
+
+
+                row.insertCell(2)
+                    .innerText =
+                    volunteerEmail;
+
+
+                row.insertCell(3)
+                    .innerText =
+                    task.location ||
+                    "";
+
+
+                row.insertCell(4)
+                    .innerText =
+                    task.priority ||
+                    "";
+
+
+                row.insertCell(5)
+                    .innerText =
+                    taskStatus;
+
+
+                const actionCell =
+                    row.insertCell(6);
+
+
+                if (
+                    taskStatus
+                        .toLowerCase() !==
+                    "completed"
+                ) {
+
+                    const completeButton =
+                        document.createElement(
+                            "button"
+                        );
+
+
+                    completeButton.innerText =
+                        "Mark Complete";
+
+
+                    completeButton.className =
+                        "assign-btn";
+
+
+                    completeButton.addEventListener(
+                        "click",
+                        function() {
+
+                            updateTaskStatus(
+                                task.taskId,
+                                "Completed"
+                            );
+
+                        }
+                    );
+
+
+                    actionCell.appendChild(
+                        completeButton
+                    );
+
+                }
+                else {
+
+                    actionCell.innerText =
+                        "Completed";
+
+                }
+
+            }
+        );
+
+    })
+
+    .catch(function(error) {
+
+        console.error(
+            "Task monitoring error:",
+            error
+        );
+
+
+        const row =
+            table.insertRow(-1);
+
+
+        const cell =
+            row.insertCell(0);
+
+
+        cell.colSpan =
+            7;
+
+
+        cell.innerText =
+            "Unable to load tasks.";
+
+    });
+
+}
+
+
+/* =========================================================
+   UPDATE TASK STATUS
+   ========================================================= */
+
+function updateTaskStatus(
+    taskId,
+    status
+) {
+
+    fetch(
+        BACKEND_URL +
+        "/api/tasks/" +
+        taskId +
+        "/status?status=" +
+        encodeURIComponent(status),
+        {
+
+            method:
+                "PUT"
+
+        }
+    )
+
+    .then(function(response) {
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Failed to update task status"
+            );
+
+        }
+
+
+        return response.json();
+
+    })
+
+    .then(function() {
+
+        alert(
+            "Task status updated."
+        );
+
 
         loadTaskMonitoring();
 
-    </script>
+        loadAdminNotifications();
+
+    })
+
+    .catch(function(error) {
+
+        console.error(
+            "Task status error:",
+            error
+        );
+
+
+        alert(
+            "Failed to update task status."
+        );
+
+    });
+
+}
+
+
+/* =========================================================
+   UPDATE TASK COUNTS
+   ========================================================= */
+
+function updateTaskCounts(
+    tasks
+) {
+
+    const active =
+        tasks.filter(
+            function(task) {
+
+                return (
+                    (
+                        task.status ||
+                        ""
+                    ).toLowerCase() !==
+                    "completed"
+                );
+
+            }
+        ).length;
+
+
+    const completed =
+        tasks.filter(
+            function(task) {
+
+                return (
+                    (
+                        task.status ||
+                        ""
+                    ).toLowerCase() ===
+                    "completed"
+                );
+
+            }
+        ).length;
+
+
+    document.getElementById(
+        "activeTasksCount"
+    ).innerText =
+        active;
+
+
+    document.getElementById(
+        "completedTasksCount"
+    ).innerText =
+        completed;
+
+}
+
+
+/* =========================================================
+   REFRESH TASKS
+   ========================================================= */
+
+document
+    .getElementById(
+        "refreshTasksBtn"
+    )
+    .addEventListener(
+        "click",
+        function() {
+
+            loadTaskMonitoring();
+
+        }
+    );
+
+
+/* =========================================================
+   INITIAL LOAD
+   ========================================================= */
+
+loadAdminNotifications();
+
+loadVolunteers();
+
+loadSosAlerts();
+
+loadEmergencyAlerts();
+
+loadVoiceAlerts();
+
+loadTaskMonitoring();
+
+</script>
 
 </body>
 
