@@ -20,7 +20,23 @@ public class NotificationService {
     private UserRepository userRepository;
 
 
-    // Create notification for one user
+    // =========================================================
+    // SAVE EXISTING NOTIFICATION
+    // =========================================================
+
+    public Notification saveNotification(
+            Notification notification) {
+
+        return notificationRepository.save(
+                notification
+        );
+    }
+
+
+    // =========================================================
+    // CREATE NOTIFICATION FOR ONE USER
+    // =========================================================
+
     public Notification createNotificationForUser(
             Long userId,
             String title,
@@ -30,7 +46,9 @@ public class NotificationService {
         User user = userRepository
                 .findById(userId)
                 .orElseThrow(
-                        () -> new RuntimeException("User not found")
+                        () -> new RuntimeException(
+                                "User not found"
+                        )
                 );
 
         Notification notification =
@@ -48,7 +66,10 @@ public class NotificationService {
     }
 
 
-    // Create notification using email
+    // =========================================================
+    // CREATE NOTIFICATION USING EMAIL
+    // =========================================================
+
     public Notification createNotificationForEmail(
             String email,
             String title,
@@ -58,7 +79,9 @@ public class NotificationService {
         User user = userRepository
                 .findByEmail(email)
                 .orElseThrow(
-                        () -> new RuntimeException("User not found")
+                        () -> new RuntimeException(
+                                "User not found"
+                        )
                 );
 
         Notification notification =
@@ -76,7 +99,10 @@ public class NotificationService {
     }
 
 
-    // Create notification for all volunteers
+    // =========================================================
+    // NOTIFY ALL VOLUNTEERS
+    // =========================================================
+
     public void notifyAllVolunteers(
             String title,
             String message,
@@ -89,7 +115,9 @@ public class NotificationService {
                         .filter(user ->
                                 user.getRole() != null &&
                                 user.getRole()
-                                    .equalsIgnoreCase("VOLUNTEER"))
+                                        .equalsIgnoreCase(
+                                                "VOLUNTEER"
+                                        ))
                         .toList();
 
         for (User volunteer : volunteers) {
@@ -98,6 +126,45 @@ public class NotificationService {
                     new Notification();
 
             notification.setUser(volunteer);
+            notification.setTitle(title);
+            notification.setMessage(message);
+            notification.setType(type);
+            notification.setReadStatus(false);
+
+            notificationRepository.save(
+                    notification
+            );
+        }
+    }
+
+
+    // =========================================================
+    // NOTIFY ALL ADMINS
+    // =========================================================
+
+    public void notifyAllAdmins(
+            String title,
+            String message,
+            String type) {
+
+        List<User> admins =
+                userRepository
+                        .findAll()
+                        .stream()
+                        .filter(user ->
+                                user.getRole() != null &&
+                                user.getRole()
+                                        .equalsIgnoreCase(
+                                                "ADMIN"
+                                        ))
+                        .toList();
+
+        for (User admin : admins) {
+
+            Notification notification =
+                    new Notification();
+
+            notification.setUser(admin);
             notification.setTitle(title);
             notification.setMessage(message);
             notification.setType(type);
