@@ -9,6 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -22,56 +26,218 @@ public class UserController {
     @Autowired
     private VolunteerRepository volunteerRepository;
 
-    @PostMapping("/register")
-    public ResponseEntity<User> registerUser(@RequestBody User user) {
 
-        User savedUser = userRepository.save(user);
+    // =========================================================
+    // REGISTER
+    // =========================================================
+
+    @PostMapping("/register")
+    public ResponseEntity<User> registerUser(
+            @RequestBody User user) {
+
+        User savedUser =
+                userRepository.save(user);
+
 
         // Create Volunteer record for volunteer users
         if (savedUser.getRole() != null &&
-                savedUser.getRole().equalsIgnoreCase("VOLUNTEER")) {
+                savedUser.getRole()
+                        .equalsIgnoreCase("VOLUNTEER")) {
 
             Optional<Volunteer> existingVolunteer =
-                    volunteerRepository.findByUser_UserId(savedUser.getUserId());
+                    volunteerRepository
+                            .findByUser_UserId(
+                                    savedUser.getUserId()
+                            );
+
 
             if (existingVolunteer.isEmpty()) {
 
-                Volunteer volunteer = new Volunteer();
+                Volunteer volunteer =
+                        new Volunteer();
 
                 volunteer.setUser(savedUser);
                 volunteer.setSkills("Not Specified");
                 volunteer.setAvailability("Available");
                 volunteer.setStatus("AVAILABLE");
 
-                volunteerRepository.save(volunteer);
+                volunteerRepository.save(
+                        volunteer
+                );
             }
         }
 
-        return ResponseEntity.ok(savedUser);
+
+        return ResponseEntity.ok(
+                savedUser
+        );
     }
 
+
+    // =========================================================
+    // LOGIN
+    // =========================================================
+
     @PostMapping("/login")
-    public ResponseEntity<?> loginUser(@RequestBody User user) {
+    public ResponseEntity<?> loginUser(
+            @RequestBody User user) {
 
         Optional<User> existingUser =
-                userRepository.findByEmail(user.getEmail());
+                userRepository.findByEmail(
+                        user.getEmail()
+                );
+
 
         if (existingUser.isEmpty()) {
 
             return ResponseEntity
                     .status(401)
-                    .body("Invalid email or password");
+                    .body(
+                            "Invalid email or password"
+                    );
         }
 
-        User foundUser = existingUser.get();
 
-        if (!foundUser.getPassword().equals(user.getPassword())) {
+        User foundUser =
+                existingUser.get();
+
+
+        if (!foundUser.getPassword()
+                .equals(user.getPassword())) {
 
             return ResponseEntity
                     .status(401)
-                    .body("Invalid email or password");
+                    .body(
+                            "Invalid email or password"
+                    );
         }
 
-        return ResponseEntity.ok(foundUser);
+
+        return ResponseEntity.ok(
+                foundUser
+        );
+    }
+
+
+    // =========================================================
+    // GET ALL VOLUNTEERS
+    // =========================================================
+
+    @GetMapping("/volunteers")
+    public ResponseEntity<?> getAllVolunteers() {
+
+        List<User> users =
+                userRepository.findAll();
+
+
+        List<Map<String, Object>> volunteers =
+                new ArrayList<>();
+
+
+        for (User user : users) {
+
+            if (user.getRole() != null &&
+                    user.getRole()
+                            .equalsIgnoreCase(
+                                    "VOLUNTEER"
+                            )) {
+
+                Map<String, Object> volunteer =
+                        new HashMap<>();
+
+
+                volunteer.put(
+                        "userId",
+                        user.getUserId()
+                );
+
+
+                volunteer.put(
+                        "name",
+                        user.getName()
+                );
+
+
+                volunteer.put(
+                        "email",
+                        user.getEmail()
+                );
+
+
+                Optional<Volunteer> volunteerRecord =
+                        volunteerRepository
+                                .findByUser_UserId(
+                                        user.getUserId()
+                                );
+
+
+                if (volunteerRecord.isPresent()) {
+
+                    Volunteer record =
+                            volunteerRecord.get();
+
+
+                    volunteer.put(
+                            "volunteerId",
+                            record.getVolunteerId()
+                    );
+
+
+                    volunteer.put(
+                            "skills",
+                            record.getSkills()
+                    );
+
+
+                    volunteer.put(
+                            "availability",
+                            record.getAvailability()
+                    );
+
+
+                    volunteer.put(
+                            "status",
+                            record.getStatus()
+                    );
+
+                }
+                else {
+
+                    volunteer.put(
+                            "volunteerId",
+                            null
+                    );
+
+
+                    volunteer.put(
+                            "skills",
+                            "Not Specified"
+                    );
+
+
+                    volunteer.put(
+                            "availability",
+                            "Available"
+                    );
+
+
+                    volunteer.put(
+                            "status",
+                            "AVAILABLE"
+                    );
+
+                }
+
+
+                volunteers.add(
+                        volunteer
+                );
+            }
+        }
+
+
+        return ResponseEntity.ok(
+                volunteers
+        );
     }
 }
