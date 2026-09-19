@@ -28,7 +28,7 @@ public class UserController {
 
 
     // =========================================================
-    // REGISTER
+    // REGISTER USER
     // =========================================================
 
     @PostMapping("/register")
@@ -39,7 +39,8 @@ public class UserController {
                 userRepository.save(user);
 
 
-        // Create Volunteer record for volunteer users
+        // Create Volunteer record automatically
+        // for volunteer users
         if (savedUser.getRole() != null &&
                 savedUser.getRole()
                         .equalsIgnoreCase("VOLUNTEER")) {
@@ -75,7 +76,7 @@ public class UserController {
 
 
     // =========================================================
-    // LOGIN
+    // LOGIN USER
     // =========================================================
 
     @PostMapping("/login")
@@ -136,103 +137,102 @@ public class UserController {
 
         for (User user : users) {
 
-            if (user.getRole() != null &&
-                    user.getRole()
+            // Only volunteer users
+            if (user.getRole() == null ||
+                    !user.getRole()
                             .equalsIgnoreCase(
                                     "VOLUNTEER"
                             )) {
 
-                Map<String, Object> volunteer =
-                        new HashMap<>();
-
-
-                volunteer.put(
-                        "userId",
-                        user.getUserId()
-                );
-
-
-                volunteer.put(
-                        "name",
-                        user.getName()
-                );
-
-
-                volunteer.put(
-                        "email",
-                        user.getEmail()
-                );
-
-
-                Optional<Volunteer> volunteerRecord =
-                        volunteerRepository
-                                .findByUser_UserId(
-                                        user.getUserId()
-                                );
-
-
-                if (volunteerRecord.isPresent()) {
-
-                    Volunteer record =
-                            volunteerRecord.get();
-
-
-                    volunteer.put(
-                            "volunteerId",
-                            record.getVolunteerId()
-                    );
-
-
-                    volunteer.put(
-                            "skills",
-                            record.getSkills()
-                    );
-
-
-                    volunteer.put(
-                            "availability",
-                            record.getAvailability()
-                    );
-
-
-                    volunteer.put(
-                            "status",
-                            record.getStatus()
-                    );
-
-                }
-                else {
-
-                    volunteer.put(
-                            "volunteerId",
-                            null
-                    );
-
-
-                    volunteer.put(
-                            "skills",
-                            "Not Specified"
-                    );
-
-
-                    volunteer.put(
-                            "availability",
-                            "Available"
-                    );
-
-
-                    volunteer.put(
-                            "status",
-                            "AVAILABLE"
-                    );
-
-                }
-
-
-                volunteers.add(
-                        volunteer
-                );
+                continue;
             }
+
+
+            // Find volunteer record
+            Optional<Volunteer> volunteerRecord =
+                    volunteerRepository
+                            .findByUser_UserId(
+                                    user.getUserId()
+                            );
+
+
+            Volunteer record;
+
+
+            // If volunteer record is missing,
+            // create it automatically
+            if (volunteerRecord.isEmpty()) {
+
+                record =
+                        new Volunteer();
+
+                record.setUser(user);
+                record.setSkills("Not Specified");
+                record.setAvailability("Available");
+                record.setStatus("AVAILABLE");
+
+                record =
+                        volunteerRepository.save(
+                                record
+                        );
+
+            } else {
+
+                record =
+                        volunteerRecord.get();
+            }
+
+
+            // Prepare safe response
+            Map<String, Object> volunteer =
+                    new HashMap<>();
+
+
+            volunteer.put(
+                    "userId",
+                    user.getUserId()
+            );
+
+
+            volunteer.put(
+                    "name",
+                    user.getName()
+            );
+
+
+            volunteer.put(
+                    "email",
+                    user.getEmail()
+            );
+
+
+            volunteer.put(
+                    "volunteerId",
+                    record.getVolunteerId()
+            );
+
+
+            volunteer.put(
+                    "skills",
+                    record.getSkills()
+            );
+
+
+            volunteer.put(
+                    "availability",
+                    record.getAvailability()
+            );
+
+
+            volunteer.put(
+                    "status",
+                    record.getStatus()
+            );
+
+
+            volunteers.add(
+                    volunteer
+            );
         }
 
 
