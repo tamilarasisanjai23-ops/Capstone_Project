@@ -1,15 +1,34 @@
-function loginUser(event) {
+// ============================================================
+// LOGIN
+// ============================================================
+
+async function loginUser(event) {
 
     event.preventDefault();
 
+    const emailInput =
+        document.getElementById("loginEmail");
+
+    const passwordInput =
+        document.getElementById("loginPassword");
+
+    if (!emailInput || !passwordInput) {
+        console.error("Login fields not found.");
+        return;
+    }
+
     const email =
-        document.getElementById("loginEmail").value.trim();
+        emailInput.value.trim();
 
     const password =
-        document.getElementById("loginPassword").value;
+        passwordInput.value;
 
     if (!email || !password) {
-        alert("Please enter email and password.");
+
+        alert(
+            "Please enter email and password."
+        );
+
         return;
     }
 
@@ -18,98 +37,223 @@ function loginUser(event) {
         password: password
     };
 
-    fetch("https://capstone-project-c6bv.onrender.com/api/users/login", {
+    try {
 
-        method: "POST",
+        console.log(
+            "Sending login request for:",
+            email
+        );
 
-        headers: {
-            "Content-Type": "application/json"
-        },
+        const response =
+            await fetch(
+                "https://capstone-project-c6bv.onrender.com/api/users/login",
+                {
+                    method: "POST",
 
-        body: JSON.stringify(loginData)
+                    headers: {
+                        "Content-Type":
+                            "application/json",
+                        "Accept":
+                            "application/json"
+                    },
 
-    })
-    .then(response => {
+                    body:
+                        JSON.stringify(
+                            loginData
+                        )
+                }
+            );
+
+
+        const responseText =
+            await response.text();
+
+
+        console.log(
+            "Login response:",
+            response.status,
+            responseText
+        );
+
 
         if (!response.ok) {
-            throw new Error("Invalid email or password");
+
+            alert(
+                "Invalid email or password."
+            );
+
+            return;
         }
 
-        return response.json();
 
-    })
-    .then(user => {
+        let user;
+
+        try {
+
+            user =
+                JSON.parse(
+                    responseText
+                );
+
+        } catch (error) {
+
+            console.error(
+                "Invalid login response:",
+                error
+            );
+
+            alert(
+                "Login response is invalid."
+            );
+
+            return;
+        }
+
+
+        if (!user || !user.email) {
+
+            alert(
+                "Login failed. User data not received."
+            );
+
+            return;
+        }
+
 
         localStorage.setItem(
             "loggedInEmail",
             user.email
         );
 
-        if (user.role === "ADMIN") {
 
-            alert("Admin Login Successful!");
+        localStorage.setItem(
+            "loggedInRole",
+            user.role || ""
+        );
+
+
+        console.log(
+            "Login successful:",
+            user
+        );
+
+
+        if (
+            String(user.role || "")
+                .toUpperCase() === "ADMIN"
+        ) {
+
+            alert(
+                "Admin Login Successful!"
+            );
 
             window.location.href =
                 "admin-dashboard.html";
 
         } else {
 
-            alert("Login Successful!");
+            alert(
+                "Login Successful!"
+            );
 
             window.location.href =
                 "volunteer-dashboard.html";
         }
 
-    })
-    .catch(error => {
+    }
+    catch (error) {
 
-        console.error("Login error:", error);
+        console.error(
+            "Login error:",
+            error
+        );
 
-        alert("Invalid email or password.");
+        alert(
+            "Unable to connect to server. Please try again."
+        );
 
-    });
+    }
 
 }
 
 
+// Make inline HTML onsubmit able to call it
+window.loginUser =
+    loginUser;
 
-// ====================
+
+// ============================================================
 // REGISTER
-// ====================
+// ============================================================
 
-function registerUser(event) {
+async function registerUser(event) {
 
     event.preventDefault();
 
 
+    const nameElement =
+        document.getElementById("name");
+
+    const emailElement =
+        document.getElementById("email");
+
+    const phoneElement =
+        document.getElementById("phone");
+
+    const passwordElement =
+        document.getElementById("password");
+
+    const skillsElement =
+        document.getElementById("skills");
+
+    const locationElement =
+        document.getElementById("location");
+
+
+    if (
+        !nameElement ||
+        !emailElement ||
+        !phoneElement ||
+        !passwordElement
+    ) {
+
+        console.error(
+            "Registration fields not found."
+        );
+
+        return;
+
+    }
+
+
     const name =
-        document.getElementById("name").value.trim();
+        nameElement.value.trim();
 
     const email =
-        document.getElementById("email").value.trim();
+        emailElement.value.trim();
 
     const phone =
-        document.getElementById("phone").value.trim();
+        phoneElement.value.trim();
 
     const password =
-        document.getElementById("password").value;
+        passwordElement.value;
 
     const skills =
-        document.getElementById("skills").value;
+        skillsElement
+            ? skillsElement.value
+            : "";
 
     const location =
-        document.getElementById("location").value.trim();
+        locationElement
+            ? locationElement.value.trim()
+            : "";
 
-
-    // Validate fields
 
     if (
         !name ||
         !email ||
         !phone ||
-        !password ||
-        !skills ||
-        !location
+        !password
     ) {
 
         alert(
@@ -117,10 +261,9 @@ function registerUser(event) {
         );
 
         return;
+
     }
 
-
-    // Data sent to Spring Boot
 
     const userData = {
 
@@ -143,43 +286,48 @@ function registerUser(event) {
     );
 
 
-    fetch("https://capstone-project-c6bv.onrender.com/api/users/register", {
+    try {
 
-    method: "POST",
+        const response =
+            await fetch(
+                "https://capstone-project-c6bv.onrender.com/api/users/register",
+                {
+                    method: "POST",
 
-            headers: {
+                    headers: {
+                        "Content-Type":
+                            "application/json",
+                        "Accept":
+                            "application/json"
+                    },
 
-                "Content-Type":
-                    "application/json"
+                    body:
+                        JSON.stringify(
+                            userData
+                        )
+                }
+            );
 
-            },
 
-            body:
-                JSON.stringify(userData)
+        const responseText =
+            await response.text();
 
-        }
-    )
 
-    .then(response => {
+        console.log(
+            "Registration response:",
+            response.status,
+            responseText
+        );
+
 
         if (!response.ok) {
 
-            throw new Error(
-                "Registration failed"
+            alert(
+                "Registration failed."
             );
 
+            return;
         }
-
-        return response.json();
-
-    })
-
-    .then(data => {
-
-        console.log(
-            "Registration successful:",
-            data
-        );
 
 
         alert(
@@ -190,9 +338,8 @@ function registerUser(event) {
         window.location.href =
             "login.html";
 
-    })
-
-    .catch(error => {
+    }
+    catch (error) {
 
         console.error(
             "Registration error:",
@@ -201,37 +348,49 @@ function registerUser(event) {
 
 
         alert(
-            "Registration failed. Please try again."
+            "Unable to connect to server."
         );
 
-    });
+    }
 
 }
 
 
-
-// ====================
-// CONNECT REGISTER FORM
-// ====================
-
-const registerForm =
-    document.getElementById("registerForm");
+// Make inline HTML able to use it
+window.registerUser =
+    registerUser;
 
 
-if (registerForm) {
+// ============================================================
+// REGISTER FORM SUPPORT
+// ============================================================
 
-    registerForm.addEventListener(
-        "submit",
-        registerUser
-    );
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
 
-}
+        const registerForm =
+            document.getElementById(
+                "registerForm"
+            );
 
 
+        if (registerForm) {
 
-// ====================
+            registerForm.addEventListener(
+                "submit",
+                registerUser
+            );
+
+        }
+
+    }
+);
+
+
+// ============================================================
 // ACCEPT TASK
-// ====================
+// ============================================================
 
 function acceptTask(taskName) {
 
@@ -242,11 +401,13 @@ function acceptTask(taskName) {
 
 }
 
+window.acceptTask =
+    acceptTask;
 
 
-// ====================
+// ============================================================
 // UPDATE TASK
-// ====================
+// ============================================================
 
 function updateTask(taskName) {
 
@@ -257,13 +418,24 @@ function updateTask(taskName) {
 
 }
 
+window.updateTask =
+    updateTask;
 
 
-// ====================
+// ============================================================
 // LOGOUT
-// ====================
+// ============================================================
 
 function logoutUser() {
+
+    localStorage.removeItem(
+        "loggedInEmail"
+    );
+
+    localStorage.removeItem(
+        "loggedInRole"
+    );
+
 
     alert(
         "You have been logged out."
@@ -274,3 +446,6 @@ function logoutUser() {
         "login.html";
 
 }
+
+window.logoutUser =
+    logoutUser;
