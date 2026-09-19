@@ -2,2240 +2,2365 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Volunteer Dashboard</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="css/style.css">
+    <title>
+        Volunteer Dashboard
+    </title>
+
+    <link rel="stylesheet"
+          href="css/style.css">
+
 </head>
+
 
 <body>
 
-    <!-- ========================== -->
-    <!-- NAVIGATION -->
-    <!-- ========================== -->
 
-    <nav>
+<!-- =========================================================
+     NAVIGATION
+     ========================================================= -->
 
-        <h2>
-            Disaster Relief
-        </h2>
+<nav>
 
-        <div>
+    <h2>
+        Disaster Relief
+    </h2>
 
-            <a href="index.html">
-                Home
-            </a>
+    <div>
 
-            <a href="volunteer-dashboard.html">
-                Dashboard
-            </a>
+        <a href="index.html">
+            Home
+        </a>
 
-            <a href="tasks.html">
-                Tasks
-            </a>
+        <a href="volunteer-dashboard.html">
+            Dashboard
+        </a>
 
-            <a href="login.html">
-                Logout
-            </a>
+        <a href="tasks.html">
+            Tasks
+        </a>
 
-        </div>
+        <a href="login.html">
+            Logout
+        </a>
 
-    </nav>
+    </div>
 
+</nav>
 
-    <!-- ========================== -->
-    <!-- DASHBOARD -->
-    <!-- ========================== -->
 
-    <div class="dashboard">
+<!-- =========================================================
+     DASHBOARD
+     ========================================================= -->
 
-        <h1>
-            Welcome, Volunteer!
-        </h1>
+<div class="dashboard">
 
-        <p class="dashboard-subtitle">
-            Thank you for supporting disaster relief activities.
-        </p>
 
+    <h1>
+        Welcome, Volunteer!
+    </h1>
 
-        <!-- ========================== -->
-        <!-- SUMMARY CARDS -->
-        <!-- ========================== -->
 
-        <div class="dashboard-cards">
+    <p class="dashboard-subtitle">
+        Thank you for supporting disaster relief activities.
+    </p>
 
-            <div class="dashboard-card">
 
-                <h3>
-                    Assigned Tasks
-                </h3>
+    <!-- =====================================================
+         SUMMARY CARDS
+         ===================================================== -->
 
-                <p
-                    class="number"
-                    id="assignedCount">
+    <div class="dashboard-cards">
 
-                    0
 
-                </p>
+        <div class="dashboard-card">
 
-            </div>
-
-
-            <div class="dashboard-card">
-
-                <h3>
-                    Completed Tasks
-                </h3>
-
-                <p
-                    class="number"
-                    id="completeCount">
-
-                    0
-
-                </p>
-
-            </div>
-
-
-            <div class="dashboard-card">
-
-                <h3>
-                    Pending Tasks
-                </h3>
-
-                <p
-                    class="number"
-                    id="pendingCount">
-
-                    0
-
-                </p>
-
-            </div>
-
-
-            <div class="dashboard-card">
-
-                <h3>
-                    Relief Activities
-                </h3>
-
-                <p
-                    class="number"
-                    id="reliefCount">
-
-                    0
-
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <!-- ========================== -->
-        <!-- VOLUNTEER PROFILE -->
-        <!-- ========================== -->
-
-        <div class="dashboard-section">
-
-            <h2>
-                My Profile
-            </h2>
-
-            <div class="profile-info">
-
-                <p>
-
-                    <strong>
-                        Name:
-                    </strong>
-
-                    <span id="volunteerName">
-                        Volunteer Name
-                    </span>
-
-                </p>
-
-
-                <p>
-
-                    <strong>
-                        Email:
-                    </strong>
-
-                    <span id="volunteerEmail">
-                        volunteer@gmail.com
-                    </span>
-
-                </p>
-
-
-                <p>
-
-                    <strong>
-                        Phone:
-                    </strong>
-
-                    <span id="volunteerPhone">
-                        -
-
-                    </span>
-
-                </p>
-
-
-                <p>
-
-                    <strong>
-                        Skill:
-                    </strong>
-
-                    <span id="volunteerSkill">
-                        -
-
-                    </span>
-
-                </p>
-
-
-                <p>
-
-                    <strong>
-                        Location:
-                    </strong>
-
-                    <span id="volunteerLocation">
-                        -
-
-                    </span>
-
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <!-- ========================== -->
-        <!-- NOTIFICATION CENTER -->
-        <!-- ========================== -->
-
-        <div class="dashboard-section">
-
-            <h2>
-
-                🔔 Notification Center
-
-                <span
-                    id="unreadCount"
-                    style="
-                        color: #d32f2f;
-                        font-size: 16px;
-                        margin-left: 10px;
-                    ">
-
-                    Unread: 0
-
-                </span>
-
-            </h2>
-
-
-            <button
-                id="refreshNotificationsBtn"
-                class="assign-btn"
-                style="margin-bottom: 15px;">
-
-                🔄 Refresh Notifications
-
-            </button>
-
-
-            <div id="notificationContainer">
-
-                <p>
-                    Loading notifications...
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <!-- ========================== -->
-        <!-- SOS ALERT -->
-        <!-- ========================== -->
-
-        <div
-            class="dashboard-section"
-            style="
-                text-align: center;
-                border: 2px solid #d32f2f;
-                background-color: #fff5f5;
-            ">
-
-            <h2>
-                🆘 Emergency SOS
-            </h2>
-
-            <p>
-                Press the button only during an emergency.
-            </p>
-
-
-            <button
-                id="sosButton"
-                onclick="sendSOS()"
-                style="
-                    background-color: #d32f2f;
-                    color: white;
-                    border: none;
-                    padding: 15px 30px;
-                    font-size: 20px;
-                    font-weight: bold;
-                    border-radius: 8px;
-                    cursor: pointer;
-                ">
-
-                🆘 SEND SOS
-
-            </button>
-
+            <h3>
+                Assigned Tasks
+            </h3>
 
             <p
-                id="sosStatus"
-                style="
-                    margin-top: 15px;
-                    font-weight: bold;
-                ">
+                class="number"
+                id="assignedCount">
+
+                0
 
             </p>
 
         </div>
 
 
-        <!-- ========================== -->
-        <!-- EMERGENCY ALERTS -->
-        <!-- ========================== -->
+        <div class="dashboard-card">
 
-        <div class="dashboard-section alert">
+            <h3>
+                Completed Tasks
+            </h3>
 
-            <h2>
-                🚨 Emergency Alerts
-            </h2>
+            <p
+                class="number"
+                id="completeCount">
 
+                0
 
-            <div id="emergencyAlerts">
-
-                <p>
-                    Loading emergency alerts...
-                </p>
-
-            </div>
+            </p>
 
         </div>
 
 
-        <!-- ========================== -->
-        <!-- VOICE ALERTS -->
-        <!-- ========================== -->
+        <div class="dashboard-card">
 
-        <div class="dashboard-section">
+            <h3>
+                Pending Tasks
+            </h3>
 
-            <h2>
-                🎙️ Voice Alerts
-            </h2>
+            <p
+                class="number"
+                id="pendingCount">
 
+                0
 
-            <div id="voiceAlerts">
-
-                <p>
-                    Loading voice alerts...
-                </p>
-
-            </div>
+            </p>
 
         </div>
 
 
-        <!-- ========================== -->
-        <!-- ASSIGNED TASKS -->
-        <!-- ========================== -->
+        <div class="dashboard-card">
 
-        <div class="dashboard-section">
+            <h3>
+                Relief Activities
+            </h3>
 
-            <h2>
-                📋 My Assigned Tasks
-            </h2>
+            <p
+                class="number"
+                id="reliefCount">
 
+                0
 
-            <button
-                id="refreshTasksBtn"
-                class="assign-btn"
-                style="margin-bottom: 15px;">
-
-                🔄 Refresh Tasks
-
-            </button>
-
-
-            <div id="assignedTasksContainer">
-
-                <p>
-                    Loading assigned tasks...
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <!-- ========================== -->
-        <!-- RECENT TASKS -->
-        <!-- ========================== -->
-
-        <div class="dashboard-section">
-
-            <h2>
-                Recent Tasks
-            </h2>
-
-
-            <div
-                style="
-                    overflow-x: auto;
-                ">
-
-                <table id="recentTasksTable">
-
-                    <tr>
-
-                        <th>
-                            Task
-                        </th>
-
-                        <th>
-                            Location
-                        </th>
-
-                        <th>
-                            Priority
-                        </th>
-
-                        <th>
-                            Status
-                        </th>
-
-                    </tr>
-
-
-                    <tr>
-
-                        <td colspan="4">
-                            Loading tasks...
-                        </td>
-
-                    </tr>
-
-                </table>
-
-            </div>
+            </p>
 
         </div>
 
     </div>
 
 
-    <!-- ========================== -->
-    <!-- JAVASCRIPT -->
-    <!-- ========================== -->
+    <!-- =====================================================
+         VOLUNTEER PROFILE
+         ===================================================== -->
 
-    <script>
+    <div class="dashboard-section">
 
-        const BACKEND_URL =
-            "https://capstone-project-c6bv.onrender.com";
+        <h2>
+            My Profile
+        </h2>
 
 
-        /* =====================================================
-           LOAD LOGGED-IN EMAIL
-           ===================================================== */
+        <div class="profile-info">
 
-        function getLoggedInEmail() {
 
-            return localStorage.getItem(
-                "loggedInEmail"
+            <p>
+
+                <strong>
+                    Name:
+                </strong>
+
+                <span id="volunteerName">
+                    Loading...
+                </span>
+
+            </p>
+
+
+            <p>
+
+                <strong>
+                    Email:
+                </strong>
+
+                <span id="volunteerEmail">
+                    Loading...
+                </span>
+
+            </p>
+
+
+            <p>
+
+                <strong>
+                    Phone:
+                </strong>
+
+                <span id="volunteerPhone">
+                    Loading...
+                </span>
+
+            </p>
+
+
+            <p>
+
+                <strong>
+                    Skill:
+                </strong>
+
+                <span id="volunteerSkill">
+                    Loading...
+                </span>
+
+            </p>
+
+
+            <p>
+
+                <strong>
+                    Location:
+                </strong>
+
+                <span id="volunteerLocation">
+                    -
+                </span>
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         NOTIFICATION CENTER
+         ===================================================== -->
+
+    <div class="dashboard-section">
+
+
+        <h2>
+
+            🔔 Notification Center
+
+            <span
+                id="unreadCount"
+                style="
+                    color:#d32f2f;
+                    font-size:16px;
+                    margin-left:10px;
+                ">
+
+                Unread: 0
+
+            </span>
+
+        </h2>
+
+
+        <button
+            id="refreshNotificationsBtn"
+            class="assign-btn"
+            style="
+                margin-bottom:15px;
+            ">
+
+            🔄 Refresh Notifications
+
+        </button>
+
+
+        <div id="notificationContainer">
+
+            <p>
+                Loading notifications...
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         SOS
+         ===================================================== -->
+
+    <div
+        class="dashboard-section"
+        style="
+            text-align:center;
+            border:2px solid #d32f2f;
+            background-color:#fff5f5;
+        ">
+
+
+        <h2>
+            🆘 Emergency SOS
+        </h2>
+
+
+        <p>
+            Press the button only during an emergency.
+        </p>
+
+
+        <button
+            id="sosButton"
+            onclick="sendSOS()"
+            style="
+                background-color:#d32f2f;
+                color:white;
+                border:none;
+                padding:15px 30px;
+                font-size:20px;
+                font-weight:bold;
+                border-radius:8px;
+                cursor:pointer;
+            ">
+
+            🆘 SEND SOS
+
+        </button>
+
+
+        <p
+            id="sosStatus"
+            style="
+                margin-top:15px;
+                font-weight:bold;
+            ">
+
+        </p>
+
+    </div>
+
+
+    <!-- =====================================================
+         EMERGENCY ALERTS
+         ===================================================== -->
+
+    <div class="dashboard-section alert">
+
+
+        <h2>
+            🚨 Emergency Alerts
+        </h2>
+
+
+        <div id="emergencyAlerts">
+
+            <p>
+                Loading emergency alerts...
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         VOICE ALERTS
+         ===================================================== -->
+
+    <div class="dashboard-section">
+
+
+        <h2>
+            🎙️ Voice Alerts
+        </h2>
+
+
+        <div id="voiceAlerts">
+
+            <p>
+                Loading voice alerts...
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         ASSIGNED TASKS
+         ===================================================== -->
+
+    <div class="dashboard-section">
+
+
+        <h2>
+            📋 My Assigned Tasks
+        </h2>
+
+
+        <button
+            id="refreshTasksBtn"
+            class="assign-btn"
+            style="
+                margin-bottom:15px;
+            ">
+
+            🔄 Refresh Tasks
+
+        </button>
+
+
+        <div id="assignedTasksContainer">
+
+            <p>
+                Loading assigned tasks...
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         RECENT TASKS
+         ===================================================== -->
+
+    <div class="dashboard-section">
+
+
+        <h2>
+            Recent Tasks
+        </h2>
+
+
+        <div
+            style="
+                overflow-x:auto;
+            ">
+
+
+            <table id="recentTasksTable">
+
+                <tr>
+
+                    <th>
+                        Task
+                    </th>
+
+                    <th>
+                        Location
+                    </th>
+
+                    <th>
+                        Priority
+                    </th>
+
+                    <th>
+                        Status
+                    </th>
+
+                </tr>
+
+
+                <tr>
+
+                    <td colspan="4">
+                        Loading tasks...
+                    </td>
+
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+     ========================================================= -->
+
+<script>
+
+
+/* =========================================================
+   BACKEND URL
+   ========================================================= */
+
+const BACKEND_URL =
+    "https://capstone-project-c6bv.onrender.com";
+
+
+/* =========================================================
+   GET LOGGED-IN EMAIL
+   ========================================================= */
+
+function getLoggedInEmail() {
+
+    return localStorage.getItem(
+        "loggedInEmail"
+    );
+
+}
+
+
+/* =========================================================
+   LOAD EMAIL
+   ========================================================= */
+
+function loadVolunteerEmail() {
+
+    const email =
+        getLoggedInEmail();
+
+
+    const emailElement =
+        document.getElementById(
+            "volunteerEmail"
+        );
+
+
+    if (email) {
+
+        emailElement.innerText =
+            email;
+
+    }
+    else {
+
+        emailElement.innerText =
+            "Not logged in";
+
+    }
+
+}
+
+
+/* =========================================================
+   LOAD REAL VOLUNTEER PROFILE
+   ========================================================= */
+
+function loadVolunteerProfile() {
+
+    const email =
+        getLoggedInEmail();
+
+
+    if (!email) {
+
+        return;
+
+    }
+
+
+    fetch(
+        BACKEND_URL +
+        "/api/users/email?email=" +
+        encodeURIComponent(
+            email
+        )
+    )
+
+    .then(function(response) {
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Profile API not available"
             );
 
         }
 
 
-        /* =====================================================
-           LOAD VOLUNTEER EMAIL
-           ===================================================== */
+        return response.json();
 
-        function loadVolunteerEmail() {
+    })
 
-            const loggedInEmail =
-                getLoggedInEmail();
+    .then(function(user) {
 
+        if (!user) {
 
-            const emailElement =
-                document.getElementById(
-                    "volunteerEmail"
-                );
-
-
-            if (loggedInEmail) {
-
-                emailElement.innerText =
-                    loggedInEmail;
-
-            }
+            return;
 
         }
 
 
-        /* =====================================================
-           LOAD VOLUNTEER PROFILE
-           ===================================================== */
-
-        function loadVolunteerProfile() {
-
-            const email =
-                getLoggedInEmail();
-
-
-            if (!email) {
-
-                return;
-
-            }
-
-
-            fetch(
-                BACKEND_URL +
-                "/api/users/email?email=" +
-                encodeURIComponent(email)
-            )
-
-                .then(function (response) {
-
-                    if (!response.ok) {
-
-                        throw new Error(
-                            "Profile API not available"
-                        );
-
-                    }
-
-                    return response.json();
-
-                })
-
-                .then(function (user) {
-
-                    if (!user) {
-
-                        return;
-
-                    }
-
-
-                    const nameElement =
-                        document.getElementById(
-                            "volunteerName"
-                        );
-
-
-                    const phoneElement =
-                        document.getElementById(
-                            "volunteerPhone"
-                        );
-
-
-                    if (nameElement) {
-
-                        nameElement.innerText =
-                            user.name ||
-                            "Volunteer";
-
-                    }
-
-
-                    if (phoneElement) {
-
-                        phoneElement.innerText =
-                            user.phone ||
-                            "-";
-
-                    }
-
-                })
-
-                .catch(function (error) {
-
-                    console.log(
-                        "Profile API unavailable:",
-                        error.message
-                    );
-
-                });
-
-        }
-
-
-        /* =====================================================
-           LOAD NOTIFICATIONS
-           ===================================================== */
-
-        function loadNotifications() {
-
-            const email =
-                getLoggedInEmail();
-
-
-            const container =
-                document.getElementById(
-                    "notificationContainer"
-                );
-
-
-            const unreadCountElement =
-                document.getElementById(
-                    "unreadCount"
-                );
-
-
-            if (!email) {
-
-                container.innerHTML = `
-                    <p>
-                        Please login again to view notifications.
-                    </p>
-                `;
-
-
-                unreadCountElement.innerText =
-                    "Unread: 0";
-
-
-                return;
-
-            }
-
-
-            fetch(
-                BACKEND_URL +
-                "/api/notifications/email?email=" +
-                encodeURIComponent(email)
-            )
-
-                .then(function (response) {
-
-                    if (!response.ok) {
-
-                        return response
-                            .text()
-                            .then(function (message) {
-
-                                throw new Error(
-                                    message ||
-                                    "Failed to load notifications"
-                                );
-
-                            });
-
-                    }
-
-
-                    return response.json();
-
-                })
-
-                .then(function (notifications) {
-
-                    container.innerHTML =
-                        "";
-
-
-                    if (
-                        !Array.isArray(notifications) ||
-                        notifications.length === 0
-                    ) {
-
-                        container.innerHTML = `
-                            <p>
-                                No notifications available.
-                            </p>
-                        `;
-
-
-                        unreadCountElement.innerText =
-                            "Unread: 0";
-
-
-                        return;
-
-                    }
-
-
-                    let unreadCount =
-                        0;
-
-
-                    notifications.forEach(
-                        function (notification) {
-
-                            if (
-                                notification.readStatus ===
-                                false
-                            ) {
-
-                                unreadCount++;
-
-                            }
-
-
-                            const notificationBox =
-                                document.createElement(
-                                    "div"
-                                );
-
-
-                            notificationBox.style.marginBottom =
-                                "15px";
-
-
-                            notificationBox.style.padding =
-                                "15px";
-
-
-                            notificationBox.style.borderRadius =
-                                "8px";
-
-
-                            notificationBox.style.border =
-                                notification.readStatus
-                                    ? "1px solid #ddd"
-                                    : "2px solid #d32f2f";
-
-
-                            notificationBox.style.backgroundColor =
-                                notification.readStatus
-                                    ? "#ffffff"
-                                    : "#fff5f5";
-
-
-                            const title =
-                                notification.title ||
-                                "Notification";
-
-
-                            const message =
-                                notification.message ||
-                                "";
-
-
-                            const type =
-                                notification.type ||
-                                "GENERAL";
-
-
-                            const createdAt =
-                                notification.createdAt ||
-                                "";
-
-
-                            notificationBox.innerHTML = `
-
-                                <h3>
-                                    🔔 ${title}
-                                </h3>
-
-                                <p>
-                                    <strong>
-                                        Type:
-                                    </strong>
-                                    ${type}
-                                </p>
-
-                                <p>
-                                    <strong>
-                                        Message:
-                                    </strong>
-                                    ${message}
-                                </p>
-
-                                <p>
-                                    <strong>
-                                        Time:
-                                    </strong>
-                                    ${createdAt}
-                                </p>
-
-                            `;
-
-
-                            if (
-                                notification.readStatus ===
-                                false
-                            ) {
-
-                                const readButton =
-                                    document.createElement(
-                                        "button"
-                                    );
-
-
-                                readButton.innerText =
-                                    "Mark as Read";
-
-
-                                readButton.className =
-                                    "assign-btn";
-
-
-                                readButton.addEventListener(
-                                    "click",
-                                    function () {
-
-                                        markNotificationAsRead(
-                                            notification.notificationId
-                                        );
-
-                                    }
-                                );
-
-
-                                notificationBox.appendChild(
-                                    readButton
-                                );
-
-                            }
-                            else {
-
-                                const readText =
-                                    document.createElement(
-                                        "span"
-                                    );
-
-
-                                readText.innerText =
-                                    "✓ Read";
-
-
-                                readText.style.color =
-                                    "green";
-
-
-                                readText.style.fontWeight =
-                                    "bold";
-
-
-                                notificationBox.appendChild(
-                                    readText
-                                );
-
-                            }
-
-
-                            container.appendChild(
-                                notificationBox
-                            );
-
-                        }
-                    );
-
-
-                    unreadCountElement.innerText =
-                        "Unread: " +
-                        unreadCount;
-
-                })
-
-                .catch(function (error) {
-
-                    console.error(
-                        "Notification error:",
-                        error
-                    );
-
-
-                    container.innerHTML = `
-                        <p>
-                            Unable to load notifications.
-                        </p>
-                    `;
-
-
-                    unreadCountElement.innerText =
-                        "Unread: 0";
-
-                });
-
-        }
-
-
-        /* =====================================================
-           MARK NOTIFICATION AS READ
-           ===================================================== */
-
-        function markNotificationAsRead(
-            notificationId
-        ) {
-
-            fetch(
-                BACKEND_URL +
-                "/api/notifications/" +
-                notificationId +
-                "/read",
-                {
-                    method:
-                        "PUT"
-                }
-            )
-
-                .then(function (response) {
-
-                    if (!response.ok) {
-
-                        throw new Error(
-                            "Failed to mark notification as read"
-                        );
-
-                    }
-
-
-                    return response.json();
-
-                })
-
-                .then(function () {
-
-                    loadNotifications();
-
-                })
-
-                .catch(function (error) {
-
-                    console.error(
-                        "Mark read error:",
-                        error
-                    );
-
-
-                    alert(
-                        "Failed to mark notification as read."
-                    );
-
-                });
-
-        }
-
-
-        /* =====================================================
-           REFRESH NOTIFICATIONS
-           ===================================================== */
-
-        const refreshNotificationsBtn =
+        /* =========================================
+           NAME
+           ========================================= */
+
+        const nameElement =
             document.getElementById(
-                "refreshNotificationsBtn"
+                "volunteerName"
             );
 
 
-        if (refreshNotificationsBtn) {
+        if (nameElement) {
 
-            refreshNotificationsBtn.addEventListener(
-                "click",
-                function () {
-
-                    loadNotifications();
-
-                }
-            );
+            nameElement.innerText =
+                user.name ||
+                "Volunteer";
 
         }
 
 
-        /* =====================================================
-           LOAD ALL TASKS
-           ===================================================== */
+        /* =========================================
+           EMAIL
+           ========================================= */
 
-        function loadVolunteerTasks() {
+        const emailElement =
+            document.getElementById(
+                "volunteerEmail"
+            );
 
-            const email =
-                getLoggedInEmail();
 
+        if (emailElement) {
 
-            const container =
-                document.getElementById(
-                    "assignedTasksContainer"
-                );
+            emailElement.innerText =
+                user.email ||
+                email ||
+                "-";
 
+        }
 
-            const table =
-                document.getElementById(
-                    "recentTasksTable"
-                );
 
+        /* =========================================
+           PHONE
+           ========================================= */
 
-            if (!email) {
+        const phoneElement =
+            document.getElementById(
+                "volunteerPhone"
+            );
 
-                container.innerHTML = `
-                    <p>
-                        Please login again to view assigned tasks.
-                    </p>
-                `;
 
+        if (phoneElement) {
 
-                return;
+            phoneElement.innerText =
+                user.phone ||
+                "-";
 
-            }
+        }
 
 
-            fetch(
-                BACKEND_URL +
-                "/api/tasks"
-            )
+        /* =========================================
+           SKILL
+           ========================================= */
 
-                .then(function (response) {
+        const skillElement =
+            document.getElementById(
+                "volunteerSkill"
+            );
 
-                    if (!response.ok) {
 
-                        throw new Error(
-                            "Failed to load tasks"
-                        );
+        if (skillElement) {
 
-                    }
+            skillElement.innerText =
+                user.skills ||
+                "Not Specified";
 
+        }
 
-                    return response.json();
 
-                })
+        /* =========================================
+           LOCATION
+           ========================================= */
 
-                .then(function (tasks) {
+        const locationElement =
+            document.getElementById(
+                "volunteerLocation"
+            );
 
-                    if (
-                        !Array.isArray(tasks)
-                    ) {
 
-                        tasks = [];
+        if (locationElement) {
 
-                    }
+            locationElement.innerText =
+                user.location ||
+                "-";
 
+        }
 
-                    /* =========================================
-                       FILTER TASKS FOR CURRENT VOLUNTEER
-                       ========================================= */
+    })
 
-                    const assignedTasks =
-                        tasks.filter(
-                            function (task) {
+    .catch(function(error) {
 
-                                if (
-                                    !task.volunteer ||
-                                    !task.volunteer.user
-                                ) {
+        console.error(
+            "Profile error:",
+            error
+        );
 
-                                    return false;
 
-                                }
+        document.getElementById(
+            "volunteerName"
+        ).innerText =
+            "Unable to load";
 
 
-                                return (
-                                    task.volunteer.user.email
-                                        ===
-                                    email
-                                );
+        document.getElementById(
+            "volunteerPhone"
+        ).innerText =
+            "-";
 
-                            }
-                        );
 
+        document.getElementById(
+            "volunteerSkill"
+        ).innerText =
+            "-";
 
-                    /* =========================================
-                       COUNTS
-                       ========================================= */
+    });
 
-                    const assignedCount =
-                        assignedTasks.length;
+}
 
 
-                    const completedTasks =
-                        assignedTasks.filter(
-                            function (task) {
+/* =========================================================
+   LOAD NOTIFICATIONS
+   ========================================================= */
 
-                                return (
-                                    task.status &&
-                                    task.status.toLowerCase()
-                                        ===
-                                    "completed"
-                                );
+function loadNotifications() {
 
-                            }
-                        );
+    const email =
+        getLoggedInEmail();
 
 
-                    const pendingTasks =
-                        assignedTasks.filter(
-                            function (task) {
+    const container =
+        document.getElementById(
+            "notificationContainer"
+        );
 
-                                return (
-                                    !task.status ||
-                                    task.status.toLowerCase()
-                                        !==
-                                    "completed"
-                                );
 
-                            }
-                        );
+    const unreadCountElement =
+        document.getElementById(
+            "unreadCount"
+        );
 
 
-                    document.getElementById(
-                        "assignedCount"
-                    ).innerText =
-                        assignedCount;
+    if (!email) {
 
+        container.innerHTML = `
+            <p>
+                Please login again to view notifications.
+            </p>
+        `;
 
-                    document.getElementById(
-                        "completeCount"
-                    ).innerText =
-                        completedTasks.length;
 
+        unreadCountElement.innerText =
+            "Unread: 0";
 
-                    document.getElementById(
-                        "pendingCount"
-                    ).innerText =
-                        pendingTasks.length;
 
+        return;
 
-                    document.getElementById(
-                        "reliefCount"
-                    ).innerText =
-                        completedTasks.length;
+    }
 
 
-                    /* =========================================
-                       ASSIGNED TASK CARDS
-                       ========================================= */
+    fetch(
+        BACKEND_URL +
+        "/api/notifications/email?email=" +
+        encodeURIComponent(
+            email
+        )
+    )
 
-                    container.innerHTML =
-                        "";
+    .then(function(response) {
 
+        if (!response.ok) {
 
-                    if (
-                        assignedTasks.length ===
-                        0
-                    ) {
+            return response
+                .text()
+                .then(function(message) {
 
-                        container.innerHTML = `
-                            <p>
-                                No tasks assigned yet.
-                            </p>
-                        `;
-
-                    }
-                    else {
-
-                        assignedTasks.forEach(
-                            function (task) {
-
-                                createTaskCard(
-                                    task,
-                                    container
-                                );
-
-                            }
-                        );
-
-                    }
-
-
-                    /* =========================================
-                       RECENT TASK TABLE
-                       ========================================= */
-
-                    table.innerHTML = `
-
-                        <tr>
-
-                            <th>
-                                Task
-                            </th>
-
-                            <th>
-                                Location
-                            </th>
-
-                            <th>
-                                Priority
-                            </th>
-
-                            <th>
-                                Status
-                            </th>
-
-                        </tr>
-
-                    `;
-
-
-                    if (
-                        assignedTasks.length ===
-                        0
-                    ) {
-
-                        const row =
-                            table.insertRow(-1);
-
-
-                        const cell =
-                            row.insertCell(0);
-
-
-                        cell.colSpan =
-                            4;
-
-
-                        cell.innerText =
-                            "No assigned tasks.";
-
-                    }
-                    else {
-
-                        assignedTasks.forEach(
-                            function (task) {
-
-                                const row =
-                                    table.insertRow(
-                                        -1
-                                    );
-
-
-                                row.insertCell(
-                                    0
-                                ).innerText =
-                                    task.taskName ||
-                                    "";
-
-
-                                row.insertCell(
-                                    1
-                                ).innerText =
-                                    task.location ||
-                                    "";
-
-
-                                row.insertCell(
-                                    2
-                                ).innerText =
-                                    task.priority ||
-                                    "";
-
-
-                                const statusCell =
-                                    row.insertCell(
-                                        3
-                                    );
-
-
-                                const status =
-                                    task.status ||
-                                    "Pending";
-
-
-                                statusCell.innerText =
-                                    status;
-
-
-                                if (
-                                    status.toLowerCase()
-                                        ===
-                                    "completed"
-                                ) {
-
-                                    statusCell.style.color =
-                                        "green";
-
-                                    statusCell.style.fontWeight =
-                                        "bold";
-
-                                }
-                                else {
-
-                                    statusCell.style.color =
-                                        "orange";
-
-                                    statusCell.style.fontWeight =
-                                        "bold";
-
-                                }
-
-                            }
-                        );
-
-                    }
-
-                })
-
-                .catch(function (error) {
-
-                    console.error(
-                        "Task loading error:",
-                        error
+                    throw new Error(
+                        message ||
+                        "Failed to load notifications"
                     );
-
-
-                    container.innerHTML = `
-                        <p>
-                            Unable to load assigned tasks.
-                        </p>
-                    `;
 
                 });
 
         }
 
 
-        /* =====================================================
-           CREATE TASK CARD
-           ===================================================== */
+        return response.json();
 
-        function createTaskCard(
-            task,
-            container
+    })
+
+    .then(function(notifications) {
+
+        container.innerHTML =
+            "";
+
+
+        if (
+            !Array.isArray(
+                notifications
+            ) ||
+            notifications.length === 0
         ) {
 
-            const taskBox =
-                document.createElement(
-                    "div"
-                );
-
-
-            taskBox.style.marginBottom =
-                "15px";
-
-
-            taskBox.style.padding =
-                "18px";
-
-
-            taskBox.style.borderRadius =
-                "10px";
-
-
-            taskBox.style.border =
-                "1px solid #ddd";
-
-
-            taskBox.style.backgroundColor =
-                "#ffffff";
-
-
-            const status =
-                task.status ||
-                "Pending";
-
-
-            const taskName =
-                task.taskName ||
-                "Task";
-
-
-            const location =
-                task.location ||
-                "-";
-
-
-            const priority =
-                task.priority ||
-                "-";
-
-
-            taskBox.innerHTML = `
-
-                <h3>
-                    📋 ${taskName}
-                </h3>
-
+            container.innerHTML = `
                 <p>
-                    <strong>
-                        Location:
-                    </strong>
-                    ${location}
+                    No notifications available.
                 </p>
-
-                <p>
-                    <strong>
-                        Priority:
-                    </strong>
-                    ${priority}
-                </p>
-
-                <p>
-                    <strong>
-                        Status:
-                    </strong>
-
-                    <span
-                        class="task-status-text">
-
-                        ${status}
-
-                    </span>
-
-                </p>
-
             `;
 
 
-            const statusText =
-                taskBox.querySelector(
-                    ".task-status-text"
-                );
+            unreadCountElement.innerText =
+                "Unread: 0";
 
 
-            if (
-                status.toLowerCase() ===
-                "completed"
-            ) {
+            return;
 
-                statusText.style.color =
-                    "green";
+        }
 
 
-                statusText.style.fontWeight =
-                    "bold";
-
-            }
-            else {
-
-                statusText.style.color =
-                    "orange";
+        let unread =
+            0;
 
 
-                statusText.style.fontWeight =
-                    "bold";
-
-            }
+        notifications.forEach(
+            function(notification) {
 
 
-            if (
-                status.toLowerCase() !==
-                "completed"
-            ) {
+                if (
+                    notification.readStatus ===
+                    false
+                ) {
 
-                const completeButton =
+                    unread++;
+
+                }
+
+
+                const box =
                     document.createElement(
-                        "button"
+                        "div"
                     );
 
 
-                completeButton.innerText =
-                    "✅ Complete Task";
+                box.style.marginBottom =
+                    "15px";
 
 
-                completeButton.className =
-                    "assign-btn";
+                box.style.padding =
+                    "15px";
 
 
-                completeButton.style.marginTop =
-                    "10px";
+                box.style.borderRadius =
+                    "8px";
 
 
-                completeButton.addEventListener(
-                    "click",
-                    function () {
+                box.style.border =
+                    notification.readStatus
+                        ? "1px solid #ddd"
+                        : "2px solid #d32f2f";
 
-                        completeAssignedTask(
-                            task.taskId
-                        );
 
-                    }
-                );
+                box.style.backgroundColor =
+                    notification.readStatus
+                        ? "#fff"
+                        : "#fff5f5";
 
 
-                taskBox.appendChild(
-                    completeButton
-                );
+                box.innerHTML = `
 
-            }
-            else {
+                    <h3>
+                        🔔 ${
+                            notification.title ||
+                            "Notification"
+                        }
+                    </h3>
 
-                const completedText =
-                    document.createElement(
-                        "span"
-                    );
+                    <p>
 
+                        <strong>
+                            Type:
+                        </strong>
 
-                completedText.innerText =
-                    "✓ Completed";
+                        ${
+                            notification.type ||
+                            "GENERAL"
+                        }
 
+                    </p>
 
-                completedText.style.color =
-                    "green";
+                    <p>
 
+                        <strong>
+                            Message:
+                        </strong>
 
-                completedText.style.fontWeight =
-                    "bold";
+                        ${
+                            notification.message ||
+                            ""
+                        }
 
+                    </p>
 
-                completedText.style.display =
-                    "inline-block";
+                    <p>
 
+                        <strong>
+                            Time:
+                        </strong>
 
-                completedText.style.marginTop =
-                    "10px";
+                        ${
+                            notification.createdAt ||
+                            ""
+                        }
 
+                    </p>
 
-                taskBox.appendChild(
-                    completedText
-                );
+                `;
 
-            }
 
+                if (
+                    notification.readStatus ===
+                    false
+                ) {
 
-            container.appendChild(
-                taskBox
-            );
-
-        }
-
-
-        /* =====================================================
-           COMPLETE ASSIGNED TASK
-           ===================================================== */
-
-        function completeAssignedTask(
-            taskId
-        ) {
-
-            fetch(
-                BACKEND_URL +
-                "/api/tasks/" +
-                taskId +
-                "/status?status=Completed",
-                {
-
-                    method:
-                        "PUT"
-
-                }
-            )
-
-                .then(function (response) {
-
-                    if (!response.ok) {
-
-                        return response
-                            .text()
-                            .then(function (message) {
-
-                                throw new Error(
-                                    message ||
-                                    "Failed to update task"
-                                );
-
-                            });
-
-                    }
-
-
-                    return response.json();
-
-                })
-
-                .then(function () {
-
-                    alert(
-                        "Task marked as completed!"
-                    );
-
-
-                    loadVolunteerTasks();
-
-                    loadNotifications();
-
-                })
-
-                .catch(function (error) {
-
-                    console.error(
-                        "Task update error:",
-                        error
-                    );
-
-
-                    alert(
-                        "Failed to update task."
-                    );
-
-                });
-
-        }
-
-
-        /* =====================================================
-           REFRESH TASKS
-           ===================================================== */
-
-        const refreshTasksBtn =
-            document.getElementById(
-                "refreshTasksBtn"
-            );
-
-
-        if (refreshTasksBtn) {
-
-            refreshTasksBtn.addEventListener(
-                "click",
-                function () {
-
-                    loadVolunteerTasks();
-
-                }
-            );
-
-        }
-
-
-        /* =====================================================
-           LOAD EMERGENCY ALERTS
-           ===================================================== */
-
-        function loadEmergencyAlerts() {
-
-            fetch(
-                BACKEND_URL +
-                "/api/emergency-alerts"
-            )
-
-                .then(function (response) {
-
-                    if (!response.ok) {
-
-                        throw new Error(
-                            "Failed to load emergency alerts"
-                        );
-
-                    }
-
-
-                    return response.json();
-
-                })
-
-                .then(function (alerts) {
-
-                    const alertContainer =
-                        document.getElementById(
-                            "emergencyAlerts"
+                    const readButton =
+                        document.createElement(
+                            "button"
                         );
 
 
-                    if (
-                        !Array.isArray(alerts) ||
-                        alerts.length === 0
-                    ) {
-
-                        alertContainer.innerHTML = `
-                            <p>
-                                No emergency alerts available.
-                            </p>
-                        `;
+                    readButton.innerText =
+                        "Mark as Read";
 
 
-                        return;
-
-                    }
-
-
-                    alertContainer.innerHTML =
-                        "";
+                    readButton.className =
+                        "assign-btn";
 
 
-                    alerts.forEach(
-                        function (alert) {
+                    readButton.addEventListener(
+                        "click",
+                        function() {
 
-                            const alertBox =
-                                document.createElement(
-                                    "div"
-                                );
-
-
-                            alertBox.style.marginBottom =
-                                "15px";
-
-
-                            alertBox.style.padding =
-                                "15px";
-
-
-                            alertBox.style.borderRadius =
-                                "8px";
-
-
-                            alertBox.style.border =
-                                "1px solid #ddd";
-
-
-                            alertBox.style.backgroundColor =
-                                "#fff";
-
-
-                            alertBox.innerHTML = `
-
-                                <h3>
-                                    🚨 ${
-                                        alert.title ||
-                                        "Emergency Alert"
-                                    }
-                                </h3>
-
-                                <p>
-
-                                    <strong>
-                                        Message:
-                                    </strong>
-
-                                    ${
-                                        alert.message ||
-                                        ""
-                                    }
-
-                                </p>
-
-                                <p>
-
-                                    <strong>
-                                        Severity:
-                                    </strong>
-
-                                    ${
-                                        alert.severity ||
-                                        ""
-                                    }
-
-                                </p>
-
-                            `;
-
-
-                            alertContainer.appendChild(
-                                alertBox
+                            markNotificationAsRead(
+                                notification.notificationId
                             );
 
                         }
                     );
 
-                })
 
-                .catch(function (error) {
-
-                    console.error(
-                        "Error loading emergency alerts:",
-                        error
+                    box.appendChild(
+                        readButton
                     );
 
+                }
+                else {
 
-                    const alertContainer =
-                        document.getElementById(
-                            "emergencyAlerts"
+                    const readText =
+                        document.createElement(
+                            "span"
                         );
 
 
-                    alertContainer.innerHTML = `
-                        <p>
-                            Unable to load emergency alerts.
-                        </p>
-                    `;
+                    readText.innerText =
+                        "✓ Read";
 
-                });
 
-        }
+                    readText.style.color =
+                        "green";
 
 
-        /* =====================================================
-           LOAD VOICE ALERTS
-           ===================================================== */
+                    readText.style.fontWeight =
+                        "bold";
 
-        function loadVoiceAlerts() {
 
-            const voiceContainer =
-                document.getElementById(
-                    "voiceAlerts"
-                );
-
-
-            fetch(
-                BACKEND_URL +
-                "/api/voice-alerts"
-            )
-
-                .then(function (response) {
-
-                    if (!response.ok) {
-
-                        throw new Error(
-                            "Failed to load voice alerts"
-                        );
-
-                    }
-
-
-                    return response.json();
-
-                })
-
-                .then(function (alerts) {
-
-                    if (
-                        !Array.isArray(alerts) ||
-                        alerts.length === 0
-                    ) {
-
-                        voiceContainer.innerHTML = `
-                            <p>
-                                No voice alerts available.
-                            </p>
-                        `;
-
-
-                        return;
-
-                    }
-
-
-                    voiceContainer.innerHTML =
-                        "";
-
-
-                    alerts.forEach(
-                        function (voiceAlert) {
-
-                            const alertBox =
-                                document.createElement(
-                                    "div"
-                                );
-
-
-                            alertBox.style.marginBottom =
-                                "15px";
-
-
-                            alertBox.style.padding =
-                                "15px";
-
-
-                            alertBox.style.borderRadius =
-                                "8px";
-
-
-                            alertBox.style.border =
-                                "1px solid #ddd";
-
-
-                            alertBox.style.backgroundColor =
-                                "#fff";
-
-
-                            const title =
-                                voiceAlert.title ||
-                                "Voice Alert";
-
-
-                            const level =
-                                voiceAlert.alertLevel ||
-                                "UNKNOWN";
-
-
-                            const duration =
-                                voiceAlert.duration ||
-                                0;
-
-
-                            alertBox.innerHTML = `
-
-                                <h3>
-                                    🎙️ ${title}
-                                </h3>
-
-                                <p>
-
-                                    <strong>
-                                        Alert Level:
-                                    </strong>
-
-                                    ${level}
-
-                                </p>
-
-                                <p>
-
-                                    <strong>
-                                        Duration:
-                                    </strong>
-
-                                    ${duration}
-                                    seconds
-
-                                </p>
-
-                            `;
-
-
-                            const audioPlayer =
-                                document.createElement(
-                                    "audio"
-                                );
-
-
-                            audioPlayer.controls =
-                                true;
-
-
-                            audioPlayer.style.width =
-                                "100%";
-
-
-                            audioPlayer.style.marginTop =
-                                "10px";
-
-
-                            audioPlayer.src =
-                                voiceAlert.audioData ||
-                                "";
-
-
-                            alertBox.appendChild(
-                                audioPlayer
-                            );
-
-
-                            voiceContainer.appendChild(
-                                alertBox
-                            );
-
-                        }
+                    box.appendChild(
+                        readText
                     );
-
-                })
-
-                .catch(function (error) {
-
-                    console.error(
-                        "Error loading voice alerts:",
-                        error
-                    );
-
-
-                    voiceContainer.innerHTML = `
-                        <p>
-                            Unable to load voice alerts.
-                        </p>
-                    `;
-
-                });
-
-        }
-
-
-        /* =====================================================
-           SEND SOS
-           ===================================================== */
-
-        function sendSOS() {
-
-            const sosButton =
-                document.getElementById(
-                    "sosButton"
-                );
-
-
-            const sosStatus =
-                document.getElementById(
-                    "sosStatus"
-                );
-
-
-            const volunteerEmail =
-                getLoggedInEmail();
-
-
-            if (!volunteerEmail) {
-
-                sosStatus.innerText =
-                    "Please login again before sending SOS.";
-
-
-                sosStatus.style.color =
-                    "red";
-
-
-                return;
-
-            }
-
-
-            if (!navigator.geolocation) {
-
-                sosStatus.innerText =
-                    "GPS is not supported by this browser.";
-
-
-                sosStatus.style.color =
-                    "red";
-
-
-                return;
-
-            }
-
-
-            sosButton.disabled =
-                true;
-
-
-            sosButton.innerText =
-                "Getting Location...";
-
-
-            sosStatus.innerText =
-                "Getting your current location...";
-
-
-            sosStatus.style.color =
-                "#333";
-
-
-            navigator.geolocation.getCurrentPosition(
-
-                function (position) {
-
-                    const latitude =
-                        position.coords.latitude;
-
-
-                    const longitude =
-                        position.coords.longitude;
-
-
-                    const sosData = {
-
-                        latitude:
-                            latitude,
-
-                        longitude:
-                            longitude,
-
-                        message:
-                            "Volunteer needs emergency assistance.",
-
-                        status:
-                            "ACTIVE"
-
-                    };
-
-
-                    sosStatus.innerText =
-                        "Sending SOS alert...";
-
-
-                    fetch(
-                        BACKEND_URL +
-                        "/api/sos-alerts?volunteerEmail=" +
-                        encodeURIComponent(
-                            volunteerEmail
-                        ),
-                        {
-
-                            method:
-                                "POST",
-
-                            headers: {
-
-                                "Content-Type":
-                                    "application/json"
-
-                            },
-
-                            body:
-                                JSON.stringify(
-                                    sosData
-                                )
-
-                        }
-                    )
-
-                        .then(function (response) {
-
-                            if (!response.ok) {
-
-                                return response
-                                    .text()
-                                    .then(function (message) {
-
-                                        throw new Error(
-                                            message ||
-                                            "Failed to send SOS"
-                                        );
-
-                                    });
-
-                            }
-
-
-                            return response.json();
-
-                        })
-
-                        .then(function (savedAlert) {
-
-                            sosStatus.innerText =
-                                "🆘 SOS sent successfully! Admin has been notified.";
-
-
-                            sosStatus.style.color =
-                                "green";
-
-
-                            sosButton.innerText =
-                                "🆘 SOS SENT";
-
-
-                            alert(
-                                "Emergency SOS sent successfully."
-                            );
-
-
-                            console.log(
-                                "Saved SOS:",
-                                savedAlert
-                            );
-
-                        })
-
-                        .catch(function (error) {
-
-                            console.error(
-                                "SOS Error:",
-                                error
-                            );
-
-
-                            sosStatus.innerText =
-                                "Failed to send SOS: " +
-                                error.message;
-
-
-                            sosStatus.style.color =
-                                "red";
-
-
-                            sosButton.disabled =
-                                false;
-
-
-                            sosButton.innerText =
-                                "🆘 SEND SOS";
-
-                        });
-
-                },
-
-                function (error) {
-
-                    console.error(
-                        "GPS Error:",
-                        error
-                    );
-
-
-                    let message =
-                        "Unable to get your location.";
-
-
-                    if (
-                        error.code === 1
-                    ) {
-
-                        message =
-                            "Location permission denied. Please allow location access.";
-
-                    }
-                    else if (
-                        error.code === 2
-                    ) {
-
-                        message =
-                            "Location unavailable. Please try again.";
-
-                    }
-                    else if (
-                        error.code === 3
-                    ) {
-
-                        message =
-                            "Location request timed out. Please try again.";
-
-                    }
-
-
-                    sosStatus.innerText =
-                        message;
-
-
-                    sosStatus.style.color =
-                        "red";
-
-
-                    sosButton.disabled =
-                        false;
-
-
-                    sosButton.innerText =
-                        "🆘 SEND SOS";
-
-                },
-
-                {
-
-                    enableHighAccuracy:
-                        true,
-
-                    timeout:
-                        10000,
-
-                    maximumAge:
-                        0
 
                 }
 
+
+                container.appendChild(
+                    box
+                );
+
+            }
+        );
+
+
+        unreadCountElement.innerText =
+            "Unread: " +
+            unread;
+
+    })
+
+    .catch(function(error) {
+
+        console.error(
+            "Notification error:",
+            error
+        );
+
+
+        container.innerHTML = `
+            <p>
+                Unable to load notifications.
+            </p>
+        `;
+
+
+        unreadCountElement.innerText =
+            "Unread: 0";
+
+    });
+
+}
+
+
+/* =========================================================
+   MARK NOTIFICATION AS READ
+   ========================================================= */
+
+function markNotificationAsRead(
+    notificationId
+) {
+
+    fetch(
+        BACKEND_URL +
+        "/api/notifications/" +
+        notificationId +
+        "/read",
+        {
+            method:
+                "PUT"
+        }
+    )
+
+    .then(function(response) {
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Failed to mark notification as read"
             );
 
         }
 
 
-        /* =====================================================
-           INITIAL LOAD
-           ===================================================== */
+        return response.json();
 
-        loadVolunteerEmail();
+    })
 
-        loadVolunteerProfile();
+    .then(function() {
 
         loadNotifications();
 
+    })
+
+    .catch(function(error) {
+
+        console.error(
+            "Mark read error:",
+            error
+        );
+
+
+        alert(
+            "Failed to mark notification as read."
+        );
+
+    });
+
+}
+
+
+/* =========================================================
+   REFRESH NOTIFICATIONS
+   ========================================================= */
+
+const refreshNotificationsBtn =
+    document.getElementById(
+        "refreshNotificationsBtn"
+    );
+
+
+if (refreshNotificationsBtn) {
+
+    refreshNotificationsBtn.addEventListener(
+        "click",
+        function() {
+
+            loadNotifications();
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   LOAD VOLUNTEER TASKS
+   ========================================================= */
+
+function loadVolunteerTasks() {
+
+    const email =
+        getLoggedInEmail();
+
+
+    const container =
+        document.getElementById(
+            "assignedTasksContainer"
+        );
+
+
+    const table =
+        document.getElementById(
+            "recentTasksTable"
+        );
+
+
+    if (!email) {
+
+        container.innerHTML = `
+            <p>
+                Please login again to view assigned tasks.
+            </p>
+        `;
+
+
+        return;
+
+    }
+
+
+    fetch(
+        BACKEND_URL +
+        "/api/tasks"
+    )
+
+    .then(function(response) {
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Failed to load tasks"
+            );
+
+        }
+
+
+        return response.json();
+
+    })
+
+    .then(function(tasks) {
+
+        if (
+            !Array.isArray(tasks)
+        ) {
+
+            tasks =
+                [];
+
+        }
+
+
+        /* =========================================
+           FILTER CURRENT VOLUNTEER
+           ========================================= */
+
+        const assignedTasks =
+            tasks.filter(
+                function(task) {
+
+                    if (
+                        !task.volunteer ||
+                        !task.volunteer.user
+                    ) {
+
+                        return false;
+
+                    }
+
+
+                    return (
+                        task.volunteer.user.email
+                            ===
+                        email
+                    );
+
+                }
+            );
+
+
+        /* =========================================
+           COMPLETED / PENDING
+           ========================================= */
+
+        const completedTasks =
+            assignedTasks.filter(
+                function(task) {
+
+                    return (
+                        task.status &&
+                        task.status
+                            .toLowerCase() ===
+                        "completed"
+                    );
+
+                }
+            );
+
+
+        const pendingTasks =
+            assignedTasks.filter(
+                function(task) {
+
+                    return (
+                        !task.status ||
+                        task.status
+                            .toLowerCase() !==
+                        "completed"
+                    );
+
+                }
+            );
+
+
+        /* =========================================
+           UPDATE COUNTS
+           ========================================= */
+
+        document.getElementById(
+            "assignedCount"
+        ).innerText =
+            assignedTasks.length;
+
+
+        document.getElementById(
+            "completeCount"
+        ).innerText =
+            completedTasks.length;
+
+
+        document.getElementById(
+            "pendingCount"
+        ).innerText =
+            pendingTasks.length;
+
+
+        document.getElementById(
+            "reliefCount"
+        ).innerText =
+            completedTasks.length;
+
+
+        /* =========================================
+           TASK CARDS
+           ========================================= */
+
+        container.innerHTML =
+            "";
+
+
+        if (
+            assignedTasks.length ===
+            0
+        ) {
+
+            container.innerHTML = `
+                <p>
+                    No tasks assigned yet.
+                </p>
+            `;
+
+        }
+        else {
+
+            assignedTasks.forEach(
+                function(task) {
+
+                    createTaskCard(
+                        task,
+                        container
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =========================================
+           RECENT TASKS TABLE
+           ========================================= */
+
+        table.innerHTML = `
+
+            <tr>
+
+                <th>
+                    Task
+                </th>
+
+                <th>
+                    Location
+                </th>
+
+                <th>
+                    Priority
+                </th>
+
+                <th>
+                    Status
+                </th>
+
+            </tr>
+
+        `;
+
+
+        if (
+            assignedTasks.length ===
+            0
+        ) {
+
+            const row =
+                table.insertRow(-1);
+
+
+            const cell =
+                row.insertCell(0);
+
+
+            cell.colSpan =
+                4;
+
+
+            cell.innerText =
+                "No assigned tasks.";
+
+        }
+        else {
+
+            assignedTasks.forEach(
+                function(task) {
+
+                    const row =
+                        table.insertRow(-1);
+
+
+                    row.insertCell(
+                        0
+                    ).innerText =
+                        task.taskName ||
+                        "";
+
+
+                    row.insertCell(
+                        1
+                    ).innerText =
+                        task.location ||
+                        "";
+
+
+                    row.insertCell(
+                        2
+                    ).innerText =
+                        task.priority ||
+                        "";
+
+
+                    const statusCell =
+                        row.insertCell(
+                            3
+                        );
+
+
+                    const status =
+                        task.status ||
+                        "Pending";
+
+
+                    statusCell.innerText =
+                        status;
+
+
+                    if (
+                        status.toLowerCase() ===
+                        "completed"
+                    ) {
+
+                        statusCell.style.color =
+                            "green";
+
+
+                        statusCell.style.fontWeight =
+                            "bold";
+
+                    }
+                    else {
+
+                        statusCell.style.color =
+                            "orange";
+
+
+                        statusCell.style.fontWeight =
+                            "bold";
+
+                    }
+
+                }
+            );
+
+        }
+
+    })
+
+    .catch(function(error) {
+
+        console.error(
+            "Task loading error:",
+            error
+        );
+
+
+        container.innerHTML = `
+            <p>
+                Unable to load assigned tasks.
+            </p>
+        `;
+
+    });
+
+}
+
+
+/* =========================================================
+   CREATE TASK CARD
+   ========================================================= */
+
+function createTaskCard(
+    task,
+    container
+) {
+
+    const taskBox =
+        document.createElement(
+            "div"
+        );
+
+
+    taskBox.style.marginBottom =
+        "15px";
+
+
+    taskBox.style.padding =
+        "18px";
+
+
+    taskBox.style.borderRadius =
+        "10px";
+
+
+    taskBox.style.border =
+        "1px solid #ddd";
+
+
+    taskBox.style.backgroundColor =
+        "#fff";
+
+
+    const status =
+        task.status ||
+        "Pending";
+
+
+    const taskName =
+        task.taskName ||
+        "Task";
+
+
+    const location =
+        task.location ||
+        "-";
+
+
+    const priority =
+        task.priority ||
+        "-";
+
+
+    taskBox.innerHTML = `
+
+        <h3>
+            📋 ${taskName}
+        </h3>
+
+        <p>
+
+            <strong>
+                Location:
+            </strong>
+
+            ${location}
+
+        </p>
+
+        <p>
+
+            <strong>
+                Priority:
+            </strong>
+
+            ${priority}
+
+        </p>
+
+        <p>
+
+            <strong>
+                Status:
+            </strong>
+
+            <span
+                class="task-status-text">
+
+                ${status}
+
+            </span>
+
+        </p>
+
+    `;
+
+
+    const statusText =
+        taskBox.querySelector(
+            ".task-status-text"
+        );
+
+
+    if (
+        status.toLowerCase() ===
+        "completed"
+    ) {
+
+        statusText.style.color =
+            "green";
+
+
+        statusText.style.fontWeight =
+            "bold";
+
+    }
+    else {
+
+        statusText.style.color =
+            "orange";
+
+
+        statusText.style.fontWeight =
+            "bold";
+
+    }
+
+
+    if (
+        status.toLowerCase() !==
+        "completed"
+    ) {
+
+        const completeButton =
+            document.createElement(
+                "button"
+            );
+
+
+        completeButton.innerText =
+            "✅ Complete Task";
+
+
+        completeButton.className =
+            "assign-btn";
+
+
+        completeButton.style.marginTop =
+            "10px";
+
+
+        completeButton.addEventListener(
+            "click",
+            function() {
+
+                completeAssignedTask(
+                    task.taskId
+                );
+
+            }
+        );
+
+
+        taskBox.appendChild(
+            completeButton
+        );
+
+    }
+    else {
+
+        const completedText =
+            document.createElement(
+                "span"
+            );
+
+
+        completedText.innerText =
+            "✓ Completed";
+
+
+        completedText.style.color =
+            "green";
+
+
+        completedText.style.fontWeight =
+            "bold";
+
+
+        completedText.style.display =
+            "inline-block";
+
+
+        completedText.style.marginTop =
+            "10px";
+
+
+        taskBox.appendChild(
+            completedText
+        );
+
+    }
+
+
+    container.appendChild(
+        taskBox
+    );
+
+}
+
+
+/* =========================================================
+   COMPLETE TASK
+   ========================================================= */
+
+function completeAssignedTask(
+    taskId
+) {
+
+    fetch(
+        BACKEND_URL +
+        "/api/tasks/" +
+        taskId +
+        "/status?status=Completed",
+        {
+            method:
+                "PUT"
+        }
+    )
+
+    .then(function(response) {
+
+        if (!response.ok) {
+
+            return response
+                .text()
+                .then(function(message) {
+
+                    throw new Error(
+                        message ||
+                        "Failed to update task"
+                    );
+
+                });
+
+        }
+
+
+        return response.json();
+
+    })
+
+    .then(function() {
+
+        alert(
+            "Task marked as completed!"
+        );
+
+
         loadVolunteerTasks();
 
-        loadEmergencyAlerts();
+        loadNotifications();
 
-        loadVoiceAlerts();
+    })
 
-    </script>
+    .catch(function(error) {
+
+        console.error(
+            "Task update error:",
+            error
+        );
+
+
+        alert(
+            "Failed to update task."
+        );
+
+    });
+
+}
+
+
+/* =========================================================
+   REFRESH TASKS
+   ========================================================= */
+
+const refreshTasksBtn =
+    document.getElementById(
+        "refreshTasksBtn"
+    );
+
+
+if (refreshTasksBtn) {
+
+    refreshTasksBtn.addEventListener(
+        "click",
+        function() {
+
+            loadVolunteerTasks();
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   LOAD EMERGENCY ALERTS
+   ========================================================= */
+
+function loadEmergencyAlerts() {
+
+    const container =
+        document.getElementById(
+            "emergencyAlerts"
+        );
+
+
+    fetch(
+        BACKEND_URL +
+        "/api/emergency-alerts"
+    )
+
+    .then(function(response) {
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Failed to load emergency alerts"
+            );
+
+        }
+
+
+        return response.json();
+
+    })
+
+    .then(function(alerts) {
+
+        if (
+            !Array.isArray(alerts) ||
+            alerts.length === 0
+        ) {
+
+            container.innerHTML = `
+                <p>
+                    No emergency alerts available.
+                </p>
+            `;
+
+
+            return;
+
+        }
+
+
+        container.innerHTML =
+            "";
+
+
+        alerts.forEach(
+            function(alertData) {
+
+                const box =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                box.style.marginBottom =
+                    "15px";
+
+
+                box.style.padding =
+                    "15px";
+
+
+                box.style.borderRadius =
+                    "8px";
+
+
+                box.style.border =
+                    "1px solid #ddd";
+
+
+                box.style.backgroundColor =
+                    "#fff";
+
+
+                box.innerHTML = `
+
+                    <h3>
+                        🚨 ${
+                            alertData.title ||
+                            "Emergency Alert"
+                        }
+                    </h3>
+
+                    <p>
+
+                        <strong>
+                            Message:
+                        </strong>
+
+                        ${
+                            alertData.message ||
+                            ""
+                        }
+
+                    </p>
+
+                    <p>
+
+                        <strong>
+                            Severity:
+                        </strong>
+
+                        ${
+                            alertData.severity ||
+                            ""
+                        }
+
+                    </p>
+
+                `;
+
+
+                container.appendChild(
+                    box
+                );
+
+            }
+        );
+
+    })
+
+    .catch(function(error) {
+
+        console.error(
+            "Emergency alert error:",
+            error
+        );
+
+
+        container.innerHTML = `
+            <p>
+                Unable to load emergency alerts.
+            </p>
+        `;
+
+    });
+
+}
+
+
+/* =========================================================
+   LOAD VOICE ALERTS
+   ========================================================= */
+
+function loadVoiceAlerts() {
+
+    const container =
+        document.getElementById(
+            "voiceAlerts"
+        );
+
+
+    fetch(
+        BACKEND_URL +
+        "/api/voice-alerts"
+    )
+
+    .then(function(response) {
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Failed to load voice alerts"
+            );
+
+        }
+
+
+        return response.json();
+
+    })
+
+    .then(function(alerts) {
+
+        if (
+            !Array.isArray(alerts) ||
+            alerts.length === 0
+        ) {
+
+            container.innerHTML = `
+                <p>
+                    No voice alerts available.
+                </p>
+            `;
+
+
+            return;
+
+        }
+
+
+        container.innerHTML =
+            "";
+
+
+        alerts.forEach(
+            function(voiceAlert) {
+
+                const box =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                box.style.marginBottom =
+                    "15px";
+
+
+                box.style.padding =
+                    "15px";
+
+
+                box.style.borderRadius =
+                    "8px";
+
+
+                box.style.border =
+                    "1px solid #ddd";
+
+
+                box.style.backgroundColor =
+                    "#fff";
+
+
+                box.innerHTML = `
+
+                    <h3>
+                        🎙️ ${
+                            voiceAlert.title ||
+                            "Voice Alert"
+                        }
+                    </h3>
+
+                    <p>
+
+                        <strong>
+                            Alert Level:
+                        </strong>
+
+                        ${
+                            voiceAlert.alertLevel ||
+                            "UNKNOWN"
+                        }
+
+                    </p>
+
+                    <p>
+
+                        <strong>
+                            Duration:
+                        </strong>
+
+                        ${
+                            voiceAlert.duration ||
+                            0
+                        }
+                        seconds
+
+                    </p>
+
+                `;
+
+
+                const audio =
+                    document.createElement(
+                        "audio"
+                    );
+
+
+                audio.controls =
+                    true;
+
+
+                audio.style.width =
+                    "100%";
+
+
+                audio.style.marginTop =
+                    "10px";
+
+
+                audio.src =
+                    voiceAlert.audioData ||
+                    "";
+
+
+                box.appendChild(
+                    audio
+                );
+
+
+                container.appendChild(
+                    box
+                );
+
+            }
+        );
+
+    })
+
+    .catch(function(error) {
+
+        console.error(
+            "Voice alert error:",
+            error
+        );
+
+
+        container.innerHTML = `
+            <p>
+                Unable to load voice alerts.
+            </p>
+        `;
+
+    });
+
+}
+
+
+/* =========================================================
+   SEND SOS
+   ========================================================= */
+
+function sendSOS() {
+
+    const sosButton =
+        document.getElementById(
+            "sosButton"
+        );
+
+
+    const sosStatus =
+        document.getElementById(
+            "sosStatus"
+        );
+
+
+    const volunteerEmail =
+        getLoggedInEmail();
+
+
+    if (!volunteerEmail) {
+
+        sosStatus.innerText =
+            "Please login again before sending SOS.";
+
+
+        sosStatus.style.color =
+            "red";
+
+
+        return;
+
+    }
+
+
+    if (!navigator.geolocation) {
+
+        sosStatus.innerText =
+            "GPS is not supported by this browser.";
+
+
+        sosStatus.style.color =
+            "red";
+
+
+        return;
+
+    }
+
+
+    sosButton.disabled =
+        true;
+
+
+    sosButton.innerText =
+        "Getting Location...";
+
+
+    sosStatus.innerText =
+        "Getting your current location...";
+
+
+    sosStatus.style.color =
+        "#333";
+
+
+    navigator.geolocation.getCurrentPosition(
+
+        function(position) {
+
+            const latitude =
+                position.coords.latitude;
+
+
+            const longitude =
+                position.coords.longitude;
+
+
+            const sosData = {
+
+                latitude:
+                    latitude,
+
+                longitude:
+                    longitude,
+
+                message:
+                    "Volunteer needs emergency assistance.",
+
+                status:
+                    "ACTIVE"
+
+            };
+
+
+            sosStatus.innerText =
+                "Sending SOS alert...";
+
+
+            fetch(
+                BACKEND_URL +
+                "/api/sos-alerts?volunteerEmail=" +
+                encodeURIComponent(
+                    volunteerEmail
+                ),
+                {
+
+                    method:
+                        "POST",
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/json"
+
+                    },
+
+                    body:
+                        JSON.stringify(
+                            sosData
+                        )
+
+                }
+            )
+
+            .then(function(response) {
+
+                if (!response.ok) {
+
+                    return response
+                        .text()
+                        .then(function(message) {
+
+                            throw new Error(
+                                message ||
+                                "Failed to send SOS"
+                            );
+
+                        });
+
+                }
+
+
+                return response.json();
+
+            })
+
+            .then(function(savedAlert) {
+
+                sosStatus.innerText =
+                    "🆘 SOS sent successfully! Admin has been notified.";
+
+
+                sosStatus.style.color =
+                    "green";
+
+
+                sosButton.innerText =
+                    "🆘 SOS SENT";
+
+
+                alert(
+                    "Emergency SOS sent successfully."
+                );
+
+
+                console.log(
+                    "Saved SOS:",
+                    savedAlert
+                );
+
+            })
+
+            .catch(function(error) {
+
+                console.error(
+                    "SOS error:",
+                    error
+                );
+
+
+                sosStatus.innerText =
+                    "Failed to send SOS: " +
+                    error.message;
+
+
+                sosStatus.style.color =
+                    "red";
+
+
+                sosButton.disabled =
+                    false;
+
+
+                sosButton.innerText =
+                    "🆘 SEND SOS";
+
+            });
+
+        },
+
+
+        function(error) {
+
+            console.error(
+                "GPS error:",
+                error
+            );
+
+
+            let message =
+                "Unable to get your location.";
+
+
+            if (
+                error.code === 1
+            ) {
+
+                message =
+                    "Location permission denied. Please allow location access.";
+
+            }
+            else if (
+                error.code === 2
+            ) {
+
+                message =
+                    "Location unavailable. Please try again.";
+
+            }
+            else if (
+                error.code === 3
+            ) {
+
+                message =
+                    "Location request timed out. Please try again.";
+
+            }
+
+
+            sosStatus.innerText =
+                message;
+
+
+            sosStatus.style.color =
+                "red";
+
+
+            sosButton.disabled =
+                false;
+
+
+            sosButton.innerText =
+                "🆘 SEND SOS";
+
+        },
+
+
+        {
+
+            enableHighAccuracy:
+                true,
+
+            timeout:
+                10000,
+
+            maximumAge:
+                0
+
+        }
+
+    );
+
+}
+
+
+/* =========================================================
+   INITIAL LOAD
+   ========================================================= */
+
+loadVolunteerEmail();
+
+loadVolunteerProfile();
+
+loadNotifications();
+
+loadVolunteerTasks();
+
+loadEmergencyAlerts();
+
+loadVoiceAlerts();
+
+
+</script>
+
 
 </body>
 
