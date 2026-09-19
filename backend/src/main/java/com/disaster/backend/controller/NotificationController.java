@@ -1,6 +1,7 @@
 package com.disaster.backend.controller;
 
 import com.disaster.backend.entity.Notification;
+import com.disaster.backend.entity.User;
 import com.disaster.backend.repository.NotificationRepository;
 import com.disaster.backend.repository.UserRepository;
 
@@ -22,6 +23,11 @@ public class NotificationController {
     @Autowired
     private UserRepository userRepository;
 
+
+    // =========================================================
+    // GET NOTIFICATIONS BY USER ID
+    // =========================================================
+
     @GetMapping("/user/{userId}")
     public List<Notification> getUserNotifications(
             @PathVariable Long userId) {
@@ -30,35 +36,159 @@ public class NotificationController {
                 .findByUser_UserIdOrderByCreatedAtDesc(userId);
     }
 
+
+    // =========================================================
+    // GET UNREAD NOTIFICATIONS BY USER ID
+    // =========================================================
+
     @GetMapping("/user/{userId}/unread")
     public List<Notification> getUnreadNotifications(
             @PathVariable Long userId) {
 
         return notificationRepository
-                .findByUser_UserIdAndReadStatusFalseOrderByCreatedAtDesc(userId);
+                .findByUser_UserIdAndReadStatusFalseOrderByCreatedAtDesc(
+                        userId
+                );
     }
+
+
+    // =========================================================
+    // GET NOTIFICATIONS BY EMAIL
+    // =========================================================
+
+    @GetMapping("/email")
+    public ResponseEntity<?> getNotificationsByEmail(
+            @RequestParam String email) {
+
+        Optional<User> existingUser =
+                userRepository.findByEmail(email);
+
+        if (existingUser.isEmpty()) {
+
+            return ResponseEntity
+                    .badRequest()
+                    .body("User not found");
+        }
+
+        Long userId =
+                existingUser.get().getUserId();
+
+        List<Notification> notifications =
+                notificationRepository
+                        .findByUser_UserIdOrderByCreatedAtDesc(
+                                userId
+                        );
+
+        return ResponseEntity.ok(
+                notifications
+        );
+    }
+
+
+    // =========================================================
+    // GET UNREAD NOTIFICATIONS BY EMAIL
+    // =========================================================
+
+    @GetMapping("/email/unread")
+    public ResponseEntity<?> getUnreadNotificationsByEmail(
+            @RequestParam String email) {
+
+        Optional<User> existingUser =
+                userRepository.findByEmail(email);
+
+        if (existingUser.isEmpty()) {
+
+            return ResponseEntity
+                    .badRequest()
+                    .body("User not found");
+        }
+
+        Long userId =
+                existingUser.get().getUserId();
+
+        List<Notification> notifications =
+                notificationRepository
+                        .findByUser_UserIdAndReadStatusFalseOrderByCreatedAtDesc(
+                                userId
+                        );
+
+        return ResponseEntity.ok(
+                notifications
+        );
+    }
+
+
+    // =========================================================
+    // CREATE NOTIFICATION BY USER ID
+    // =========================================================
 
     @PostMapping
     public ResponseEntity<?> createNotification(
             @RequestParam Long userId,
             @RequestBody Notification notification) {
 
-        Optional<com.disaster.backend.entity.User> existingUser =
+        Optional<User> existingUser =
                 userRepository.findById(userId);
 
         if (existingUser.isEmpty()) {
+
             return ResponseEntity
                     .badRequest()
                     .body("User not found");
         }
 
-        notification.setUser(existingUser.get());
+        notification.setUser(
+                existingUser.get()
+        );
 
         Notification saved =
-                notificationRepository.save(notification);
+                notificationRepository.save(
+                        notification
+                );
 
-        return ResponseEntity.ok(saved);
+        return ResponseEntity.ok(
+                saved
+        );
     }
+
+
+    // =========================================================
+    // CREATE NOTIFICATION BY EMAIL
+    // =========================================================
+
+    @PostMapping("/email")
+    public ResponseEntity<?> createNotificationByEmail(
+            @RequestParam String email,
+            @RequestBody Notification notification) {
+
+        Optional<User> existingUser =
+                userRepository.findByEmail(email);
+
+        if (existingUser.isEmpty()) {
+
+            return ResponseEntity
+                    .badRequest()
+                    .body("User not found");
+        }
+
+        notification.setUser(
+                existingUser.get()
+        );
+
+        Notification saved =
+                notificationRepository.save(
+                        notification
+                );
+
+        return ResponseEntity.ok(
+                saved
+        );
+    }
+
+
+    // =========================================================
+    // MARK AS READ
+    // =========================================================
 
     @PutMapping("/{id}/read")
     public ResponseEntity<?> markAsRead(
@@ -67,11 +197,16 @@ public class NotificationController {
         return notificationRepository.findById(id)
                 .map(notification -> {
 
-                    notification.setReadStatus(true);
+                    notification.setReadStatus(
+                            true
+                    );
 
                     return ResponseEntity.ok(
-                            notificationRepository.save(notification)
+                            notificationRepository.save(
+                                    notification
+                            )
                     );
+
                 })
                 .orElse(
                         ResponseEntity
@@ -80,16 +215,31 @@ public class NotificationController {
                 );
     }
 
+
+    // =========================================================
+    // DELETE NOTIFICATION
+    // =========================================================
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteNotification(
             @PathVariable Long id) {
 
-        if (!notificationRepository.existsById(id)) {
-            return ResponseEntity.notFound().build();
+        if (
+                !notificationRepository
+                        .existsById(id)
+        ) {
+
+            return ResponseEntity
+                    .notFound()
+                    .build();
         }
 
-        notificationRepository.deleteById(id);
+        notificationRepository.deleteById(
+                id
+        );
 
-        return ResponseEntity.noContent().build();
+        return ResponseEntity
+                .noContent()
+                .build();
     }
 }
