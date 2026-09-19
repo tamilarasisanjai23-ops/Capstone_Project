@@ -1,100 +1,422 @@
 # Volunteer Disaster Relief Coordination System
-> A Complete Full-Stack Capstone Project for Emergency Response & Humanitarian Volunteer Management
 
-![Project License](https://img.shields.io/badge/License-MIT-blue.svg)
-![Spring Boot](https://img.shields.io/badge/Spring--Boot-3.x-brightgreen.svg)
-![React](https://img.shields.io/badge/React-18.x-61dafb.svg)
+> A Full-Stack Capstone Project for Emergency Response and Volunteer Coordination
+
+![License](https://img.shields.io/badge/License-MIT-blue.svg)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-brightgreen.svg)
 ![MySQL](https://img.shields.io/badge/MySQL-8.0-blue.svg)
 
 ---
 
 ## 📌 Project Overview
-The **Volunteer Disaster Relief Coordination System** is a web-based platform engineered to streamline disaster response operations. It enables administrators to log disaster incidents, manage relief resources, register shelter facilities, assign tasks to registered volunteers, broadcast critical emergency alerts, and track real-time progress across crisis zones.
+
+The **Volunteer Disaster Relief Coordination System** is a web-based platform developed to support disaster-response activities and volunteer coordination.
+
+The system provides a centralized platform where administrators can manage disasters, volunteers, emergency alerts, relief tasks, resources, shelters, SOS requests, voice alerts, and notifications.
+
+Volunteers can view emergency information, manage assigned tasks, update task status, send SOS alerts, receive notifications, and access emergency communication features.
 
 ---
 
 ## 🎯 Key Features
 
-### 🚨 Real-World Emergency Response Subsystem (NEW)
-1. **Emergency Alert System**: Create broadcast warnings with severity levels (`LOW`, `MEDIUM`, `HIGH`, `CRITICAL`). Critical alerts trigger prominent warning banners and Web Audio API alarm sirens.
-2. **Voice Alert / Microphone Feature**: Microphone recording in Admin dashboard using browser `MediaRecorder` API. Persists voice metadata and enables volunteers to listen via an inline player with Play, Pause, and Stop controls.
-3. **Emergency Radio / Push-to-Talk (PTT)**: Dedicated `/emergency-radio` tactical walkie-talkie page supporting 5 channels (*Medical*, *Rescue*, *Food Distribution*, *Transport*, *General Emergency*), real-time WebRTC audio streams, microphone permission indicators, mute/unmute, and frequency visualizers.
-4. **SOS Emergency Button**: Prominent SOS button on Volunteer Dashboard capturing live GPS coordinates (`navigator.geolocation`), notifying Command Center Admins, updating SOS status, and providing an Admin `/sos-alerts` portal.
-5. **Live Location & Emergency Map**: Dedicated `/emergency-map` page rendering interactive pins for Disasters, Relief Shelters, SOS Emergency calls, and Live Volunteer coordinates with layer filters.
-6. **Enhanced Notification Center**: Unified notification hub for Emergency Warnings, Voice Alerts, SOS Alerts, Task Assignments, and Announcements.
+### 🚨 Emergency Response
 
-### 🔐 Authentication & Roles
-- **Role-Based Access**: Distinct Admin and Volunteer dashboards and action permissions.
-- **Secure Password Authentication**: BCrypt hashed passwords and JWT session handling.
+* Emergency Alert System
+* Voice Alert System
+* Emergency SOS
+* Emergency Radio / Push-to-Talk
+* Disaster Management
+* Volunteer Task Coordination
+* Notification Center
 
-### 📊 Admin Dashboard
-- **Comprehensive Metrics**: Real-time counters for Total & Active Volunteers, Disasters, Tasks, Resources, Relief Shelters, and Active SOS Calls.
-- **Operational Control**: Manage disasters, task allocations, supply inventories, voice broadcasts, and emergency notifications.
+### 🔔 Emergency Alert System
 
-### 🙋 Volunteer Dashboard
-- **Personalized Workspace**: View assigned emergency tasks, update status (Pending $\rightarrow$ In Progress $\rightarrow$ Completed), trigger SOS distress calls, listen to voice alerts, and connect to PTT channels.
+* Admin can create emergency alerts.
+* Alerts can contain a title, message, and severity.
+* Volunteers can view available emergency alerts.
+* Admin can delete emergency alerts.
+
+### 🔊 Voice Alert System
+
+* Admin can create voice alerts.
+* Volunteers can view available voice alerts.
+* Voice-based emergency communication is supported through the frontend.
+
+### 📻 Emergency Radio
+
+* Emergency Radio interface for volunteers.
+* Emergency channel selection.
+* Microphone access for communication.
+* Push-to-talk style communication interface.
+* Uses browser-based audio capabilities.
+
+### 🆘 SOS Alert System
+
+* Volunteers can send SOS alerts during emergency situations.
+* Admin can monitor SOS alerts.
+* Admin can update SOS alert status.
+* Volunteers can receive updated SOS status.
+
+### 📋 Task Coordination
+
+* Admin can assign tasks to volunteers.
+* Volunteers can view assigned tasks.
+* Volunteers can update task status.
+* Supported task statuses include:
+
+  * Pending
+  * In Progress
+  * Completed
+
+### 🔔 Notification Center
+
+Notifications can be used for:
+
+* Emergency alerts
+* Task assignments
+* Task status updates
+* SOS status changes
+* Other emergency-response activities
+
+---
+
+## 🔐 Authentication & Roles
+
+### 👨‍💼 Admin
+
+Admin features include:
+
+* Manage disasters
+* Manage volunteers
+* Assign tasks
+* Manage emergency alerts
+* Manage voice alerts
+* Monitor SOS alerts
+* Manage resources
+* Manage shelters
+* Monitor notifications
+
+### 🙋 Volunteer
+
+Volunteer features include:
+
+* View assigned tasks
+* Update task status
+* View emergency alerts
+* View voice alerts
+* Send SOS alerts
+* View notifications
+* Access Emergency Radio
+* Participate in emergency communication
+
+---
+
+## 📊 Admin Dashboard
+
+The Admin Dashboard provides centralized management of disaster-relief activities.
+
+### Admin Operations
+
+* Volunteer Management
+* Disaster Management
+* Task Assignment
+* Resource Management
+* Shelter Management
+* Emergency Alert Management
+* Voice Alert Management
+* SOS Monitoring
+* Notification Management
+
+---
+
+## 🙋 Volunteer Dashboard
+
+The Volunteer Dashboard provides volunteers with access to emergency-response activities.
+
+### Volunteer Operations
+
+* View assigned tasks
+* Update task status
+* View emergency alerts
+* View voice alerts
+* Send SOS alerts
+* View notifications
+* Access Emergency Radio
+* Participate in emergency communication
 
 ---
 
 ## 🛠️ Technology Stack
 
-| Layer | Technology |
-| :--- | :--- |
-| **Frontend** | React.js (Vite), JavaScript (ES6+), Web Audio API, WebRTC, MediaRecorder API, Geolocation API, HTML5, CSS3, Lucide Icons |
-| **Backend** | Java 17/26, Spring Boot 3.x, Spring Data JPA, Spring Security, JWT, Maven |
-| **Database** | MySQL 8.0+ |
-| **Tools** | VS Code / IntelliJ IDEA, Git |
+| Layer                     | Technology                                                            |
+| ------------------------- | --------------------------------------------------------------------- |
+| **Frontend**              | HTML5, CSS3, JavaScript                                               |
+| **Interactive Component** | React / Vite                                                          |
+| **Backend**               | Java, Spring Boot 3.x                                                 |
+| **API**                   | Spring Boot REST APIs                                                 |
+| **Data Access**           | Spring Data JPA                                                       |
+| **Database**              | MySQL 8.0+                                                            |
+| **Build Tool**            | Maven                                                                 |
+| **Communication**         | Web Audio API, MediaRecorder API, WebRTC-related browser capabilities |
+| **Location**              | Browser Geolocation API                                               |
+| **Development Tools**     | VS Code, Git, GitHub                                                  |
+| **Deployment**            | Docker / Cloud Deployment                                             |
 
 ---
 
 ## 📂 Project Structure
 
-```
-Volunteer-Disaster-Relief-System/
-├── frontend/                     # React Single Page Application
-│   ├── src/
-│   │   ├── components/          # Reusable UI (Sidebar, Navbar, Modals, StatCards, SosButton, VoicePlayer, VoiceRecorderModal)
-│   │   ├── pages/               # 15 Core Application Pages (inc. EmergencyRadio, EmergencyMap, SosAlerts)
-│   │   ├── services/            # API Layer (Live REST API + Offline Mock Fallback + audioService)
-│   │   ├── App.jsx              # Routing & Context Setup
-│   │   └── index.css            # Custom Styling System
-│   ├── package.json
-│   └── vite.config.js
+```text
+capstone/
 │
-├── backend/                      # Spring Boot REST API Service
-│   ├── src/main/java/com/disaster/backend/
-│   │   ├── controller/          # REST Controllers (EmergencyAlertController, VoiceAlertController, SosAlertController, etc.)
-│   │   ├── entity/              # JPA Entities (User, Volunteer, EmergencyAlert, VoiceAlert, SosAlert, etc.)
-│   │   ├── repository/          # Spring Data Repositories
-│   │   └── BackendApplication.java
-│   ├── src/main/resources/
-│   │   └── application.properties
+├── frontend/
+│   ├── index.html
+│   ├── login.html
+│   ├── register.html
+│   ├── admin-login.html
+│   ├── admin-dashboard.html
+│   ├── volunteer-dashboard.html
+│   ├── tasks.html
+│   ├── radio.html
+│   │
+│   ├── css/
+│   │
+│   ├── js/
+│   │
+│   └── src/
+│       ├── radio-main.jsx
+│       └── pages/
+│           └── EmergencyRadio.jsx
+│
+├── backend/
+│   ├── src/
+│   │   └── main/
+│   │       ├── java/
+│   │       │   └── com/
+│   │       │       └── disaster/
+│   │       │           └── backend/
+│   │       │               ├── controller/
+│   │       │               ├── entity/
+│   │       │               ├── repository/
+│   │       │               └── BackendApplication.java
+│   │       │
+│   │       └── resources/
+│   │           └── application.properties
+│   │
+│   ├── Dockerfile
 │   └── pom.xml
 │
 ├── database/
-│   └── schema.sql               # MySQL Schema (14 Tables & Initial Seed Data)
+│   └── schema.sql
 │
 ├── docs/
-│   ├── ER_Diagram.md            # Database Schema & Mermaid ER Diagram
-│   ├── Problem_Statement.md     # Problem Statement & Functional Requirements
-│   └── Project_Documentation.md # Architecture & Module Specs
 │
-├── README.md                    # Main Project Readme
-└── .gitignore                   # Git Ignore Rules
+├── er_diagram.md
+├── problem-statement.md
+├── README.md
+├── capstone.code-workspace
+└── .gitignore
 ```
 
 ---
 
-## 🚀 REST API Endpoints Summary
+## 🚀 Backend API
 
-### Emergency Response Endpoints
-- `GET /api/emergency-alerts` - Fetch all emergency alerts
-- `POST /api/emergency-alerts` - Create emergency alert
-- `GET /api/voice-alerts` - Fetch voice audio broadcasts
-- `POST /api/voice-alerts` - Publish voice audio dispatch
-- `GET /api/sos-alerts` - Fetch active SOS distress calls
-- `POST /api/sos-alerts` - Trigger SOS signal with GPS coordinates
-- `PUT /api/sos-alerts/{id}/status` - Update SOS status (ACTIVE, RESPONDING, RESOLVED)
-- `GET /api/radio-channels` - List emergency PTT channels
-- `GET /api/volunteer-locations` - View live volunteer coordinates
-- `POST /api/volunteer-locations` - Update volunteer live location
+The Spring Boot backend provides REST APIs for disaster-response operations.
+
+### 🚨 Emergency Alerts
+
+```text
+GET    /api/emergency-alerts
+POST   /api/emergency-alerts
+DELETE /api/emergency-alerts/{id}
+```
+
+### 🔊 Voice Alerts
+
+```text
+GET  /api/voice-alerts
+POST /api/voice-alerts
+```
+
+### 🆘 SOS Alerts
+
+```text
+GET /api/sos-alerts
+POST /api/sos-alerts
+PUT /api/sos-alerts/{id}/status
+```
+
+### 📋 Other Backend Operations
+
+The backend also supports operations related to:
+
+* Volunteer management
+* Task assignment
+* Task status updates
+* Notifications
+* Disaster management
+* Relief coordination
+* Emergency-response activities
+
+---
+
+## 🗄️ Database
+
+The project uses **MySQL** for persistent data storage.
+
+The database is designed to manage information related to:
+
+* Users
+* Volunteers
+* Disasters
+* Emergency Alerts
+* SOS Alerts
+* Voice Alerts
+* Tasks
+* Notifications
+* Relief Resources
+* Shelters
+
+Database scripts are maintained inside the:
+
+```text
+database/
+└── schema.sql
+```
+
+---
+
+## 🔄 System Workflow
+
+```text
+                    ADMIN
+                      │
+          ┌───────────┼────────────┐
+          │           │            │
+     Manage       Create       Monitor
+    Volunteers     Alerts        SOS
+          │           │            │
+          └───────────┼────────────┘
+                      │
+                      ▼
+             SPRING BOOT BACKEND
+                      │
+              REST API Operations
+                      │
+                      ▼
+                    MYSQL
+                      │
+                      ▼
+                  FRONTEND
+                      │
+                      ▼
+                VOLUNTEERS
+                      │
+        ┌─────────────┼─────────────┐
+        │             │             │
+      Tasks         Alerts         SOS
+        │             │             │
+        ▼             ▼             ▼
+   Update Status   View Alerts   Send SOS
+                      │
+                      ▼
+              Emergency Radio
+```
+
+---
+
+## ▶️ How to Run the Project
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/tamilarasisanjai23-ops/Capstone_Project.git
+cd Capstone_Project
+```
+
+### 2. Start the Backend
+
+Open a terminal inside the backend directory:
+
+```bash
+cd backend
+```
+
+Build the project:
+
+```bash
+mvn clean package
+```
+
+Run the Spring Boot application:
+
+```bash
+mvn spring-boot:run
+```
+
+### 3. Frontend
+
+The frontend contains HTML, CSS, JavaScript and React/Vite-based emergency communication components.
+
+Open the required frontend page using the configured frontend development environment.
+
+---
+
+## 🐳 Docker Deployment
+
+The backend includes a Dockerfile:
+
+```text
+backend/Dockerfile
+```
+
+The Docker configuration can be used for container-based deployment of the Spring Boot backend.
+
+---
+
+## 📌 Project Status
+
+The project is being developed as a **college capstone project**.
+
+### Current Development Areas
+
+* Emergency response
+* Volunteer coordination
+* Task management
+* Emergency alerts
+* Voice alerts
+* SOS management
+* Emergency communication
+* Backend API integration
+* Database integration
+* Cloud deployment
+
+---
+
+## 🎯 Project Objective
+
+The main objective of the **Volunteer Disaster Relief Coordination System** is to provide a centralized platform for coordinating volunteers and emergency-response activities during disaster situations.
+
+The system focuses on:
+
+* Faster emergency communication
+* Volunteer coordination
+* Task assignment and tracking
+* Emergency reporting
+* SOS management
+* Resource and shelter coordination
+* Centralized disaster-response management
+
+---
+
+## 👩‍💻 Project
+
+**Volunteer Disaster Relief Coordination System**
+
+**Type:** College Capstone Project
+
+**Domain:** Disaster Management / Emergency Response
+
+**Architecture:** Full-Stack Web Application
